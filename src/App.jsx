@@ -1,16 +1,20 @@
-import React from 'react';
-import Login from "./Components/Pages/Login"
-import CourseContent from './Admin/CourseContent'
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./Components/Pages/Login";
+import CourseContent from "./Admin/CourseContent";
 
 function App(props) {
   return (
     <div>
-      <Login/>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login/>}/>
+        </Routes>
+      </BrowserRouter>
+      
+      <CourseContent />
     </div>
   );
-    <>
-        <CourseContent />
-    </>
 }
 
 export default App;
