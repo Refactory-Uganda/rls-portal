@@ -10,18 +10,18 @@ const CourseContent = () => {
     setContent(event.target.value);
   }
   return (
-    <div>
-      <div className={style.body}>
-        <Button name='MATERIALS' pr={40} pl={40} mr={'4px'} borderRadius={15} borderColor={'#58C5C8'} color={'black'} backgroundColor={'#58C5C8'} />  
-        <Button name='Details'  borderRadius={5} borderColor={'#58C5C8'} color={'black'} backgroundColor={'#58C5C8'}  />
-        <Button name='Entrolled' padding={'15px'} borderRadius={5} borderColor={'#58C5C8'} color={'white'} backgroundColor={'purple'}  />
+    <div className={style.body}>
+      <div className={style.box}>
+        <Button name='MATERIALS' pr={40} pl={40} mr={'8px'} borderRadius={10} borderColor={'#58C5C8'} color={'black'} backgroundColor={'#58C5C8'} />  
+        <Button name='DETAILS'  pr={40} pl={40} mr={'8px'} borderRadius={10} borderColor={'#58C5C8'} color={'black'} backgroundColor={'#58C5C8'}  />
+        <Button name='ENTROLLED' pr={40} pl={40} mr={'8px'} borderRadius={10} borderColor={'purple'} color={'white'} backgroundColor={'#693769'}  />
     </div>
-    <hr style={{background: 'lime',color: 'lime',borderColor: 'lime',height: '3px', width: '100%'}}/>
+    <hr style={{background: '#693769',color:"#693769", borderColor: '#693769',height: '3px', width: '100%'}}/>
     <div className={style.container}>
             <ContentEditable html={content} onChange={handleChange} style={{width: '710px', height: '500px',  padding: '10px'}}  />
         <div className={style.btn}>
-            <Button name='RESET' padding={'8px'} borderRadius={8} borderColor={'#58C5C8'} color={'black'} backgroundColor={'#58C5C8'} size={'10px'} mr={'4px'} />  
-            <Button name='SAVE' padding={'8px'} borderRadius={8} borderColor={'purple'} color={'white'} backgroundColor={'purple'} size={'10px'} />
+            <Button name='RESET' padding={'8px'}  borderRadius={8} borderColor={'#58C5C8'} color={'black'} backgroundColor={'#58C5C8'} size={'10px'} mr={'4px'} />  
+            <Button name='SAVE' padding={'8px'} borderRadius={8} borderColor={'purple'} color={'white'} backgroundColor={'#693769'} size={'10px'} />
         </div>
     </div>
     </div>

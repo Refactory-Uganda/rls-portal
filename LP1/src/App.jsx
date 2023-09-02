@@ -1,5 +1,6 @@
 
-import CourseContent from './Admin/CourseContent'
+import AddCourseContent from './Admin/AddCourseContent'
+// import CourseContent from './Admin/CourseContent'
 
 
 function App() {
@@ -7,7 +8,7 @@ function App() {
 
   return (
     <>
-        <CourseContent />
+        <AddCourseContent />
     </>
   )
 }
