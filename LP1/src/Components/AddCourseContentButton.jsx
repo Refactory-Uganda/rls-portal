@@ -1,4 +1,3 @@
-
 import PropTypes from 'prop-types';
 
 const ButtonAddContent = ({ label, borderColor, backgroundColor, contentColor }) => {
@@ -6,7 +5,9 @@ const ButtonAddContent = ({ label, borderColor, backgroundColor, contentColor })
     border: `2px solid ${borderColor}`,
     background: backgroundColor,
     color: contentColor,
-    borderRadius: '10px', 
+    borderRadius: '1rem', // Border radius in rem
+    width: '7rem', // Width in rem
+    height: '2rem', 
   };
 
   return (
