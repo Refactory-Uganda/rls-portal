@@ -20,8 +20,8 @@ const CourseContent = () => {
     <div className={style.container}>
             <ContentEditable html={content} onChange={handleChange} style={{width: '710px', height: '500px',  padding: '10px'}}  />
         <div className={style.btn}>
-            <Button name='RESET' padding={'8px'} borderRadius={10} borderColor={'#58C5C8'} color={'black'} backgroundColor={'#58C5C8'} size={'10px'} mr={'4px'} />  
-            <Button name='SAVE' padding={'8px'} borderRadius={10} borderColor={'purple'} color={'white'} backgroundColor={'purple'} size={'10px'} />
+            <Button name='RESET' padding={'8px'} borderRadius={8} borderColor={'#58C5C8'} color={'black'} backgroundColor={'#58C5C8'} size={'10px'} mr={'4px'} />  
+            <Button name='SAVE' padding={'8px'} borderRadius={8} borderColor={'purple'} color={'white'} backgroundColor={'purple'} size={'10px'} />
         </div>
     </div>
     </div>
