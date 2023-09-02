@@ -9,10 +9,10 @@ function App(props) {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/coursecontent" element={<CourseContent/>}/>
         </Routes>
       </BrowserRouter>
       
-      <CourseContent />
     </div>
   );
 }
