@@ -12,9 +12,9 @@ const CourseContent = () => {
   return (
     <div>
       <div className={style.body}>
-        <Button name='Materials' padding={'15px'} borderRadius={5} borderColor={'#58C5C8'} color={'black'} backgroundColor={'#58C5C8'} />  
-        <Button name='Details' padding={'15px'} borderRadius={5} borderColor={'#58C5C8'} color={'black'} backgroundColor={'#58C5C8'}  />
-        <Button name='Entrolled' padding={'15px'} borderRadius={5} borderColor={'#58C5C8'} color={'black'} backgroundColor={'purple'}  />
+        <Button name='MATERIALS' pr={40} pl={40} mr={'4px'} borderRadius={15} borderColor={'#58C5C8'} color={'black'} backgroundColor={'#58C5C8'} />  
+        <Button name='Details'  borderRadius={5} borderColor={'#58C5C8'} color={'black'} backgroundColor={'#58C5C8'}  />
+        <Button name='Entrolled' padding={'15px'} borderRadius={5} borderColor={'#58C5C8'} color={'white'} backgroundColor={'purple'}  />
     </div>
     <hr style={{background: 'lime',color: 'lime',borderColor: 'lime',height: '3px', width: '100%'}}/>
     <div className={style.container}>
