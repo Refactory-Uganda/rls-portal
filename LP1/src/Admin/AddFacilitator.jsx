@@ -5,7 +5,7 @@ const AddFacilitator = () => {
     return (
         <div className="AddCourse">
         <div className="header">
-       <h3>ADD COURSE CONTENT</h3>
+       <h3>ADD FACILITATOR</h3>
        </div> 
        <input type="text"   className="AddCourse__input" placeholder="USER NAME"/>
        <input type="text" 
