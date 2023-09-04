@@ -1,9 +1,8 @@
 
-import ButtonAddContent from '../Components/AddCourseContentButton';
 import style from './AddFacilitar.module.css'
 const AddFacilitator = () => {
     return (
-        <div className={style.AddFacilitator}>
+        <div className={style.addFacillitator}>
         <div className={style.header}>
        <h3>ADD FACILITATOR</h3>
        </div> 
@@ -15,7 +14,7 @@ const AddFacilitator = () => {
          className={style.input}  
        placeholder="COURSE NAME "/>
      
-<ButtonAddContent backgroundColor="#693769ff" label="Save" borderColor="#693769ff" contentColor="white" />
+<button className={style.button}>Save</button>
 
        
    </div>

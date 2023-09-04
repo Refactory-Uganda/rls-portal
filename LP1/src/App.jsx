@@ -8,8 +8,8 @@ function App() {
 
   return (
     <>
-<AddCourse/>
-{/* <AddFacilitator/> */}
+{/* <AddCourse/> */}
+<AddFacilitator/>
 {/* <AddCourseMaterial/> */}
     </>
   )
