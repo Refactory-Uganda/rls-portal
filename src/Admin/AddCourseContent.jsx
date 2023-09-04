@@ -15,12 +15,15 @@ const AddCourseContent = () => {
       <Button name='ADD'  pr={40} pl={40} mr={'8px'} borderRadius={1} borderColor={'#58C5C8'} color={'black'} backgroundColor={'#58C5C8'}  />
       <Button name='ADDED' pr={40} pl={40} mr={'8px'} borderRadius={1} borderColor={'purple'} color={'white'} backgroundColor={'#693769'}  />
   </div>
-  <div>
+  <div className={style.container}>
     <div className={style.textBtn}>
         <Button name='text' padding={'8px'}  borderRadius={8} mb={"8px"} borderColor={'#58C5C8'} color={'black'} backgroundColor={'#58C5C8'} size={'10px'} mr={'4px'} />  
         <Button name='video' padding={'8px'} borderRadius={8} mb={"8px"} borderColor={'purple'} color={'white'} backgroundColor={'#693769'} size={'10px'} />
-        <Button name='image' padding={'8px'} borderRadius={8} borderColor={'purple'} color={'white'} backgroundColor={'#693769'} size={'10px'} />
-        <Button name='slide' padding={'8px'} borderRadius={8} borderColor={'purple'} color={'white'} backgroundColor={'#693769'} size={'10px'} />
+        <Button name='image' padding={'8px'} borderRadius={8} mb={"8px"} borderColor={'purple'} color={'white'} backgroundColor={'#693769'} size={'10px'} />
+        <Button name='slide' padding={'8px'} borderRadius={8} mb={"8px"} borderColor={'purple'} color={'white'} backgroundColor={'#693769'} size={'10px'} />
+    </div>
+    <div>
+      <h2>SELECTE CONTENT TO EDIT</h2>
     </div>
   </div>
   </div>
