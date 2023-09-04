@@ -1,10 +1,10 @@
-import ButtonAddContent from "../Components/AddCourseContentButton";
+
 import stlye from './AddCourse.module.css'
 const AddCourse = () => {
     return (
-        <div className={stlye.AddCourse}>
+        <div className={stlye.addCourse}>
              <div className={stlye.header}>
-            <h3>ADD COURSE CONTENT</h3>
+            <h3 className={stlye.header__content}>ADD COURSE CONTENT</h3>
             </div> 
             <input type="text"   className={stlye.AddCourse__input} placeholder="COURSE NAME"/>
             <input type="text" 
@@ -16,8 +16,8 @@ const AddCourse = () => {
             <input type="text" 
           className={stlye.AddCourse__input}
             placeholder="COURSE DURATION"/>
-<ButtonAddContent backgroundColor="#693769ff" label="Save" borderColor="#693769ff" contentColor="white" />
 
+<button className={stlye.button} >Save</button>
             
         </div>
     );
