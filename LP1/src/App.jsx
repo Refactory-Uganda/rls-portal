@@ -8,9 +8,9 @@ function App() {
 
   return (
     <>
-<AddCourse/>
+{/* <AddCourse/> */}
 {/* <AddFacilitator/> */}
-{/* <AddCourseMaterial/> */}
+<AddCourseMaterial/>
     </>
   )
 }
