@@ -16,5 +16,24 @@
 }
 
 .container{
+    display: flex;
+    justify-content: space-around;
     margin-top: 40px;
+}
+.content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: purple;
+    margin-bottom: 50px;
+    font-family: po;
+}
+
+
+.btns{
+    border: 1px solid #58C5C8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
 }
