@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+#footercontainer{
+    background-color:  rgb(86, 26, 86);
+    margin-top: 40px;
+}
+#logincontainer{
+    background-color: white;
+}
+
+#inputtext{
+    width:90%;
+     border-radius: 7px;
+     border: cornsilk;
+     padding: 10px;
+     text-align: center;
+}
+.inputs{
+ margin-top: 30px;
+}
+.formcontainer{
+    background-color :#673467;
+    border-radius: 10px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+   text-align: center;
+   padding-top: 40px;
+   
+}
+.absentaccount{
+    color: white;
+}
+.button1{
+    background-color: rgb(43, 140, 145);
+    color: black;
+    border: rgb(42, 104, 106);
+    padding: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 5px;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
