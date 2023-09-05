@@ -1,4 +1,4 @@
-import AddCourseContent from "./Admin/AddCourseContent"
+
 
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
   return (
     <>
 
-<AddCourseContent/>
+
     </>
   )
 }
