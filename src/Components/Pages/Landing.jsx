@@ -100,10 +100,10 @@ useEffect(()=>{})
             <div className="coursewrapper py-1 sm2:grid grid-cols-2 md:flex flex-col lg:grid grid-cols-2">{
               demo.map((data)=>(
 
-                <div key={data.id} className="course m-5 bg-darkpurple rounded-1sm md:grid grid-cols-2 gap-2 my-10 w-[90%] m-auto ">
+                <div key={data.id} className="course m-5 bg-darkpurple rounded-1sm md:grid grid-cols-2 gap-2 my-10 w-[90%] mx-auto ">
                 <div className="coursecard bg-darkpurple rounded-1sm ">
                   <div className="img rouded-5sm py-2">
-                  <img src={data.img} className=' w-25 h-20 rounded-5sm mx-auto  md:mx-5 ' alt=""  />
+                  <img src={data.img} className=' courseimg rounded-5sm  md:mx-5 ' alt=""  />
                   </div>
                   
                   <div className="tittle bg-bluegreen my-2">
@@ -113,13 +113,13 @@ useEffect(()=>{})
                 <div className="coursedescription ">
                   <div className="sidebar ps-3">
                   <div className="details md:bg-white">
-                    <p className='text-center text-base text-white p-2 md:text-black' >{data.description}</p>
+                    <p className='Desctext text-center text-base p-2 ' >{data.description}</p>
                   </div>
                   </div>
                   <div className="actions flex justify-around">
-                    <button className='flex border-solid border-bluegreen border-2 bg-white m-2 text-purple'><svg xmlns="http://www.w3.org/2000/svg" className='fill-purple' height="24" viewBox="0 -960 960 960" width="24"><path d="M160-80q-33 0-56.5-23.5T80-160v-400q0-33 23.5-56.5T160-640h640q33 0 56.5 23.5T880-560v400q0 33-23.5 56.5T800-80H160Zm0-80h640v-400H160v400Zm240-40 240-160-240-160v320ZM160-680v-80h640v80H160Zm120-120v-80h400v80H280ZM160-160v-400 400Z"/></svg>Enroll</button>
-                    <button className='flex bg-bluegreen  m-2 rounded-0.5sm text-purple'><svg xmlns="http://www.w3.org/2000/svg" height="24" className='fill-purple' viewBox="0 -960 960 960" width="24"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg>View</button>
-                    <button className='flex bg-bluegreen  m-2 rounded-0.5sm text-purple hover:bg-purple'><svg xmlns="http://www.w3.org/2000/svg" height="24" className='fill-purple' viewBox="0 -960 960 960" width="24"><path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z"/></svg>Mark</button>
+                    <button className='flex border-solid border-bluegreen border-2 bg-white my-2 text-purple'><svg xmlns="http://www.w3.org/2000/svg" className='fill-purple' height="24" viewBox="0 -960 960 960" width="24"><path d="M160-80q-33 0-56.5-23.5T80-160v-400q0-33 23.5-56.5T160-640h640q33 0 56.5 23.5T880-560v400q0 33-23.5 56.5T800-80H160Zm0-80h640v-400H160v400Zm240-40 240-160-240-160v320ZM160-680v-80h640v80H160Zm120-120v-80h400v80H280ZM160-160v-400 400Z"/></svg>Enroll</button>
+                    <button className='flex bg-bluegreen  my-2 rounded-0.5sm text-purple'><svg xmlns="http://www.w3.org/2000/svg" height="24" className='fill-purple' viewBox="0 -960 960 960" width="24"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg>View</button>
+                    <button className='flex bg-bluegreen  my-2 rounded-0.5sm text-purple hover:bg-purple'><svg xmlns="http://www.w3.org/2000/svg" height="24" className='fill-purple' viewBox="0 -960 960 960" width="24"><path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z"/></svg>Mark</button>
                   </div>
                   </div>
                 
@@ -137,7 +137,7 @@ useEffect(()=>{})
           </div>
           <div className="techIcons grid grid-cols-5 m-auto md:grid-cols-9 w-[95%]">
             {imgdata.map((image)=>(
-               <img key={image.id} src={image.src} className='w-25 h-20 m-auto' alt="" />
+               <img key={image.id} src={image.src} className='techimgs m-auto' alt="" />
             ))}
            
           </div>
@@ -153,7 +153,7 @@ useEffect(()=>{})
                     <img src={forum.image} className='w-20 h-20 rounded-5sm m-auto' alt="" />
                  </div>
                 <div className="trendingName">
-                  <h3 className='text-center'>{forum.name}</h3>
+                  <h5 className='text-center'>{forum.name}</h5>
                </div>
               <div className="trendingRate  flex justify-between max-w-[150px] m-auto">
                {
@@ -182,8 +182,8 @@ useEffect(()=>{})
                   <img src={story.image} className="w-10 h-10 rounded-5sm m-auto sm:m-2"  alt="" />
                    </div>
                    <div className="userDetails text-center mb-3 w-full">
-                    <h1 className='text-center'>{story.name}</h1>
-                    <h3>{story.studentTrack}</h3>
+                    <h3 className='text-center'>{story.name}</h3>
+                    <h4>{story.studentTrack}</h4>
                    </div>
                  </div>
                  <div className="storyDetails">

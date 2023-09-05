@@ -6,7 +6,7 @@ function Footer(){
             <div className="footer bg-purple ">
                 <div className="wrapperfooter md:grid grid-cols-3 w-[90%] m-auto">
                     <div className="location ">
-                        <img src="/img/refactoryWhite.png" className="text-left text-white text-5xl w-40 p-5" alt="Refactory" />
+                        <img src="/img/refactoryWhite.png"  className="w-40 m-2 p-2" alt="Refactory" />
                         <p className="text-white p-2 ">
                         Refactory is a tech program developed in partnership with the tech sector.We are the industry&apos;s blueprint for hiring developers.
                         </p>
@@ -19,21 +19,21 @@ function Footer(){
                         } 
                         </span>
                     </div>
-                    <div className="links p-4">
-                        <h1 className="p-2 text-white">MORE ON REFACTORY</h1>
+                    <div className="links p-1 md:p-4">
+                        <h1 className="p-2 text-white text-sm">MORE ON REFACTORY</h1>
                         <ul className="p-2 text-white">
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Help</a></li>
-                            <li><a href="#">Notifactions</a></li>
-                            <li><a href="#">Partners</a></li>
+                            <li><a href="#" className="text-white">Contact</a></li>
+                            <li><a href="#"  className="text-white">Blog</a></li>
+                            <li><a href="#"  className="text-white">Help</a></li>
+                            <li><a href="#"  className="text-white">Notifactions</a></li>
+                            <li><a href="#"  className="text-white">Partners</a></li>
                         </ul>
                     </div>
                     <div className="permiumPartners p-4">
                         <div className="sm:grid grid-cols-2">
-                            <span><img src="/img/Labo.png" className="w-25 h-20 " alt="" /></span>
-                            <span><img src="/img/clark.png" className="w-25 h-20 " alt="" /></span>
-                            <span><img src="/img/for-one.png" className="w-25 h-20" alt="" /></span>
+                            <span><img src="/img/Labo.png" className="w-30 h-10 m-auto my-5 md:h-16 mt-1 " alt="" /></span>
+                            <span><img src="/img/clark.png" className="w-30 h-10 m-auto my-5 md:h-16 mt-1" alt="" /></span>
+                            <span><img src="/img/for-one.png" className="w-30 h-10 m-auto my-5 md:h-16 mt-1" alt="" /></span>
                         </div>
                     </div>
                 </div>
