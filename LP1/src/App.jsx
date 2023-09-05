@@ -1,6 +1,4 @@
-import AddCourse from "./Admin/AddCourse"
-import AddCourseMaterial from "./Admin/AddCourseMaterial"
-import AddFacilitator from "./Admin/AddFacilitator"
+import AddCourseContent from "./Admin/AddCourseContent"
 
 
 function App() {
@@ -8,9 +6,8 @@ function App() {
 
   return (
     <>
-{/* <AddCourse/> */}
-<AddFacilitator/>
-{/* <AddCourseMaterial/> */}
+
+<AddCourseContent/>
     </>
   )
 }

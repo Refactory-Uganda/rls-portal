@@ -5,9 +5,10 @@ const ButtonAddContent = ({ label, borderColor, backgroundColor, contentColor })
     border: `2px solid ${borderColor}`,
     background: backgroundColor,
     color: contentColor,
-    borderRadius: '1rem', // Border radius in rem
-    width: '7rem', // Width in rem
-    height: '2rem', 
+    borderRadius: '1rem', 
+    width: '7rem', 
+    height: '2rem',
+    margin:'.5rem' 
   };
 
   return (

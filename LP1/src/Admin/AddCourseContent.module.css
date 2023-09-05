@@ -1,0 +1,45 @@
+.addCourseContent{
+  margin: 0;
+}
+.header{
+  background-color: rgb(196, 195, 195);
+  border-bottom-left-radius: 50px; 
+  border-bottom-right-radius: 50px;
+  margin: 0 1rem;
+}
+.header h3{
+  margin: 1rem 6rem 0 6rem ;
+  background-color: #693769ff;
+  text-align: center;
+  border-top-left-radius: 10px; 
+  border-top-right-radius: 10px;
+  color: white;
+  padding: .5rem;
+
+}
+  .content{
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    margin: 0.6rem;
+  }
+  .content__flex{
+    display: flex;
+   
+  }
+  .paragraph{
+    border: 1px solid rgb(88,197,200) ;
+    margin: 1rem;
+    padding: .5rem;
+  }
+  .sideButtons{
+    margin: 1rem;
+    background-color: black;
+    border: 2px sol;
+
+  }
+  .content__top{
+    margin-bottom: 1.5rem;
+  }
+ 
+ 
