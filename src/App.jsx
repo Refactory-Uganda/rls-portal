@@ -4,6 +4,7 @@ import Login from "./Components/Pages/Login";
 import CourseContent from "./Admin/CourseContent";
 import AddCourseContent from "./Admin/AddCourseContent";
 import Landing from "./Components/Pages/Landing"
+import Admin from "./Admin/AdminLandingPage"
 import "./index.css"
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Landing/>}></Route>
+          <Route path="/" element={<Admin/>}></Route>
+          <Route path="/LANDING" element={<Landing/>}></Route>
           <Route path="/login" element={<Login/>}/>
           <Route path="/coursecontent" element={<CourseContent/>}/>
           <Route path="/addCourse" element={<AddCourseContent/>}/>
