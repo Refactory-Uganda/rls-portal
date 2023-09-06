@@ -9,7 +9,8 @@
   background-color: rgb(196, 195, 195);
   border-bottom-left-radius: 50px; 
   border-bottom-right-radius: 50px;
-  margin: 0 1rem;
+  margin: 0  3rem;
+  margin-bottom: 1rem;
 }
 .header h3{
   margin: 1rem 6rem 0 6rem ;
@@ -22,15 +23,15 @@
 
 }
 .input {
-  width: 80%; 
-  margin: 1rem auto; 
+  width: 40%; 
+  margin: 3rem auto; 
   padding: 0.5rem; 
   border-color: #693769ff;
 border-radius: .6rem;
 
 }
 .button{
-  margin: 0 auto;
+  margin: 1rem auto;
   border: 0;
   background-color: #693769ff;
   color: white;
