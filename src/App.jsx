@@ -7,6 +7,7 @@ import Landing from "./Components/Pages/Landing"
 import Admin from "./Admin/AdminLandingPage"
 import AddFacilitator from "./Admin/AddFacilitator"
 import "./index.css"
+import AddCourse from "./Admin/AddCourse";
 
 function App() {
   return (
@@ -17,8 +18,10 @@ function App() {
           <Route path="/LANDING" element={<Landing/>}></Route>
           <Route path="/login" element={<Login/>}/>
           <Route path="/coursecontent" element={<CourseContent/>}/>
-          <Route path="/addCourse" element={<AddCourseContent/>}/>
+          <Route path="/addCourseContent" element={<AddCourseContent/>}/>
           <Route path= '/addFacilitator' element={<AddFacilitator/>}/>
+          <Route path= '/addCourse' element={<AddCourse/>}/>
+
 
         </Routes>
       </BrowserRouter>
