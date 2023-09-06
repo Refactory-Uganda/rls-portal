@@ -1,10 +1,10 @@
+import AdminNacHeader from '../Components/AdminNacHeader';
 import style from './AddFacilitar.module.css'
 const AddFacilitator = () => {
     return (
         <div className={style.addFacillitator}>
-        <div className={style.header}>
-       <h3>ADD FACILITATOR</h3>
-       </div> 
+
+       <AdminNacHeader label='ADD FACILITATOR'/>
        <input type="text"  
           className={style.input}  
         
