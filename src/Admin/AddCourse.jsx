@@ -1,11 +1,10 @@
 
+import AdminNacHeader from '../Components/AdminNacHeader';
 import stlye from './AddCourse.module.css'
 const AddCourse = () => {
     return (
         <div className={stlye.addCourse}>
-             <div className={stlye.header}>
-            <h3 className={stlye.header__content}>ADD COURSE CONTENT</h3>
-            </div> 
+            <AdminNacHeader label='ADD COURSE CONTENT'/>
             <input type="text"   className={stlye.AddCourse__input} placeholder="COURSE NAME"/>
             <input type="text" 
             className={stlye.AddCourse__input} 
