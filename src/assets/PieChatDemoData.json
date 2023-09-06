@@ -1,0 +1,34 @@
+[
+{
+    "id": 1,
+    "name":"Edwin",
+    "course":"Javascript",
+    "number":2
+},
+
+{
+    "id": 2,
+    "name":"Kalungi",
+    "course":"AI",
+    "number":3
+},
+{
+    "id": 3,
+    "name":"Sarah",
+    "course":"Python",
+    "number":5
+},
+{
+    "id": 3,
+    "name":"Isaac",
+    "course":"Python",
+    "number":5
+},
+{
+    "id": 3,
+    "name":"Eric",
+    "course":"Python",
+    "number":5
+}
+
+]
