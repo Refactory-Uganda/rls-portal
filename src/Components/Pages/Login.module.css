@@ -46,6 +46,40 @@
 .loginimage{
     height: 100px;
     border-radius: 50px;
-    margin-top:-100px;
-
+    margin-top:-90px;
+    margin-left: 200px;
 }
+
+/* @media (max-width: 530px) {
+    .loginimage{
+        height: 100px;
+        border-radius: 50px;
+        margin-top:-90px;
+        margin-left: 130px;
+    } 
+}
+@media (max-width: 540px) {
+    .loginimage{
+        height: 100px;
+        border-radius: 50px;
+        margin-top:-90px;
+        margin-left: -3px;
+    } 
+}
+@media (max-width: 280px) {
+    .loginimage{
+        height: 100px;
+        border-radius: 50px;
+        margin-top:-90px;
+        margin-left: 75px;
+    }  
+} */
+
+/* @media (max-width: 912px) {
+    .loginimage{
+        height: 100px;
+        border-radius: 50px;
+        margin-top:-90px;
+        margin-left: 250px;
+    } 
+} */

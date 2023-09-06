@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom"
 import LoginCss from "./Login.module.css"
-
+import Footer from "../MicroComponents/footer/Footer";
 
 function Login(props) {
   return (
@@ -17,7 +17,7 @@ function Login(props) {
               <div className={LoginCss.formcontainer}>
                 <form action="">
                   <div>
-                    <img src="../public/images/refactory logo.png" alt="" className={LoginCss.loginimage} />
+                    <img src="../images/refactory logo.png" alt="" className={LoginCss.loginimage} />
                   </div>
                   <div className={LoginCss.inputs}>
                     <input
@@ -53,7 +53,7 @@ function Login(props) {
         {/* Footer */}
         <div className="container-fluid" id="footercontainer">
           <div className="row">
-            <div className="col">I'm your content inside the grid!</div>
+            <div className="col"><Footer/></div>
           </div>
         </div>
       </div>
