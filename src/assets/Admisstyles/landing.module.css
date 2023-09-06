@@ -1,3 +1,28 @@
-.paragraph{
-    background-color: brown;
+
+#icons{
+    display: flex;
+    flex-direction: row;
+    padding: 0;
 }
+
+@media screen and (min-width:650px) {
+    #logo{
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+    #NavAdmin{
+        height: 100vh;
+    }
+   #icons{
+    margin-top: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+   }
+    
+}
+
+
+

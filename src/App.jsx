@@ -23,6 +23,8 @@ function App() {
           <Route path= '/addCourse' element={<AddCourse/>}/>
 
 
+          <Route path="/addCourse" element={<AddCourseContent/>}/>
+          {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}
         </Routes>
       </BrowserRouter>
       
