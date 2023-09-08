@@ -1,4 +1,10 @@
-
+.assignCourseFacilitator{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 1rem;
+  
+}
   .input {
     width: 40%; 
     margin: 3rem auto; 
