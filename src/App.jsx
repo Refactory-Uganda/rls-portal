@@ -32,6 +32,7 @@ function App() {
           <Route path="/facilitatorModules" element={<FacilitatorModules/>} />
           <Route path="/addCourse" element={<AddCourseContent/>}/>
           <Route path="/piechart" element={<PieChart/>}></Route>
+         
           {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}
         </Routes>
       </BrowserRouter>
