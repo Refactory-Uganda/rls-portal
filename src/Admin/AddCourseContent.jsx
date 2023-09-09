@@ -1,10 +1,13 @@
 
 import Button from '../Components/Button';
 import style from './AddCourseContent.module.css';
-import {FaEllipsisV} from 'react-icons/fa'
+import {FaEllipsisV} from 'react-icons/fa';
+
 
 const AddCourseContent = () => {
   return (
+    <>
+
     <div className={style.body}>
     <div className={style.box}>
     <Button name='CONTENT' pr={40} pl={40} mr={'8px'} borderRadius={10} borderColor={'purple'} color={'white'} backgroundColor={'#693769'}  />
@@ -26,7 +29,7 @@ const AddCourseContent = () => {
     </div>
     <div >
       <div className={style.content}>
-          <h2>SELECTE CONTENT TO EDIT</h2>
+          <h2>SELECT CONTENT TO EDIT</h2>
           <FaEllipsisV />
       </div>
       
@@ -39,7 +42,8 @@ const AddCourseContent = () => {
       </div>
     </div>
   </div>
-  </div>
+    </div>
+    </>
   )
 }
 

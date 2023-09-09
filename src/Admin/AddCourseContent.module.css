@@ -2,7 +2,7 @@
 .body{
     width: 50vw;
     margin-top: 20px;
-    margin-left: 20px;
+    margin-left: 5rem;
 }
 
 .box{
@@ -37,4 +37,16 @@
     flex-direction: column;
     justify-content: center;
     padding: 30px;
+}
+
+@media (min-width: 281px)  and (max-width: 768px) {
+    .body {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        width: 90vw;
+    }
+
+    Button{
+        font-size: 5px;
+    }
 }
