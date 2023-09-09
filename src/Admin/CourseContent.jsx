@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ContentEditable from 'react-contenteditable';
 import Button from '../Components/Button';
 import style from './CourseContent.module.css';
-import Navbar from '../Components/MicroComponents/NavbarAdmin/AdminNavbar';
+
 
 const CourseContent = () => {
   const [content, setContent] = useState('Input content here');
@@ -12,7 +12,7 @@ const CourseContent = () => {
   }
   return (
     <>
-    <Navbar />
+    
     <div className={style.body}>
       <div className={style.box}>
         <Button name='MATERIALS' pr={40} pl={40} mr={'8px'} borderRadius={10} borderColor={'#58C5C8'} color={'black'} backgroundColor={'#58C5C8'} />  
