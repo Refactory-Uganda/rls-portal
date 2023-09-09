@@ -33,7 +33,7 @@ function App() {
           <Route path= '/assignCourseFacilitator' element={<AssignCourseFacilitator/>}/>
           <Route path= '/addCourseContentDraft' element={<AddCourseContentDraft/>}/>
           <Route path="/facilitatorModules" element={<FacilitatorModules/>} />
-          <Route path="/addCourse" element={<AddCourseContent/>}/>
+          <Route path="/addCourseContentAdded" element={<AddCourseContent/>}/>
           <Route path="/piechart" element={<PieChart/>}></Route>
          
           {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}

@@ -5,9 +5,9 @@ import Footer from "../MicroComponents/footer/Footer";
 
 function Login(props) {
   return (
-    <>
+    <div>
   
-      <div>
+      <div  className={LoginCss.LoginDiv3}>
         {/* Header */}
         <div className="container-fluid" id="logincontainer">
           <div className="row">
@@ -53,11 +53,11 @@ function Login(props) {
         {/* Footer */}
         <div className="container-fluid" id="footercontainer">
           <div className="row">
-            <div className="col"><Footer/></div>
+            <div className="col" id={LoginCss.footer}><Footer/></div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
