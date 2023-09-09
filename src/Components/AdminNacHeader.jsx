@@ -3,11 +3,11 @@ const AdminNacHeader = ({ label }) => {
         backgroundColor: 'rgb(196, 195, 195)',
         borderBottomLeftRadius: '50px',
         borderBottomRightRadius: '50px',
-        margin: '0 1rem',
+        padding: '1rem 0 0 0',
     };
 
     const content = {
-        margin: '1rem 6rem 0 6rem',
+        margin: '0rem 6rem 0 6rem',
         backgroundColor: '#693769ff',
         textAlign: 'center',
         borderTopLeftRadius: '10px',

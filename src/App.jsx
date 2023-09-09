@@ -7,8 +7,10 @@ import Landing from "./Components/Pages/Landing"
 import Admin from "./Admin/AdminLandingPage"
 import AddFacilitator from "./Admin/AddFacilitator"
 import AddCourse from "./Admin/AddCourse";
+import AssignCourseFacilitator from "./Admin/AssignCourseFacilitator.jsx";
 import PieChart from "./Components/MicroComponents/PieChart/PieChart";
 import FacilitatorModules from "./Admin/facilitatorModules";
+import AddCourseContentDraft from "./Admin/AddCourseContentDraft";
 
 
 
@@ -25,9 +27,12 @@ function App() {
           <Route path="/addcoursecontent" element={<AddCourseContent/>}/>
           <Route path= '/addFacilitator' element={<AddFacilitator/>}/>
           <Route path= '/addCourse' element={<AddCourse/>}/>
+          <Route path= '/assignCourseFacilitator' element={<AssignCourseFacilitator/>}/>
+          <Route path= '/addCourseContentDraft' element={<AddCourseContentDraft/>}/>
           <Route path="/facilitatorModules" element={<FacilitatorModules/>} />
           <Route path="/addCourse" element={<AddCourseContent/>}/>
           <Route path="/piechart" element={<PieChart/>}></Route>
+         
           {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}
         </Routes>
       </BrowserRouter>
