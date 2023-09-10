@@ -4,18 +4,24 @@
     flex-direction: row;
     padding: 0;
 }
-
+#Navicons{
+    text-decoration: none;
+    background:#180027;
+    margin: 0;
+}
+#Navicons:hover{
+    background: paleturquoise;
+}
 @media screen and (min-width:650px) {
-    #logo{
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
+    #innerlogo{
+        margin: auto;
     }
     #NavAdmin{
         height: 100vh;
+        width: 110px;
     }
    #icons{
-    margin-top: 100px;
-    padding-top: 50px;
+    margin-top: 0px;
     padding-bottom: 50px;
     border-radius: 20px;
     display: flex;

@@ -1,4 +1,5 @@
 import { useEffect,useState } from 'react'
+import styles from "../../assets/Landingpagestlyes/Landingpage.module.css"
 // ....................the technology icons and partners...........................
 import imgdata from "../../assets/images.json"
 import partners from "../../assets/partners.json"
@@ -28,7 +29,7 @@ useEffect(()=>{})
               className="w-40 mx-auto p-3"
             />
           </div>
-          <div  id="navIconLanding" className='navicons hidden bg-white md:flex flex-row justify-between'>
+          <div   className=' hidden bg-white md:flex flex-row justify-between' id={styles.navicons}>
             <div className="p-3">
             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>
             </div>
@@ -46,7 +47,7 @@ useEffect(()=>{})
           </div>
         </div>
         <div className="bottomNav sticky top-0 z-10  md:grid grid-cols-2 gap-10 justify-between bg-purple">
-          <div className="courseGallary  bg-purple  h-10 ">
+          <div className="bg-purple  h-10 " id={styles.courseGallary}>
             <div className="text-center p-2 ">
             <button className="  rounded-5sm h-5 w-5 bg-black  mx-auto my-1 p-0.2 text-center">
               <svg
@@ -60,7 +61,7 @@ useEffect(()=>{})
             
             </div>
             
-            <div className="gallary flex flex-row justify-around overflow-x-auto ">
+            <div className="gallary flex flex-row justify-around overflow-x-auto overflow-y-hidden ">
               {demo.map((data) => (
                 <div className="mx-1 my-2 bg-white  h-6 w-35 rounded-0.5sm justify-" key={data.id}>
                   <p className="text-purple  text-sm px-2 py-0.5 ">{data.name}</p>
@@ -81,7 +82,7 @@ useEffect(()=>{})
             </div>
            
           </div>
-            <div className="searchbar flex justify-between   bg-menuwhite md:bg-purple ">
+            <div className="flex justify-between   bg-menuwhite md:bg-purple " id={styles.searchbar}>
               <div className="p-1.5  flex flex-row ">
               <input type="text" className=" input border-solid  border-bluegreen border-2 rounded-0.5sm w-32 sm:w-auto" />
               <div className=" py-1.5 px-2">
@@ -95,15 +96,15 @@ useEffect(()=>{})
               </div>
             </div>
       </div>
-          <div className="wrapper ">
+          <div id={styles.wrapper}>
             <div className="innerwrapper backdrop-blur-sm bg-purple/60">
             <div className="coursewrapper py-1 sm2:grid grid-cols-2 md:flex flex-col lg:grid grid-cols-2">{
               demo.map((data)=>(
 
-                <div key={data.id} className="course m-5 bg-darkpurple rounded-1sm md:grid grid-cols-2 gap-2 my-10 w-[90%] mx-auto ">
+                <div key={data.id}id={styles.course} className=" m-5 bg-darkpurple rounded-1sm md:grid grid-cols-2 gap-2 my-10 w-[90%] mx-auto ">
                 <div className="coursecard bg-darkpurple rounded-1sm ">
-                  <div className="img rouded-5sm py-2">
-                  <img src={data.img} className=' courseimg rounded-5sm  md:mx-5 ' alt=""  />
+                   <div className="rouded-5sm py-2" >
+                  <img src={data.img} className='  rounded-5sm  md:mx-5 ' id={styles.courseimg} alt=""  />
                   </div>
                   
                   <div className="tittle bg-bluegreen my-2">
@@ -111,12 +112,12 @@ useEffect(()=>{})
                   </div>
                 </div>
                 <div className="coursedescription ">
-                  <div className="sidebar ps-3">
-                  <div className="details md:bg-white">
-                    <p className='Desctext text-center text-base p-2 ' >{data.description}</p>
+                  <div className="ps-3" id={styles.sidebar}>
+                  <div className=" md:bg-white" id={styles.details}>
+                    <p className=' text-center text-base p-2 ' id={styles.Desctext} >{data.description}</p>
                   </div>
                   </div>
-                  <div className="actions flex justify-around">
+                  <div className="flex justify-around " id={styles.actions}>
                     <button className='flex border-solid border-bluegreen border-2 bg-white my-2 mx-1 text-purple p-1'><svg xmlns="http://www.w3.org/2000/svg" className='fill-purple' height="24" viewBox="0 -960 960 960" width="24"><path d="M160-80q-33 0-56.5-23.5T80-160v-400q0-33 23.5-56.5T160-640h640q33 0 56.5 23.5T880-560v400q0 33-23.5 56.5T800-80H160Zm0-80h640v-400H160v400Zm240-40 240-160-240-160v320ZM160-680v-80h640v80H160Zm120-120v-80h400v80H280ZM160-160v-400 400Z"/></svg>Enroll</button>
                     <button className='flex bg-bluegreen  my-2 mx- rounded-0.5sm text-purple p-1'><svg xmlns="http://www.w3.org/2000/svg" height="24" className='fill-purple' viewBox="0 -960 960 960" width="24"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg>View</button>
                     <button className='flex bg-bluegreen  my-2 mx-1 rounded-0.5sm text-purple p-1 '><svg xmlns="http://www.w3.org/2000/svg" height="24" className='fill-purple' viewBox="0 -960 960 960" width="24"><path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z"/></svg>Mark</button>
@@ -132,21 +133,21 @@ useEffect(()=>{})
             </div>
          </div>
          <div className="technologies  bg-fadepurple">
-          <div className="headingTech bg-purple">
+          <div className=" bg-purple" id={styles.headingTech}>
             <h1 className=' text-white text-center '>Technologies</h1>
           </div>
           <div className="techIcons grid grid-cols-5 m-auto md:grid-cols-9 w-[95%]">
             {imgdata.map((image)=>(
-               <img key={image.id} src={image.src} className='techimgs m-auto' alt="" />
+               <img key={image.id} src={image.src} className=' m-auto' id={styles.techimgs} alt="" />
             ))}
            
           </div>
          </div>
          <div className="trendingForum">
-          <div className="trendingHeading">
+          <div id={styles.trendingHeading}>
             <h1 className='text-center m-10'>Trending Forums</h1>
           </div>
-          <div className="forums grid grid-cols-2 sm2:grid-cols-3 md:grid-cols-4 ">{
+          <div className=" grid grid-cols-2 sm2:grid-cols-3 md:grid-cols-4 " id={styles.forums}>{
             demoForum.map((forum)=>(
               <div className="forum  my-8" key={forum.id}>
                  <div className="trendingImage ">
@@ -171,12 +172,12 @@ useEffect(()=>{})
           
          </div>
           <div className="userStory ">
-          <div className="userStoryHeading">
+          <div id="userStoryHeading">
             <h1 className='text-bluegreen text-center mt-20 mb-10'>User Story</h1>
           </div>
           <div className="storys md:grid grid-cols-2 ">
             { demoStory.map((story)=>(
-                 <div className="story m-4" key={story.id}>
+                 <div className="m-4" key={story.id} id={styles.story}>
                  <div className="top sm:flex ">
                    <div className="userImg">
                   <img src={story.image} className="w-10 h-10 rounded-5sm m-auto sm:m-2"  alt="" />

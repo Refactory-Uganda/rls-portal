@@ -6,6 +6,7 @@ import AddCourseContent from "./Admin/AddCourseContent";
 import Landing from "./Components/Pages/Landing"
 import Admin from "./Admin/AdminLandingPage"
 import AddFacilitator from "./Admin/AddFacilitator"
+// import "./index.css"
 import AddCourse from "./Admin/AddCourse";
 import AssignCourseFacilitator from "./Admin/AssignCourseFacilitator.jsx";
 import PieChart from "./Components/MicroComponents/PieChart/PieChart";
@@ -21,8 +22,8 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Admin/>}></Route>
-          <Route path="/LANDING" element={<Landing/>}></Route>
+          <Route path="/Admin" element={<Admin/>}></Route>
+          <Route path="/" element={<Landing/>}></Route>
           <Route path="/login" element={<Login/>}/>
           <Route path="/coursecontent" element={<CourseContent/>}/>
           <Route path="/addcoursecontent" element={<AddCourseContent/>}/>
