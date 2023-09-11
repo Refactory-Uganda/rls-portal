@@ -1,6 +1,6 @@
 
 // importing react reactor dom
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+//import { BrowserRouter, Route, Routes } from "react-router-dom";
 // importing section compontents
 import Nav from "../Components/MicroComponents/NavbarAdmin/AdminNavbar"
 import styles from "./AdminLandingPage.module.css"
