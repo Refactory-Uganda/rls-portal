@@ -5,6 +5,7 @@ const AddCourse = () => {
     return (
         <div className={stlye.addCourse}>
             <AdminNacHeader label='ADD COURSE CONTENT'/>
+           <form className={stlye.form}>
             <input type="text"   className={stlye.AddCourse__input} placeholder="COURSE NAME"/>
             <input type="text" 
             className={stlye.AddCourse__input} 
@@ -15,6 +16,7 @@ const AddCourse = () => {
             <input type="text" 
           className={stlye.AddCourse__input}
             placeholder="COURSE DURATION"/>
+           </form>
 
 <button className={stlye.button} >Save</button>
             
