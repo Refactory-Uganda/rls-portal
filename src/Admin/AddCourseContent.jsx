@@ -1,5 +1,4 @@
 
-import Button from '../Components/Button';
 import style from './AddCourseContent.module.css';
 import {FaEllipsisV} from 'react-icons/fa';
 import { useState } from 'react';
@@ -29,10 +28,10 @@ const AddCourseContent = () => {
   </div>
   <div className={style.container}>
     <div  className={`${style.textBtn} ${showIcons ? '' : style.iconsHidden}`}>
-        <Button name='text' pr={20} pl={20} padding={'8px'}  borderRadius={8} mb={"12px"} borderColor={'#58C5C8'} color={'black'} backgroundColor={'#58C5C8'} size={'10px'} mr={'4px'} />  
-        <Button name='video' pr={18} pl={18} padding={'8px'} borderRadius={8} mb={"12px"} borderColor={'purple'} color={'white'} backgroundColor={'#693769'} size={'10px'} />
-        <Button name='image' pr={18} pl={18} padding={'8px'} borderRadius={8} mb={"12px"} borderColor={'purple'} color={'white'} backgroundColor={'#693769'} size={'10px'} />
-        <Button name='slide' pr={20} pl={20} padding={'8px'} borderRadius={8} mb={"12px"} borderColor={'purple'} color={'white'} backgroundColor={'#693769'} size={'10px'} />
+        <button className={style.button6}>text</button>
+        <button className={style.button7}>video</button>
+        <button className={style.button7}>image</button>
+        <button className={style.button7}>slide</button>
     </div>
     <div >
       <div className={style.content}>
