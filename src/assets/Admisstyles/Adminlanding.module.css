@@ -16,6 +16,9 @@
     #innerlogo{
         margin: auto;
     }
+    #NavText{
+        display: flex;
+    }
     #NavAdmin{
         height: 100vh;
         width: 110px;
