@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./Components/Pages/Login";
 import CourseContent from "./Admin/CourseContent";
@@ -13,6 +12,7 @@ import PieChart from "./Components/MicroComponents/PieChart/PieChart";
 import ViewAndAddFacilitors from "./Admin/ViewAndAddFacilitors";
 import FacilitatorModules from "./Admin/facilitatorModules";
 import AddCourseContentDraft from "./Admin/AddCourseContentDraft";
+// import Profile from "./Admin/AdminProfile"
 
 
 
@@ -29,6 +29,7 @@ function App() {
           <Route path="/addcoursecontent" element={<AddCourseContent/>}/>
           <Route path= '/addFacilitator' element={<AddFacilitator/>}/>
           <Route path= '/addCourse' element={<AddCourse/>}/>
+          {/* <Route path= '/AdminProfile' element={<Profile/>}/> */}
            <Route path="/view/add/facilitator" element={<ViewAndAddFacilitors/>}></Route>
 
           <Route path= '/assignCourseFacilitator' element={<AssignCourseFacilitator/>}/>
