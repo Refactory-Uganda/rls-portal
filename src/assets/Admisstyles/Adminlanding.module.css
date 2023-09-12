@@ -10,14 +10,19 @@
     margin: 0;
 }
 #Navicons:hover{
-    background: paleturquoise;
+    background: rgb(125, 224, 224);
 }
+#Navicons:focus{
+    background: #58c5c8;
+}
+
 @media screen and (min-width:650px) {
     #innerlogo{
         margin: auto;
     }
     #NavText{
         display: flex;
+        font-size: 14px;
     }
     #NavAdmin{
         height: 100vh;

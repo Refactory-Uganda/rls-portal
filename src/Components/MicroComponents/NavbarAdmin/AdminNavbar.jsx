@@ -14,22 +14,22 @@ function AdminNavBar(){
                     </div>
             </div>
             <div className="md:flex flex-col justify-around m-0 w-[100%]" id={styles.icons}>
-             <a href="" className="px-1 py-2 flex m-1 rounded-0.5sm  " id={styles.Navicons}>
+             <Link href="" className="px-1 py-2 flex m-1 rounded-0.5sm  " id={styles.Navicons}>
                 <img src="/img/person.svg" alt="" />
                 <p  className="text-white m-0 px-1 hidden " id={styles.NavText}>Account</p>
-             </a>
-             <a href="" className="px-1 py-2 hover:bg-white flex m-1 rounded-0.5sm  " id={styles.Navicons}>
+             </Link>
+             <Link href="" className="px-1 py-2 hover:bg-white flex m-1 rounded-0.5sm  " id={styles.Navicons}>
                 <img src="/img/school.svg" alt="" />
                 <p className="text-white m-0 px-1 hidden "  id={styles.NavText}>Student</p>
-             </a>
+             </Link>
              <Link to="/admin/coursecontent" className="px-1 py-2 hover:bg-white flex m-1 rounded-0.5sm  " id={styles.Navicons}>
                 <img src="/img/group.svg" alt="" />
                 <p className="text-white m-0 px-1 hidden "  id={styles.NavText}>Facilitator</p>
              </Link>
-             <a href=" " className="px-1 py-2 hover:bg-white flex m-1 rounded-0.5sm  " id={styles.Navicons}>
+             <Link href=" " className="px-1 py-2 hover:bg-white flex m-1 rounded-0.5sm  " id={styles.Navicons}>
                 <img src="/img/book.svg" alt="" />
                 <p className="text-white  px-1 hidden md:m-0 "  id={styles.NavText}>Courses</p>
-             </a>
+             </Link>
             </div>
             
         </div>

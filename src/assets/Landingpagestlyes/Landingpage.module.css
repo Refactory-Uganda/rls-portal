@@ -38,6 +38,10 @@
 #userStoryHeading{
     font-size: 40px;
 }
+#dropNavIcon:focus{
+  fill:purple ;
+
+}
 @media (max-width:500px) { 
  #navicons {
         display:none; 
