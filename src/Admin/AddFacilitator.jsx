@@ -5,7 +5,9 @@ const AddFacilitator = () => {
         <div className={style.addFacillitator}>
 
        <AdminNacHeader label='ADD FACILITATOR'/>
-       <input type="text"  
+      <form className={style.form}>
+
+      <input type="text"  
           className={style.input}  
         
         placeholder="USER NAME"/>
@@ -14,6 +16,7 @@ const AddFacilitator = () => {
        placeholder="COURSE NAME "/>
      
 <button className={style.button}>Save</button>
+      </form>
 
        
    </div>
