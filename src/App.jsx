@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./Components/Pages/Login";
 import CourseContent from "./Admin/CourseContent";
 import AddCourseContent from "./Admin/AddCourseContent";
@@ -20,26 +20,25 @@ import AddCourseContentDraft from "./Admin/AddCourseContentDraft";
 function App() {
   return (
     <div>
-      <BrowserRouter>
+      <Router>
         <Routes>
-          <Route path="/Admin" element={<Admin/>}></Route>
+         
           <Route path="/" element={<Landing/>}></Route>
           <Route path="/login" element={<Login/>}/>
-          <Route path="/coursecontent" element={<CourseContent/>}/>
-          <Route path="/addcoursecontent" element={<AddCourseContent/>}/>
-          <Route path= '/addFacilitator' element={<AddFacilitator/>}/>
-          <Route path= '/addCourse' element={<AddCourse/>}/>
-           <Route path="/view/add/facilitator" element={<ViewAndAddFacilitors/>}></Route>
-
-          <Route path= '/assignCourseFacilitator' element={<AssignCourseFacilitator/>}/>
-          <Route path= '/addCourseContentDraft' element={<AddCourseContentDraft/>}/>
-          <Route path="/facilitatorModules" element={<FacilitatorModules/>} />
-          <Route path="/addCourseContentAdded" element={<AddCourseContent/>}/>
           <Route path="/piechart" element={<PieChart/>}></Route>
-         
+          <Route path="/admin" element={<Admin/>}>
+              <Route path="/admin/coursecontent" element={<CourseContent/>}/>
+              <Route path="/admin/addcoursecontent" element={<AddCourseContent/>}/>
+              <Route path= '/admin/addFacilitator' element={<AddFacilitator/>}/>
+              <Route path="/admin/view/add/facilitator" element={<ViewAndAddFacilitors/>}></Route>
+              <Route path= '/admin/assignCourseFacilitator' element={<AssignCourseFacilitator/>}/>
+              <Route path= '/admin/addCourseContentDraft' element={<AddCourseContentDraft/>}/>
+              <Route path="/admin/facilitatorModules" element={<FacilitatorModules/>} />
+              <Route path="/admin/addCourseContentAdded" element={<AddCourseContent/>}/>
+          </Route>
           {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}
         </Routes>
-      </BrowserRouter>
+      </Router>
       
     </div>
   );

@@ -1,7 +1,7 @@
 
 // importing react reactor dom
-//import { BrowserRouter, Route, Routes } from "react-router-dom";
 // importing section compontents
+import { Outlet } from "react-router-dom"
 import Nav from "../Components/MicroComponents/NavbarAdmin/AdminNavbar"
 import styles from "./AdminLandingPage.module.css"
 function Admin(){
@@ -13,6 +13,7 @@ function Admin(){
             {/* the view content section tis to arranged here the router element*/}
 
             <div className={styles.ViewContainer}>
+                <Outlet/>
             <div className={styles.ChartandNotifications}>2</div>
             </div>
             {/* the chart and notification content is to arranged here */}
