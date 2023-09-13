@@ -4,16 +4,20 @@ const AdminNacHeader = ({ label }) => {
         borderBottomLeftRadius: '50px',
         borderBottomRightRadius: '50px',
         padding: '1rem 0 0 0',
+        height:'2.5rem'
     };
 
     const content = {
         margin: '0rem 6rem 0 6rem',
-        backgroundColor: '#693769ff',
+        backgroundColor: '#693769',
         textAlign: 'center',
         borderTopLeftRadius: '10px',
         borderTopRightRadius: '10px',
         color: 'white',
-        padding: '.5rem',
+        paddingTop: '0.2rem',
+        height:'1.5rem ',
+        fontSize:'1rem',
+        fontWeight:'bold'
     };
 
     return (
