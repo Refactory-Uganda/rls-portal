@@ -4,7 +4,9 @@ import stlye from './AddCourse.module.css'
 const AddCourse = () => {
     return (
         <div className={stlye.addCourse}>
+            
             <AdminNacHeader label='ADD COURSE CONTENT'/>
+            <hr style={{background: '#693769', color:"#693769", borderColor: '#693769',height: '3px', width: '100%',marginTop:'3rem', marginBottom:'2rem'}}/>
            <form className={stlye.form}>
             <input type="text"   className={stlye.AddCourse__input} placeholder="COURSE NAME"/>
             <input type="text" 
@@ -17,9 +19,7 @@ const AddCourse = () => {
           className={stlye.AddCourse__input}
             placeholder="COURSE DURATION"/>
            </form>
-
-<button className={stlye.button} >Save</button>
-            
+        <button className={stlye.button} >Save</button>   
         </div>
     );
 }
