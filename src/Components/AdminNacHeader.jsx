@@ -28,6 +28,12 @@ const Content = styled.h3`
     margin: 0rem 5rem 0 5rem;
     height: 2rem;
   }
+  @media  (max-width: 280px) {
+    padding-top: 0.5rem;
+    margin: 0rem 4rem 0 4rem;
+    height: 2rem;
+    font-size: 0.6rem;
+  }
 `;
 
 const AdminNavHeader = ({ label }) => {
