@@ -41,3 +41,9 @@
     border-radius: 2rem;
     font-size: larger;
 }
+
+@media  (max-width: 768px) {
+    .AddCourse__input {
+        width: 80%; 
+      }
+}

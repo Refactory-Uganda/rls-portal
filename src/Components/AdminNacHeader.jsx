@@ -1,32 +1,41 @@
-const AdminNacHeader = ({ label }) => {
-    const header = {
-        backgroundColor: 'rgb(196, 195, 195)',
-        borderBottomLeftRadius: '50px',
-        borderBottomRightRadius: '50px',
-        padding: '1rem 0 0 0',
-        height:'2.5rem'
-    };
+import styled from 'styled-components';
 
-    const content = {
-        margin: '0rem 6rem 0 6rem',
-        backgroundColor: '#693769',
-        textAlign: 'center',
-        borderTopLeftRadius: '10px',
-        borderTopRightRadius: '10px',
-        color: 'white',
-        paddingTop: '0.2rem',
-        height:'1.5rem ',
-        fontSize:'1rem',
-        fontWeight:'bold'
-    };
+const Header = styled.div`
+  background-color: rgb(196, 195, 195);
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  padding: 1rem 0 0 0;
+  height: 2.5rem;
 
-    return (
-        <>
-            <div style={header}>
-                <h3 style={content}>{label}</h3>
-            </div>
-        </>
-    );
+  @media  (max-width: 768px) {
+    height: 3rem;
+  }
+`;
+
+const Content = styled.h3`
+  margin: 0rem 6rem 0 6rem;
+  background-color: #693769;
+  text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: white;
+  padding-top: 0.2rem;
+  height: 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  @media  (max-width: 768px) {
+    padding-top: 0.5rem;
+    margin: 0rem 5rem 0 5rem;
+    height: 2rem;
+  }
+`;
+
+const AdminNavHeader = ({ label }) => {
+  return (
+    <Header>
+      <Content>{label}</Content>
+    </Header>
+  );
 };
 
-export default AdminNacHeader;
+export default AdminNavHeader;
