@@ -4,6 +4,7 @@
 import { Outlet } from "react-router-dom"
 import Nav from "../Components/MicroComponents/NavbarAdmin/AdminNavbar"
 import styles from "./AdminLandingPage.module.css"
+import Piechart from "../Components/MicroComponents/PieChart/PieChart"
 function Admin(){
     return(
         <>
@@ -14,7 +15,7 @@ function Admin(){
 
             <div className={styles.ViewContainer}>
                 <Outlet/>
-            <div className={styles.ChartandNotifications}>2</div>
+            <div className={styles.ChartandNotifications}><Piechart/></div>
             </div>
             {/* the chart and notification content is to arranged here */}
             
