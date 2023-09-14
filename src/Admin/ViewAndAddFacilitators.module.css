@@ -2,7 +2,7 @@
 
 
 /* maximum width desktop view */
-@media(max-width:1400px){
+@media(max-width:1400px ){
 
     .button{
         background-color: rgb(78, 188, 188);
