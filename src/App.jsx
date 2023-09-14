@@ -13,7 +13,7 @@ import ViewAndAddFacilitors from "./Admin/ViewAndAddFacilitors";
 import FacilitatorModules from "./Admin/facilitatorModules";
 import AddCourseContentDraft from "./Admin/AddCourseContentDraft";
 import AddCourseMaterial from "./Admin/AddCourseMaterial";
-import NavBar from "./Components/MicroComponents/NewNav/navBar";
+
 // import Profile from "./Admin/AdminProfile"
 
 
@@ -28,7 +28,7 @@ function App() {
           <Route path="/" element={<Landing/>}></Route>
           <Route path="/login" element={<Login/>}/>
           <Route path="/piechart" element={<PieChart/>}></Route>
-          <Route path="/navbar" element={<NavBar/>}></Route>
+  
           <Route path="/admin" element={<Admin/>}>
               <Route path="/admin/addcourse" element={<AddCourse/>}></Route>
               <Route path="/admin/coursecontent" element={<CourseContent/>}/>

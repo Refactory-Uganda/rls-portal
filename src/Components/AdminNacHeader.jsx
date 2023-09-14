@@ -5,7 +5,7 @@ const Header = styled.div`
   border-bottom-left-radius: 50px;
   border-bottom-right-radius: 50px;
   padding: 1rem 0 0 0;
-  height: 2.5rem;
+  height: 3rem;
 
   @media  (max-width: 768px) {
     height: 3rem;
@@ -20,8 +20,8 @@ const Content = styled.h3`
   border-top-right-radius: 10px;
   color: white;
   padding-top: 0.2rem;
-  height: 1.5rem;
-  font-size: 1rem;
+  height: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   @media  (max-width: 768px) {
     padding-top: 0.5rem;
