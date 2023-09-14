@@ -6,6 +6,7 @@ const AssignCourseFacilitator = () => {
         <>
     <div className={style.assignCourseFacilitator}>
     <AdminNacHeader label=' Assign Course Facilitator' />
+    <hr style={{background: '#693769', color:"#693769", borderColor: '#693769',height: '3px', width: '100%',marginTop:'3rem', marginBottom:'2rem'}}/>
             <input type="text" placeholder="SELECT COURSE"  className={style.input}/>
             <input type="text" placeholder="SELECT FACILITATOR" className={style.input} />
             <button className={style.button}>Save</button>
