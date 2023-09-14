@@ -2,7 +2,7 @@
 // importing react reactor dom
 // importing section compontents
 import { Outlet } from "react-router-dom"
-import Nav from "../Components/MicroComponents/NavbarAdmin/AdminNavbar"
+
 import styles from "./AdminLandingPage.module.css"
 import Piechart from "../Components/MicroComponents/PieChart/PieChart"
 import SideBar from "../Components/MicroComponents/NewNav/navBar"
