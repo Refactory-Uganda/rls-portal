@@ -1,0 +1,75 @@
+[
+    {
+        "id": 1,
+        "name": "Mary handerson",
+        "image":"https://img.freepik.com/free-photo/woman-with-long-hair-yellow-hoodie-with-word-music-it_1340-39068.jpg?size=626&ext=jpg&ga=GA1.1.124905048.1693360040&semt=sph",
+        "rate": 7
+    },
+    {
+        "id": 2,
+        "name": "jackson mulingi",
+        "image":"https://img.freepik.com/free-photo/middle-aged-cheerful-dark-skinned-male-with-shining-smile_273609-28538.jpg?size=626&ext=jpg&ga=GA1.1.124905048.1693360040&semt=sph",
+        "rate": 4
+    },
+    {
+        "id": 3,
+        "name": "Morgan toni",
+        "image":"https://img.freepik.com/free-photo/man-wearing-shirt-that-says-2gg-gaucho-it_1340-25365.jpg?size=626&ext=jpg&uid=R106263328&ga=GA1.1.124905048.1693360040&semt=sph",
+        "rate": 5
+    },
+    {
+        "id": 4,
+        "name": "Lysa hanah",
+        "image":"https://img.freepik.com/free-photo/young-woman-with-round-glasses-yellow-sweater_273609-7091.jpg?size=626&ext=jpg&uid=R106263328&ga=GA1.1.124905048.1693360040&semt=sph",
+        "rate": 5
+    },
+    {
+        "id": 5,
+        "name": "Lysa hanah",
+        "image":"https://img.freepik.com/free-photo/african-woman-successful-entrepreneur-wearing-glasses-face-portrait_53876-148050.jpg?size=626&ext=jpg&uid=R106263328&ga=GA1.1.124905048.1693360040&semt=sph",
+        "rate": 5
+    },
+    {
+        "id": 6,
+        "name": "Lysa Mary",
+        "image":"https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg&uid=R106263328&ga=GA1.1.124905048.1693360040&semt=sph",
+        "rate": 5
+    },
+    {
+        "id": 4,
+        "name": "Shiril Abdul",
+        "image":"https://img.freepik.com/premium-photo/beautiful-girl-sunglasses-style-severe-work-with-palette-knife-orange-indigo-precision-art-created-with-generative-ai-technology_600978-1329.jpg?size=626&ext=jpg&uid=R106263328&ga=GA1.1.124905048.1693360040&semt=sph",
+        "rate": 5
+    },
+    {
+        "id": 4,
+        "name": "Lutaya Henry",
+        "image":"https://img.freepik.com/free-photo/headshot-handsome-young-afro-american-male-looking-with-broad-friendly-smile-enjoying-good-day-leisure-time-indoors-black-man-feeling-happy-carefree-while-relaxing-home_273609-433.jpg?size=626&ext=jpg&uid=R106263328&ga=GA1.1.124905048.1693360040&semt=sph",
+        "rate": 5
+    },
+    {
+        "id": 4,
+        "name": "Tamale Moses",
+        "image":"https://img.freepik.com/free-psd/3d-rendering-mike-working-computer_23-2149312576.jpg?size=626&ext=jpg&uid=R106263328&ga=GA1.1.124905048.1693360040&semt=sph",
+        "rate": 5
+    },
+    {
+        "id": 4,
+        "name": "Namukwaya Shirat",
+        "image":"https://img.freepik.com/free-photo/woman-with-long-hair-white-top-is-standing-beach_1340-37514.jpg?size=626&ext=jpg&uid=R106263328&ga=GA1.1.124905048.1693360040&semt=sph",
+        "rate": 5
+    },
+    {
+        "id": 4,
+        "name": "Edwin Rugogamu",
+        "image":"https://img.freepik.com/free-photo/woman-with-robot-head-helmet-that-says-robot-it_1340-39428.jpg?size=626&ext=jpg&uid=R106263328&ga=GA1.1.124905048.1693360040&semt=sph",
+        "rate": 5
+    },
+    {
+        "id": 4,
+        "name": "Linda hanah",
+        "image":"https://img.freepik.com/free-photo/lion-with-rainbow-mane-blue-eyes_1340-39421.jpg?size=626&ext=jpg&uid=R106263328&ga=GA1.1.124905048.1693360040&semt=sph",
+        "rate": 5
+    }
+    
+]

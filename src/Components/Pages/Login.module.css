@@ -1,0 +1,87 @@
+.loginUsernameInput {
+  width: 90%;
+  border-radius: 7px;
+  border: cornsilk;
+  padding: 10px;
+  text-align: center;
+}
+.loginPasswordInput {
+  width: 90%;
+  border-radius: 7px;
+  border: cornsilk;
+  padding: 10px;
+  text-align: center;
+}
+.inputs {
+  margin-top: 30px;
+}
+.formcontainer {
+  background-color: #673467;
+  border-radius: 10px;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  text-align: center;
+  padding-top: 40px;
+}
+.absentaccount {
+  color: white;
+}
+.button1 {
+  background-color: rgb(43, 140, 145);
+  color: black;
+  border: rgb(42, 104, 106);
+  padding: 5px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 5px;
+  font-size: 20px;
+  padding-bottom: 10px;
+}
+
+.loginimage {
+  height: 100px;
+  border-radius: 50px;
+  margin: auto;
+  margin-top: -90px;
+}
+
+.LoginDiv3 {
+  height: 100vh;
+}
+
+@media (720px <= width <= 920px) {
+  #footer {
+    position: absolute;
+    padding: 0px;
+    bottom: 0;
+  }
+}
+
+/* @media ( max-width : 920) {
+    #footer {
+
+        position:absolute;
+        margin: 0px;
+        padding: 0px;
+        bottom: 0;
+       
+      }
+} */
+
+/* @media (max-width: 280px) {
+    .loginimage{
+        height: 100px;
+        border-radius: 50px;
+        margin-top:-90px;
+        margin-left: 75px;
+    }  
+} */
+
+/* @media (max-width: 912px) {
+    .loginimage{
+        height: 100px;
+        border-radius: 50px;
+        margin-top:-90px;
+        margin-left: 250px;
+    } 
+} */

@@ -1,0 +1,50 @@
+@media screen  and (min-width:650px) {
+  
+   .ViewContainer{
+    margin-left: 120px;
+   
+   }
+   
+}
+@media screen and (min-width:1024px){
+ .ViewContainer{
+    display: grid;
+    grid-template-columns: auto 30%;
+    grid-gap:10px
+ }  
+}
+
+
+.card {
+   border-radius: 20px;
+   background-color: #500f69 !important;
+   margin-top: 10px;
+   display: inline-flex;
+ }
+ 
+ .card img{
+     width: 20%;
+ }
+ 
+ .cardText{
+     color: white;
+ }
+ 
+ .subtitle{
+     display: inline-flex;
+     color: white !important;
+     margin-left: 50px;
+ }
+ .dropdown{
+   color: white;
+  padding: 20px;
+  font-size: 15px;
+  float: right;
+  }
+
+
+@media (max-width: 768px)  {
+   .card{
+   margin-left: 100px;
+}
+ }
