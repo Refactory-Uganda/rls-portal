@@ -56,6 +56,7 @@ body {
 
 #sidebar header a:hover {
   color: #fff;
+  
 }
 
 .icon {
@@ -75,7 +76,12 @@ body {
 
 #sidebar .nav a:hover {
   background: none;
-  color: #CFD8DC;
+  color: #693769;
+  border:1px solid #fff;
+  padding: 10px ;
+  background-color: white;
+  border-radius: 20px;
+
 }
 
 .topSection {
