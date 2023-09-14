@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Header = styled.div`
-  background-color: rgb(196, 195, 195);
+  background-color: #E6EEF1;
   border-bottom-left-radius: 50px;
   border-bottom-right-radius: 50px;
   padding: 1rem 0 0 0;

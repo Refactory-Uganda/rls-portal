@@ -13,7 +13,7 @@ function ViewAndAddFacilitors(props) {
         <div className="row">
        
           {/* <div className="col-xl-1 col-lg-1 col-md-1 col-sm-12" > them</div> */}
-          <div className="col" >
+          <div className="col" id={ViewAddFacilitatorCss.main}>
            <h1 id={ViewAddFacilitatorCss.col}> <Navbar label="FACILITORS"/></h1>
            <button className={ViewAddFacilitatorCss.button}>+ ADD FACILITATOR</button>
            <hr className={ViewAddFacilitatorCss.hr} />
