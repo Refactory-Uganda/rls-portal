@@ -12,7 +12,7 @@ import PieChart from "./Components/MicroComponents/PieChart/PieChart";
 import ViewAndAddFacilitors from "./Admin/ViewAndAddFacilitors";
 import FacilitatorModules from "./Admin/facilitatorModules";
 import AddCourseContentDraft from "./Admin/AddCourseContentDraft";
-// import Profile from "./Admin/AdminProfile"
+import Profile from "./Admin/AdminProfile"
 
 
 
@@ -29,6 +29,7 @@ function App() {
           <Route path="/admin" element={<Admin/>}>
               <Route path="/admin/addcourse" element={<AddCourse/>}></Route>
               <Route path="/admin/coursecontent" element={<CourseContent/>}/>
+              <Route path= '/admin/Profile' element={<Profile/>}/>
               <Route path="/admin/addcoursecontent" element={<AddCourseContent/>}/>
               <Route path= '/admin/addFacilitator' element={<AddFacilitator/>}/>
               <Route path="/admin/add/facilitator" element={<ViewAndAddFacilitors/>}></Route>
