@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "class":"JAVASCRIPT",
+        "tittle":"The introduction to JavaScript",
+        "description":"JavaScript is a programming language that allows you to implement complex things on web pages. Every time a web page does more .......",
+        "img":"/img/javascript.png"
+
+    },
+    {
+        "id": 2,
+        "class":"REACT",
+        "tittle":"The introduction to React",
+        "description":"React is a JavaScript library for building user interfaces. It is the view layer for web applications. React also allows us to build complex.........",
+        "img":"/img/icons8-react-native.svg"
+
+    },
+    {
+        "id": 3,
+        "class":"PYTHON",
+        "tittle":"The introduction to Python",
+        "description":"Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability.........",
+        "img":"/img/icons8-python.svg"
+
+    }
+]

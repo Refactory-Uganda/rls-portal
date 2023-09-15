@@ -1,10 +1,8 @@
-#col{
-    /* width: 100%; */
-}
+
 
 
 /* maximum width desktop view */
-@media(max-width:1400px){
+@media( 1025px <= width <= 1400px ){
 
     .button{
         background-color: rgb(78, 188, 188);
@@ -13,7 +11,7 @@
         border-radius: 10px;
         font-weight: 400;
         margin: auto;
-        margin-left: 600px;
+        margin-left: 550px;
     }
     .hr{
         border-top: 3px solid;
@@ -54,7 +52,7 @@
 
 /* mini width desktop  */
 
-@media(max-width:1025px){
+@media(800px <= width <= 1024px ){
 
     .button{
         background-color: rgb(78, 188, 188);
@@ -62,12 +60,145 @@
         color: white;
         border-radius: 10px;
         font-weight: 400;
-        margin-left: 490px;
+        margin-left: 400px;
     }
     .hr{
          
         color: rgb(216, 16, 36);
     }
+    #box{
+        background-color: rgb(104, 41, 104);
+        height: 300px;
+        text-align: center;
+        border-radius: 10px;
+       margin-bottom: 10px;
+    }
+   .image{
+    width: 150px;
+    border-radius: 50%;
+    margin: auto;
+    padding: 15px;
+   }
+
+   .h5{
+    font-size: 40px;
+    padding-top: 15px;
+    color: white;
+   }
+   .email{
+    color: white;
+    /* font-size: 15px; */
+   }
+   .dropdown{
+    color: white;
+   padding: 20px;
+   font-size: 25px;
+   }
+
+
+}
+
+
+
+
+@media(600px <= width <= 799px ){
+
+    .button{
+        background-color: rgb(78, 188, 188);
+        padding: 10px;
+        color: white;
+        border-radius: 10px;
+        font-weight: 400;
+        margin-left: 400px;
+    }
+    .hr{
+         
+        color: rgb(216, 16, 36);
+    }
+    #box{
+        background-color: rgb(104, 41, 104);
+        height: 270px;
+        text-align: center;
+        border-radius: 10px;
+       margin-bottom: 10px;
+    }
+   .image{
+    width: 120px;
+    border-radius: 50%;
+    margin: auto;
+    padding: 15px;
+   }
+
+   .h5{
+    font-size: 40px;
+    padding-top: 15px;
+    color: white;
+   }
+   .email{
+    color: white;
+    font-size: 15px;
+   }
+   .dropdown{
+    color: white;
+   padding: 20px;
+   font-size: 25px;
+   }
+   #main{
+    margin: auto;
+   }
+
+
+}
+
+
+
+
+@media(400px <= width <= 599px ){
+
+    .button{
+        background-color: rgb(78, 188, 188);
+        padding: 10px;
+        color: white;
+        border-radius: 10px;
+        font-weight: 400;
+        margin-left: 220px;
+    }
+    .hr{
+         
+        color: rgb(216, 16, 36);
+    }
+    #box{
+        background-color: rgb(104, 41, 104);
+        height: 270px;
+        text-align: center;
+        border-radius: 10px;
+       margin-bottom: 10px;
+       
+    }
+   .image{
+    width: 120px;
+    border-radius: 50%;
+    margin: auto;
+    padding: 15px;
+   }
+
+   .h5{
+    font-size: 40px;
+    padding-top: 15px;
+    color: white;
+   }
+   .email{
+    color: white;
+    font-size: 15px;
+   }
+   .dropdown{
+    color: white;
+   padding: 20px;
+   font-size: 25px;
+   }
+   #main{
+    margin: auto;
+   }
 
 
 }
@@ -76,6 +207,109 @@
 
 
 
+@media(300px <= width <= 399px ){
+
+    .button{
+        background-color: rgb(78, 188, 188);
+        padding: 10px;
+        color: white;
+        border-radius: 10px;
+        font-weight: 400;
+        margin-left: 160px;
+    }
+    .hr{
+         
+        color: rgb(216, 16, 36);
+    }
+    #box{
+        background-color: rgb(104, 41, 104);
+        height: 270px;
+        text-align: center;
+        border-radius: 10px;
+       margin-bottom: 10px;
+       
+    }
+   .image{
+    width: 120px;
+    border-radius: 50%;
+    margin: auto;
+    padding: 15px;
+   }
+
+   .h5{
+    font-size: 40px;
+    padding-top: 15px;
+    color: white;
+   }
+   .email{
+    color: white;
+    font-size: 15px;
+   }
+   .dropdown{
+    color: white;
+   padding: 20px;
+   font-size: 25px;
+   }
+   #main{
+    margin: auto;
+   }
+
+
+}
+
+
+@media(250px <= width <= 299px ){
+
+    .button{
+        background-color: rgb(78, 188, 188);
+        padding: 10px;
+        color: white;
+        border-radius: 10px;
+        font-weight: 400;
+        margin-left: 130px;
+        font-size: 10px;
+    }
+    .hr{
+         
+        color: rgb(216, 16, 36);
+    }
+    #box{
+        background-color: rgb(104, 41, 104);
+        height: 270px;
+        text-align: center;
+        border-radius: 10px;
+       margin-bottom: 10px;
+       
+    }
+   .image{
+    width: 120px;
+    border-radius: 50%;
+    margin: auto;
+    padding: 15px;
+   }
+
+   .h5{
+    font-size: 40px;
+    padding-top: 15px;
+    color: white;
+   }
+   .email{
+    color: white;
+    font-size: 15px;
+   }
+   .dropdown{
+    color: white;
+   padding: 20px;
+   font-size: 25px;
+   }
+   #main{
+    margin: auto;
+   }
+
+
+}
+
+/* 
 @media(max-width:800px){
 
     .button{
@@ -88,4 +322,4 @@
     }
 
 
-}
+} */

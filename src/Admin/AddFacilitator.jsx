@@ -5,7 +5,10 @@ const AddFacilitator = () => {
         <div className={style.addFacillitator}>
 
        <AdminNacHeader label='ADD FACILITATOR'/>
-       <input type="text"  
+       <hr style={{background: '#693769', color:"#693769", borderColor: '#693769',height: '3px', width: '100%',marginTop:'3rem', marginBottom:'2rem'}}/>
+      <form className={style.form}>
+
+      <input type="text"  
           className={style.input}  
         
         placeholder="USER NAME"/>
@@ -14,6 +17,7 @@ const AddFacilitator = () => {
        placeholder="COURSE NAME "/>
      
 <button className={style.button}>Save</button>
+      </form>
 
        
    </div>

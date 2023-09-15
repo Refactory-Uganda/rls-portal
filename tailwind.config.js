@@ -20,6 +20,7 @@ export default {
         'sm2':'500px',
         'md':'650px',
         'md2':'768px',
+        "md3":'800px',
         'lg':'1024px',
         'xl':'1280px',
         '2xl': '1536px'
@@ -28,6 +29,7 @@ export default {
         '0.5sm':'5px',
         '1sm':'10px',
         '2sm':'20px',
+        '2m':'20%',
         '5sm':'50%'
     },
     
