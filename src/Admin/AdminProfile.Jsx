@@ -1,14 +1,13 @@
 import LoginCss from "../Admin/AdminProfile.module.css"
 import TextField from '@mui/material/TextField';
-import React from "react";
 
-function Profile(props) {
+
+function Profile() {
   return (
     <div>
       <div  className={LoginCss.LoginDiv3}>
         <div className="container-fluid" id="logincontainer">
           <div className="row">
-            <div className="col-xl-4 , col-lg-4 , col-md-2 , col-sm-12"></div>
             <div className="col-xl-4 , col-lg-4 , col-md-8 , col-sm-12">
               <div className={LoginCss.formcontainer}>
                 <form action="">

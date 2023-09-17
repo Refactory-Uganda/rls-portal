@@ -13,7 +13,9 @@ import ViewAndAddFacilitors from "./Admin/ViewAndAddFacilitors";
 import FacilitatorModules from "./Admin/facilitatorModules";
 import AddCourseContentDraft from "./Admin/AddCourseContentDraft";
 import AddCourseMaterial from "./Admin/AddCourseMaterial";
-import NavBar from "./Components/MicroComponents/NewNav/navBar";
+import AddCourseMaterialField from "./Admin/AddCourseMaterialField";
+// import Profile from "./Admin/AdminProfile.Jsx";
+
 // import Profile from "./Admin/AdminProfile"
 
 
@@ -41,6 +43,7 @@ function App() {
               <Route path= '/admin/addCourseContentDraft' element={<AddCourseContentDraft/>}/>
               <Route path="/admin/facilitatorModules" element={<FacilitatorModules/>} />
               <Route path="/admin/addCourseContentAdded" element={<AddCourseContent/>}/>
+              <Route path="/admin/AddCourseMaterialField" element={<AddCourseMaterialField />}/>
           </Route>
           {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}
         </Routes>
