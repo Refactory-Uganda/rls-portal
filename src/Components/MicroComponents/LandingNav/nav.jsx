@@ -1,4 +1,4 @@
-import {useState} from "react"
+import {useState,Link} from "react"
 import styles from "../../../assets/Landingpagestlyes/Landingpage.module.css"
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
