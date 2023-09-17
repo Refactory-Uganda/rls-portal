@@ -1,6 +1,6 @@
 
 import  {useEffect } from 'react'; // Ensure you import React and useEffect
-//import styles from "../../assets/Landingpagestlyes/Landingpage.module.css"
+
 import styles2 from '../../assets/Landingpagestlyes/styles.module.css'
 // ....................the technology icons and partners...........................
 import imgdata from "../../assets/images.json"
@@ -8,7 +8,7 @@ import partners from "../../assets/partners.json"
 
 //  .............................the footer........................
 import Footer from '../MicroComponents/footer/Footer';
-//import Navbar from '../MicroComponents/LandingNav/nav'
+import Navbar from '../MicroComponents/LandingNav/nav'
 
 import demo from "./demo.json";
 import demoForum from "./demoForum.json"
@@ -37,7 +37,7 @@ function Landing() {
   return (
     <>
     
-   {/* <Navbar/> */}
+   <Navbar/> 
    
     <div className="w-[90%] m-auto md:grid grid-cols-2" id={styles2.heading}>
         <div  id={styles2.h1}>

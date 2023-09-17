@@ -1,6 +1,6 @@
 [
     {
-        "name":"javacript",
+        "name":"javascript",
         "description":"javascript is Nodejs is a engineers and this have and are working the world big tech company solve world problems, so free theo learn jackson the attributor and funder of Nodejs fundation Africa",
         "img":"/img/icons8-vue-js.svg",
         "id":1,
@@ -29,5 +29,7 @@
         "tittle":"The introduction to NodeJS",
         "img":"/img/icons8-react-native.svg"
     }
+    
+
 
 ]
