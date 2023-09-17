@@ -13,7 +13,7 @@ import ViewAndAddFacilitors from "./Admin/ViewAndAddFacilitors";
 import FacilitatorModules from "./Admin/facilitatorModules";
 import AddCourseContentDraft from "./Admin/AddCourseContentDraft";
 import AddCourseMaterial from "./Admin/AddCourseMaterial";
-
+import NavBar from "./Components/MicroComponents/NewNav/navBar";
 // import Profile from "./Admin/AdminProfile"
 
 
@@ -32,6 +32,7 @@ function App() {
           <Route path="/admin" element={<Admin/>}>
               <Route path="/admin/addcourse" element={<AddCourse/>}></Route>
               <Route path="/admin/coursecontent" element={<CourseContent/>}/>
+              {/* <Route path= '/admin/Profile' element={<Profile/>}/> */}
               <Route path="/admin/addcoursecontent" element={<AddCourseContent/>}/>
               <Route path="/admin/addcoursematerial" element={<AddCourseMaterial/>}/>
               <Route path= '/admin/addFacilitator' element={<AddFacilitator/>}/>

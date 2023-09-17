@@ -4,12 +4,12 @@
 #trendingHeading{
     font-size: 30px;
 }
-#wrapper{
+ #wrapper{
     background-image: url('/img/lesson.jpeg');
     background-position: center;
     background-repeat: no-repeat;
     background-size:cover;
-}
+} 
 #courseGallary {
     display: grid;
     grid-template-columns: 10% auto 10%
@@ -42,22 +42,7 @@
   fill:purple ;
 
 }
-@media (max-width:500px) { 
- #navicons {
-        display:none; 
-       }
-  .responsive{ 
-        display: flex;
-        flex-direction:row;
-        position: absolute;
-        top:137.25px;
-        width:100%;
-        justify-content: space-between;
-   
-       
-    }
-    
-}
+
 @media (min-width:650px) { 
     
     #searchbar{
@@ -89,4 +74,4 @@
         font-size: 40px;
     }
     
-} 
+}  
