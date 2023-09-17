@@ -116,9 +116,12 @@ body {
   .toggleIcon {
     display: block;
   }
+  
   /* Adjustments for Small Screen Sidebar */
   #sidebar header {
-    text-align: left; /* Align the header text to the left */
+    text-align: left; 
+    padding-top: 9px;
+    padding-bottom: 9px;/* Align the header text to the left */
   }
   #sidebar header a {
     padding-left: 20px; /* Add padding to the logo for spacing */

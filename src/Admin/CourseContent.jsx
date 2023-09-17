@@ -15,7 +15,7 @@ const CourseContent = () => {
     <>
     
     <div className={style.body}>
-      <AdminNacHeader label='Course Details' />
+      <AdminNacHeader label={' COURSE CONTENT'}/>
       <div className={style.box}>
         <button className={style.button}>MATERIALS</button>
         <button className={style.button}>DETAILS</button>

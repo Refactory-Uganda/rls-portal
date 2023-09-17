@@ -1,4 +1,4 @@
-
+import AdminNacHeader from '../Components/AdminNacHeader';
 import style from './AddCourseContent.module.css';
 import {FaEllipsisV} from 'react-icons/fa';
 import { useState } from 'react';
@@ -15,6 +15,7 @@ const AddCourseContent = () => {
     <>
 
     <div className={style.body}>
+      <AdminNacHeader label={'ADD COURSE CONTENT'} />
     <div className={style.box}>
       <button className={style.button2}>CONTENT</button>
       <button className={style.button}>DETAILS</button>
