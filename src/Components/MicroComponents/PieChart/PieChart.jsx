@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Pie } from "react-chartjs-2";
 import UserData from "../../../assets/PieChatDemoData.json";
 import { Chart as chartjs, ArcElement, Tooltip, Legend } from "chart.js";
@@ -6,7 +6,7 @@ import PieCss from "./PieChart.module.css"
 
 
 function PieChart() {
-  const [userData, setUserData] = useState({
+  const [userData] = useState({
     labels: UserData.map((data) => data.name),
     datasets: [
       {
@@ -43,9 +43,6 @@ function PieChart() {
        
       <div className="container">
         <div className="row">
-        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12  ">
-          <label htmlFor="" className={PieCss.PieHeading}>CHART</label>
-        </div>
           <div className="col">
             <Pie data={userData} height={400} options={options} />
           </div>

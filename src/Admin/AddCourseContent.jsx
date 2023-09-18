@@ -15,7 +15,7 @@ const AddCourseContent = () => {
     <>
 
     <div className={style.body}>
-      <AdminNacHeader label={'ADD COURSE CONTENT'} />
+      {/* <AdminNacHeader label={'ADD COURSE CONTENT'} /> */}
     <div className={style.box}>
       <button className={style.button2}>CONTENT</button>
       <button className={style.button}>DETAILS</button>

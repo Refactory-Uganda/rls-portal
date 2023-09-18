@@ -40,12 +40,12 @@ body {
 }
 
 #sidebar header {
-  background-color: #e6eef1;
+  background-color: #fff;
   font-size: 20px;
   line-height: 52px;
   text-align: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 6px;
+  padding-bottom: 7px;
 }
 
 #sidebar header a {

@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    background-color: #673467;
+    background-color: #673467;
+    padding-left:  470px;
+    padding-right:  20px;
+  }
+.label{
+    text-align: center;
+    color: white;
+    font-size: 11px;
+    font-weight: 800;
+    margin-right: 50px;
+}
+.text{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    color: white;
+    gap: 200px;
+}
+.btn{
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 5px 20px;
+    font-weight: 800;
+     
+}

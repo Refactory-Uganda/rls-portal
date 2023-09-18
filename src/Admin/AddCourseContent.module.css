@@ -21,13 +21,14 @@
     display: flex;
     justify-content: space-around;
     margin-top: 40px;
+    gap: 10px;
 }
 .content{
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: purple;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     font-family: po;
 }
 
@@ -93,7 +94,9 @@
     color: white;
     font-weight: bold;
   }
+
   .button5 {
+    font-size: 13px;
     padding-left: 10rem;
     padding-right: 10rem;
     margin-bottom: 10px;

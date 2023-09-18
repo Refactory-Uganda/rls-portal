@@ -5,7 +5,7 @@ const AddCourse = () => {
     return (
         <div className={stlye.addCourse}>
             
-            <AdminNacHeader label='ADD COURSE CONTENT'/>
+            {/* <AdminNacHeader label='ADD COURSE CONTENT'/> */}
             <hr style={{background: '#693769', color:"#693769", borderColor: '#693769',height: '3px', width: '100%',marginTop:'3rem', marginBottom:'2rem'}}/>
            <form className={stlye.form}>
             <input type="text"   className={stlye.AddCourse__input} placeholder="COURSE NAME"/>
