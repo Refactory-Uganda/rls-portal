@@ -1,6 +1,3 @@
-
-// importing react reactor dom
-// importing section compontents
 import { Outlet } from "react-router-dom"
 import styles from "./AdminLandingPage.module.css";
 import Navbar from '../Components/MicroComponents/NewNav/navBar.jsx'
