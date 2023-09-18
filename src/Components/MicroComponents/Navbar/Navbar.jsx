@@ -7,7 +7,7 @@ const Navbar = () => {
                 <h1>Refactory</h1>
             </div>
             <div className={style.text}>
-                <h3 className={style.txt}>Chat</h3>
+                <h3 className={style.txt}>Chart</h3>
                 <button className={style.btn}>Signout</button>
             </div>
     </div>
