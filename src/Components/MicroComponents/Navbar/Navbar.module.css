@@ -1,4 +1,6 @@
 .container {
+    position: sticky; 
+    top: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -7,6 +9,7 @@
     background-color: #673467;
     padding-left:  470px;
     padding-right:  20px;
+    width: 100vw;
   }
 .label{
     text-align: center;
@@ -20,7 +23,7 @@
     text-align: center;
     align-items: center;
     color: white;
-    gap: 200px;
+    gap: 20px;
 }
 .btn{
     border: 1px solid white;
@@ -28,4 +31,14 @@
     padding: 5px 20px;
     font-weight: 800;
      
+}
+
+@media screen and (max-width: 768px) {
+    .container{
+        padding-left:  20px;
+        padding-right:  20px;
+    }
+    .txt{
+        display: none
+    }
 }
