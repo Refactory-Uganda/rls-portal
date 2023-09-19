@@ -1,20 +1,17 @@
-import React from "react";
-import SideBar from "../Components/MicroComponents/NavbarAdmin/AdminNavbar"
-import Navbar from "../Components/AdminNacHeader"
 import ViewAddFacilitatorCss from "../Admin/ViewAndAddFacilitators.module.css"
-import PieChart from "../Components/MicroComponents/PieChart/PieChart"
-// import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import {FaEllipsisV} from 'react-icons/fa'
+import Navbar from "../Components/MicroComponents/Navbar/Navbar";
 
-function ViewAndAddFacilitors(props) {
+function ViewAndAddFacilitors() {
   return (
     <>
+    {/* <Navbar label={"FACILITATORS"}/> */}
       <div className="container-fluid">
         <div className="row">
        
           {/* <div className="col-xl-1 col-lg-1 col-md-1 col-sm-12" > them</div> */}
           <div className="col" id={ViewAddFacilitatorCss.main}>
-           <h1 id={ViewAddFacilitatorCss.col}> <Navbar label="FACILITORS"/></h1>
+           {/* <h1 id={ViewAddFacilitatorCss.col}> <Navbar label="FACILITORS"/></h1> */}
            <button className={ViewAddFacilitatorCss.button}>+ ADD FACILITATOR</button>
            <hr className={ViewAddFacilitatorCss.hr} />
            <div className="container"> 

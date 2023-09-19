@@ -1,10 +1,12 @@
 import LoginCss from "../Admin/AdminProfile.module.css"
 import TextField from '@mui/material/TextField';
+import Navbar from "../Components/MicroComponents/Navbar/Navbar";
 
 
 function Profile() {
   return (
-    <div>
+    <>
+    {/* <Navbar label={' ADMIN PROFILE'} /> */}
       <div  className={LoginCss.LoginDiv3}>
         <div className="container-fluid" id="logincontainer">
           <div className="row">
@@ -36,7 +38,7 @@ function Profile() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

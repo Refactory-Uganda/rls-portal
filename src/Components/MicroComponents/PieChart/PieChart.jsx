@@ -46,10 +46,10 @@ function PieChart() {
           <div className="col">
             <Pie data={userData} height={400} options={options} />
           </div>
-          <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12  ">
+          <div className="col-xl-11 col-lg-11 col-md-11 col-sm-11 m-auto ">
           <label htmlFor="" className={PieCss.PieHeading}>NOTIFICATION</label>
         </div>
-        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 " id={PieCss.NotificationMessage}>
+        <div className="col-xl-10 col-lg-10 col-md-10 col-sm-10 m-auto mt-2 " id={PieCss.NotificationMessage}>
      
           <p>Hi Joanitah the attempt to send information to the database was successful</p>
         </div>
