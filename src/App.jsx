@@ -31,11 +31,10 @@ function App() {
           <Route path="/" element={<Landing/>}></Route>
           <Route path="/login" element={<Login/>}/>
           <Route path="/piechart" element={<PieChart/>}></Route>
-  
           <Route path="/admin" element={<Admin/>}>
               <Route path="/admin/addcourse" element={<AddCourse/>}></Route>
               <Route path="/admin/coursecontent" element={<CourseContent/>}/>
-              {/* <Route path= '/admin/Profile' element={<Profile/>}/> */}
+              <Route path= '/admin/nav' element={<NavBar/>}/>
               <Route path="/admin/addcoursecontent" element={<AddCourseContent/>}/>
               <Route path="/admin/addcoursematerial" element={<AddCourseMaterial/>}/>
               <Route path= '/admin/addFacilitator' element={<AddFacilitator/>}/>
