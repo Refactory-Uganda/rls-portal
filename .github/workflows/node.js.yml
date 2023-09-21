@@ -60,4 +60,4 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: curl https://api.render.com/deploy/srv-ck5virj6fquc73aaa7qg?key=ZEMZwiSFljc
+      - run: curl {{RENDER_BUILD_HOOK}}
