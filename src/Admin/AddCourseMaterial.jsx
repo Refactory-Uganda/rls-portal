@@ -3,7 +3,7 @@ import style from './AddCourseMaterial.module.css';
 import {FaEllipsisV} from 'react-icons/fa';
 import { useState } from 'react';
 
-import Navbar from '../Components/MicroComponents/Navbar/Navbar';
+//import Navbar from '../Components/MicroComponents/Navbar/Navbar';
 
 const AddCourseMaterial = () => {
   const [showIcons, setShowIcons] = useState(false);

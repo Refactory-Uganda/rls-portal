@@ -13,7 +13,7 @@ const FacilitatorModules = () => {
       };
   return (
     <>
-    {/* <Navbar label={'FACILITATOR MODULES'}/> */}
+    <Navbar label={'FACILITATOR MODULES'}/> 
     <div className={style.body}>
         <div className={style.box}>
                 <h4 className={style.text} >JACKSON Mc</h4>

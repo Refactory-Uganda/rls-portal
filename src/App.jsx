@@ -15,30 +15,32 @@ import AddCourseContentDraft from "./Admin/AddCourseContentDraft";
 import AddCourseMaterial from "./Admin/AddCourseMaterial";
 import AddCourseMaterialField from "./Admin/AddCourseMaterialField";
 import AddCouserMaterialDaft from "./Admin/AddCouserMaterialDaft";
-// import Profile from "./Admin/AdminProfile.Jsx";
+import AdminVeiwCourses from "./Admin/AdminViewCourses";
+import AdminFacitatorContentAdded from "./Admin/AdminFacilitatorContentAdded";
+import Profile from "./Admin/AdminProfile";
 
-// import Profile from "./Admin/AdminProfile"
 
-
-
+import Chat from "./Admin/Chatgptdash";
 
 function App() {
   return (
     <div>
       <Router>
         <Routes>
-         
+        <Route path="/chat" element={<Chat/>}/>
           <Route path="/" element={<Landing/>}></Route>
           <Route path="/login" element={<Login/>}/>
           <Route path="/piechart" element={<PieChart/>}></Route>
           <Route path="/admin" element={<Admin/>}>
+              <Route path="/admin/profile" element={<Profile/>}></Route>
               <Route path="/admin/addcourse" element={<AddCourse/>}></Route>
               <Route path="/admin/coursecontent" element={<CourseContent/>}/>
-              {/* <Route path= '/admin/nav' element={<NavBar/>}/> */}
+              <Route path="/admin/facilitatorcontentadded" element={<AdminFacitatorContentAdded/>}></Route>
+              <Route path= '/admin/' element={<AdminVeiwCourses/>}/>
               <Route path="/admin/addcoursecontent" element={<AddCourseContent/>}/>
               <Route path="/admin/addcoursematerial" element={<AddCourseMaterial/>}/>
               <Route path= '/admin/addFacilitator' element={<AddFacilitator/>}/>
-              <Route path="/admin/add/facilitator" element={<ViewAndAddFacilitors/>}></Route>
+              <Route path="/admin/facilitator" element={<ViewAndAddFacilitors/>}></Route>
               <Route path= '/admin/assignCourseFacilitator' element={<AssignCourseFacilitator/>}/>
               <Route path= '/admin/addCourseContentDraft' element={<AddCourseContentDraft/>}/>
               <Route path="/admin/facilitatorModules" element={<FacilitatorModules/>} />

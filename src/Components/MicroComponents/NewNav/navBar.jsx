@@ -4,7 +4,7 @@ import { MdDashboard } from 'react-icons/md';
 import { BsLink, BsPerson, BsPeople } from 'react-icons/bs';
 import { FaBars, FaBook, FaCog, FaDoorOpen, FaTimes } from 'react-icons/fa';
 import { useState } from 'react';
-
+import {Link} from 'react-router-dom'
 const NavBar = () => {
     
         const [sidebarVisible, setSidebarVisible] = useState(false);
@@ -19,32 +19,33 @@ const NavBar = () => {
       {/* Sidebar */}
       <div id={style.sidebar}>
             <header>
-              <a href="#">
+              <Link to='/admin/'>
                 <img src="/img/refactoryLogoColored.png" alt="logo" className={style.img}/>
-              </a>
+              </Link>
             </header>
         <div className={`list-group list-group-flush ${style.nav}`} >
-          <a href="#" className={`list-group-item list-group-item-action d-flex align-items-center `}>
+           
+          <Link to='/admin/' className={`list-group-item list-group-item-action d-flex align-items-center `}>
             <MdDashboard className="mr-2" /> Dashboard
-          </a>
-          <a href="#" className="list-group-item list-group-item-action d-flex align-items-center">
+          </Link>
+          <Link to="/admin/profile" className="list-group-item list-group-item-action d-flex align-items-center">
             <BsLink className="mr-2" /> Account
-          </a>
-          <a href="#" className="list-group-item list-group-item-action d-flex align-items-center">
+          </Link>
+          <Link to="" className="list-group-item list-group-item-action d-flex align-items-center">
             <BsPerson className="mr-2" /> Student
-          </a>
-          <a href="#" className="list-group-item list-group-item-action d-flex align-items-center">
+          </Link>
+          <Link to="/admin/facilitator" className="list-group-item list-group-item-action d-flex align-items-center">
           <BsPeople className="mr-2" />  Facilitator
-          </a>
-          <a href="#" className="list-group-item list-group-item-action d-flex align-items-center">
+          </Link>
+          <Link to="/admin/" className="list-group-item list-group-item-action d-flex align-items-center">
           <FaBook className="mr-2" /> Course
-          </a>
-          <a href="#" className="list-group-item list-group-item-action d-flex align-items-center">
+          </Link>
+          <Link to="" className="list-group-item list-group-item-action d-flex align-items-center">
           <FaCog className="mr-2" /> Setting
-          </a>
-          <a href="#" className="list-group-item list-group-item-action d-flex align-items-center ">
+          </Link>
+          <Link to="" className="list-group-item list-group-item-action d-flex align-items-center ">
             <FaDoorOpen className="mr-2" /> SignOut
-          </a>
+          </Link>
         </div>
       </div>
       <div className={style.topSection}>
