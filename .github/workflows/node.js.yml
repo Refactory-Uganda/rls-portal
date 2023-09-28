@@ -60,4 +60,4 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: curl {{RENDER_BUILD_HOOK}}
+      - run: curl ${{secrets.RENDER_BUILD_HOOK }}

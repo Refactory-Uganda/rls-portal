@@ -1,0 +1,15 @@
+#name{
+    border-bottom: 4px solid #bebebe;
+}
+#profile{
+    display: grid;
+    grid-template-columns: auto 40px;
+}
+#assigned{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+#toDo{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
