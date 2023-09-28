@@ -1,4 +1,13 @@
 
+.notification{
+    display: flex;
+    gap: 10px;
+    color: #fff;
+}
+.icon{
+  
+    margin-top: 5px;
+}
 .container {
     position: sticky; 
     top: 0;
@@ -41,9 +50,7 @@
         padding-right:  20px;
         background-color: whitesmoke;
     }
-    .txt{
-      
-    }
+  
     .label{
         text-align: center;
         color: #673467;

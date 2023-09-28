@@ -1,9 +1,23 @@
 import style from './Navbar.module.css';
-import { FaUserAlt } from 'react-icons/fa';
-
+import { FaCog, FaUserAlt } from 'react-icons/fa';
 import Notification from '../notification/Notification';
+import { OverlayTrigger, Popover } from 'react-bootstrap';
 
 
+const popoverContent = (
+  <Popover id="popover-basic" style={{backgroundColor:'#673467'}}>
+    <Popover.Body>
+      <div className={style.notification}>
+        <FaUserAlt className={style.icon} /> Profile
+      </div>
+      <hr style={{color:'#fff'}}></hr>
+      <div className={style.notification}>
+        <FaCog className={style.icon} /> Account Setting
+      </div>
+      
+    </Popover.Body>
+  </Popover>
+);
 
 
 const Navbar = () => {
@@ -14,7 +28,10 @@ const Navbar = () => {
             </div>
             <div className={style.text}>
                 <Notification />
+                <OverlayTrigger trigger="click" placement="bottom" overlay={popoverContent}>
                 <button className={style.btn}>Account <FaUserAlt className='pl-2 pt-2'/></button>
+                </OverlayTrigger>
+                
             </div>
     </div>
   )
