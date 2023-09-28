@@ -1,5 +1,6 @@
 import style from './Notification.module.css';
 import { FaBell, FaBullhorn, FaTrashAlt} from 'react-icons/fa';
+import { Badge } from 'react-bootstrap';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
 const popoverContent = (
@@ -19,7 +20,9 @@ const popoverContent = (
 const Notification = () => {
   return (
     <OverlayTrigger trigger="click" placement="bottom" overlay={popoverContent}>
-    <h3 className={style.txt} ><FaBell fontSize={"1.3rem"}/></h3>
+    <h3 className={`position-relative ${style.txt}`} ><FaBell fontSize={"1.3rem"}className={style.bell} /> <Badge pill bg="danger" className="position-absolute top-0 start-100 translate-middle custom-class ">
+      2
+    </Badge></h3>
     </OverlayTrigger>
   )
 }
