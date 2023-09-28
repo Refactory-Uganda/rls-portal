@@ -1,0 +1,13 @@
+.notification{
+    display: flex;
+    gap: 10px;
+}
+
+.icon{
+    font-size: 40px;
+    margin-top: 3px;
+    color: #673467;
+}
+.txt{
+    margin-top: 5px;
+}

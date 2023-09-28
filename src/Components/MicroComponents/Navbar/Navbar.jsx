@@ -1,14 +1,20 @@
 import style from './Navbar.module.css';
+import { FaUserAlt } from 'react-icons/fa';
 
-const Navbar = ({label}) => {
+import Notification from '../notification/Notification';
+
+
+
+
+const Navbar = () => {
   return (
     <div className={style.container}>
             <div className={style.label}>
-                <h1>Facilitators</h1>
+                <h1></h1>
             </div>
             <div className={style.text}>
-                <h3 className={style.txt}>Chart</h3>
-                <button className={style.btn}>Signout</button>
+                <Notification />
+                <button className={style.btn}>Account <FaUserAlt className='pl-2 pt-2'/></button>
             </div>
     </div>
   )
