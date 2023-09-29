@@ -55,7 +55,7 @@ const NavBar = () => {
             </Dropdown.Toggle>
             <Dropdown.Menu style={{backgroundColor:'#693769'}}>
               <Dropdown.Item href="#/action-3" className='align-items-center '><Link to="/admin/addcourse" className={style.item}>Add Course</Link></Dropdown.Item>
-              <Dropdown.Item href="#/action-2"><Link to="/admin/coursecontent" className={style.item}>Add Content</Link></Dropdown.Item>
+              <Dropdown.Item href="#/action-2"><Link to="/admin/coursecontent" className={style.item}>AddContent</Link></Dropdown.Item>
               <Dropdown.Item href="#/action-2"><Link to="/admin/addcoursecontent" className={style.item}>Course Content</Link></Dropdown.Item>
               
             </Dropdown.Menu>

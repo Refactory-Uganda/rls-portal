@@ -2,13 +2,14 @@ import style from './Navbar.module.css';
 import { FaCog, FaDoorOpen, FaUserAlt } from 'react-icons/fa';
 import Notification from '../notification/Notification';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 
 const popoverContent = (
   <Popover id="popover-basic" style={{backgroundColor:'#673467'}}>
     <Popover.Body>
       <div className={style.notification}>
-        <FaUserAlt className={style.icon} /> Profile
+        <Link to="/admin/profile" className={style.notification}> <FaUserAlt className={style.icon} /> Profile</Link>
       </div>
       <hr style={{color:'#fff'}}></hr>
       <div className={style.notification}>

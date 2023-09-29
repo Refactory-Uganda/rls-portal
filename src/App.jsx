@@ -36,6 +36,7 @@ function App() {
               <Route path="/admin/addcourse" element={<AddCourse/>}></Route>
               <Route path="/admin/coursecontent" element={<CourseContent/>}/>
               <Route path="/admin/facilitatorcontentadded" element={<AdminFacitatorContentAdded/>}></Route>
+              <Route path= '/admin/' element={<AdminVeiwCourses/>}/>
               <Route path= '/admin/piechart' element={<PieChart/>}/>
               <Route path="/admin/addcoursecontent" element={<AddCourseContent/>}/>
               <Route path="/admin/addcoursematerial" element={<AddCourseMaterial/>}/>

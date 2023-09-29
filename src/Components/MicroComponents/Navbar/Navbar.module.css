@@ -4,6 +4,10 @@
     gap: 10px;
     color: #fff;
     cursor: pointer;
+    text-decoration: none;
+}
+.notification:hover{
+  color: #45c3e3;
 }
 .icon{
   
