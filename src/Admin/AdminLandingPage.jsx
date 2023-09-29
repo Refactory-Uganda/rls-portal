@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom"
 import styles from "./AdminLandingPage.module.css";
 import SideBar from '../Components/MicroComponents/NewNav/navBar.jsx'
-import PieChart from "../Components/MicroComponents/PieChart/PieChart";
 import NavBar from "../Components/MicroComponents/Navbar/Navbar.jsx";
 function Admin(){
     return(
@@ -14,9 +13,9 @@ function Admin(){
 
             <div className={styles.ViewContainer}>
                 <Outlet/>
-            <div className={styles.ChartandNotifications}>
+            {/* <div className={styles.ChartandNotifications}>
                 <PieChart />
-            </div>
+            </div> */}
             </div>
             {/* the chart and notification content is to arranged here */}
             

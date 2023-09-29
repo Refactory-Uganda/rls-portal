@@ -1,5 +1,4 @@
 
-import Navbar from '../Components/MicroComponents/Navbar/Navbar';
 import stlye from './AddCourse.module.css'
 const AddCourse = () => {
     return (

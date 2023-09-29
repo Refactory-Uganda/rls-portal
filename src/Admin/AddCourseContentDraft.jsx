@@ -2,7 +2,7 @@ import ContentEditable from 'react-contenteditable';
 import style from './AddCourseContentDraft.module.css';
 import {FaEllipsisV} from 'react-icons/fa';
 import { useState } from 'react';
-import Navbar from '../Components/MicroComponents/Navbar/Navbar';
+
 
 
 

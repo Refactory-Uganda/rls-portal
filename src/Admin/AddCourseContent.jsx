@@ -2,7 +2,7 @@
 import style from './AddCourseContent.module.css';
 import {FaEllipsisV} from 'react-icons/fa';
 import { useState } from 'react';
-import Navbar from '../Components/MicroComponents/Navbar/Navbar';
+
 
 
 const AddCourseContent = () => {
