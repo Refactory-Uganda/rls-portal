@@ -1,4 +1,4 @@
-import style from './Notification.module.css';
+import style from './notification.module.css';
 import { FaBell, FaBullhorn, FaTrashAlt} from 'react-icons/fa';
 import { Badge } from 'react-bootstrap';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
