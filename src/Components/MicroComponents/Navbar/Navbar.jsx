@@ -1,5 +1,5 @@
 import style from './Navbar.module.css';
-import { FaCog, FaUserAlt } from 'react-icons/fa';
+import { FaCog, FaDoorOpen, FaUserAlt } from 'react-icons/fa';
 import Notification from '../notification/Notification';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
@@ -13,6 +13,10 @@ const popoverContent = (
       <hr style={{color:'#fff'}}></hr>
       <div className={style.notification}>
         <FaCog className={style.icon} /> Account Setting
+      </div>
+      <hr style={{color:'#fff'}}></hr>
+      <div className={style.notification}>
+        <FaDoorOpen className={style.icon} /> Signout
       </div>
       
     </Popover.Body>
