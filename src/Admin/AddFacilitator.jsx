@@ -1,20 +1,53 @@
-import Navbar from '../Components/MicroComponents/Navbar/Navbar';
+
 import style from './AddFacilitar.module.css'
 const AddFacilitator = () => {
     return (
       <>
       {/* <Navbar label={'Add Facilitator'} /> */}
-      <div className={style.addFacillitator}>
-       <hr style={{background: '#693769', color:"#693769", borderColor: '#693769',height: '3px', width: '100%',marginTop:'3rem', marginBottom:'2rem'}}/>
+      <div className={` ${style.addFacillitator}`}>
+       
       <form className={style.form}>
-
+      <div className={style.btn}>
+      <label className={style.label}>Name</label>
       <input type="text"  
           className={style.input}  
         
-        placeholder="USER NAME"/>
-       <input type="text" 
+        placeholder="ADD NAME"/>
+      </div>
+      <div className={style.btn}>
+        <label htmlFor="" className={style.label}>Images</label>
+        <input type="file"  
+          className={style.input}  
+        
+        placeholder="ADD IMAGE"/>
+      </div>
+      <div className={style.btn}>
+        <label htmlFor="" className={style.label}>Role:</label>
+        <input type="text"  
+          className={style.input}  
+        
+        placeholder="ADD ROLE"/>
+      </div>
+      <div className={style.btn}>
+        <label htmlFor="" className={style.label}>Email</label>
+        <input type="email"  
+          className={style.input}  
+        
+        placeholder="ADD EMAIL"/>
+      </div>
+      <div className={style.btn}>
+        <label htmlFor="" className={style.label}>ID</label>
+        <input type="TEXT"  
+          className={style.input}  
+        
+        placeholder="ADD ID"/>
+      </div>
+      <div className={style.btn}>
+        <label htmlFor="" className={style.label}>Course</label>
+        <input type="text" 
          className={style.input}  
        placeholder="COURSE NAME "/>
+      </div>
      <button className={style.button}>Save</button>
       </form>
 
