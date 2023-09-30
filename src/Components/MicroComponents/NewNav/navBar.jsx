@@ -32,9 +32,6 @@ const NavBar = () => {
           <Link to="/admin/piechart" className="list-group-item list-group-item-action d-flex align-items-center">
             <BsLink className="mr-2" /> Chart
           </Link>
-          <Link to="" className="list-group-item list-group-item-action d-flex align-items-center">
-            <BsPerson className="mr-2" /> Student
-          </Link>
           <Link to="#" className="list-group-item list-group-item-action d-flex align-items-center">
           <Dropdown className={style.dropdown}>
             <Dropdown.Toggle variant="none" id="dropdown-basic" className={`d-flex align-items-center ${style.dropdownToggle}`}>
