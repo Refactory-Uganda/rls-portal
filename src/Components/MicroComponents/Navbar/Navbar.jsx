@@ -36,7 +36,6 @@ const Navbar = () => {
                 <OverlayTrigger trigger="click" placement="bottom" overlay={popoverContent}>
                 <button className={style.btn}>Account <FaUserAlt className='pl-2 pt-2'/></button>
                 </OverlayTrigger>
-                
             </div>
     </div>
   )

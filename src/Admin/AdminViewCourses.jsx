@@ -1,4 +1,5 @@
 //import NavBar from "../Components/MicroComponents/Navbar/Navbar.jsx";
+import { FaEdit, FaEllipsisV, FaTrash } from 'react-icons/fa'
 import demo from '../Components/Pages/demo.json'
 import style from './AdminViewCourses.module.css'
 
@@ -10,11 +11,25 @@ function AdminVeiwCourses(){
             {
                 demo.map((data)=>(
                     <div key={data.id} className="courseCard rounded-1sm p-4 flex flex-col justify-between" id={style.course}>
-                <div className="cardHead flex justify-between">
-                    <img src={data.img} className='w-20' alt="img"/>
-                    <p className='pt-3 font-black'>{data.name}</p>
-                    <svg className='mt-3' xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg>
-                </div>
+                     <div className="cardHead flex justify-between">
+                        <div className='flex'>
+                            <img src={data.img} className='w-12' alt="img"/>
+                            <p className='pt-3 pr-4 font-black'>{data.name}</p>
+                        </div>
+                        <div className="pt-3">
+                        <div className="dropdown-center">
+                        <button className='' type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <FaEllipsisV />
+                        </button>
+                        <ul className="dropdown-menu bg-bluegreen" style={{minWidth: '5px', backgroundColor:'#673467'}}>
+                            <li><a className="dropdown-item " href="#"><FaTrash color='#58C5C8'/></a></li>
+                            <hr></hr>
+                            <li><a className="dropdown-item" href="#"><FaEdit color='#58C5C8'/></a></li>
+                        </ul>
+                        </div>
+                        </div>
+                
+                    </div>
                 <div className="cardContent">
                     <p>{data.description.substring(-1,50)+"........"}</p>
                 </div>
