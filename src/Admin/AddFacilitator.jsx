@@ -15,7 +15,7 @@ const AddFacilitator = () => {
         placeholder="ADD NAME"/>
       </div>
       <div className={style.btn}>
-        <label htmlFor="" className={style.label}>Images</label>
+        <label htmlFor="" className={style.label}>Image</label>
         <input type="file"  
           className={style.input}  
         

@@ -40,7 +40,7 @@ const NavBar = () => {
             <Dropdown.Menu style={{backgroundColor:'#693769'}}>
               <Dropdown.Item href="#/action-3" className='align-items-center '><Link to="/admin/facilitator" className={style.item}> Facilitator</Link></Dropdown.Item>
               <Dropdown.Item href="#/action-3" className='align-items-center '><Link to="/admin/addFacilitator" className={style.item}>Add Facilitator</Link></Dropdown.Item>
-              <Dropdown.Item href="#/action-2"><Link to="/admin/facilitatorcontentadded" className={style.item}>FacilitatorModule</Link></Dropdown.Item>
+              {/* <Dropdown.Item href="#/action-2"><Link to="/admin/facilitatorcontentadded" className={style.item}>FacilitatorModule</Link></Dropdown.Item> */}
               
             </Dropdown.Menu>
           </Dropdown>
