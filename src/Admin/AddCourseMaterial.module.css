@@ -68,6 +68,7 @@
     background-color: #693769; 
     color: white;
     font-weight: bold;
+
 }
 
 .button3{
@@ -100,7 +101,10 @@
     height: 500px;
     padding: 10px;
     outline: none;
-    
+    overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
+  word-wrap: break-word;
   }
   .element:empty::before {
     content: attr(data-placeholder);
@@ -111,6 +115,9 @@
 
   .element.focused:empty::before {
     display: none;
+  }
+  .element:focus {
+    outline: none;
   }
   .button6 {
     padding-right: 20px;
@@ -141,8 +148,8 @@
   
   .img{
     margin-top: 10px;
-    margin-bottom: 250px;
-    width: 80px;
+    margin-bottom: 200px;
+    width: 60px;
   }
 
 @media (min-width: 281px)  and (max-width: 768px) {
