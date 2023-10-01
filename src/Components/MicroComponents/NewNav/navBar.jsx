@@ -1,7 +1,7 @@
 
 import style from './navbar.module.css'; 
 import { MdDashboard } from 'react-icons/md';
-import { BsLink, BsPerson, BsPeople } from 'react-icons/bs';
+import { BsLink, BsPeople } from 'react-icons/bs';
 import { FaBars, FaBook, FaCog, FaDoorOpen, FaTimes } from 'react-icons/fa';
 import { useState } from 'react';
 import {Link} from 'react-router-dom';
@@ -52,9 +52,7 @@ const NavBar = () => {
             </Dropdown.Toggle>
             <Dropdown.Menu style={{backgroundColor:'#693769'}}>
               <Dropdown.Item href="#/action-3" className='align-items-center '><Link to="/admin/addcourse" className={style.item}>Add Course</Link></Dropdown.Item>
-              <Dropdown.Item href="#/action-2"><Link to="/admin/coursecontent" className={style.item}>AddContent</Link></Dropdown.Item>
-              <Dropdown.Item href="#/action-2"><Link to="/admin/addcoursecontent" className={style.item}>Course Content</Link></Dropdown.Item>
-              
+              <Dropdown.Item href="#/action-2"><Link to="/admin/addcoursematerial" className={style.item}>Add Content</Link></Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           </Link>

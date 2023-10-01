@@ -2,6 +2,7 @@ import ContentEditable from 'react-contenteditable';
 import style from './AddCourseMaterial.module.css';
 import {FaEllipsisV} from 'react-icons/fa';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 //import Navbar from '../Components/MicroComponents/Navbar/Navbar';
 
@@ -10,7 +11,7 @@ const AddCourseMaterial = () => {
     const toggleIcons = () => {
         setShowIcons(!showIcons);
       };
-    const [content, setContent] = useState('Input content here');
+    const [content, setContent] = useState('');
 
   function handleChange(event) {
     setContent(event.target.value);
@@ -21,15 +22,15 @@ const AddCourseMaterial = () => {
       {/* <Navbar label={'ADD COURSE MATERIAL'}/> */}
     <div className={style.body}>
     <div className={style.box}>
-      <button className={style.button2}>CONTENT</button>
+      <button className={style.button2}><Link to='/admin/addcoursematerial' >CONTENT</Link></button>
       <button className={style.button}>DETAILS</button>
       <button className={style.button}>ENROLLED</button>
   </div>
-  <hr style={{background: '#693769',color:"#693769", borderColor: '#693769',height: '3px', width: '100%'}}/>
+  <hr style={{background: '#693769',color:"#693769", borderColor: '#693769',height: '3px', width: '800%'}}/>
   <div className={style.box}>
-      <button className={style.button3}>DRAFT</button>
       <button className={style.button4}>ADD</button>
-      <button className={style.button3}>ADDED</button>
+      <button className={style.button3}>EDIT</button>
+      <button className={style.button3}>PREVIEW</button>
   </div>
   <div className={style.container}>
     <div  className={`${style.textBtn} ${showIcons ? '' : style.iconsHidden}`}>
@@ -48,7 +49,7 @@ const AddCourseMaterial = () => {
       </div>
       
       <div className={style.btns}>
-      <ContentEditable html={content} onChange={handleChange} className={style.element}  />
+      <ContentEditable data-placeholder="Input content here" html={content} onChange={handleChange} className={style.element}  />
       </div>
     </div>
   </div>
