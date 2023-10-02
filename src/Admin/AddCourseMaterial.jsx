@@ -22,11 +22,11 @@ const AddCourseMaterial = () => {
       {/* <Navbar label={'ADD COURSE MATERIAL'}/> */}
     <div className={style.body}>
     <div className={style.box}>
-      <button className={style.button2}><Link to='/admin/addcoursematerial' >CONTENT</Link></button>
-      <button className={style.button}>DETAILS</button>
-      <button className={style.button}>ENROLLED</button>
+      <button className={style.button2}><Link to='/admin/addcoursematerial' style={{color:'white'}}>CONTENT</Link></button>
+      <button className={style.button}><Link to='/admin/AddCourseMaterialField' style={{color:'white'}}>TOPICS</Link></button>
+      <button className={style.button}><Link to='/admin/AddCourseMaterialDaft' style={{color:'white'}}>MATERIAL</Link></button>
   </div>
-  <hr style={{background: '#693769',color:"#693769", borderColor: '#693769',height: '3px', width: '800%'}}/>
+  <hr className={style.hr}/>
   <div className={style.box}>
       <button className={style.button4}>ADD</button>
       <button className={style.button3}>EDIT</button>
