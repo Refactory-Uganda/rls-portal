@@ -1,5 +1,5 @@
+
 //import NavBar from "../Components/MicroComponents/Navbar/Navbar.jsx";
-import { FaEdit, FaEllipsisV, FaTrash } from 'react-icons/fa'
 import demo from '../Components/Pages/demo.json'
 import style from './AdminViewCourses.module.css'
 
@@ -7,7 +7,9 @@ import style from './AdminViewCourses.module.css'
 function AdminVeiwCourses(){
     return(
         <>
+       
          <div className="main grid grid-cols-1 p-3 sm2:grid-cols-2  md2:grid-cols-3  gap-3 lg:grid-cols-2 xl:grid-cols-3">
+         
             {
                 demo.map((data)=>(
                     <div key={data.id} className="courseCard rounded-1sm p-4 flex flex-col justify-between" id={style.course}>
