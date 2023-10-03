@@ -22,6 +22,7 @@ import Profile from "./Admin/AdminProfile";
 
 import Chat from "./Admin/Chatgptdash";
 import Setting from "./Admin/Setting";
+import AccountSetting from "./Admin/AccountSetting";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/piechart" element={<PieChart/>}></Route>
           <Route path="/admin" element={<Admin/>}>
               <Route path="/admin/profile" element={<Profile/>}></Route>
+              <Route path="/admin/accountsetting" element={<AccountSetting/>}></Route>
               <Route path="/admin/setting" element={<Setting/>}></Route>
               <Route path="/admin/addcourse" element={<AddCourse/>}></Route>
               <Route path="/admin/coursecontent" element={<CourseContent/>}/>

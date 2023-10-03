@@ -13,11 +13,11 @@ const popoverContent = (
       </div>
       <hr style={{color:'#fff'}}></hr>
       <div className={style.notification}>
-        <FaCog className={style.icon} /> Account Setting
+      <Link to="/admin/accountsetting" className={style.notification}> <FaCog className={style.icon} /> Account Setting</Link>
       </div>
       <hr style={{color:'#fff'}}></hr>
       <div className={style.notification}>
-        <FaDoorOpen className={style.icon} /> Signout
+      <Link to="/login" className={style.notification}><FaDoorOpen className={style.icon} /> Signout</Link>
       </div>
       
     </Popover.Body>

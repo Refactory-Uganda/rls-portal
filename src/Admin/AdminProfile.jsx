@@ -3,7 +3,8 @@ import style from "./AdminProfile.module.css"
 function Profile(){
     return(
         <>
-       <div className="form w-[80%] m-auto">
+       <div className="form  m-auto">
+       <img  src='/images/profile.jpg' className={style.img}/>
         <form action="" className="flex flex-col  bg-white mt-5 p-4 rounded-1sm" id={style.form}>
             <label htmlFor="username" className="mt-2">Name</label>
             <input type="text" id="username" className={`${style.input} h-[50px] p-3 mt-2`}/>

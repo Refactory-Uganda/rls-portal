@@ -5,7 +5,7 @@ const Setting = () => {
   return (
     <>
        <div className={style.body}>
-            <h2 className={style.header}>Account Setting</h2>
+            <h2 className={style.header}> Setting</h2>
             <div className={style.profile}>
                 <div>
                   <h5 className={style.header} >Your Avatar</h5>

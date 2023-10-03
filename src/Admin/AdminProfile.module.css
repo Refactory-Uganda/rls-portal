@@ -1,8 +1,28 @@
 #form{
     box-shadow:  0 0 10px #c9d0d1, 0 0 20px #c9d0d1,
     0 0 20px #c9d0d1, 0 0 20px #c9d0d1;
+    width: fit-content;
+    margin: auto;
+    position: relative;
 }
 .input{
+   
     border-bottom: 2px solid #c9d0d1;
 
+}
+.input:focus{
+    outline: none;
+}
+.img{
+    position: absolute;
+    right: 535px;
+    z-index: 1;
+    border-radius: 50%;
+    width: 100px;
+}
+
+@media (max-width:908) {
+    .img{
+        display: none;
+    }
 }
