@@ -1,6 +1,8 @@
 .container{
+    margin-top: 50px;
     font-weight: 200;
-font-size: larger;
+    font-size: 40px;
+    
 }
 #NotificationMessage{
     background-color: gray;

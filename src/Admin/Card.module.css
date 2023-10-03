@@ -1,0 +1,29 @@
+.container{
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    padding-bottom: 10px;
+   
+}
+.el{
+    display: flex;
+    gap: 10px;
+    margin: auto;
+}
+.card{
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.img{
+    background-color: aqua;
+    border-radius: 5px;
+    color: #fff;
+    padding: 20px;
+}

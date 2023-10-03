@@ -21,7 +21,7 @@
     width: 100px;
 }
 
-@media (max-width:908) {
+@media (max-width:768) {
     .img{
         display: none;
     }
