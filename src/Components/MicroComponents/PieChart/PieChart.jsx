@@ -52,8 +52,12 @@ function PieChart() {
       title: {
         display: true,
         text: 'Newly Registered Students',
-        fontSize: 100,
+        font:{
+          size: 30
+        },
+        color: "#693769",
       },
+     
     },
    
 
