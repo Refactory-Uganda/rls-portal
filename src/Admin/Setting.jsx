@@ -66,7 +66,7 @@ const Setting = () => {
                   <h4 className={style.head}>By deleting your account you will lose all your data</h4>
                 </div>
                 <div>
-                <button className={style.button}>Delete account </button>
+                <button className={style.button2}>Delete account </button>
                 </div>
               </div>
             </div>

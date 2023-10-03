@@ -104,6 +104,17 @@
     display: flex;
     justify-content: end;
 }
+.button2{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #693769;
+    border-radius: 10px; 
+    box-shadow:  0 0 10px #c9d0d1, 0 0 10px #c9d0d1,
+       0 0 10px #c9d0d1, 0 0 5px #c9d0d1; 
+
+}
 
 .button3{
     padding-left: 20px;
@@ -118,17 +129,24 @@
    
 }
 @media (max-width: 768px) {
-    .form{
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
+    .text{
+        font-size: 14px;
+        padding-top: 17px;
     }
-    .forms{
-        display: flex;
-        gap: 20px;  
+    .head{
+        font-size: 12px;
+        padding-bottom: 25px;
     }
 
-    
+    .input {
+        width: 100%; 
+        margin: o.2rem auto; 
+        padding: 0.8rem; 
+        border:1px solid #693769ff;
+        border-radius: .4rem;
+        text-align: start;
+        font-size: 9px;
+      }
 }
     
 
