@@ -1,27 +1,25 @@
-
-import Navbar from '../Components/MicroComponents/Navbar/Navbar';
 import style from './AddCourseMaterialField.module.css';
+import { Link } from 'react-router-dom';
 
 
 
 const AddCourseMaterialField = () => {
- 
-         
+        
   return (
     <>
     {/* <Navbar label={'ADD COURSE MATERIAL'} /> */}
     <div className={style.body}>
       
     <div className={style.box}>
-      <button className={style.button2}>CONTENT</button>
-      <button className={style.button}>DETAILS</button>
-      <button className={style.button}>ENROLLED</button>
+    <button className={style.button}><Link to='/admin/addcoursematerial' style={{color:'white'}}>CONTENT</Link></button>
+      <button className={style.button2}><Link to='/admin/AddCourseMaterialField' style={{color:'white'}}>TOPICS</Link></button>
+      <button className={style.button}><Link to='/admin/AddCourseMaterialDaft' style={{color:'white'}}>MATERIAL</Link></button>
   </div>
-  <hr style={{background: '#693769',color:"#693769", borderColor: '#693769',height: '3px', width: '100%'}}/>
+  <hr className={style.hr}/>
   <div className={style.box}>
-      <button className={style.button3}>DRAFT</button>
-      <button className={style.button3}>ADD</button>
-      <button className={style.button4}>ADDED</button>
+      <button className={style.button3}>Edit</button>
+      <button className={style.button4}>ADD</button>
+      <button className={style.button3}>PREVIEW</button>
   </div>
   <div className={style.container}>
     <div  className={`${style.textBtn} `}>
@@ -37,7 +35,6 @@ const AddCourseMaterialField = () => {
             <input type="text" placeholder="SELECT COURSE"  className={style.input}/>
             <input type="text" placeholder="SELECT FACILITATOR" className={style.input} />
             <textarea rows="9" placeholder="ADD FILE DESCRIBTION" className={style.textarea} />
-            <button className={style.button9}>Submit </button>
             
       </div>
   

@@ -2,7 +2,8 @@ import ContentEditable from 'react-contenteditable';
 import style from './AddCouserMaterialDaft.module.css';
 import {FaEllipsisV} from 'react-icons/fa';
 import { useState } from 'react';
-import Navbar from '../Components/MicroComponents/Navbar/Navbar';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -23,15 +24,15 @@ const AddCouserMaterialDaft = () => {
     <div className={style.body}>
     
     <div className={style.box}>
-      <button className={style.button2}>CONTENT</button>
-      <button className={style.button}>DETAILS</button>
-      <button className={style.button}>ENROLLED</button>
+    <button className={style.button}><Link to='/admin/addcoursematerial' style={{color:'white'}}>CONTENT</Link></button>
+      <button className={style.button}><Link to='/admin/AddCourseMaterialField' style={{color:'white'}}>TOPICS</Link></button>
+      <button className={style.button2}><Link to='/admin/AddCourseMaterialDaft' style={{color:'white'}}>MATERIAL</Link></button>
   </div>
-  <hr style={{background: '#693769',color:"#693769", borderColor: '#693769',height: '3px', width: '100%'}}/>
+  <hr className={style.hr}/>
   <div className={style.box}>
-      <button className={style.button3}>DRAFT</button>
-      <button className={style.button3}>ADD</button>
-      <button className={style.button4}>ADDED</button>
+      <button className={style.button3}>EDIT</button>
+      <button className={style.button4}>ADD</button>
+      <button className={style.button3}>PREVIEW</button>
   </div>
   <div className={style.container}>
     <div  className={`${style.textBtn} ${showIcons ? '' : style.iconsHidden}`}>
