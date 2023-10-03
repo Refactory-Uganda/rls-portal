@@ -56,10 +56,10 @@ const NavBar = () => {
             </Dropdown.Menu>
           </Dropdown>
           </Link>
-          <Link to="" className="list-group-item list-group-item-action d-flex align-items-center">
+          <Link to="/admin/setting" className="list-group-item list-group-item-action d-flex align-items-center">
           <FaCog className="mr-2" /> Setting
           </Link>
-          <Link to="" className="list-group-item list-group-item-action d-flex align-items-center ">
+          <Link to="/login" className="list-group-item list-group-item-action d-flex align-items-center ">
             <FaDoorOpen className="mr-2" /> SignOut
           </Link>
         </div>
