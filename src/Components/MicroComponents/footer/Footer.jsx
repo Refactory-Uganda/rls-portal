@@ -4,7 +4,7 @@ function Footer(){
     return(
         <>
             <div className="footer bg-purple ">
-                <div className="wrapperfooter md:grid grid-cols-3 w-[90%] m-auto">
+                <div className="wrapperfooter md:grid grid-cols-2 w-[90%] m-auto">
                     <div className="location ">
                         <img src="/img/refactoryWhite.png"  className="w-40 m-2 p-2" alt="Refactory" />
                         <p className="text-white p-2 ">
@@ -29,16 +29,6 @@ function Footer(){
                             <li><a href="#"  className="text-white">Partners</a></li>
                         </ul>
                     </div>
-                    <div className="permiumPartners p-4">
-                        <div className="sm:grid grid-cols-2">
-                            <span><img src="/img/Labo.png" className="w-30 h-10 m-auto my-5 md:h-16 mt-1 " alt="" /></span>
-                            <span><img src="/img/clark.png" className="w-30 h-10 m-auto my-5 md:h-16 mt-1" alt="" /></span>
-                            <span><img src="/img/for-one.png" className="w-30 h-10 m-auto my-5 md:h-16 mt-1" alt="" /></span>
-                        </div>
-                    </div>
-                </div>
-                <div className="booterFooter bg-lastbottom p-2">
-                    <p className="text-white text-center ">Refactory 2019 - Icons: Freepik/flaticon.com (licensed under CC 3.0 BY). Photos: Maren Hald Bjørgum</p>
                 </div>
             </div>
         
