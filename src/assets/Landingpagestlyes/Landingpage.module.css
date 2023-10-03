@@ -26,10 +26,7 @@
     width:80px;
     height: 80px;
 }
-#forums{
-    height: 300px;
-    overflow-y: scroll;
-}
+
 #story{
     border:#58C5C8 solid 3px;
     padding: 5px;
