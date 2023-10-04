@@ -1,7 +1,8 @@
 
 //import NavBar from "../Components/MicroComponents/Navbar/Navbar.jsx";
 import demo from '../Components/Pages/demo.json'
-import style from './AdminViewCourses.module.css'
+import style from './AdminViewCourses.module.css';
+import {FaEllipsisV, FaTrash, FaEdit} from 'react-icons/fa'
 
 
 function AdminVeiwCourses(){
