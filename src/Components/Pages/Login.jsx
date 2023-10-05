@@ -1,35 +1,46 @@
 import React from "react";
-import {Link} from "react-router-dom"
-import LoginCss from "./Login.module.css"
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import LoginCss from "./Login.module.css";
 import Footer from "../MicroComponents/footer/Footer";
-import  {useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 function Login(props) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
- 
 
-  const handleLogin = async(e) =>{
+  const handleLogin = async (e) => {
     e.preventDefault();
-    try{
-      await axios.post("http://localhost:5000/login", {
-    username:username,
-    password:password
-    })
-      setUsername("")
-      setPassword("")
+    setPassword(""),
+    setUsername("")
+    try {
+       const response = await axios.post("http://localhost:5000/login", {
+        username: username,
+        password: password,
+      });
+      
+      if (response.data.role === "Admin") {
+        navigate("/admin");
+      } else if  (response.data.role === "Facilitator"){
+        navigate("/admin/facilitator");
+      }
+      else if  (response.data.role === "Student"){
+        navigate("/admin/coursecontent");
+      }
+     
+      
+    } catch (error) {
+      console.error(error.message);
     }
-    catch(error) {
-          console.error(error.message)
-    }
-  }
-  
+  };
+
+
   return (
     <div>
-  
-      <div  className={LoginCss.LoginDiv3}>
+      <div className={LoginCss.LoginDiv3}>
         {/* Header */}
         <div className="container-fluid" id="logincontainer">
           <div className="row">
@@ -39,13 +50,19 @@ function Login(props) {
               <div className={LoginCss.formcontainer}>
                 <form onSubmit={handleLogin}>
                   <div>
-                    <img src="../images/refactory logo.png" alt="" className={LoginCss.loginimage} />
+                    <img
+                      src="../images/refactory logo.png"
+                      alt=""
+                      className={LoginCss.loginimage}
+                    />
                   </div>
                   <div className={LoginCss.inputs}>
                     <input
                       type="text"
                       placeholder="Enter Username"
                       className={LoginCss.loginUsernameInput}
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
                     />
                   </div>
                   <div className={LoginCss.inputs}>
@@ -53,17 +70,19 @@ function Login(props) {
                       type="password"
                       placeholder="Enter Password"
                       className={LoginCss.loginPasswordInput}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
                   <div className={LoginCss.inputs}>
-                    <button className={LoginCss.button1}>Sign In</button>
+                    <button className={LoginCss.button1} type="submit">Sign In</button>
                   </div>
                   <div className={LoginCss.inputs}>
                     <p className={LoginCss.absentaccount}>
                       If dont have an account please contract your suppervisor
                       for account and later use the details for signing in to
-                      the platform , but for now you can <a href="">Cancel</a> and return to
-                      the home
+                      the platform , but for now you can <a href="">Cancel</a>{" "}
+                      and return to the home
                     </p>
                   </div>
                 </form>
@@ -75,7 +94,9 @@ function Login(props) {
         {/* Footer */}
         <div className="container-fluid" id="footercontainer">
           <div className="row">
-            <div className="col" id={LoginCss.footer}><Footer/></div>
+            <div className="col" id={LoginCss.footer}>
+              <Footer />
+            </div>
           </div>
         </div>
       </div>
