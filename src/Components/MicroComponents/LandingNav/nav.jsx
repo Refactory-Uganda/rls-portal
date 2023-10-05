@@ -1,8 +1,9 @@
-import {useState,Link} from "react"
+import {useState} from "react"
 import styles from "../../../assets/Landingpagestlyes/Landingpage.module.css"
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import demo from "../../Pages/demo.json";
+import { Link } from "react-router-dom";  
 
 
 
@@ -47,11 +48,12 @@ const Navbar = () => {
           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-240q21 0 35.5-14.5T530-290q0-21-14.5-35.5T480-340q-21 0-35.5 14.5T430-290q0 21 14.5 35.5T480-240Zm-36-154h74q0-36 8-53t34-43q35-35 49.5-58.5T624-602q0-53-36-85.5T491-720q-55 0-93.5 27T344-618l66 26q7-27 28-43.5t49-16.5q27 0 45 14.5t18 38.5q0 17-11 36t-37 42q-33 29-45.5 55.5T444-394ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
           <p>Help</p>
           </div>
+          <Link to="/login" className="no-underline text-black">
           <div className="p-3 flex flex-col">
           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-120v-80h280v-560H480v-80h280q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H480Zm-80-160-55-58 102-102H120v-80h327L345-622l55-58 200 200-200 200Z"/></svg>
-          <p>Login</p>
+          <p className="">Login</p>
             </div>
-            
+            </Link>
            
           </div>
            {/* the icon that is supposed to bring the drop menu */}
@@ -74,9 +76,11 @@ const Navbar = () => {
             containerClass="carousel-container"
             className="flex flex-wrap justify-between w-[100%" >
                {demo.map((data) => (
-                <div className="text-center m-1 bg-white py-1 px-2 h-[35px] rounded-0.5sm flex justify-center lg:justify-between" key={data.id}>
+                <div className="text-center m-1 bg-white py-1 px-2 h-[35px] rounded-0.5sm flex " key={data.id}>
+       
+       <img src={data.img} className=" hidden lg:block w-10 h-7" alt="" />
                   <p className="m-0  text-purple text-xs py-1 sm:text-sm  ">{data.name}</p>
-                  <img src={data.img} className=" hidden lg:block w-10 h-7" alt="" />
+                 
                 </div>
               ))}
            </Carousel>
