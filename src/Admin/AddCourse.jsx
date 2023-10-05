@@ -1,12 +1,14 @@
 
-import style from './AddCourse.module.css'
+import style from './AddCourse.module.css';
+
 const AddCourse = () => {
+ 
     return (
         <>
         {/* <Navbar label='ADD COURSE CONTENT'/> */}
         <div className={style.addCourse}>
            
-           <form className={style.form}>
+           <form className={style.form} >
            <div className={style.btn}>
       <label className={style.label}> Course Name</label>
       <input type="text"  
