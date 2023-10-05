@@ -24,6 +24,7 @@ import Chat from "./Admin/Chatgptdash";
 import Setting from "./Admin/Setting";
 import AccountSetting from "./Admin/AccountSetting";
 import Card from "./Admin/card";
+import Facilitator from "./Facilitator/FacilitatorLanding";
 
 function App() {
   return (
@@ -55,6 +56,10 @@ function App() {
               <Route path="/admin/AddCourseMaterialField" element={<AddCourseMaterialField />}/>
               <Route path="/admin/AddCourseMaterialDaft" element={<AddCouserMaterialDaft />}/>
           </Route>
+          <Route path="/facilitator" element={<Facilitator/>}>
+              
+          </Route>
+
           {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}
         </Routes>
       </Router>
