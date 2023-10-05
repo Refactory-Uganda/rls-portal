@@ -1,10 +1,11 @@
 
 import style from './navbar.module.css'; 
 import { MdDashboard } from 'react-icons/md';
-import { BsLink, BsPerson, BsPeople } from 'react-icons/bs';
+import { BsLink, BsPeople } from 'react-icons/bs';
 import { FaBars, FaBook, FaCog, FaDoorOpen, FaTimes } from 'react-icons/fa';
 import { useState } from 'react';
-
+import {Link} from 'react-router-dom';
+import Dropdown from 'react-bootstrap/Dropdown';
 const NavBar = () => {
     
         const [sidebarVisible, setSidebarVisible] = useState(false);
@@ -19,32 +20,48 @@ const NavBar = () => {
       {/* Sidebar */}
       <div id={style.sidebar}>
             <header>
-              <a href="#">
+              <Link to='/admin/'>
                 <img src="/img/refactoryLogoColored.png" alt="logo" className={style.img}/>
-              </a>
+              </Link>
             </header>
         <div className={`list-group list-group-flush ${style.nav}`} >
-          <a href="#" className={`list-group-item list-group-item-action d-flex align-items-center `}>
+           
+          <Link to='/admin/' className={`list-group-item list-group-item-action d-flex align-items-center `}>
             <MdDashboard className="mr-2" /> Dashboard
-          </a>
-          <a href="#" className="list-group-item list-group-item-action d-flex align-items-center">
-            <BsLink className="mr-2" /> Account
-          </a>
-          <a href="#" className="list-group-item list-group-item-action d-flex align-items-center">
-            <BsPerson className="mr-2" /> Student
-          </a>
-          <a href="#" className="list-group-item list-group-item-action d-flex align-items-center">
-          <BsPeople className="mr-2" />  Facilitator
-          </a>
-          <a href="#" className="list-group-item list-group-item-action d-flex align-items-center">
-          <FaBook className="mr-2" /> Course
-          </a>
-          <a href="#" className="list-group-item list-group-item-action d-flex align-items-center">
+          </Link>
+          <Link to="/admin/piechart" className="list-group-item list-group-item-action d-flex align-items-center">
+            <BsLink className="mr-2" /> Chart
+          </Link>
+          <Link to="#" className="list-group-item list-group-item-action d-flex align-items-center">
+          <Dropdown className={style.dropdown}>
+            <Dropdown.Toggle variant="none" id="dropdown-basic" className={`d-flex align-items-center ${style.dropdownToggle}`}>
+            <BsPeople className="mr-2" />  Facilitator
+            </Dropdown.Toggle>
+            <Dropdown.Menu style={{backgroundColor:'#693769'}}>
+              <Dropdown.Item href="#/action-3" className='align-items-center '><Link to="/admin/facilitator" className={style.item}> Facilitator</Link></Dropdown.Item>
+              <Dropdown.Item href="#/action-3" className='align-items-center '><Link to="/admin/addFacilitator" className={style.item}>Add Facilitator</Link></Dropdown.Item>
+              {/* <Dropdown.Item href="#/action-2"><Link to="/admin/facilitatorcontentadded" className={style.item}>FacilitatorModule</Link></Dropdown.Item> */}
+              
+            </Dropdown.Menu>
+          </Dropdown>
+          </Link>
+          <Link to="#" className="list-group-item list-group-item-action d-flex align-items-center " >
+          <Dropdown className={style.dropdown}>
+            <Dropdown.Toggle variant="none" id="dropdown-basic" className={`d-flex align-items-center ${style.dropdownToggle}`}>
+            <FaBook className="mr-2" /> Course
+            </Dropdown.Toggle>
+            <Dropdown.Menu style={{backgroundColor:'#693769'}}>
+              <Dropdown.Item href="#/action-3" className='align-items-center '><Link to="/admin/addcourse" className={style.item}>Add Course</Link></Dropdown.Item>
+              <Dropdown.Item href="#/action-2"><Link to="/admin/addcoursematerial" className={style.item}>Add Content</Link></Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          </Link>
+          <Link to="/admin/setting" className="list-group-item list-group-item-action d-flex align-items-center">
           <FaCog className="mr-2" /> Setting
-          </a>
-          <a href="#" className="list-group-item list-group-item-action d-flex align-items-center ">
+          </Link>
+          <Link to="/login" className="list-group-item list-group-item-action d-flex align-items-center ">
             <FaDoorOpen className="mr-2" /> SignOut
-          </a>
+          </Link>
         </div>
       </div>
       <div className={style.topSection}>

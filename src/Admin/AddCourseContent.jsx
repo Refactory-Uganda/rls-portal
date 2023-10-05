@@ -4,6 +4,7 @@ import {FaEllipsisV} from 'react-icons/fa';
 import { useState } from 'react';
 
 
+
 const AddCourseContent = () => {
   const [showIcons, setShowIcons] = useState(false);
     const toggleIcons = () => {
@@ -13,8 +14,9 @@ const AddCourseContent = () => {
          
   return (
     <>
-
+     {/* <Navbar label={'ADD COURSE CONTENT'} /> */}
     <div className={style.body}>
+
     <div className={style.box}>
       <button className={style.button2}>CONTENT</button>
       <button className={style.button}>DETAILS</button>

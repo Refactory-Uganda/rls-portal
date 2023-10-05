@@ -13,34 +13,47 @@ import ViewAndAddFacilitors from "./Admin/ViewAndAddFacilitors";
 import FacilitatorModules from "./Admin/facilitatorModules";
 import AddCourseContentDraft from "./Admin/AddCourseContentDraft";
 import AddCourseMaterial from "./Admin/AddCourseMaterial";
-import NavBar from "./Components/MicroComponents/NewNav/navBar";
-import Profile from "./Admin/AdminProfile"
+import AddCourseMaterialField from "./Admin/AddCourseMaterialField";
+import AddCouserMaterialDaft from "./Admin/AddCouserMaterialDaft";
+import AdminVeiwCourses from "./Admin/AdminViewCourses";
+import AdminFacitatorContentAdded from "./Admin/AdminFacilitatorContentAdded";
+import Profile from "./Admin/AdminProfile";
 
 
-
+import Chat from "./Admin/Chatgptdash";
+import Setting from "./Admin/Setting";
+import AccountSetting from "./Admin/AccountSetting";
+import Card from "./Admin/card";
 
 function App() {
   return (
     <div>
       <Router>
         <Routes>
-         
+        <Route path="/chat" element={<Chat/>}/>
           <Route path="/" element={<Landing/>}></Route>
           <Route path="/login" element={<Login/>}/>
           <Route path="/piechart" element={<PieChart/>}></Route>
-          <Route path="/navbar" element={<NavBar/>}></Route>
           <Route path="/admin" element={<Admin/>}>
+              <Route path="/admin/profile" element={<Profile/>}></Route>
+              <Route path="/admin/card" element={<Card/>}></Route>
+              <Route path="/admin/accountsetting" element={<AccountSetting/>}></Route>
+              <Route path="/admin/setting" element={<Setting/>}></Route>
               <Route path="/admin/addcourse" element={<AddCourse/>}></Route>
               <Route path="/admin/coursecontent" element={<CourseContent/>}/>
-              <Route path= '/admin/Profile' element={<Profile/>}/>
+              <Route path="/admin/facilitatorcontentadded" element={<AdminFacitatorContentAdded/>}></Route>
+              <Route path= '/admin/' element={<AdminVeiwCourses/>}/>
+              <Route path= '/admin/piechart' element={<PieChart/>}/>
               <Route path="/admin/addcoursecontent" element={<AddCourseContent/>}/>
               <Route path="/admin/addcoursematerial" element={<AddCourseMaterial/>}/>
               <Route path= '/admin/addFacilitator' element={<AddFacilitator/>}/>
-              <Route path="/admin/add/facilitator" element={<ViewAndAddFacilitors/>}></Route>
+              <Route path="/admin/facilitator" element={<ViewAndAddFacilitors/>}></Route>
               <Route path= '/admin/assignCourseFacilitator' element={<AssignCourseFacilitator/>}/>
               <Route path= '/admin/addCourseContentDraft' element={<AddCourseContentDraft/>}/>
               <Route path="/admin/facilitatorModules" element={<FacilitatorModules/>} />
               <Route path="/admin/addCourseContentAdded" element={<AddCourseContent/>}/>
+              <Route path="/admin/AddCourseMaterialField" element={<AddCourseMaterialField />}/>
+              <Route path="/admin/AddCourseMaterialDaft" element={<AddCouserMaterialDaft />}/>
           </Route>
           {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}
         </Routes>

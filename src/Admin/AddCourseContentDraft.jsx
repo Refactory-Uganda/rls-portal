@@ -1,52 +1,63 @@
-import ButtonAddContent from "../Components/AddCourseContentButton";
-import AdminNacHeader from "../Components/AdminNacHeader";
-import style from './AddCourseContentDraft.module.css'
-const AddCourseContentDraft = () => {
-    return (
-        <>
-             <div className={style.addCourseContent}>
-        <AdminNacHeader label="ADD COURSE CONTENT"/>
-          <div className={style.container}>
-          <div className={style.content}>
-              <ButtonAddContent backgroundColor="white" borderColor="rgb(88,197,200)" contentColor="black" label="CONTENT"/>  
-              <ButtonAddContent backgroundColor="#693769ff" borderColor="rgba (105, 5" contentColor="white" label="DETAILS"/>  
-              <ButtonAddContent backgroundColor="white" borderColor="rgb(88,197,200)" contentColor="black" label="ENTROLLED"/>  
-            </div>
-            <div className={style.content}>
-              <ButtonAddContent backgroundColor="rgb(88,197,200)" borderColor="rgb(88,197,200)" contentColor="black" label="CONTENT"/>  
-              <ButtonAddContent backgroundColor="white" borderColor="rgb(88,197,200)" contentColor="black" label="ADDED"/>  
-              <ButtonAddContent backgroundColor="black" borderColor="black" contentColor="white" label="ADD"/>  
-            </div>
-
-            <div className={style.content}>
-              <ButtonAddContent backgroundColor="white" borderColor="white" contentColor="red" label="CANCEL"/>  
-              <ButtonAddContent backgroundColor="#693769ff" borderColor="white" contentColor="white" label="DELETE"/>  
-              
-            </div>
-            <div>
-             <div className={style.content__flex}>
-              <div>
-             <div className={style.content__top}>
-             <ButtonAddContent backgroundColor="black" borderColor="black" contentColor="white" label="Text"/>
-             
-              <ButtonAddContent backgroundColor="white" borderColor="#693769ff" contentColor="#693769ff" label="Video"/>     <ButtonAddContent backgroundColor="white" borderColor="#693769ff" contentColor="#693769ff" label="Image"/>     <ButtonAddContent backgroundColor="white" borderColor="#693769ff" contentColor="#693769ff" label="Slides"/> 
-              </div> 
-              <div>
-              
-              <ButtonAddContent backgroundColor="rgb(88,197,200) " borderColor="rgb(88,197,200) " contentColor="#693769ff" label="SAVE"/> 
-              <ButtonAddContent backgroundColor="#693760fF" borderColor="white" contentColor="white" label="RESET"/>    
-              </div>
+import ContentEditable from 'react-contenteditable';
+import style from './AddCourseContentDraft.module.css';
+import {FaEllipsisV} from 'react-icons/fa';
+import { useState } from 'react';
 
 
-              </div>
-              <p className={style.paragraph}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi voluptatem dolore assumenda praesentium distinctio iusto itaque sint corporis placeat! Voluptate officia consequuntur esse sed eos laudantium odio ratione ducimus laboriosam dicta velit enim facilis hic doloremque, quo nesciunt mollitia maxime neque repudiandae commodi aliquam! Mollitia expedita esse dolorum sapiente vero inventore dolorem officiis, cum fugit quos aperiam incidunt, ea sint molestias! Expedita aliquid impedit odio fugit. Quo eligendi nesciunt voluptatibus aperiam iusto velit ipsa maxime doloremque ea est hic necessitatibus veritatis, voluptate, earum totam quaerat illo at alias similique dolor nulla? Expedita, dolores. Quia laborum, optio rem veniam reiciendis sit!</p>
-             </div>
-            </div>
-          </div>
-           
-         </div>
-        </>
-    );
+
+
+const AddCourseMaterial = () => {
+  const [showIcons, setShowIcons] = useState(false);
+    const toggleIcons = () => {
+        setShowIcons(!showIcons);
+      };
+    const [content, setContent] = useState('Input content here');
+
+  function handleChange(event) {
+    setContent(event.target.value);
+  }
+         
+  return (
+    <>
+    {/* <Navbar label={'ADD COURSE CONTENT'}/> */}
+    <div className={style.body}>
+    
+    <div className={style.box}>
+      <button className={style.button2}>CONTENT</button>
+      <button className={style.button}>DETAILS</button>
+      <button className={style.button}>ENROLLED</button>
+  </div>
+  <hr style={{background: '#693769',color:"#693769", borderColor: '#693769',height: '3px', width: '100%'}}/>
+  <div className={style.box}>
+      <button className={style.button3}>DRAFT</button>
+      <button className={style.button3}>ADD</button>
+      <button className={style.button4}>ADDED</button>
+  </div>
+  <div className={style.container}>
+    <div  className={`${style.textBtn} ${showIcons ? '' : style.iconsHidden}`}>
+        <button className={style.button6}>text</button>
+        <button className={style.button7}>video</button>
+        <button className={style.button7}>image</button>
+        <button className={style.button7}>slide</button>
+        <img src='/images/drive.png' alt='logo' className={style.img}/>
+        <button className={style.button6}>Save</button>
+        <button className={style.button7}>Reset</button>
+    </div>
+    <div >
+      <div className={style.content}>
+          <button className={style.button6}>CANCEL</button>
+          <button className={style.button7}>DELETE</button>
+          <FaEllipsisV className={`${showIcons ? 'active' : ''}`} onClick={toggleIcons} />
+      </div>
+      
+      <div className={style.btns}>
+      <ContentEditable html={content} onChange={handleChange} className={style.element}  />
+      </div>
+    </div>
+  </div>
+    </div>
+    </>
+  )
 }
 
-export default AddCourseContentDraft;
+export default AddCourseMaterial

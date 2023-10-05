@@ -1,61 +1,76 @@
-import React, { useState } from "react";
-import { Pie } from "react-chartjs-2";
+import  { useState } from "react";
+import style from "./PieChart.module.css";
+import { Line } from "react-chartjs-2";
 import UserData from "../../../assets/PieChatDemoData.json";
-import { Chart as chartjs, ArcElement, Tooltip, Legend } from "chart.js";
-import PieCss from "./PieChart.module.css"
+import { Chart as ChartJS, CategoryScale,LinearScale,PointElement,LineElement,Title,Tooltip,Legend,} from 'chart.js';
+
 
 
 function PieChart() {
-  const [userData, setUserData] = useState({
-    labels: UserData.map((data) => data.name),
+  const [userData] = useState({
+    labels: UserData.map((data) => data.month),
     datasets: [
       {
-        label: "Name",
+        label: "Month Of The Year",
         data: UserData.map((data) => data.number),
+       
         backgroundColor: [
           "rgb(255, 99, 132)",
           "rgb(54, 162, 235)",
           "rgb(255, 205, 86)",
           "yellow",
           "green",
+          "red"
         ],
         hoverOffset: 4,
       },
     ],
   });
 
-  chartjs.register(Tooltip, Legend, ArcElement);
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+  );
 
 
   // Optional configuration options
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-    legend: {
-      labels: {
-        fontSize: 26,
+    plugins: {
+      legend: {
+        position: 'top' ,
+        labels: {
+          fontSize: 36,
+        },
       },
+      title: {
+        display: true,
+        text: 'Newly Registered Students',
+        font:{
+          size: 30
+        },
+        color: "#693769",
+      },
+     
     },
+   
+
   };
 
   return (
     <>
        
-      <div className="container">
+      <div className={style.container}>
         <div className="row">
-        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12  ">
-          <label htmlFor="" className={PieCss.PieHeading}>CHART</label>
-        </div>
-          <div className="col">
-            <Pie data={userData} height={400} options={options} />
+          <div className="col-9 m-auto h-[300px] p-2">
+            <Line data={userData} height={600} options={options} />
           </div>
-          <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12  ">
-          <label htmlFor="" className={PieCss.PieHeading}>NOTIFICATION</label>
-        </div>
-        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 " id={PieCss.NotificationMessage}>
-     
-          <p>Hi Joanitah the attempt to send information to the database was successful</p>
-        </div>
         </div>
       </div>
     </>

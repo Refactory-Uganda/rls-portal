@@ -2,8 +2,30 @@ import React from "react";
 import {Link} from "react-router-dom"
 import LoginCss from "./Login.module.css"
 import Footer from "../MicroComponents/footer/Footer";
+import  {useState, useEffect } from "react";
+import axios from "axios";
 
 function Login(props) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+ 
+
+  const handleLogin = async(e) =>{
+    e.preventDefault();
+    try{
+      await axios.post("http://localhost:5000/login", {
+    username:username,
+    password:password
+    })
+      setUsername("")
+      setPassword("")
+    }
+    catch(error) {
+          console.error(error.message)
+    }
+  }
+  
   return (
     <div>
   
@@ -15,7 +37,7 @@ function Login(props) {
             {/* form */}
             <div className="col-xl-4 , col-lg-4 , col-md-8 , col-sm-12">
               <div className={LoginCss.formcontainer}>
-                <form action="">
+                <form onSubmit={handleLogin}>
                   <div>
                     <img src="../images/refactory logo.png" alt="" className={LoginCss.loginimage} />
                   </div>

@@ -40,12 +40,12 @@ body {
 }
 
 #sidebar header {
-  background-color: #e6eef1;
+  background-color: #fff;
   font-size: 20px;
   line-height: 52px;
   text-align: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 6px;
+  padding-bottom: 7px;
 }
 
 #sidebar header a {
@@ -53,6 +53,8 @@ body {
   display: block;
   text-decoration: none;
 }
+
+
 
 #sidebar header a:hover {
   color: #fff;
@@ -64,8 +66,6 @@ body {
   justify-content: center;
 }
 
-
-
 #sidebar .nav a {
   background: none;
   border-bottom: 1px solid #455A64;
@@ -74,15 +74,36 @@ body {
   padding: 16px 24px;
 }
 
-#sidebar .nav a:hover {
+#sidebar .nav .dropdownToggle {
+  background: none;
+  color: #fff;
+  font-size: 14px;
+  padding: 6px 1px;
+}
+#sidebar .nav .dropdownToggle:focus {
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: none !important;
+}
+
+#sidebar .nav .item {
+  background: none;
+  color: #fff;
+  font-size: 14px;
+  padding: 6px 1px;
+  text-decoration: none;
+  border: none;
+}
+
+/* #sidebar .nav a:hover {
   background: none;
   color: #693769;
   border:1px solid #fff;
   padding: 10px ;
   background-color: white;
   border-radius: 20px;
-
-}
+} */
 
 .topSection {
     display: none; /* Initially hide the top section */
@@ -116,9 +137,12 @@ body {
   .toggleIcon {
     display: block;
   }
+  
   /* Adjustments for Small Screen Sidebar */
   #sidebar header {
-    text-align: left; /* Align the header text to the left */
+    text-align: left; 
+    padding-top: 9px;
+    padding-bottom: 9px;/* Align the header text to the left */
   }
   #sidebar header a {
     padding-left: 20px; /* Add padding to the logo for spacing */

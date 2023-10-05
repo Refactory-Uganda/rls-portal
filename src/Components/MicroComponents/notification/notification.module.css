@@ -1,0 +1,24 @@
+.notification{
+    display: flex;
+    gap: 10px;
+}
+
+.icon{
+    font-size: 40px;
+    margin-top: 3px;
+    color: #673467;
+    
+}
+.txt{
+    margin-top: 5px;
+    font-size: 12px;
+}
+.bell{
+    color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+    .bell{
+        color: #673467;
+    }
+}

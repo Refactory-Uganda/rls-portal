@@ -10,6 +10,9 @@ export default defineConfig({
   css: {
     postcss: './postcss.config.js', // Path to your postcss.config.js
   },
+  server: {
+    host: true,
+  },
 });
 
 

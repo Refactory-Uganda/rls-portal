@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ContentEditable from 'react-contenteditable';
 import Button from '../Components/Button';
 import style from './CourseContent.module.css';
-import AdminNacHeader from '../Components/AdminNacHeader';
+import Navbar from '../Components/MicroComponents/Navbar/Navbar';
 
 
 const CourseContent = () => {
@@ -13,9 +13,8 @@ const CourseContent = () => {
   }
   return (
     <>
-    
+        {/* <Navbar label={' COURSE CONTENT'}/> */}
     <div className={style.body}>
-      <AdminNacHeader label='Course Details' />
       <div className={style.box}>
         <button className={style.button}>MATERIALS</button>
         <button className={style.button}>DETAILS</button>

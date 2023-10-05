@@ -1,7 +1,7 @@
 @media screen  and (min-width:650px) {
   
    .ViewContainer{
-    margin-left: 200px;
+    margin-left: 150px;
    
    }
    
@@ -9,7 +9,7 @@
 @media screen and (min-width:1024px){
  .ViewContainer{
     display: grid;
-    grid-template-columns:  auto 30%;
+    grid-template-columns:  auto 1%;
     grid-gap:20px
  }  
 }

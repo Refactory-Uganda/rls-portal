@@ -1,34 +1,77 @@
 [
 {
     "id": 1,
-    "name":"Edwin",
+    "month":"January",
     "course":"Javascript",
-    "number":2
+    "number":10
 },
 
 {
     "id": 2,
-    "name":"Kalungi",
+    "month":"February",
     "course":"AI",
-    "number":0.5
+    "number":50
 },
 {
     "id": 3,
-    "name":"Sarah",
+    "month":"March",
     "course":"Python",
-    "number":5
+    "number":20
 },
 {
-    "id": 3,
-    "name":"Isaac",
+    "id": 4,
+    "month":"April",
     "course":"Python",
-    "number":5
+    "number":70
 },
 {
-    "id": 3,
-    "name":"Eric",
+    "id": 5,
+    "month":"May",
     "course":"Python",
-    "number":5
+    "number":40
+},
+{
+    "id": 6,
+    "month":"June",
+    "course":"Python",
+    "number":40
+
+},
+{
+    "id": 7,
+    "month":"July",
+    "course":"Python",
+    "number":80
+},
+{
+    "id":8,
+    "month":"August",
+    "course":"Python",
+    "number":100
+},
+{
+    "id": 9,
+    "month":"September",
+    "course":"Python",
+    "number":150
+},
+{
+    "id": 10,
+    "month":"Octember",
+    "course":"Python",
+    "number":100
+},
+{
+    "id": 11,
+    "month":"November",
+    "course":"Python",
+    "number":100
+},
+{
+    "id": 12,
+    "month":"December",
+    "course":"Python",
+    "number":130
 }
 
 ]

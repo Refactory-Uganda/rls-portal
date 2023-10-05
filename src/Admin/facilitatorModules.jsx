@@ -2,6 +2,7 @@ import { FaEllipsisH, FaEllipsisV, FaPlusSquare, FaTrash } from 'react-icons/fa'
 import Button from '../Components/Button';
 import style from './facilitatorModules.module.css';
 import { useState } from 'react';
+import Navbar from '../Components/MicroComponents/Navbar/Navbar';
 
 
 
@@ -11,6 +12,8 @@ const FacilitatorModules = () => {
         setShowIcons(!showIcons);
       };
   return (
+    <>
+    <Navbar label={'FACILITATOR MODULES'}/> 
     <div className={style.body}>
         <div className={style.box}>
                 <h4 className={style.text} >JACKSON Mc</h4>
@@ -64,6 +67,8 @@ const FacilitatorModules = () => {
             </div>
         </div>
     </div>
+    </>
+    
   )
 }
 

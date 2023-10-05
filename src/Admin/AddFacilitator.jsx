@@ -1,26 +1,60 @@
-import AdminNacHeader from '../Components/AdminNacHeader';
+
 import style from './AddFacilitar.module.css'
 const AddFacilitator = () => {
     return (
-        <div className={style.addFacillitator}>
-
-       <AdminNacHeader label='ADD FACILITATOR'/>
-       <hr style={{background: '#693769', color:"#693769", borderColor: '#693769',height: '3px', width: '100%',marginTop:'3rem', marginBottom:'2rem'}}/>
+      <>
+      {/* <Navbar label={'Add Facilitator'} /> */}
+      <div className={` ${style.addFacillitator}`}>
+       
       <form className={style.form}>
-
+      <div className={style.btn}>
+      <label className={style.label}>Name</label>
       <input type="text"  
           className={style.input}  
         
-        placeholder="USER NAME"/>
-       <input type="text" 
+        placeholder="ADD NAME"/>
+      </div>
+      <div className={style.btn}>
+        <label htmlFor="" className={style.label}>Image</label>
+        <input type="file"  
+          className={style.input}  
+        
+        placeholder="ADD IMAGE"/>
+      </div>
+      <div className={style.btn}>
+        <label htmlFor="" className={style.label}>Role:</label>
+        <input type="text"  
+          className={style.input}  
+        
+        placeholder="ADD ROLE"/>
+      </div>
+      <div className={style.btn}>
+        <label htmlFor="" className={style.label}>Email</label>
+        <input type="email"  
+          className={style.input}  
+        
+        placeholder="ADD EMAIL"/>
+      </div>
+      <div className={style.btn}>
+        <label htmlFor="" className={style.label}>ID</label>
+        <input type="TEXT"  
+          className={style.input}  
+        
+        placeholder="ADD ID"/>
+      </div>
+      <div className={style.btn}>
+        <label htmlFor="" className={style.label}>Course</label>
+        <input type="text" 
          className={style.input}  
        placeholder="COURSE NAME "/>
-     
-<button className={style.button}>Save</button>
+      </div>
+     <button className={style.button}>Save</button>
       </form>
 
        
    </div>
+      </>
+       
     );
 }
 
