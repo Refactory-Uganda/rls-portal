@@ -111,7 +111,7 @@ body {
 
 
 /* Media Query for Small Screens (Max Width 768px) */
-@media (max-width: 534px) {
+@media (max-width: 768px) {
     .topSection {
         display: flex; 
         justify-content: space-between; 
@@ -165,66 +165,4 @@ body {
     left: -250px;
     transition: all 0.3s ease; /* Add a smooth transition for the sidebar */
   }
-}
-
-
-
-
-
-/* Media Query for Small Screens (Max Width 768px) */
-@media (min-width: 534px) and (max-width: 700px){
-  .topSection {
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      padding: 10px;
-      background-color: #693769; 
-      width: 100%;
-    }
-    .img1{
-      width:40%;
-    }
-
-    .icon{
-     color: white;
-    }
-
-#sidebar {
-  left: 0; /* Show the sidebar initially */
-  margin-left: 0;
-}
-#content {
-  margin-left: 0;
-}
-.toggleIcon {
-  display: block;
-}
-
-/* Adjustments for Small Screen Sidebar */
-#sidebar header {
-  text-align: left; 
-  padding-top: 9px;
-  padding-bottom: 9px;/* Align the header text to the left */
-}
-#sidebar header a {
-  padding-left: 20px; /* Add padding to the logo for spacing */
-}
-#sidebar .nav a {
-  text-align: left; /* Align menu items to the left */
-  padding-left: 20px; 
-  padding-right: 20px; 
-}
-
-.sidebar-active #sidebar {
-  left: 0;
-}
-.sidebar-active #content {
-  margin-left: 250px;
-}
-
-#sidebar {
-  /* ... */
-  left: -450px;
-  transition: all 0.3s ease; 
-}
 }
