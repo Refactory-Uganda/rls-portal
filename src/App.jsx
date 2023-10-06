@@ -18,6 +18,7 @@ import AddCouserMaterialDaft from "./Admin/AddCouserMaterialDaft";
 import AdminVeiwCourses from "./Admin/AdminViewCourses";
 import AdminFacitatorContentAdded from "./Admin/AdminFacilitatorContentAdded";
 import Profile from "./Admin/AdminProfile";
+import EnrolledCourses from "./Students/EnrolledCourses"
 
 
 import Chat from "./Admin/Chatgptdash";
@@ -55,6 +56,7 @@ function App() {
               <Route path="/admin/AddCourseMaterialField" element={<AddCourseMaterialField />}/>
               <Route path="/admin/AddCourseMaterialDaft" element={<AddCouserMaterialDaft />}/>
           </Route>
+          <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
           {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}
         </Routes>
       </Router>
