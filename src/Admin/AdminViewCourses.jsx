@@ -3,21 +3,37 @@
 import demo from '../Components/Pages/demo.json'
 import style from './AdminViewCourses.module.css';
 import {FaEllipsisV, FaTrash, FaEdit} from 'react-icons/fa'
-
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 
 function AdminVeiwCourses(){
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        const apiUrl = "http://localhost:5000/admin/addCourses";
+        const fetchData = async () => {
+          try {
+            const response = await axios.get(apiUrl);
+            setData(response.data);
+          } catch (error) {
+            console.error("Error fetching data:", error);
+          }
+        };
+    
+        fetchData();
+      }, []);
+
     return(
         <>
        
          <div className="main grid grid-cols-1 p-3 sm2:grid-cols-2  md2:grid-cols-3  gap-3 lg:grid-cols-2 xl:grid-cols-3">
          
             {
-                demo.map((data)=>(
+                data.map((data)=>(
                     <div key={data.id} className="courseCard rounded-1sm p-4 flex flex-col justify-between" id={style.course}>
                      <div className="cardHead flex justify-between">
                         <div className='flex'>
-                            <img src={data.img} className='w-12' alt="img"/>
-                            <p className='pt-3 pr-4 font-black'>{data.name}</p>
+                            <img src={data.course_display_icon} className='w-12' alt="img"/>
+                            <p className='pt-3 pr-4 font-black'>{data.course_name}</p>
                         </div>
                         <div className="pt-3">
                         <div className="dropdown-center">
@@ -34,11 +50,12 @@ function AdminVeiwCourses(){
                 
                     </div>
                 <div className="cardContent">
-                    <p>{data.description.substring(-1,50)+"........"}</p>
+                    <p>{data.course_description.substring(-1,50)+"........"}</p>
+                    <p>{data.course_duration}</p>
                 </div>
                 <div className="cardButtons">
                     {
-                        data.published ? <button className='bg-bluegreen text-center p-2 rounded-0.5sm'>Published</button>:<div><button className='bg-white text-black p-2 rounded-0.5sm border-black '>Pending</button> <button className='bg-bluegreen text-black p-2 rounded-0.5sm'>Publish</button></div> 
+                        data.status==="Publish" ? <button className='bg-bluegreen text-center p-2 rounded-0.5sm'>Published</button>:<div><button className='bg-white text-black p-2 rounded-0.5sm border-black '>Pending</button> <button className='bg-bluegreen text-black p-2 rounded-0.5sm'>Publish</button></div> 
                     }
                 </div>
 

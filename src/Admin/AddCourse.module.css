@@ -43,7 +43,7 @@
     margin: 1rem auto;
       border: 0;
       background-color: #693769ff;
-      color: white;
+      /* color: white; */
       padding:.3rem 4rem;
       border-radius: 2rem;
       font-size: larger;
