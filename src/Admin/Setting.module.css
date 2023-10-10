@@ -53,11 +53,11 @@
 }
 .forms{
     display: flex;
-    gap: 20px;  
+    gap: 120px;  
 }
 
 .input {
-    width: 100%; 
+    width: 130%; 
     margin: o.9rem auto; 
     padding: 0.8rem; 
     border:1px solid #693769ff;
