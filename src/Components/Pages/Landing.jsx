@@ -12,10 +12,10 @@ import "react-multi-carousel/lib/styles.css";
 //  .............................the footer........................
 import Footer from '../MicroComponents/footer/Footer';
 import Navbar from '../MicroComponents/LandingNav/nav'
+import Journey from '../MicroComponents/journeys/Journey';
 
 import demo from "./demo.json";
 import demoForum from "./demoForum.json"
-import demoStory from "./demoUseStory.json"
 
 
 function Landing() {
@@ -115,14 +115,12 @@ function Landing() {
                 <div className="forum m-auto rounded-lg hover:scale-105 shadow-2xl" key={forum.id} >
                   <span >
                 <div className="forum  m-6 my-8" >
-                 <div className="trendingImage ">
-                    <img src={forum.image} className='w-20 h-20 rounded-5sm m-auto' alt="" />
-                 </div>
+                 
                 <div className="trendingName">
                   <h5 className='text-center'>{forum.name}</h5>
                </div>
                <div className="div">
-                  <p className='text-center'>{forum.description.substring(-1,22)}</p>
+                  <p className='text-center font-bolder'>{forum.description.substring(-1,22)}</p>
                </div>
               <div className="trendingRate  flex justify-between max-w-[150px] m-auto">
                {
@@ -148,29 +146,11 @@ function Landing() {
          </div>
          <div className="userStory ">
           <div id="userStoryHeading">
-            <h1 className='text-bluegreen text-center mt-20 mb-10'>User Story</h1>
+            <h1 className='text-bluegreen text-center mt-20 mb-10'>My Journey With Refactory</h1>
           </div>
-          <div className="storys w-[90%] md:grid w-[80%] gap-3 m-auto grid-cols-2 ">
-            { demoStory.map((story)=>(
-                 <div className=" m-auto my-4 hover:bg-menuwhite lg:w-[80%]" key={story.id} id={styles2.story}>
-                 <div className="top sm:flex ">
-                   <div className="userImg">
-                  <img src={story.image} className="w-10 h-10 rounded-5sm m-auto sm:m-2"  alt="" />
-                   </div>
-                   <div className="userDetails text-center mb-3 w-full">
-                    <h3 className='text-center'>{story.name}</h3>
-                    <h4>{story.studentTrack}</h4>
-                   </div>
-                 </div>
-                 <div className="storyDetails">
-                   <p className='text-left'>{story.story.substring(-1,200)+"....."}</p>
-                   <button className='bg-purple px-2 py-1 m-1 rounded-0.5sm text-center text-white'>Read more...</button>
-                 </div>
-               </div>
+          <div className="storys w-[90%] md:w-[70%] m-auto ">
+          <Journey/>
 
-            ))
-           
-          }
             
           </div>
           </div>

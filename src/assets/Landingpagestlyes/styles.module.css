@@ -60,14 +60,37 @@ box-shadow:  0 0 10px #c9d0d1, 0 0 20px #c9d0d1,
     border: #4bc7e0 2px solid;
     padding: 10px;
 }
+#stry{
+    display: flex;
+    flex-direction: column;
+  
+}
+#imgs{
+    width: 100% !important;
+    height: 250px !important;
+}
 
 @media screen and (min-width:650px){
     #headingH1{
       font-size: 40px;
     }   
+    #stry{
+        display: grid;
+        grid-template-rows: 40% auto;
+        padding: 70px;
+    }
+    #imgs{
+        width: 100% !important;
+        height: 250px !important;
+    }
 }
 @media screen and (min-width:1024px){
     #headingH1{
       font-size: 50px;
     }   
+    #stry{
+        display: grid;
+        grid-template-columns: 30% auto;
+        padding: 70px;
+    }
 }
