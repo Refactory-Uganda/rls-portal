@@ -20,25 +20,25 @@ console.log(course_display_icon)
       setCourse_duration("");
     // setStatus("")
 
-    const formData =  new FormData();
-    formData.append("course_name",course_name);
-    formData.append("course_display_icon", course_display_icon);
-    formData.append("course_description", course_description);
-    formData.append("course_duration", course_duration);
+    // const formData =  new FormData();
+    // formData.append("course_name",course_name);
+    // formData.append("course_display_icon", course_display_icon);
+    // formData.append("course_description", course_description);
+    // formData.append("course_duration", course_duration);
 
     const api = "http://localhost:5000/admin/addCourses";
 
-    // const info = {
-    //   course_name: course_name,
-    //   image: course_display_icon,
-    //   course_description: course_description,
-    //   course_duration: course_duration,
-    //   // status:status
-    // };
-      console.log(formData)
+    const info = {
+      course_name: course_name,
+      image: course_display_icon,
+      course_description: course_description,
+      course_duration: course_duration,
+      // status:status
+    };
+      console.log(info)
 
     try {
-      await axios.post(api, formData);
+      await axios.post(api, info);
       alert("Course posted successfully");
     } catch (error) {
       console.error(error.message);
@@ -52,7 +52,7 @@ console.log(course_display_icon)
         <form
           className={style.form}
           onSubmit={handleAddCourses}
-          enctype="multipart/form-data"
+          // encType="multipart/form-data"
         >
           <div className={style.btn}>
             <label className={style.label}> Course Name</label>
@@ -81,7 +81,7 @@ console.log(course_display_icon)
             <label htmlFor="" className={style.label}>
               Course Description
             </label>
-            <input
+            <textarea
               type="text"
               className={style.input}
               placeholder="ADD COURSE DISCRIPTION"
@@ -101,7 +101,7 @@ console.log(course_display_icon)
               onChange={(e) => setCourse_duration(e.target.value)}
             />
           </div>
-          <button type="submit" className={style.button}>
+          <button  className={style.button}>
             Save
           </button>
         </form>
