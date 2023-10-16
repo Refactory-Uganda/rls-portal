@@ -9,7 +9,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import {FaBell } from 'react-icons/fa'
 import {FaSearch} from 'react-icons/fa'
 import Dropdown from 'react-bootstrap/Dropdown';
-import styles from './LandingPageNavBar.module';
+import style from './LandingPageNavBar.module.css';
 
 
 function LandingPageNavBar(props) {
