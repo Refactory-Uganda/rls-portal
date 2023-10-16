@@ -1,6 +1,5 @@
 import React from "react";
 import  { useState } from 'react';
-import style from "./LandingPageNavBar.module.css";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -10,6 +9,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import {FaBell } from 'react-icons/fa'
 import {FaSearch} from 'react-icons/fa'
 import Dropdown from 'react-bootstrap/Dropdown';
+import style from "./LandingPageNavBar.module.css";
 
 function LandingPageNavBar(props) {
   const [isOpen, setIsOpen] = useState(false);
