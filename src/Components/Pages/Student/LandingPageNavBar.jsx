@@ -1,5 +1,6 @@
 import React from "react";
-// import style from "../Student/LandingPageNavBar.module.css";
+import  { useState } from 'react';
+import style from "../Student/LandingPageNavBar.module.css";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -7,72 +8,107 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import {FaBell } from 'react-icons/fa'
+import {FaSearch} from 'react-icons/fa'
+import Dropdown from 'react-bootstrap/Dropdown';
 
 function LandingPageNavBar(props) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
       <div className={style.yaa}>
-        <Navbar expand="lg" className="bg-body-tertiary">
-          <Container fluid>
-            <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
+        <Navbar bg="dark" expand="lg" className="bg-body" id={style.NavBar}>
+          <Container fluid id={style.container}>
+            <Navbar.Brand href="#"><img src="../img/refactoryLogoColored.png" alt=""  className={style.logoImage}/></Navbar.Brand>
+            {/* <FaSearch className={style.search} /> */}
+            <FaBell className={style.bell2} /> 
+            
+ 
+            
             <Navbar.Toggle aria-controls="navbarScroll" />
+           
             <Navbar.Collapse id="navbarScroll">
               <Nav
                 className="me-auto my-2 my-lg-0"
                 style={{ maxHeight: "100px" }}
                 navbarScroll
               >
-                <Nav.Link href="#action1">Home</Nav.Link>
-                <Form className="d-flex">
-                  <Form.Control
-                    type="search"
-                    placeholder="Search"
-                    className="me-2"
-                    aria-label="Search"
-                  />
-                  <Button variant="outline-success">Search</Button>
-                </Form>
+                {/* <Nav.Link href="#action1">Categories</Nav.Link> */}
+                {/* categories */}
+                <div className="hover-dropdown" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <Dropdown >
+        {/* categories */}
+      <Nav.Link  id={style.Courses}>Catergories</Nav.Link>
+
+        <Dropdown.Menu show={isOpen}>
+          <Dropdown.Item href="#/action-1">Web Development </Dropdown.Item>
+          <Dropdown.Item href="#/action-2">Design</Dropdown.Item>
+          <Dropdown.Item href="#/action-3">Data Science</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown></div>
+
+                {/* search */}
+                <Form className="d-flex" id={style.form}>
+               
+               <Form.Control
+              
+                 type="search"
+                 placeholder="Search for Courses"
+                 id={style.search}
+                 aria-label="Search"
+               />
+               <Button variant="outline" id={style.button} ><FaSearch/></Button>
+             </Form>
                 
               </Nav>
 
               <Nav>
                 {/* courses */}
-                <NavDropdown title="Courses" id="navbarScrollingDropdown">
-                  <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+                < NavDropdown className={style.headers} title="Courses" id={style.Courses} >
+                  <NavDropdown.Item href="#action3" >Action</NavDropdown.Item>
                   <NavDropdown.Item href="#action4">
                     Another action
                   </NavDropdown.Item>
-                  <NavDropdown.Divider />
+                  {/* <NavDropdown.Divider /> */}
                   <NavDropdown.Item href="#action5">
                     Something else here
                   </NavDropdown.Item>
                 </NavDropdown>
                 {/* features */}
-                <NavDropdown title="Features" id="navbarScrollingDropdown">
+                <NavDropdown title="Features" id={style.Courses} >
                   <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                   <NavDropdown.Item href="#action4">
                     Another action
                   </NavDropdown.Item>
-                  <NavDropdown.Divider />
+                  {/* <NavDropdown.Divider /> */}
                   <NavDropdown.Item href="#action5">
                     Something else here
                   </NavDropdown.Item>
                 </NavDropdown>
                   {/* community */}
-                  <NavDropdown title="Features" id="navbarScrollingDropdown">
+                  <NavDropdown title="Community" id={style.Courses}>
                   <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                   <NavDropdown.Item href="#action4">
                     Another action
                   </NavDropdown.Item>
-                  <NavDropdown.Divider />
+                  {/* <NavDropdown.Divider /> */}
                   <NavDropdown.Item href="#action5">
                     Something else here
                   </NavDropdown.Item>
                 </NavDropdown>
                
-                <Nav.Link href="#action2"> <FaBell/> </Nav.Link>
-                <Nav.Link href="#action2"> <img src="" alt="" /> </Nav.Link>
-               
+                 <FaBell className={style.bellIcon}/> 
+               <img src="/images/profile.jpg" alt="" className={style.profileImage} /> 
+               {/* account */}
+               <Nav.Link href="#home" id={style.account}>Account</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
