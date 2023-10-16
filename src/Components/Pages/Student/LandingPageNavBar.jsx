@@ -9,7 +9,8 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import {FaBell } from 'react-icons/fa'
 import {FaSearch} from 'react-icons/fa'
 import Dropdown from 'react-bootstrap/Dropdown';
-import style from "./LandingPageNavBar.module.css";
+import styles from './LandingPageNavBar.module';
+
 
 function LandingPageNavBar(props) {
   const [isOpen, setIsOpen] = useState(false);
