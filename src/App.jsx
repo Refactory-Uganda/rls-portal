@@ -19,7 +19,7 @@ import AdminVeiwCourses from "./Admin/AdminViewCourses";
 import AdminFacitatorContentAdded from "./Admin/AdminFacilitatorContentAdded";
 import Profile from "./Admin/AdminProfile";
 import EnrolledCourses from "./Students/EnrolledCourses"
-import Student from "./Components/Pages/LandingPageNavBar";
+import Student from "./Components/Pages/Student/LandingPageNavBar";
 
 import Chat from "./Admin/Chatgptdash";
 import Setting from "./Admin/Setting";
