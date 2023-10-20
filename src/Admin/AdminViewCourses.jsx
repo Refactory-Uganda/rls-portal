@@ -9,7 +9,7 @@ import axios from 'axios';
 function AdminVeiwCourses(){
     const [data, setData] = useState([]);
     useEffect(() => {
-        const apiUrl = "http://localhost:5000/admin/addCourses";
+        const apiUrl = "http://localhost:5000/courses";
         const fetchData = async () => {
           try {
             const response = await axios.get(apiUrl);

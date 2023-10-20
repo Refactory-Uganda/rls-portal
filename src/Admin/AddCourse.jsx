@@ -26,7 +26,7 @@ console.log(course_display_icon)
     // formData.append("course_description", course_description);
     // formData.append("course_duration", course_duration);
 
-    const api = "https://ris-api-stmo.onrender.com/admin/addCourses";
+    const api = "https://ris-api-stmo.onrender.com/courses";
 
     const info = {
       course_name: course_name,
