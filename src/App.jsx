@@ -19,13 +19,13 @@ import AdminVeiwCourses from "./Admin/AdminViewCourses";
 import AdminFacitatorContentAdded from "./Admin/AdminFacilitatorContentAdded";
 import Profile from "./Admin/AdminProfile";
 import EnrolledCourses from "./Students/EnrolledCourses"
-
-
 import Chat from "./Admin/Chatgptdash";
 import Setting from "./Admin/Setting";
 import AccountSetting from "./Admin/AccountSetting";
 import Card from "./Admin/card";
 import Facilitator from "./Facilitator/FacilitatorLanding";
+import AddCourseEdit from "./Admin/AddcourseEdit";
+import AddcourseGet from "./Admin/AddcourseGet";
 
 function App() {
   return (
@@ -38,6 +38,8 @@ function App() {
           <Route path="/piechart" element={<PieChart/>}></Route>
           <Route path="/admin" element={<Admin/>}>
               <Route path="/admin/profile" element={<Profile/>}></Route>
+              <Route path="/admin/AddCourseEdit" element={<AddCourseEdit />}></Route>
+              <Route path="/admin/AddCourseget" element={<AddcourseGet />}></Route>
               <Route path="/admin/card" element={<Card/>}></Route>
               <Route path="/admin/accountsetting" element={<AccountSetting/>}></Route>
               <Route path="/admin/setting" element={<Setting/>}></Route>
