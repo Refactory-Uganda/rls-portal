@@ -1,4 +1,3 @@
-import React from "react";
 import style from "./AddCourse.module.css";
 import axios from "axios";
 import { useState } from "react";
