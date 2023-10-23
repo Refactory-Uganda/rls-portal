@@ -1,8 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx,html}"
+    "./src/**/*.{js,jsx,ts,tsx,html}",
+    // ""
   ],
+  
   theme: {
     colors:{
       'purple':'#693769',
@@ -13,7 +15,8 @@ export default {
       'grey':'#D9D9D9',
       'menuwhite':'#F4F0F0',
       'darkpurple':'#180027',
-      'lastbottom':'#5E1A69'
+      'lastbottom':'#5E1A69',
+      'slate':'#f7f8f9'
     },
     screens:{
         'sm':'320px',
@@ -30,7 +33,9 @@ export default {
         '1sm':'10px',
         '2sm':'20px',
         '2m':'20%',
-        '5sm':'50%'
+        '5sm':'50%',
+        '1m':'50px'
+        
     },
     
    
@@ -51,7 +56,8 @@ export default {
         '100sm':'100px',
         '20sm':'20px'
 
-      }
+      },
+      'important': true,
     },
   },
   plugins: [

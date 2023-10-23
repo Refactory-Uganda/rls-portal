@@ -19,6 +19,7 @@ import AdminVeiwCourses from "./Admin/AdminViewCourses";
 import AdminFacitatorContentAdded from "./Admin/AdminFacilitatorContentAdded";
 import Profile from "./Admin/AdminProfile";
 import EnrolledCourses from "./Students/EnrolledCourses"
+import Student from "./Components/Pages/Student/LandingPageNavBar";
 import Chat from "./Admin/Chatgptdash";
 import Setting from "./Admin/Setting";
 import AccountSetting from "./Admin/AccountSetting";
@@ -59,6 +60,7 @@ function App() {
               <Route path="/admin/AddCourseMaterialField" element={<AddCourseMaterialField />}/>
               <Route path="/admin/AddCourseMaterialDaft" element={<AddCouserMaterialDaft />}/>
           </Route>
+          <Route path ="/student/Navbar" element={<Student/>}/>
           <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
           <Route path="/facilitator" element={<Facilitator/>}>
               

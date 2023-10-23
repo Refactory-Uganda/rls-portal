@@ -75,7 +75,7 @@ function Login(props) {
                     />
                   </div>
                   <div className={LoginCss.inputs}>
-                    <button className={LoginCss.button1} type="submit">Sign In</button>
+                    <button className={LoginCss.button1} >Sign In</button>
                   </div>
                   <div className={LoginCss.inputs}>
                     <p className={LoginCss.absentaccount}>
