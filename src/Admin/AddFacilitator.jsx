@@ -19,16 +19,20 @@ const AddFacilitator = () => {
     setName('')
     setRole('')
     const formData = new FormData();
-    formData.append('name', name)
+    // formData.append('name', name)
     formData.append('image', image)
-    formData.append('id',id)
+    // formData.append('id',id)
     formData.append('role',role)
-    formData.append('course', course)
-    const api = "http://localhost:5000/admin/addFacilitator";
+    // formData.append('course', course)
+    const api = "http://localhost:5000/facilitator";
 
     try {
       const response = await axios.post(api,
-    formData
+    formData,{
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }
       );
       // Handle the response as needed (e.g., show a success message)
       alert('facilitator added')
@@ -60,10 +64,9 @@ const AddFacilitator = () => {
             </label>
             <input
               type="file"
-              name="file"
-              value={image}
+              name="image"
               className={style.input}
-              onChange={e=> setImage(e.target.value)}
+              onChange={e=> setImage(e.target.files[0])}
               placeholder="ADD IMAGE"
             />
           </div>
