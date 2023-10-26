@@ -11,7 +11,7 @@ const AddCourseMaterial = () => {
     const toggleIcons = () => {
         setShowIcons(!showIcons);
       };
-    const [content, setContent] = useState('Input content here');
+    const [content, setContent] = useState('Input content here'); 
 
   function handleChange(event) {
     setContent(event.target.value);

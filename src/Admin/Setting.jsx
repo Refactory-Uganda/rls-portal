@@ -108,23 +108,8 @@ const Setting = () => {
               </div>
 
             </div>
-            <hr className={style.hr}/>
-            <div>
-  
-              <div className={style.google}>
-                <div >
-                <h2 className={style.header}>Delete Account</h2>
-                  <h4 className={style.head}>By deleting your account you will lose all your data</h4>
-                </div>
-                <div>
-                <button className={style.button2}>Delete account </button>
-                </div>
-              </div>
-            </div>
-            <hr className={style.hr}/>
-            <div className={style.end}>
-            <button className={style.button3}>Save Change </button>
-            </div>
+            
+           
        </div>
     </>
   )

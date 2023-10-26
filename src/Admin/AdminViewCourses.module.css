@@ -2,3 +2,12 @@
     box-shadow:  0 0 10px #c9d0d1, 0 0 20px #c9d0d1,
     0 0 20px #c9d0d1, 0 0 20px #c9d0d1;
 }
+
+.list{
+    text-decoration: none;
+    color: black;
+}
+.list:hover{
+    
+    color: rgb(49, 157, 186);
+}

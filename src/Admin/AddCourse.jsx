@@ -1,4 +1,3 @@
-import React from "react";
 import style from "./AddCourse.module.css";
 import axios from "axios";
 import { useState } from "react";
@@ -10,40 +9,41 @@ const AddCourse = () => {
   const [course_duration, setCourse_duration] = useState("");
   // const [status, setStatus] = useState("");
 
-  const handleAddCourses = async (e) => {
-    e.preventDefault();
-console.log(course_display_icon)
-
-    setCourse_name(""),
-      setCourse_display_icon(""),
-      setCourse_description(""),
-      setCourse_duration("");
-    // setStatus("")
-
-    // const formData =  new FormData();
-    // formData.append("course_name",course_name);
-    // formData.append("course_display_icon", course_display_icon);
-    // formData.append("course_description", course_description);
-    // formData.append("course_duration", course_duration);
-
-    const api = "https://ris-api-stmo.onrender.com/courses";
-
-    const info = {
-      course_name: course_name,
-      image: course_display_icon,
-      course_description: course_description,
-      course_duration: course_duration,
-      // status:status
-    };
-      console.log(info)
-
-    try {
-      await axios.post(api, info);
-      alert("Course posted successfully");
-    } catch (error) {
-      console.error(error.message);
-    }
+  const handleAddCourses =  () => {
+    axios.post('http://localhost:5000/courses', {
+      course_name,
+      course_display_icon,
+      course_description,
+      course_duration,
+    })
+    .then(response => {
+      if (response.status === 200) {
+        alert('Course saved successfully');
+      } else {
+        console.log(response);
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
   };
+    // const api = "http://localhost:5000/courses";
+
+  //   const info = {
+  //     course_name: course_name,
+  //     course_display_icon: course_display_icon,
+  //     course_description: course_description,
+  //     course_duration: course_duration,
+  //     // status:status
+  //   };
+  //     console.log(info)
+
+  //   try {
+  //     await axios.post(api, info);
+  //     alert("Course posted successfully");
+  //   } catch (error) {
+  //     console.error(error.message);
+  //   }
 
   return (
     <>
@@ -60,7 +60,7 @@ console.log(course_display_icon)
               type="text"
               className={style.input}
               placeholder="ADD Course Name"
-              value={course_name}
+              name ="course_name"
               onChange={(e) => setCourse_name(e.target.value)}
             />
           </div>
@@ -70,9 +70,9 @@ console.log(course_display_icon)
             </label>
             <input
               type="file"
+              name= "course_display_icon"
               className={style.input}
               placeholder="ADD Course Icon"
-              // value={course_display_icon}
               accept=".png, .jpg, .svg, .jpeg"
               onChange={(e) => setCourse_display_icon(e.target.files[0])}
             />
@@ -85,7 +85,7 @@ console.log(course_display_icon)
               type="text"
               className={style.input}
               placeholder="ADD COURSE DISCRIPTION"
-              // value={course_description}
+              name="course_description"
               onChange={(e) => setCourse_description(e.target.value)}
             />
           </div>
@@ -97,11 +97,11 @@ console.log(course_display_icon)
               type="text"
               className={style.input}
               placeholder="ADD COURSE DURATION"
-              value={course_duration}
+              name="course_duration"
               onChange={(e) => setCourse_duration(e.target.value)}
             />
           </div>
-          <button  className={style.button}>
+          <button className={style.button}>
             Save
           </button>
         </form>
