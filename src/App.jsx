@@ -27,6 +27,9 @@ import Card from "./Admin/card";
 import Facilitator from "./Facilitator/FacilitatorLanding";
 import AddCourseEdit from "./Admin/AddcourseEdit";
 import AddcourseGet from "./Admin/AddcourseGet";
+import LandingPage from "./Students/LandingPage";
+
+
 
 function App() {
   return (
@@ -62,9 +65,9 @@ function App() {
           </Route>
           <Route path ="/student/Navbar" element={<Student/>}/>
           <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
-          <Route path="/facilitator" element={<Facilitator/>}>
-              
-          </Route>
+          <Route path="/facilitator" element={<Facilitator/>}/>
+          <Route path="student/landingPage" element={<LandingPage/>}/>   
+     
 
           {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}
         </Routes>
