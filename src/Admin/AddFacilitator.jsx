@@ -44,6 +44,7 @@ const AddFacilitator = () => {
   };
   return (
     <>
+    <button onClick={on}></button>
       {/* <Navbar label={'Add Facilitator'} /> */}
       <div className={` ${style.addFacillitator}`}>
         <form className={style.form} onSubmit={handleSubmit}>
