@@ -30,6 +30,11 @@
   padding-bottom: 0px;
 }
 
+/* AddFacilitar.module.css */
+
+.purple-border {
+  border-color:  #693769ff;
+}
 
 .input {
   width: 100%; 
