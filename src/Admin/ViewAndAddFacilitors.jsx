@@ -4,7 +4,7 @@ import { FaEdit, FaEllipsisV, FaTrash} from 'react-icons/fa'
 
 function ViewAndAddFacilitors() {
   
-  const response= await axios.get('http://localhost:5000/facilitator')
+ 
   return (
     <>
     {/* <Navbar label={"FACILITATORS"}/> */}
