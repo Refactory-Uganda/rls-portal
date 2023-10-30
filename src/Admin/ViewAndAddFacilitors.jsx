@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import axios from 'axios';
 import ViewAddFacilitatorCss from '../Admin/ViewAndAddFacilitators.module.css';
 import { FaEdit, FaEllipsisV, FaTrash } from 'react-icons/fa';
