@@ -31,6 +31,7 @@ function AdminVeiwCourses(){
           alert("Data deleted successfully");
         } catch (error) {
           console.error("Error deleting data:", error);
+          alert(error)
         }
       };
 
@@ -48,7 +49,7 @@ function AdminVeiwCourses(){
                      <Link className={style.list} to="/admin/AddCourseget">
                      <div className="cardHead flex justify-between">
                         <div className='flex'>
-                            <img src={data.course_display_icon} className='w-12' alt="img"/>
+                            <img src={data.image} className='w-12' alt="img"/>
                             <p className='pt-3 pr-4 font-black'>{data.course_name}</p>
                         </div>
                         <div className="pt-3">
