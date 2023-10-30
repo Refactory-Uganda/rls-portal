@@ -14,26 +14,27 @@ import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Modal from "react-bootstrap/Modal";
 import { MDBCol } from "mdbreact";
+import DropdownMenu from "react-bootstrap/DropdownMenu";
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
+
 
 function LandingPageNavBar({ name, ...props }) {
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleClose2 = () => setShow(false);
+  // const handleClose = () => setShow(false);
+  // const handleClose2 = () => setShow(false);
   const handleShow = () => setShow(true);
   const [expanded, setExpanded] = useState(false);
 
   const toggleNav = () => {
     setExpanded(!expanded);
   };
+  
+
 
   const values = ["md-down"];
   const [fullscreen, setFullscreen] = useState(true);
-
-  // function handleShow(breakpoint) {
-  //   setFullscreen(breakpoint);
-  //   setShow(true);
-  // }
 
   return (
     <>
@@ -50,6 +51,7 @@ function LandingPageNavBar({ name, ...props }) {
               {/* toggle */}
               <Navbar.Toggle
                 aria-controls={`offcanvasNavbar-expand-${expand}`}
+                id={style.toggle}
               />
 
               <Navbar.Brand href="#">
@@ -63,9 +65,10 @@ function LandingPageNavBar({ name, ...props }) {
               {/* Offcanvas */}
 
               <Navbar.Offcanvas
-                id={`offcanvasNavbar-expand-${expand}`}
+                // id={`offcanvasNavbar-expand-${expand}`}
                 aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
                 placement="start"
+                  id={style.NavBar_Offcanvas}
               >
                 <Offcanvas.Header closeButton>
                   <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
@@ -79,68 +82,199 @@ function LandingPageNavBar({ name, ...props }) {
                 <Offcanvas.Body>
                   <Nav
                     className="me-auto my-2 my-lg-0"
-                    style={{ maxHeight: "100px" }}
+                  
                     navbarScroll
                   >
+                   
                     {/* Categories */}
-                    <NavDropdown title="Categories" id={style.Courses}>
-                      <NavDropdown.Item href="#action3">
-                        Learning Path
-                      </NavDropdown.Item>
-                      <NavDropdown.Item href="#action4">
-                        Assessment
-                      </NavDropdown.Item>
-                      <NavDropdown.Item href="#action5">
-                        Certification
-                      </NavDropdown.Item>
-                    </NavDropdown>
+                    
+                    
+                    <Dropdown>
+                      <Dropdown.Toggle id={style.Courses}>
+                        Categories
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu id={style.Dropdown_menu}>
+                        <Dropdown.Item
+                          href="#/action-1"
+                          id={style.Dropdown_Item}
+                        >
+                          Learning Path
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                          href="#/action-2"
+                          id={style.Dropdown_Item}
+                        >
+                          {" "}
+                          Assessment
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                          href="#/action-3"
+                          id={style.Dropdown_Item}
+                        >
+                          Certification
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
 
                     {/* search */}
                     <div id={style.form2}>
-                    <MDBCol>
-      <input className="form-control" type="text" placeholder="Search" aria-label="Search" />
-    </MDBCol>
+                      <MDBCol>
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="Search for anything"
+                          aria-label="Search"
+                          id={style.form3}
+                        />
+                      </MDBCol>
                     </div>
                   </Nav>
 
                   <Nav>
                     {/* courses */}
-                    <Nav.Link href="#home" id={style.Courses}>
+                    <Nav.Link href="#home" id={style.Courses2}>
                       Courses
                     </Nav.Link>
 
                     {/* features */}
-                    <NavDropdown title="Features" id={style.Courses}>
-                      <NavDropdown.Item href="#action3">
-                        Learning Path
-                      </NavDropdown.Item>
-                      <NavDropdown.Item href="#action4">
-                        Assessment
-                      </NavDropdown.Item>
-                      <NavDropdown.Item href="#action5">
-                        Certification
-                      </NavDropdown.Item>
-                    </NavDropdown>
+                    <Dropdown>
+                      <Dropdown.Toggle id={style.Courses}>
+                      features
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu id={style.Dropdown_menu}>
+                        <Dropdown.Item
+                          href="#/action-1"
+                          id={style.Dropdown_Item}
+                        >
+                          Learning Path
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                          href="#/action-2"
+                          id={style.Dropdown_Item}
+                        >
+                          {" "}
+                          Assessment
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                          href="#/action-3"
+                          id={style.Dropdown_Item}
+                        >
+                          Certification
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
                     {/* community */}
-                    <NavDropdown title="Community" id={style.Courses}>
-                      <NavDropdown.Item href="#action3" id={style.them}>
-                        Forum
-                      </NavDropdown.Item>
-                      <NavDropdown.Item href="#action4" id={style.them}>
-                        Learner Stories
-                      </NavDropdown.Item>
-                    </NavDropdown>
+                    <Dropdown>
+                      <Dropdown.Toggle id={style.Courses}>
+                      community 
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu id={style.Dropdown_menu}>
+                        <Dropdown.Item
+                          href="#/action-1"
+                          id={style.Dropdown_Item}
+                        >
+                          Forum
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                          href="#/action-2"
+                          id={style.Dropdown_Item}
+                        >
+                          {" "}
+                          Learner Stories
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
 
                     <FaBell className={style.bellIcon} />
-                    <img
+                    <>
+      {['bottom'].map((placement) => (
+        <OverlayTrigger
+          trigger="click"
+          key={placement}
+          placement={placement}
+          
+          overlay={
+            <Popover id={`popover-positioned-${placement}`} className={style.Overlaytrigger}>
+               <Popover.Body id={style.Popover_Body}>
+              
+                <Nav.Link href="#home" id={style.Nav_Link}>
+                     <strong>Profile</strong> 
+               </Nav.Link>
+               <Nav.Link href="#home" id={style.Nav_Link}>
+                     <strong> Settings</strong> 
+               </Nav.Link>
+               <Nav.Link href="#home" id={style.Nav_Link}>
+                     <strong>Accomplishments</strong> 
+               </Nav.Link>
+               <Nav.Link href="#home" id={style.Nav_Link}>
+                     <strong>Help Center</strong> 
+               </Nav.Link>
+
+               <Nav.Link href="#home" id={style.Nav_Link}>
+                     <strong>Log Out</strong> 
+               </Nav.Link>
+              </Popover.Body>
+            
+             
+            </Popover>
+          }
+        >
+            <img
                       src="/images/profile.jpg"
                       alt=""
                       className={style.profileImage}
                     />
+        </OverlayTrigger>
+      ))}
+    </>
+                  
                     {/* account */}
-                    <Nav.Link href="#home" id={style.account}>
+                    {/* <Nav.Link href="#home" id={style.account}>
                       Account
-                    </Nav.Link>
+                    </Nav.Link> */}
+                    <Dropdown>
+                      <Dropdown.Toggle id={style.account}>
+                      Account
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu id={style.Dropdown_menu}>
+                        <Dropdown.Item
+                          href="#/action-1"
+                          id={style.Dropdown_Item}
+                        >
+                          Profile
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                          href="#/action-2"
+                          id={style.Dropdown_Item}
+                        >
+                          {" "}
+                          Settings
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                          href="#/action-3"
+                          id={style.Dropdown_Item}
+                        >
+                         Accomplishments
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                          href="#/action-3"
+                          id={style.Dropdown_Item}
+                        >
+                        Help Center
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                          href="#/action-3"
+                          id={style.Dropdown_Item}
+                        >
+                        Log Out
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+
                   </Nav>
                 </Offcanvas.Body>
               </Navbar.Offcanvas>
@@ -169,8 +303,14 @@ function LandingPageNavBar({ name, ...props }) {
                     <Modal.Title>
                       {" "}
                       <MDBCol>
-      <input className="form-control" type="text" placeholder="Search" aria-label="Search" id={ style.search3}/>
-    </MDBCol>
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="Search for anything"
+                          aria-label="Search"
+                          id={style.search3}
+                        />
+                      </MDBCol>
                     </Modal.Title>
                   </Modal.Header>
                   <Modal.Body>Modal body content</Modal.Body>
