@@ -4,46 +4,45 @@ import { useState } from "react";
 
 const AddCourse = () => {
   const [course_name, setCourse_name] = useState("");
-  const [course_display_icon, setCourse_display_icon] = useState();
+  const [image,setImage] = useState();
   const [course_description, setCourse_description] = useState("");
   const [course_duration, setCourse_duration] = useState("");
   // const [status, setStatus] = useState("");
 
-  const handleAddCourses =  () => {
-    axios.post('http://localhost:5000/courses', {
-      course_name,
-      course_display_icon,
-      course_description,
-      course_duration,
-    })
-    .then(response => {
-      if (response.status === 200) {
-        alert('Course saved successfully');
+  const handleAddCourses =  async(e) => {
+    e.preventDefault();
+    console.log(image);
+    const formData = new FormData();
+    formData.append("course_name", course_name);
+    formData.append("image", image);
+    formData.append("course_description", course_description);
+    formData.append("course_duration", course_duration);
+    const api = "http://localhost:5000/Courses";
+  
+
+    try {
+       const response = await axios.post(api, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      alert("Course posted successfully");
+      console.log("Data posted successfully:", response.data);
+    } catch (error) {
+      if (error.response) {
+        alert(error)
+          console.log(error.response.data);
+          console.log(error.response.status);
+      } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
       } else {
-        console.log(response);
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error.message);
       }
-    })
-    .catch(error => {
-      console.log(error);
-    });
+  }
   };
-    // const api = "http://localhost:5000/courses";
-
-  //   const info = {
-  //     course_name: course_name,
-  //     course_display_icon: course_display_icon,
-  //     course_description: course_description,
-  //     course_duration: course_duration,
-  //     // status:status
-  //   };
-  //     console.log(info)
-
-  //   try {
-  //     await axios.post(api, info);
-  //     alert("Course posted successfully");
-  //   } catch (error) {
-  //     console.error(error.message);
-  //   }
+   
 
   return (
     <>
@@ -52,7 +51,7 @@ const AddCourse = () => {
         <form
           className={style.form}
           onSubmit={handleAddCourses}
-          // encType="multipart/form-data"
+          encType="multipart/form-data"
         >
           <div className={style.btn}>
             <label className={style.label}> Course Name</label>
@@ -74,7 +73,7 @@ const AddCourse = () => {
               className={style.input}
               placeholder="ADD Course Icon"
               accept=".png, .jpg, .svg, .jpeg"
-              onChange={(e) => setCourse_display_icon(e.target.files[0])}
+              onChange={(e) => setImage(e.target.files[0])}
             />
           </div>
           <div className={style.btn}>
@@ -101,7 +100,7 @@ const AddCourse = () => {
               onChange={(e) => setCourse_duration(e.target.value)}
             />
           </div>
-          <button className={style.button}>
+          <button  className={style.button} >
             Save
           </button>
         </form>
