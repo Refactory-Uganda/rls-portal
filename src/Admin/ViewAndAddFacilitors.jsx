@@ -52,7 +52,7 @@ function ViewAndAddFacilitors() {
                 {/* dropdown */}
               </div>
               <h5 className={ViewAddFacilitatorCss.h5}>Name: {facilitator.name}</h5>
-              <h2 className={ViewAddFacilitatorCss.email}>Role: Facilitator</h2>
+              <h2 className={ViewAddFacilitatorCss.email}>Role: {facilitator.course}</h2>
               <h2 className={ViewAddFacilitatorCss.email}>Course: {facilitator.role}</h2>
               <h2 className={ViewAddFacilitatorCss.email}>ID: {facilitator.id}</h2>
               <p className={ViewAddFacilitatorCss.email}>Email: {facilitator.email}</p>
