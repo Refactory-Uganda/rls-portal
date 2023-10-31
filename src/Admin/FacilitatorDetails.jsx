@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import style from "./AddFacilitar.module.css"; 
+import { useParams } from 'react-router-dom';
 
 function FacilitatorDetails({ match }) {
   const [facilitator, setFacilitator] = useState(null);
-
+  const [isLoading, setIsLoading] = useState(true);
+const {id } = useParams()
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get(`http://localhost:5000/facilitator/${match.params.id}`);
+        const response = await axios.get(`http://localhost:5000/facilitator/${id}`);
         setFacilitator(response.data);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching facilitator details:', error);
       }
     }
 
     fetchData();
-  }, [match.params.id]);
+  }, [id]);
+
+  if (isLoading) {
+    return <div className={style.loading}>Loading...</div>;
+  }
 
   return (
     <div className={` ${style.facilitatorDetails} flex items-center justify-center h-screen`}>
@@ -81,62 +88,8 @@ function FacilitatorDetails({ match }) {
             />
           </div>
         </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label htmlFor="gender" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Gender
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="gender"
-              type="text"
-              name="gender"
-              placeholder="Male/Female/Other"
-              value={facilitator?.gender || ''}
-              readOnly
-            />
-          </div>
-          <div className="w-full md:w-1/2 px-3">
-            <label htmlFor="nationality" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Nationality
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="nationality"
-              type="text"
-              name="nationality"
-              placeholder="Your nationality"
-              value={facilitator?.nationality || ''}
-              readOnly
-            />
-          </div>
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label htmlFor="role" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Role
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="role"
-              type="text"
-              placeholder="Facilitator Role"
-              value={facilitator?.role || ''}
-              name="role"
-              readOnly
-            />
-          </div>
-          <div className="w-full md:w-1/2 px-3">
-            <label htmlFor="image" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Image
-            </label>
-            <img
-              src={`public${facilitator?.image || ''}`}
-              alt="Facilitator"
-              className={style.image}
-            />
-          </div>
-        </div>
+        
+        <button className={style.button} disabled>Save</button>
       </form>
     </div>
   );
