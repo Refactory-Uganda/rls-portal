@@ -28,6 +28,7 @@ import Facilitator from "./Facilitator/FacilitatorLanding";
 import AddCourseEdit from "./Admin/AddcourseEdit";
 import AddcourseGet from "./Admin/AddcourseGet";
 import LandingPage from "./Students/LandingPage";
+import FacilitatorDetails from "./Admin/FacilitatorDetails";
 
 
 
@@ -63,6 +64,7 @@ function App() {
               <Route path="/admin/AddCourseMaterialField" element={<AddCourseMaterialField />}/>
               <Route path="/admin/AddCourseMaterialDaft" element={<AddCouserMaterialDaft />}/>
           </Route>
+          <Route path="/admin/facilitator-details/:id" element={ <FacilitatorDetails/>} />
           <Route path ="/student/Navbar" element={<Student/>}/>
           <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
           <Route path="/facilitator" element={<Facilitator/>}/>

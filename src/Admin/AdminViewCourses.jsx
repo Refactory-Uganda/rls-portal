@@ -1,10 +1,10 @@
 
 //import NavBar from "../Components/MicroComponents/Navbar/Navbar.jsx";
 import { Link } from 'react-router-dom';
-import demo from '../Components/Pages/demo.json'
+
 import style from './AdminViewCourses.module.css';
 import {FaEllipsisV, FaTrash, FaEdit} from 'react-icons/fa'
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
 
 function AdminVeiwCourses(){
