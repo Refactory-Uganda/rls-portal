@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import style from "./AddFacilitar.module.css"; 
+import style from './AddFacilitar.module.css';
 import { useParams } from 'react-router-dom';
 
-function FacilitatorDetails({ match }) {
+function FacilitatorDetails() {
   const [facilitator, setFacilitator] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-const {id } = useParams()
+  const { id } = useParams();
+  const [formData, setFormData] = useState({});
+  const isEditing = useRef(false);
+
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await axios.get(`http://localhost:5000/facilitator/${id}`);
         setFacilitator(response.data);
+        setFormData(response.data);
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching facilitator details:', error);
@@ -21,13 +25,36 @@ const {id } = useParams()
     fetchData();
   }, [id]);
 
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+    isEditing.current = true;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (isEditing.current) {
+      try {
+        await axios.put(`http://localhost:5000/facilitator/${id}`, formData);
+        isEditing.current = false;
+        alert('Facilitator details updated successfully');
+      } catch (error) {
+        console.error('Error updating facilitator details:', error);
+        alert('Error updating facilitator details');
+      }
+    }
+  };
+
   if (isLoading) {
     return <div className={style.loading}>Loading...</div>;
   }
 
   return (
-    <div className={` ${style.facilitatorDetails} flex items-center justify-center h-screen`}>
-      <form className="w-full max-w-lg">
+    <div className={` ${style.addFacilitator} flex items-center justify-center h-screen`}>
+      <form className="w-full max-w-lg p-4 border shadow-lg rounded-lg" onSubmit={handleSubmit}>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label htmlFor="firstName" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -39,8 +66,8 @@ const {id } = useParams()
               type="text"
               name="firstName"
               placeholder="Jane"
-              value={facilitator?.firstName || ''}
-              readOnly
+              value={formData.firstName}
+              onChange={handleInputChange}
             />
           </div>
           <div className="w-full md:w-1/2 px-3">
@@ -53,43 +80,22 @@ const {id } = useParams()
               type="text"
               name="lastName"
               placeholder="Doe"
-              value={facilitator?.lastName || ''}
-              readOnly
+              value={formData.lastName}
+              onChange={handleInputChange}
             />
           </div>
         </div>
+        {/* Add more input fields for other properties (email, phone number, etc.) here */}
         <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label htmlFor="email" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Email
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="email"
-              type="email"
-              name="email"
-              placeholder="jane.doe@example.com"
-              value={facilitator?.email || ''}
-              readOnly
-            />
-          </div>
           <div className="w-full md:w-1/2 px-3">
-            <label htmlFor="phoneNumber" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Phone Number
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="phoneNumber"
-              type="tel"
-              name="phoneNumber"
-              placeholder="123-456-7890"
-              value={facilitator?.phoneNumber || ''}
-              readOnly
-            />
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              disabled={!isEditing.current}
+            >
+              Save
+            </button>
           </div>
         </div>
-        
-        <button className={style.button} disabled>Save</button>
       </form>
     </div>
   );

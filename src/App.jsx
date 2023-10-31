@@ -29,6 +29,7 @@ import AddCourseEdit from "./Admin/AddcourseEdit";
 import AddcourseGet from "./Admin/AddcourseGet";
 import LandingPage from "./Students/LandingPage";
 import FacilitatorDetails from "./Admin/FacilitatorDetails";
+import ViewCourseContent from "./Components/Pages/Student/ViewCourseContent";
 
 
 
@@ -69,7 +70,7 @@ function App() {
           <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
           <Route path="/facilitator" element={<Facilitator/>}/>
           <Route path="student/landingPage" element={<LandingPage/>}/>   
-     
+          <Route path="student/viewcoursecontent" element={<ViewCourseContent/>}/> 
 
           {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}
         </Routes>
