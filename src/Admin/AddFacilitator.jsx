@@ -34,6 +34,13 @@ const AddFacilitator = () => {
       });
       // Handle the response as needed (e.g., show a success message)
       alert("Facilitator added");
+      setFirstName('')
+      setLastName('')
+      setGender('')
+      setImage('')
+      setRole('')
+      setNationality('')
+      setEmail('')
       console.log("Data posted successfully:", response.data);
     } catch (error) {
       // Handle any errors that occur during the POST request
@@ -45,7 +52,7 @@ const AddFacilitator = () => {
     <div
       className={` ${style.addFacilitator} flex items-center justify-center h-screen`}
     >
-      <form className="w-full max-w-lg" onSubmit={handleSubmit}>
+      <form className="w-full max-w-lg p-4 border shadow-lg rounded-lg" onSubmit={handleSubmit}>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
@@ -110,7 +117,7 @@ const AddFacilitator = () => {
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="phoneNumber"
-              type="tel"
+              type="text"
               name="phoneNumber"
               placeholder="123-456-7890"
               value={phoneNumber}

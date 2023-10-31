@@ -19,7 +19,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 
 
-function LandingPageNavBar({ name, ...props }) {
+function  LandingPageNavBar({ name, ...props }) {
   const [show, setShow] = useState(false);
 
   // const handleClose = () => setShow(false);

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ViewAddFacilitatorCss from '../Admin/ViewAndAddFacilitators.module.css';
 import { FaEdit, FaEllipsisV, FaTrash } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 function ViewAndAddFacilitors() {
   const [facilitators, setFacilitators] = useState([]);
@@ -18,7 +19,7 @@ function ViewAndAddFacilitors() {
     }
 
     fetchData();
-  },[]);
+  },[facilitators]);
 
   const handleDelete = async (id) => {
     try {
@@ -53,9 +54,11 @@ function ViewAndAddFacilitors() {
                       </li>
                       <hr style={{ color: '#fff' }}></hr>
                       <li>
-                        <a className="dropdown-item" href="#">
+                      
+                        <Link to={`/admin/facilitator-details/${facilitator._id}`} className="dropdown-item" href="#">
                           <FaEdit color="#58C5C8" />
-                        </a>
+                        </Link>
+                      
                       </li>
                     </ul>
                   </div>
