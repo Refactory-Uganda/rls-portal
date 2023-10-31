@@ -28,7 +28,7 @@ import Facilitator from "./Facilitator/FacilitatorLanding";
 import AddCourseEdit from "./Admin/AddcourseEdit";
 import AddcourseGet from "./Admin/AddcourseGet";
 import LandingPage from "./Students/LandingPage";
-
+import RemedialTime from "./Students/RemedialTime"
 
 
 function App() {
@@ -66,7 +66,8 @@ function App() {
           <Route path ="/student/Navbar" element={<Student/>}/>
           <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
           <Route path="/facilitator" element={<Facilitator/>}/>
-          <Route path="student/landingPage" element={<LandingPage/>}/>   
+          <Route path="/student/landingPage" element={<LandingPage/>}/>  
+          <Route path="/student/remedialTime" element={< RemedialTime />}/> 
      
 
           {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}
