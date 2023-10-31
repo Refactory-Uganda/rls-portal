@@ -110,6 +110,8 @@
 #Coursedisplaycol {
   margin-top: 20px;
   margin-bottom: 20px;
+  border-color: black;
+  /* background-color: bisque; */
 }
 #Coursedisplaybody {
   text-align: center;
@@ -132,7 +134,15 @@
  text-align: center;
 margin-left: 0px;
 margin-right: 0px;
+text-decoration: none;
+color: black;
 }
+
+#categoriescol:hover{
+  /* box-shadow: 0 3px 8px rgba(83, 44, 86, 0.264); */
+ color: rgb(99, 19, 110);
+ transform: scale(1.1);
+ }
 
 #categoriesimage{
      width: 70%;
@@ -144,11 +154,12 @@ margin-right: 0px;
 #feacturedtopicscol{
   text-align: center;
   margin-top: 20px;
+  padding-bottom: 30px;
 }
 
 #feacturedtopicscont{
   background-color: rgba(227, 224, 224, 0.318);
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .feacturedtopicstopics{
