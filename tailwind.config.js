@@ -16,7 +16,8 @@ export default {
       'menuwhite':'#F4F0F0',
       'darkpurple':'#180027',
       'lastbottom':'#5E1A69',
-      'slate':'#f7f8f9'
+      'slate':'#f7f8f9',
+      'slatedark':'rgb(100 116 139)'
     },
     screens:{
         'sm':'320px',
