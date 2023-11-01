@@ -100,20 +100,30 @@ function  LandingPageNavBar({ name, ...props }) {
                           href="#/action-1"
                           id={style.Dropdown_Item}
                         >
-                          Learning Path
+                           Design
+                          
                         </Dropdown.Item>
                         <Dropdown.Item
                           href="#/action-2"
                           id={style.Dropdown_Item}
                         >
                           {" "}
-                          Assessment
+                          Security
+                          
+                          
                         </Dropdown.Item>
                         <Dropdown.Item
                           href="#/action-3"
                           id={style.Dropdown_Item}
                         >
-                          Certification
+                       Data Science
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                          href="#/action-3"
+                          id={style.Dropdown_Item}
+                        >
+                          Web development
+                          
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
