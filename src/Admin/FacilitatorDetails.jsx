@@ -65,7 +65,7 @@ function FacilitatorDetails() {
               id="firstName"
               type="text"
               name="firstName"
-              placeholder="Jane"
+            
               value={formData.firstName}
               onChange={handleInputChange}
             />
@@ -79,12 +79,73 @@ function FacilitatorDetails() {
               id="lastName"
               type="text"
               name="lastName"
-              placeholder="Doe"
+            
               value={formData.lastName}
               onChange={handleInputChange}
             />
           </div>
         </div>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label htmlFor="email" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Email
+            </label>
+            <input
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="email"
+              type="text"
+              name="email"
+        
+              value={formData.email}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="w-full md:w-1/2 px-3">
+            <label htmlFor="phoneNumber" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Phone Number
+            </label>
+            <input
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="phoneNumber"
+              type="text"
+              name="phoneNumber"
+              
+              value={formData.phoneNumber}
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label htmlFor="gender" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Gender
+            </label>
+            <input
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="gender"
+              type="text"
+              name="gender"
+            
+              value={formData.gender}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="w-full md:w-1/2 px-3">
+            <label htmlFor="nationality" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Nationality
+            </label>
+            <input
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="nationality"
+              type="text"
+              name="nationality"
+              
+              value={formData.nationality}
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+
         {/* Add more input fields for other properties (email, phone number, etc.) here */}
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3">
