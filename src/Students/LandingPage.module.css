@@ -105,6 +105,9 @@
   margin-top: 20px;
   box-shadow: 0 3px 8px rgba(83, 44, 86, 0.264);
   margin-bottom: 20px;
+  /* margin: 20px; */
+  /* margin-left: 20px; */
+  /* margin-right: -50px;   */
 }
 
 #Coursedisplaycol {
@@ -114,10 +117,9 @@
   /* background-color: bisque; */
 }
 #Coursedisplaybody {
-  text-align: center;
-  color: rgb(92, 28, 94);
-  /* font-weight: 500; */
-  font-style: italic;
+  /* text-align: center; */
+  color: rgb(9, 7, 9);
+  font-size: 10px;
   
 }
 
@@ -136,12 +138,14 @@ margin-left: 0px;
 margin-right: 0px;
 text-decoration: none;
 color: black;
+
 }
 
 #categoriescol:hover{
   /* box-shadow: 0 3px 8px rgba(83, 44, 86, 0.264); */
  color: rgb(99, 19, 110);
  transform: scale(1.1);
+ transition: 0.5s;
  }
 
 #categoriesimage{
@@ -158,8 +162,9 @@ color: black;
 }
 
 #feacturedtopicscont{
-  background-color: rgba(227, 224, 224, 0.318);
+  background-color: rgba(227, 224, 224, 0.132);
   margin-bottom: 30px;
+  padding-top: 40px;
 }
 
 .feacturedtopicstopics{
@@ -168,6 +173,10 @@ color: black;
   font-weight: 700;
   font-family:serif;
  
+}
+#card{
+  /* width: 60%; */
+  /* height: auto; */
 }
 
 @media (width <= 599px) {

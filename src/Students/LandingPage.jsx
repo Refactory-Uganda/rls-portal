@@ -31,19 +31,19 @@ function LandingPage(props) {
     superLargeDesktop: {
       // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
-      items: 5,
+      items: 6,
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3,
+      items: 6,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 2,
+      items: 4,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 1,
+      items: 2,
     },
   };
 
@@ -65,6 +65,7 @@ function LandingPage(props) {
         </div>
       </div>
       <CoursesCarousel />
+
       <div className="container-fluid" id={style.middlediv1}>
         <div className="container">
           <div className="row">
@@ -85,8 +86,9 @@ function LandingPage(props) {
           </div>
         </div>
       </div>
-
-      <div className="container" id={style.Coursedisplay}>
+        
+      <div className="container-fluid" style={{padding:"12px"}}>
+      <div className="container-fluid" id={style.Coursedisplay}>
         <Carousel
           responsive={responsive}
           autoPlay={true}
@@ -96,25 +98,28 @@ function LandingPage(props) {
           {data.map((data, index) => (
             <div className="row">
               <div className="col" id={style.Coursedisplaycol}>
-                <Card style={{ width: "18rem" }} key={index}>
+                <Card id={style.card} key={index}>
                   <Card.Img src="../images/JavaScript---Thumbnail-1200-x-630.jpg" />
                   <Card.Body id={style.Coursedisplaybody}>
-                    <Card.Title>{data.course_name}</Card.Title>
+                    <Card.Title> <strong> {data.course_name}</strong></Card.Title>
                     <Card.Text>
                       {data.course_description.substring(-1, 50) + "........"}
                     </Card.Text>
-                    <Button id={style.Coursedisplaybutton}>Enrol</Button>
+                    {/* <Button id={style.Coursedisplaybutton}>Enrol</Button> */}
                   </Card.Body>
                 </Card>
+               
               </div>
             </div>
           ))}
         </Carousel>
       </div>
+      </div>
 
-      <div className="container">
+
+      <div className="container-fluid" style={{paddingBottom:"20px"}}>
         <div className="row">
-          <h5>
+          <h5 style={{ marginBottom:"30px", paddingTop:"20px"}}>
             {" "}
             <strong>Categories </strong>
           </h5>
@@ -179,7 +184,7 @@ function LandingPage(props) {
       </div>
 
       <div className="container-fluid" id={style.feacturedtopicscont}>
-        <h5 style={{ paddingLeft: "5%" }}>
+        <h5>
           {" "}
           <strong>Featured Topics by Categories </strong>
         </h5>

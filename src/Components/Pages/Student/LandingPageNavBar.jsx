@@ -17,7 +17,8 @@ import { MDBCol } from "mdbreact";
 import DropdownMenu from "react-bootstrap/DropdownMenu";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
-
+import { Link } from "react-router-dom";
+import Login from "../Login";
 
 function  LandingPageNavBar({ name, ...props }) {
   const [show, setShow] = useState(false);
@@ -189,7 +190,8 @@ function  LandingPageNavBar({ name, ...props }) {
                     </Dropdown>
 
                     <FaBell className={style.bellIcon} />
-                    <>
+                    {/* Profile */}
+                    < div className={style.overlay}>
       {['bottom'].map((placement) => (
         <OverlayTrigger
           trigger="click"
@@ -197,7 +199,7 @@ function  LandingPageNavBar({ name, ...props }) {
           placement={placement}
           
           overlay={
-            <Popover id={`popover-positioned-${placement}`} className={style.Overlaytrigger}>
+            <Popover  id={style.Overlaytrigger}>
                <Popover.Body id={style.Popover_Body}>
               
                 <Nav.Link href="#home" id={style.Nav_Link}>
@@ -213,7 +215,7 @@ function  LandingPageNavBar({ name, ...props }) {
                      <strong>Help Center</strong> 
                </Nav.Link>
 
-               <Nav.Link href="#home" id={style.Nav_Link}>
+               <Nav.Link href="/login" id={style.Nav_Link}>
                      <strong>Log Out</strong> 
                </Nav.Link>
               </Popover.Body>
@@ -229,7 +231,7 @@ function  LandingPageNavBar({ name, ...props }) {
                     />
         </OverlayTrigger>
       ))}
-    </>
+    </div>
                   
                     {/* account */}
                     {/* <Nav.Link href="#home" id={style.account}>
@@ -270,7 +272,7 @@ function  LandingPageNavBar({ name, ...props }) {
                           href="#/action-3"
                           id={style.Dropdown_Item}
                         >
-                        Log Out
+                        <Link to="/login"> Log Out</Link>
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
