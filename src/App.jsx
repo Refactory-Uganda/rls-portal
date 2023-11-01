@@ -29,6 +29,7 @@ import AddCourseEdit from "./Admin/AddcourseEdit";
 import AddcourseGet from "./Admin/AddcourseGet";
 import LandingPage from "./Students/LandingPage";
 import FacilitatorDetails from "./Admin/FacilitatorDetails";
+import Topic from "./Components/Pages/Topic";
 
 
 
@@ -43,6 +44,7 @@ function App() {
           <Route path="/piechart" element={<PieChart/>}></Route>
           <Route path="/admin" element={<Admin/>}>
               <Route path="/admin/profile" element={<Profile/>}></Route>
+              <Route path="/admin/topic" element={<Topic/>}></Route>
               <Route path="/admin/AddCourseEdit" element={<AddCourseEdit />}></Route>
               <Route path="/admin/AddCourseget" element={<AddcourseGet />}></Route>
               <Route path="/admin/card" element={<Card/>}></Route>
