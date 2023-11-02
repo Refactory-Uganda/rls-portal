@@ -1,6 +1,8 @@
 import  { useState, useRef, useEffect } from "react"
 
 import CourseWork from "../Components/Pages/CourseWork"
+import ClassWork from "../Components/Pages/ClassWork"
+import People from "../Components/Pages/People"
 
 const AddcourseGet = () => {
   const [tabSelected, setTabSelected] = useState({
@@ -126,7 +128,7 @@ const AddcourseGet = () => {
               }`}
               onClick={() => setTabSelected({ ...tabSelected, currentTab: 3 })}
             >
-              <span>People</span>
+              <span>Grade</span>
             </button>
           </li>
         </ul>
@@ -156,10 +158,7 @@ const AddcourseGet = () => {
             tabIndex="-1"
           >
             <p>
-              One must be entirely sensitive to the structure of the material
-              that one is handling. One must yield to it in tiny details of
-              execution, perhaps the handling of the surface or grain, and one
-              must master it as a whole.
+             <ClassWork />
             </p>
           </div>
           <div
@@ -173,10 +172,7 @@ const AddcourseGet = () => {
             tabIndex="-1"
           >
             <p>
-              Even though there is no certainty that the expected results of our
-              work will manifest, we have to remain committed to our work and
-              duties; because, even if the results are slated to arrive, they
-              cannot do so without the performance of work.
+              <People />
             </p>
           </div>
         </div>
