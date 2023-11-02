@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
-
+import  style from'./ViewCourseContent.module.css'
 const cardsData = [
   {
     title: 'Card 1',
@@ -19,8 +19,8 @@ export default function ViewCourseContent() {
       <h2 className="py-4 bg-gray-200 text-center">Python</h2>
       <div className="flex flex-col items-center justify-center">
         {cardsData.map((card, index) => (
-          <div className="card w-4/5 mb-4 p-4 bg-gray-500" key={index}> {/* Updated class here */}
-            <div className="flex items-center justify-between mb-2">
+          <div className={`${style.card} card w-4/5 mb-4 p-4 bg-red`} key={index}> {/* Updated class here */}
+            <div className="flex items-center justify-between mb-2 ">
               <h2 className="card-title">{card.title}</h2>
               <div className="flex items-center">
                 <FaArrowRight />

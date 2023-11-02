@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import style from './AddFacilitar.module.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function FacilitatorDetails() {
   const [facilitator, setFacilitator] = useState(null);
@@ -9,7 +9,7 @@ function FacilitatorDetails() {
   const { id } = useParams();
   const [formData, setFormData] = useState({});
   const isEditing = useRef(false);
-
+const navigate = useNavigate();
   useEffect(() => {
     async function fetchData() {
       try {
@@ -40,7 +40,8 @@ function FacilitatorDetails() {
       try {
         await axios.put(`http://localhost:5000/facilitator/${id}`, formData);
         isEditing.current = false;
-        alert('Facilitator details updated successfully');
+        // alert('Facilitator details updated successfully');
+        navigate('/admin/facilitator')
       } catch (error) {
         console.error('Error updating facilitator details:', error);
         alert('Error updating facilitator details');
@@ -150,7 +151,7 @@ function FacilitatorDetails() {
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            
               disabled={!isEditing.current}
             >
               Save
