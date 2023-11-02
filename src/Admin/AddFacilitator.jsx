@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import style from "./AddFacilitar.module.css"; // Make sure the path is correct
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AddFacilitator = () => {
   const [firstName, setFirstName] = useState("");
@@ -11,7 +12,7 @@ const AddFacilitator = () => {
   const [nationality, setNationality] = useState("");
   const [role, setRole] = useState("");
   const [image, setImage] = useState("");
-
+const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -41,7 +42,8 @@ const AddFacilitator = () => {
       setRole('')
       setNationality('')
       setEmail('')
-      console.log("Data posted successfully:", response.data);
+      navigate('/admin/facilitator')
+      // console.log("Data posted successfully:", response.data);
     } catch (error) {
       // Handle any errors that occur during the POST request
       console.error("Error posting data:", error);

@@ -30,7 +30,11 @@ import AddcourseGet from "./Admin/AddcourseGet";
 import LandingPage from "./Students/LandingPage";
 import RemedialTime from "./Students/RemedialTime"
 import FacilitatorDetails from "./Admin/FacilitatorDetails";
+<<<<<<< HEAD
 import Topic from "./Components/Pages/Topic";
+=======
+import ViewCourseContent from "./Components/Pages/Student/ViewCourseContent";
+>>>>>>> 944dfe6a13683ad151e3f2ac2c15ab93cd757cea
 
 
 
@@ -71,6 +75,8 @@ function App() {
           <Route path ="/student/Navbar" element={<Student/>}/>
           <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
           <Route path="/facilitator" element={<Facilitator/>}/>
+          <Route path="student/landingPage" element={<LandingPage/>}/>   
+          <Route path="student/viewcoursecontent" element={<ViewCourseContent/>}/> 
           <Route path="/student/landingPage" element={<LandingPage/>}/>  
           <Route path="/student/remedialTime" element={< RemedialTime />}/> 
      
