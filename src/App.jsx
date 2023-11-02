@@ -30,11 +30,13 @@ import AddcourseGet from "./Admin/AddcourseGet";
 import LandingPage from "./Students/LandingPage";
 import RemedialTime from "./Students/RemedialTime"
 import FacilitatorDetails from "./Admin/FacilitatorDetails";
-<<<<<<< HEAD
-import Topic from "./Components/Pages/Topic";
-=======
-import ViewCourseContent from "./Components/Pages/Student/ViewCourseContent";
->>>>>>> 944dfe6a13683ad151e3f2ac2c15ab93cd757cea
+import Topic from "./Components/Pages/Course/Topic";
+import Assignment from "./Components/Pages/Course/Assignment";
+import Content from "./Components/Pages/Course/content";
+import Material from "./Components/Pages/Course/Material";
+import Project from "./Components/Pages/Course/Project";
+// import ViewCourseContent from "./Components/Pages/Student/ViewCourseContent";
+
 
 
 
@@ -50,6 +52,10 @@ function App() {
           <Route path="/admin" element={<Admin/>}>
               <Route path="/admin/profile" element={<Profile/>}></Route>
               <Route path="/admin/topic" element={<Topic/>}></Route>
+              <Route path="/admin/assignment" element={<Assignment/>}></Route>
+              <Route path="/admin/content" element={<Content/>}></Route>
+              <Route path="/admin/material" element={<Material/>}></Route>
+              <Route path="/admin/project" element={<Project/>}></Route>
               <Route path="/admin/AddCourseEdit" element={<AddCourseEdit />}></Route>
               <Route path="/admin/AddCourseget" element={<AddcourseGet />}></Route>
               <Route path="/admin/card" element={<Card/>}></Route>
@@ -76,11 +82,9 @@ function App() {
           <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
           <Route path="/facilitator" element={<Facilitator/>}/>
           <Route path="student/landingPage" element={<LandingPage/>}/>   
-          <Route path="student/viewcoursecontent" element={<ViewCourseContent/>}/> 
+          {/* <Route path="student/viewcoursecontent" element={<ViewCourseContent/>}/>  */}
           <Route path="/student/landingPage" element={<LandingPage/>}/>  
           <Route path="/student/remedialTime" element={< RemedialTime />}/> 
-     
-
           {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}
         </Routes>
       </Router>

@@ -19,23 +19,23 @@ export default function Course() {
     {
       linkName: "Content",
       icon: <MdContentPaste/>,
-      link:"/annie"
+      link:"/admin/content"
     },
     {
       linkName: "Materials",
       icon: <GiMaterialsScience />,
-      link:"/sarah"
+      link:"/admin/material"
     },
     {
       linkName: "Assignment",
       icon: <MdAssignmentAdd />,
-      link:"/bob"
+      link:"/admin/assignment"
 
     },
     {
       linkName: "Projects",
       icon: <AiFillProject/>,
-      link:"/ann"
+      link:"/admin/project"
     },
   ]
 
