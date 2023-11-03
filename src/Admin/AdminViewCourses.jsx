@@ -6,23 +6,31 @@ import style from './AdminViewCourses.module.css';
 import {FaEllipsisV, FaTrash, FaEdit} from 'react-icons/fa'
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import Loading from '../Components/Loading';
+import NoData from '../Components/NoData';
 
 function AdminVeiwCourses(){
     const [data, setData] = useState([]);
+    const[loading, setLoading] = useState(true);
     useEffect(() => {
         const apiUrl = "http://localhost:5000/courses";
         const fetchData = async () => {
           try {
             const response = await axios.get(apiUrl);
             setData(response.data);
+            setTimeout(() => {
+              setLoading(false); // Set loading to false after 1 second
+            }, 1000);
           } catch (error) {
             console.error("Error fetching data:", error);
           }
         };
        
-    
+       
         fetchData();
       }, []);
+
+      
 
       const deleteData = async (id) => {
         try {
@@ -40,14 +48,18 @@ function AdminVeiwCourses(){
 
     return(
         <>
-       
-         <div className="main grid grid-cols-1 p-3 sm2:grid-cols-2  md2:grid-cols-3  gap-3 lg:grid-cols-2 xl:grid-cols-3">
-         
+          {loading ? (
+            <div><Loading /></div>
+          ) : data.length === 0 ? (
+            <div><NoData/></div>
+          ) : (
+            <div className="main grid grid-cols-1 p-3 sm2:grid-cols-2  md2:grid-cols-3  gap-3 lg:grid-cols-2 xl:grid-cols-3">
+                
             {
                 data.map((data)=>(
                     <div key={data.id} className="courseCard rounded-1sm p-4 flex flex-col justify-between" id={style.course}>
-                     <Link className={style.list} to="/admin/AddCourseget">
-                     <div className="cardHead flex justify-between">
+                      <Link className={style.list} to="/admin/AddCourseget">
+                      <div className="cardHead flex justify-between">
                         <div className='flex'>
                             <img src={data.image} className='w-12' alt="img"/>
                             <p className='pt-3 pr-4 font-black'>{data.course_name}</p>
@@ -66,7 +78,7 @@ function AdminVeiwCourses(){
                         </div>
                 
                     </div>
-                   
+                    
                 <div className="cardContent">
                     <p>{data.course_description.substring(-1,50)+"........"}</p>
                     <p>{data.course_duration}</p>
@@ -81,7 +93,10 @@ function AdminVeiwCourses(){
                 ))
             }
             
-         </div>
+          </div>
+          ) }
+       
+         
         </>
     )
 }

@@ -28,4 +28,32 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.ck-editor__editable_inline {
+  min-height: 200px;
+  width: 550px;
+ 
+ 
+}
+
+.ck.ck-toolbar.ck-toolbar_grouping{
+  width: 550px;
+ 
+} 
+
+
+@media  (max-width: 768px) {
+  .ck-editor__editable_inline {
+    min-height: 100px;
+    width: 300px;
+   
+   
+  }
+  
+  .ck.ck-toolbar.ck-toolbar_grouping{
+    width: 300px;
+   
+  } 
+}
+
+
 
