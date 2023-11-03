@@ -30,8 +30,8 @@ import AddcourseGet from "./Admin/AddcourseGet";
 import LandingPage from "./Students/LandingPage";
 import RemedialTime from "./Students/RemedialTime"
 import FacilitatorDetails from "./Admin/FacilitatorDetails";
-
-
+import CourseDetails from "./Students/CourseDetails";
+import Courses from "./Components/Pages/Student/Courses";
 
 function App() {
   return (
@@ -66,12 +66,20 @@ function App() {
               <Route path="/admin/AddCourseMaterialDaft" element={<AddCouserMaterialDaft />}/>
           </Route>
           <Route path="/admin/facilitator-details/:id" element={ <FacilitatorDetails/>} />
-          <Route path ="/student/Navbar" element={<Student/>}/>
+          <Route path ="/student/Navbar" element={<Student/>}>
+             
+          </Route>
           <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
           <Route path="/facilitator" element={<Facilitator/>}/>
-          <Route path="/student/landingPage" element={<LandingPage/>}/>  
+          <Route path="/student/landingPage" element={<LandingPage/>}>
+          </Route> 
+           
+          <Route path ="/student/course" element={<Courses/>}>
+                <Route path =":id" element={<CourseDetails/>}/> 
+            </Route> 
+        
           <Route path="/student/remedialTime" element={< RemedialTime />}/> 
-     
+          
 
           {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}
         </Routes>

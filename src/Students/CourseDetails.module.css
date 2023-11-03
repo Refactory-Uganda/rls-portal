@@ -1,0 +1,91 @@
+#Aboutcourse{
+    background-color: rgba(54, 15, 54, 0.444);
+    color: white;
+    margin-top: 60px;
+    padding-top: 30px;
+}
+
+.image{
+    margin-top: 30px;
+    margin-right: 30px;
+    margin-left: 20px;
+    height: 100%;
+}
+#rowinfo{
+    box-shadow: 0 3px 8px rgba(83, 44, 86, 0.264);
+    margin-top: 40px;
+    margin-left: 50px;
+    margin-right: 50px;
+    text-align: center;
+    width: 90%;
+    /* height: 285px; */
+}
+.belowimage{
+    border: black;
+    margin-right: 30px;
+    margin-left: 20px;
+    box-shadow: 0 3px 8px rgba(83, 44, 86, 0.264);
+}
+
+.h5{
+  margin-left: 30%;  
+  padding-bottom: 20px;
+}
+
+.li{
+    padding-bottom: 20px;
+}
+
+.li2{
+    margin-top: 55px;
+    padding-bottom: 20px;
+}
+
+#topcompanies{
+   text-align: center;
+}
+
+
+#certificate{
+    box-shadow: 0 3px 8px rgba(83, 44, 86, 0.264); 
+    margin-bottom: 20px;
+    /* margin: 10px; */
+}
+
+.image2{
+    width: 200px;
+    /* margin-left: 30%; */
+    
+    
+}
+#image3{ 
+background-color: rgba(120, 11, 120, 0.16);
+
+}
+
+#coursecontent{
+    margin-top: 50px;
+}
+
+#content{
+    margin-bottom: 30px;
+}
+
+#accordion{
+    box-shadow: 0 3px 8px rgba(83, 44, 86, 0.264);
+}
+/* #accordion{
+    box-shadow: rgb(160, 95, 103);
+    background-color: blueviolet;
+    
+} */
+#custom_accordion_header:active{
+    box-shadow: none !important;
+    border: none;
+   
+}
+#custom_accordion_header:focus{
+    box-shadow: none !important;
+    border: none;
+   
+}

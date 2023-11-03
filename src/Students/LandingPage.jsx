@@ -7,10 +7,12 @@ import "react-multi-carousel/lib/styles.css";
 import CoursesCarousel from "../Components/Pages/Student/CoursesCarousel";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import { Link, Outlet} from "react-router-dom";
 import Footer from "../Components/MicroComponents/footer/Footer";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { NavLink } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 
 function LandingPage(props) {
   const [data, setData] = useState([]);
@@ -26,6 +28,10 @@ function LandingPage(props) {
     };
     fetchData();
   }, []);
+
+  const id = useParams()
+  
+
 
   const responsive = {
     superLargeDesktop: {
@@ -64,7 +70,7 @@ function LandingPage(props) {
           </div>
         </div>
       </div>
-      <CoursesCarousel />
+      <CoursesCarousel heading="We Collaborate with over" companies="20+ Companies"/>
 
       <div className="container-fluid" id={style.middlediv1}>
         <div className="container">
@@ -97,18 +103,19 @@ function LandingPage(props) {
         >
           {data.map((data, index) => (
             <div className="row">
-              <div className="col" id={style.Coursedisplaycol}>
-                <Card id={style.card} key={index}>
+              <div className="col" id={style.Coursedisplaycol} key={index}>
+                <NavLink href={`./course/${data._id}`} style={{textDecoration:"none"}}>
+                <Card id={style.card} >
                   <Card.Img src="../images/JavaScript---Thumbnail-1200-x-630.jpg" />
                   <Card.Body id={style.Coursedisplaybody}>
-                    <Card.Title> <strong> {data.course_name}</strong></Card.Title>
+                  <Card.Title> <strong> {data.course_name }{ data.id}</strong></Card.Title>
                     <Card.Text>
                       {data.course_description.substring(-1, 50) + "........"}
                     </Card.Text>
                     {/* <Button id={style.Coursedisplaybutton}>Enrol</Button> */}
                   </Card.Body>
                 </Card>
-               
+                </NavLink>
               </div>
             </div>
           ))}
@@ -257,8 +264,9 @@ function LandingPage(props) {
           </div>
         </div>
       </div>
-
+     
       <Footer />
+     
     </>
   );
 }

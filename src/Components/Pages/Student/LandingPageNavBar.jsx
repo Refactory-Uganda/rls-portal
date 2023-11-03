@@ -55,9 +55,9 @@ function  LandingPageNavBar({ name, ...props }) {
                 id={style.toggle}
               />
 
-              <Navbar.Brand href="#">
+              <Navbar.Brand href="/student/landingPage">
                 <img
-                  src="../img/refactoryLogoColored.png"
+                  src="/img/refactoryLogoColored.png"
                   alt=""
                   className={style.logoImage}
                 />
@@ -74,7 +74,7 @@ function  LandingPageNavBar({ name, ...props }) {
                 <Offcanvas.Header closeButton>
                   <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
                     <img
-                      src="../img/refactoryLogoColored.png"
+                      src="/img/refactoryLogoColored.png"
                       alt=""
                       className={style.logoImage}
                     />
