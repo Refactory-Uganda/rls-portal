@@ -280,6 +280,10 @@
   #Overlaytrigger{
     display: none;
   }
+  .overlay{
+   display: none;
+  }
+
 
 }
 

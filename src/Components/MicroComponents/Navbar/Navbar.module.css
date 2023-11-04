@@ -25,6 +25,7 @@
     padding-left:  470px;
     padding-right:  20px;
     width: 100vw;
+    z-index: 2;
   }
 .label{
     text-align: center;

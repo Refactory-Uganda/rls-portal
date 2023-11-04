@@ -28,7 +28,7 @@ function Login(props) {
         navigate("/admin/facilitator");
       }
       else if  (response.data.role === "Student"){
-        navigate("/admin/coursecontent");
+        navigate("/student/landingPage");
       }
      
       
