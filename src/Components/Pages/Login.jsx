@@ -74,16 +74,8 @@ function Login(props) {
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
-                  <div className={LoginCss.inputs}>
+                  <div className={LoginCss.login}>
                     <button className={LoginCss.button1} >Sign In</button>
-                  </div>
-                  <div className={LoginCss.inputs}>
-                    <p className={LoginCss.absentaccount}>
-                      If dont have an account please contract your suppervisor
-                      for account and later use the details for signing in to
-                      the platform , but for now you can <a href="">Cancel</a>{" "}
-                      and return to the home
-                    </p>
                   </div>
                 </form>
               </div>
@@ -95,7 +87,6 @@ function Login(props) {
         <div className="container-fluid" id="footercontainer">
           <div className="row">
             <div className="col" id={LoginCss.footer}>
-              <Footer />
             </div>
           </div>
         </div>

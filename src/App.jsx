@@ -29,6 +29,7 @@ import AddCourseEdit from "./Admin/AddcourseEdit";
 import AddcourseGet from "./Admin/AddcourseGet";
 import LandingPage from "./Students/LandingPage";
 import RemedialTime from "./Students/RemedialTime"
+import ViewMaterial from "./Students/ViewMaterial";
 import FacilitatorDetails from "./Admin/FacilitatorDetails";
 import Topic from "./Components/Pages/Course/Topic";
 import Assignment from "./Components/Pages/Course/Assignment";
@@ -81,7 +82,8 @@ function App() {
           <Route path ="/student/Navbar" element={<Student/>}/>
           <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
           <Route path="/facilitator" element={<Facilitator/>}/>
-          <Route path="student/landingPage" element={<LandingPage/>}/>   
+          <Route path="student/landingPage" element={<LandingPage/>}/> 
+          <Route path="student/ViewMaterial" element={<ViewMaterial/>}/>   
           {/* <Route path="student/viewcoursecontent" element={<ViewCourseContent/>}/>  */}
           <Route path="/student/landingPage" element={<LandingPage/>}/>  
           <Route path="/student/remedialTime" element={< RemedialTime />}/> 

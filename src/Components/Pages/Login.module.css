@@ -1,9 +1,10 @@
 .loginUsernameInput {
   width: 90%;
-  border-radius: 7px;
+  border-radius: 10px;
   border: cornsilk;
   padding: 10px;
   text-align: center;
+  border-color: rgb(42, 104, 106);
 }
 .loginPasswordInput {
   width: 90%;
@@ -14,21 +15,35 @@
 }
 .inputs {
   margin-top: 30px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  margin-left: 20px;
+  margin-right: 20px;
+  outline: #693769ff;
+}
+
+input{
+  border-radius: 20px;
+}
+
+.login{
+  margin-top: 50px;
 }
 .formcontainer {
-  background-color: #673467;
+  height: 80%;
   border-radius: 10px;
   margin-top: 100px;
   margin-bottom: 50px;
   text-align: center;
   padding-top: 40px;
+  box-shadow:  0 0 10px #c9d0d1, 0 0 20px #c9d0d1,
+  0 0 20px #c9d0d1, 0 0 20px #c9d0d1;
 }
 .absentaccount {
   color: white;
 }
 .button1 {
-  background-color: rgb(43, 140, 145);
-  color: black;
+  background-color: #693769ff;
+  color: white;
   border: rgb(42, 104, 106);
   padding: 5px;
   padding-left: 30px;
