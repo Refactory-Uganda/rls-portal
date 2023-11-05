@@ -1,8 +1,6 @@
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./Components/Pages/Login";
-import CourseContent from "./Admin/CourseContent";
-import AddCourseContent from "./Admin/AddCourseContent";
 import Landing from "./Components/Pages/Landing"
 import Admin from "./Admin/AdminLandingPage"
 import AddFacilitator from "./Admin/AddFacilitator"
@@ -11,10 +9,6 @@ import AssignCourseFacilitator from "./Admin/AssignCourseFacilitator.jsx";
 import PieChart from "./Components/MicroComponents/PieChart/PieChart";
 import ViewAndAddFacilitors from "./Admin/ViewAndAddFacilitors";
 import FacilitatorModules from "./Admin/facilitatorModules";
-import AddCourseContentDraft from "./Admin/AddCourseContentDraft";
-import AddCourseMaterial from "./Admin/AddCourseMaterial";
-import AddCourseMaterialField from "./Admin/AddCourseMaterialField";
-import AddCouserMaterialDaft from "./Admin/AddCouserMaterialDaft";
 import AdminVeiwCourses from "./Admin/AdminViewCourses";
 import AdminFacitatorContentAdded from "./Admin/AdminFacilitatorContentAdded";
 import Profile from "./Admin/AdminProfile";
@@ -63,20 +57,13 @@ function App() {
               <Route path="/admin/accountsetting" element={<AccountSetting/>}></Route>
               <Route path="/admin/setting" element={<Setting/>}></Route>
               <Route path="/admin/addcourse" element={<AddCourse/>}></Route>
-              <Route path="/admin/coursecontent" element={<CourseContent/>}/>
               <Route path="/admin/facilitatorcontentadded" element={<AdminFacitatorContentAdded/>}></Route>
               <Route path= '/admin/' element={<AdminVeiwCourses/>}/>
               <Route path= '/admin/piechart' element={<PieChart/>}/>
-              <Route path="/admin/addcoursecontent" element={<AddCourseContent/>}/>
-              <Route path="/admin/addcoursematerial" element={<AddCourseMaterial/>}/>
               <Route path= '/admin/addFacilitator' element={<AddFacilitator/>}/>
               <Route path="/admin/facilitator" element={<ViewAndAddFacilitors/>}></Route>
               <Route path= '/admin/assignCourseFacilitator' element={<AssignCourseFacilitator/>}/>
-              <Route path= '/admin/addCourseContentDraft' element={<AddCourseContentDraft/>}/>
               <Route path="/admin/facilitatorModules" element={<FacilitatorModules/>} />
-              <Route path="/admin/addCourseContentAdded" element={<AddCourseContent/>}/>
-              <Route path="/admin/AddCourseMaterialField" element={<AddCourseMaterialField />}/>
-              <Route path="/admin/AddCourseMaterialDaft" element={<AddCouserMaterialDaft />}/>
           </Route>
           <Route path="/admin/facilitator-details/:id" element={ <FacilitatorDetails/>} />
           <Route path ="/student/Navbar" element={<Student/>}/>

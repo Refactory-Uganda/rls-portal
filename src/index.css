@@ -45,13 +45,10 @@
   .ck-editor__editable_inline {
     min-height: 100px;
     width: 300px;
-   
-   
   }
   
   .ck.ck-toolbar.ck-toolbar_grouping{
     width: 300px;
-   
   } 
 }
 

@@ -6,7 +6,7 @@
     border-radius: 100px; /* Make the corners fully rounded */
 }
 
-.label input {
+.label .input {
     opacity: 0;
     width: 0;
     height: 0;
@@ -36,11 +36,11 @@
     border-radius: 100px; /* Make the corners fully rounded */
 }
 
-input:checked + .slider {
+.input:checked + .slider {
     background-color: #693769;
 }
 
-input:checked + .slider:before {
+.input:checked + .slider:before {
     transform: translateX(22px); /* Adjust the translation */
 }
 

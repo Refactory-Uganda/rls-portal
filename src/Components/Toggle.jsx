@@ -10,7 +10,7 @@ function ToggleSwitch() {
 
  return (
   <div className={`${styles.label} ${isChecked ? styles.checked : ''}`}>
-    <input type="checkbox" onChange={handleToggle} />
+    <input className={styles.input} type="checkbox" onChange={handleToggle} />
     <div className={styles.slider}></div>
   </div>
  );
