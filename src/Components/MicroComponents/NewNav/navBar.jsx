@@ -59,9 +59,10 @@ const NavBar = () => {
           <Link to="/admin/setting" className="list-group-item list-group-item-action d-flex align-items-center">
           <FaCog className="mr-2" /> Setting
           </Link>
-          <Link to="/login" className="list-group-item list-group-item-action d-flex align-items-center ">
-            <FaDoorOpen className="mr-2" /> SignOut
+          <Link to="/login" className={`list-group-item list-group-item-action border-t mt-[190px] d-flex align-items-center ${style.logout}`}>
+            <FaDoorOpen className="mr-2" /> LogOut
           </Link>
+          
         </div>
       </div>
       <div className={style.topSection}>
