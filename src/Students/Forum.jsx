@@ -17,8 +17,7 @@ export default function Forum() {
       {/* Center side components */}
 
       <div className="flex items-center justify-center flex-col  p-3 w-full lg:w-1/2">
-        {/* <Story /> */}
-        {/* <NewpostUploader /> */}
+        <NewpostUploader />
         {/* <Post /> */}
       </div>
 
