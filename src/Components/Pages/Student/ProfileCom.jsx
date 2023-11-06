@@ -1,39 +1,18 @@
 import { useNavigate } from "react-router-dom";
-import { useFirebase } from "../../firebase/Firebase";
+
 
 function ProfileCom() {
   const navigate = useNavigate();
-  const firebase = useFirebase();
-  const id = firebase.userId;
+ 
   return (
     <div className="w-3/4 h-96  bg-black/10 shadow-md rounded-3xl overflow-hidden relative hidden lg:flex items-center justify-center flex-col text-white">
-      {!firebase.url ? (
+     
         <img
-          src="/user.png"
-          alt="userPic"
-          className="w-full bg-black h-1/5 object-cover rounded-lg "
-        />
-      ) : (
-        <img
-          src={firebase.url}
-          alt="userPic"
-          className="w-full h-1/5 object-cover rounded-lg "
-        />
-      )}
-
-      {!firebase.url ? (
-        <img
-          src="/user.png"
-          alt="userPic"
-          className="w-20 h-20 bg-gray-500 object-cover rounded-lg absolute border-4 border-gray-700 top-14 shadow-2xl"
-        />
-      ) : (
-        <img
-          src={firebase.url}
+          src='../../../assets/Avatar (2).png'
           alt="userPic"
           className="w-20 h-20 object-cover rounded-lg absolute border-4 border-gray-700 top-14 shadow-2xl"
         />
-      )}
+      
 
       <span className="w-full flex items-center justify-between px-7 h-1/5 ">
         <span className="flex items-center justify-center flex-col">
