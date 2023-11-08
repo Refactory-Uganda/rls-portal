@@ -6,7 +6,8 @@ import { FaRegCommentDots } from "react-icons/fa";
 
 import { useEffect,  } from "react";
 import profile from '../../../assets/Avatar (2).png'
-function SinglePost(props) {
+import style from './SinglePost.module.css'
+function SinglePost() {
 
  
 
@@ -17,52 +18,52 @@ function SinglePost(props) {
 
   return (
     <div
-      className=" bg-black/10 w-full lg:px-4 py-2 my-3  rounded-3xl flex items-center justify-center flex-col"
+      className={style.singlePost}
      
     >
       {/* post top section  */}
-      <span className="w-full flex items-center justify-center my-2">
-        <span className="w-1/12 flex items-center justify-center">
+      <span className={style.spanOne}>
+        <span className={style.spanTwo}>
         
             <img
             
               src={profile}
               alt="userPic"
-              className="lg:w-10 lg:h-10 w-8 h-8 rounded-2xl object-cover border-2 bg-gray-500 border-gray-500 cursor-pointer"
+              className={style.imgOne}
              
             />
          
         </span>
-        <span className="w-3/4  flex items-start justify-center  flex-col">
+        <span className={style.spanThree}>
           <h3
-            className="mx-2 text-gray-400 text-xs cursor-pointer font-semibold my-1"
+            className={style.headerOne}
          
           >
           isaacopini8@gmail.com
           </h3>
 
           <h3
-            className="mx-2 text-gray-200 text-xs lg:text-sm cursor-pointer font-semibold flex items-center justify-center"
+            className={style.headerTwo}
            
           >
           Opipi
-            <span className="mx-2 text-xs text-gray-500 flex items-center justify-center">
+            <span className={style.spanFour}>
               {" "}
-              <p className="mx-2"> 10:00pm</p>
-              <p> 10:00pm</p>
+              <p className={style.pOne}> 10:00pm</p>
+            
             </span>
           </h3>
         </span>
-        <span className="w-1/12   flex items-center justify-center">
+        <span className={style.spanFive}>
           <BsThreeDotsVertical
             fontSize={22}
-            className="text-white cursor-pointer my-2 rotate-90"
+            className={style.BsThree}
           />
         </span>
       </span>
-      <span className="text-white text-[8px] lg:text-xs w-full px-5 my-2 font-light tracking-wider">
-        {/* eslint-disable-next-line react/prop-types */}
-        {props.disc}
+      <span className={style.spanSix}>
+     
+        Hey its I opipi
       </span>
       {/* post image section  */}
       <span className="w-full object-cover px-5 my-4">
