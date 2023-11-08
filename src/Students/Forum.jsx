@@ -1,34 +1,34 @@
-
-// import LandingPageNavBar from '../Components/Pages/Student/LandingPageNavBar'
+import React from 'react'
 import ProfileCom from '../Components/Pages/Student/ProfileCom'
 import SkillCom from '../Components/Pages/Student/SkillCom'
-
+import NewpostUploader from '../Components/Pages/Student/NewpostUploader'
+import style from './forum.module.css'
 export default function Forum() {
   return (
-    <>
-     <div className="w-full flex items-start justify-center">
-      {/* Left side components */}
+     <div className={style.container}>
+     {/* Left side components */}
 
-      <div className="hidden lg:flex items-center justify-center flex-col p-4 w-0 md:w-1/4 sticky left-0 top-16">
-        <ProfileCom />
-        <SkillCom/>
-      </div>
+     <div className={style.left}>
+       <ProfileCom />
+       <SkillCom
+       />
+       <h1>left side of things</h1>
+     </div>
 
-      {/* Center side components */}
+     {/* Center side components */}
 
-      <div className="flex items-center justify-center flex-col  p-3 w-full lg:w-1/2">
-        <NewpostUploader />
-        {/* <Post /> */}
-      </div>
+     <div className={style.main}>
+       <NewpostUploader/>
+       <h1>Main Section</h1>
+       {/* <Post/> */}
+     </div>
 
-      {/* Right side components */}
+     {/* Right side components */}
 
-      <div className="hidden lg:flex items-center justify-center flex-col  p-3 w-1/4 sticky right-0 top-16">
-        {/* <Recent /> */}
-      </div>
-    </div>
-   
- 
-    </>
+     <div className={style.right}>
+       {/* <Recent /> */}
+       <h1> Right side OF things</h1>
+     </div>
+   </div>
   )
 }

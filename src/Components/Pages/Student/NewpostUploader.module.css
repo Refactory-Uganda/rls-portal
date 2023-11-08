@@ -1,0 +1,175 @@
+.container {
+     display: flex;
+     padding: 0.5rem 0.75rem;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     border-radius: 0.75rem;
+     width: 100%;
+     background-color: whitesmoke;
+   }
+   
+   @media (min-width: 1024px) {
+     .container {
+       width: 80%;
+     }
+   }
+   .span {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     width: 100%;
+   }
+   .imgOne {
+     object-fit: cover;
+     overflow: hidden;
+     border-radius: 1rem;
+     border-width: 2px;
+     border-color: #6B7280;
+     width: 2.5rem;
+     height: 2.5rem;
+     background-color: white;
+   }
+   .BsImage {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem; 
+    color: #059669;
+  }
+  
+   @media (min-width: 1024px) {
+     .imgOne {
+       width: 3rem;
+       height: 3rem;
+     }
+   }
+   .inputOne {
+     padding-left: 1rem;
+     padding-right: 1rem;
+     margin-left: 0.5rem;
+     margin-right: 0.5rem;
+     border-radius: 0.5rem;
+     outline-style: none;
+     width: 75%;
+     height: 2rem;
+     font-size: 0.75rem;
+     line-height: 1rem;
+     color: #D1D5DB;
+   }
+   
+   @media (min-width: 1024px) {
+     .inputOne {
+       font-size: 0.875rem;
+       line-height: 1.25rem;
+     }
+   }
+   .spantwo {
+     display: flex;
+     margin-top: 0.75rem;
+     margin-bottom: 0.75rem;
+     justify-content: flex-end;
+     align-items: center;
+     width: 100%;
+   }
+   
+   @media (min-width: 1024px) {
+     .spantwo {
+       width: 80%;
+     }
+   }
+   .labelOne {
+     display: flex;
+     padding: 0.5rem 0.75rem;
+     justify-content: center;
+     align-items: center;
+     border-radius: 0.5rem;
+     cursor: pointer;
+     
+   
+     @media (min-width: 1024px) {
+       margin-right: 2rem;
+     }
+   }
+   .videoLabel {
+    display: flex;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-right: 0.25rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  
+    @media (min-width: 1024px) {
+      margin-right: 2rem;
+    }
+  }
+  .videoMd {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+    color: #2563EB;
+  }
+  .videoText {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: black;
+  }
+  .videoText {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: black;
+  }
+  .textYellow {
+    margin-left: 0.25rem;
+margin-right: 0.25rem; 
+color: #D97706; 
+
+  }
+  .schedule {
+    display: flex;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+  .divupload {
+    display: flex;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    align-items: center;
+  }
+  .uploadform {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  .uploadDivTwo {
+    display: flex;
+    position: relative;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.375rem;
+    color: #ffffff;
+    background-color: #374151;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+    @media (min-width: 768px) {
+      width: 25%;
+    }
+  }
+  .fileupload {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+  }

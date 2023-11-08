@@ -1,21 +1,20 @@
 import { BsImage, BsFillCalendar2HeartFill } from "react-icons/bs";
 import { MdOutlineSlowMotionVideo, MdOutlinePoll } from "react-icons/md";
 import { ImCross } from "react-icons/im";
-import { useFirebase } from "../../firebase/Firebase";
-import { useState } from "react";
 
+import { useState } from "react";
+import style from './NewpostUploader.module.css'
 function NewpostUploader() {
   const [uploadData, setUploadData] = useState(false);
   const [cover, setCover] = useState("");
   const [disc, setDisc] = useState("");
   const [value, setValue] = useState("Upload");
 
-  const firebase = useFirebase();
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await firebase.handleCreatePost(disc, cover);
-    setUploadData(false);
+       setUploadData(false);
   };
 
   const handleClick = () => {
@@ -29,72 +28,66 @@ function NewpostUploader() {
   };
 
   return (
-    <div className="w-full lg:w-4/5  rounded-xl px-3 py-2  bg-black/20  flex items-center justify-center flex-col">
-      <span className="flex items-center justify-center w-full">
-        {!firebase.url ? (
-          <img
-            src="/user.png"
-            alt=""
-            className="lg:w-12 bg-black lg:h-12 w-10 h-10 rounded-2xl border-2 border-gray-500 object-cover overflow-hidden "
-          />
-        ) : (
-          <img
-            src={firebase.url}
-            alt=""
-            className="lg:w-12 lg:h-12 w-10 h-10 rounded-2xl border-2 border-gray-500 object-cover overflow-hidden"
-          />
-        )}
+    <div className={style.container}>
 
+
+      <span className={style.span}>
+        
+          <img
+            src="../../../assets/Avatar (2).png"
+            alt=""
+            className={style.imgOne}
+          />
         <input
           type="text"
-          className="w-3/4 lg:h-9 h-8 bg-black/40 mx-2  rounded-lg px-4 text-gray-300 outline-none text-xs lg:text-sm"
+          className={style.inputOne}
           placeholder="Tell your friends about your thoughts..."
           maxLength={1}
           onChange={() => setUploadData(true)}
         />
       </span>
 
-      <span className="flex items-center justify-end w-full lg:w-4/5 my-3">
+      <span className={style.spantwo}>
         <label
-          className="flex items-center justify-center  bg-black/20 px-3 rounded-lg cursor-pointer py-2  lg:mr-8"
+          className={style.labelOne}
           onClick={() => setUploadData(true)}
         >
-          <BsImage className="text-green-600 mx-1" />
-          <h3 className="text-white text-xs">Photo</h3>
+          <BsImage className={style.BsImage} />
+          <h3 className={style.videoText}>Photo</h3>
         </label>
         <label
-          className="flex items-center justify-center  bg-black/20 px-3 rounded-lg cursor-pointer py-2 mr-1 lg:mr-8"
+          className={style.videoLabel}
           htmlFor="video"
         >
           {/* <input type="file" id='video' className='hidden' accept="video/mp4,video/mkv, video/x-m4v,video/*"/> */}
           <MdOutlineSlowMotionVideo
             fontSize={18}
-            className="text-blue-600 mx-1"
+            className={style.videoMd}
           />
-          <h3 className="text-white text-xs">Video</h3>
+          <h3 className={style.videoText}>Video</h3>
         </label>
-        <label className="flex items-center justify-center  bg-black/20 px-3 rounded-lg cursor-pointer py-2 mr-1 lg:mr-8">
-          <MdOutlinePoll fontSize={18} className="text-orange-600 mx-1" />
-          <h3 className="text-white text-xs">Poll</h3>
+        <label className={style.labelOne}>
+          <MdOutlinePoll fontSize={18} className={style.textYellow} />
+          <h3 className={style.videoText}>Poll</h3>
         </label>
-        <label className="flex items-center justify-center  bg-black/20 px-3 rounded-lg cursor-pointer py-2">
-          <BsFillCalendar2HeartFill className="text-yellow-600 mx-1" />
-          <h3 className="text-white text-xs">Schedule</h3>
+        <label className={style.schedule}>
+          <BsFillCalendar2HeartFill className={style.textYellow} />
+          <h3 className={style.videoText}>Schedule</h3>
         </label>
       </span>
 
       {uploadData && (
-        <div className="fixed w-screen h-screen top-0 left-0 bg-black/50 z-50 flex items-center justify-center">
+        <div className={style.divupload}>
           <form
-            className="w-full flex items-center justify-center h-full"
+            className={style.uploadform}
             onSubmit={handleSubmit}
           >
-            <div className="md:w-1/4  bg-gray-700 relative shadow-lg rounded-md flex items-center justify-center flex-col text-white px-3">
+            <div className={style.uploadDivTwo}>
               <input
                 type="file"
                 id="image"
                 accept="image/*"
-                className="my-3 cursor-pointer file:bg-yellow-200 file:border-yellow-400 file:text-base file:font-semibold file:rounded-md file:mx-5 file:outline-none file:shadow-md file:font-sans file:cursor-pointer file:px-4"
+                className={style.fileupload}
                 onChange={(e) => setCover(e.target.files[0])}
                 required
               />
