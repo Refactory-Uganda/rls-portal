@@ -30,7 +30,7 @@ import AddcourseGet from "./Admin/AddcourseGet";
 import LandingPage from "./Students/LandingPage";
 import RemedialTime from "./Students/RemedialTime"
 import FacilitatorDetails from "./Admin/FacilitatorDetails";
-
+import StudentTemplate from "./Students/StudentTemplate";
 
 
 function App() {
@@ -66,11 +66,16 @@ function App() {
               <Route path="/admin/AddCourseMaterialDaft" element={<AddCouserMaterialDaft />}/>
           </Route>
           <Route path="/admin/facilitator-details/:id" element={ <FacilitatorDetails/>} />
-          <Route path ="/student/Navbar" element={<Student/>}/>
-          <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
           <Route path="/facilitator" element={<Facilitator/>}/>
-          <Route path="/student/landingPage" element={<LandingPage/>}/>  
-          <Route path="/student/remedialTime" element={< RemedialTime />}/> 
+
+          {/* this the student loged in route */}
+          <Route path="/student" element={<StudentTemplate/>}>
+                <Route path="/student/template/enrolledcourses" element={<EnrolledCourses/>}></Route>
+                <Route path="/student/template/landingPage" element={<LandingPage/>}/>  
+                <Route path="/student/template/remedialTime" element={< RemedialTime />}/> 
+          </Route>
+          <Route path ="/student/Navbar" element={<Student/>}/>
+          
      
 
           {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}
