@@ -3,6 +3,7 @@ import ProfileCom from '../Components/Pages/Student/ProfileCom'
 import SkillCom from '../Components/Pages/Student/SkillCom'
 import NewpostUploader from '../Components/Pages/Student/NewpostUploader'
 import style from './forum.module.css'
+import Post from '../Components/Pages/Student/Post'
 export default function Forum() {
   return (
      <div className={style.container}>
@@ -19,8 +20,8 @@ export default function Forum() {
 
      <div className={style.main}>
        <NewpostUploader/>
-       <h1>Main Section</h1>
-       {/* <Post/> */}
+       
+       <Post/>
      </div>
 
      {/* Right side components */}

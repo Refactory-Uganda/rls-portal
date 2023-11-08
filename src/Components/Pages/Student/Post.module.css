@@ -1,0 +1,20 @@
+.post {
+     display: flex;
+     flex-direction: column-reverse;
+     justify-content: center;
+     align-items: center;
+     width: 100%;
+     padding-top: 0.5rem;
+     padding-bottom: 0.5rem;
+     margin-top: 0.5rem;
+     margin-bottom: 0.5rem;
+   }
+   
+   @media (min-width: 1024px) {
+     .post-container {
+       padding-left: 0.75rem;
+       padding-right: 0.75rem;
+       width: 80%;
+     }
+   }
+   

@@ -4,6 +4,7 @@ import { ImCross } from "react-icons/im";
 
 import { useState } from "react";
 import style from './NewpostUploader.module.css'
+import profile from '../../../assets/Avatar (2).png'
 function NewpostUploader() {
   const [uploadData, setUploadData] = useState(false);
   const [cover, setCover] = useState("");
@@ -34,7 +35,7 @@ function NewpostUploader() {
       <span className={style.span}>
         
           <img
-            src="../../../assets/Avatar (2).png"
+            src={profile}
             alt=""
             className={style.imgOne}
           />
