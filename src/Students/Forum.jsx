@@ -10,7 +10,7 @@ export default function Forum() {
      {/* Left side components */}
 
      <div className={style.left}>
-       {/* <ProfileCom /> */}
+       <ProfileCom />
        {/* <SkillCom
        /> */}
        {/* <h1>left side of things</h1> */}
