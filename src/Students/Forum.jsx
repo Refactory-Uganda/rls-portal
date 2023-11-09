@@ -10,10 +10,10 @@ export default function Forum() {
      {/* Left side components */}
 
      <div className={style.left}>
-       <ProfileCom />
-       <SkillCom
-       />
-       <h1>left side of things</h1>
+       {/* <ProfileCom /> */}
+       {/* <SkillCom
+       /> */}
+       {/* <h1>left side of things</h1> */}
      </div>
 
      {/* Center side components */}
@@ -28,7 +28,7 @@ export default function Forum() {
 
      <div className={style.right}>
        {/* <Recent /> */}
-       <h1> Right side OF things</h1>
+       {/* <h1> Right side OF things</h1> */}
      </div>
    </div>
   )
