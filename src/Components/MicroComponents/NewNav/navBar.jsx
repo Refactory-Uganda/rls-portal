@@ -2,7 +2,7 @@
 import style from './navbar.module.css'; 
 import { MdDashboard } from 'react-icons/md';
 import { BsLink, BsPeople } from 'react-icons/bs';
-import { FaBars, FaBook, FaCog, FaDoorOpen, FaTimes } from 'react-icons/fa';
+import { FaBars,  FaCog, FaDoorOpen, FaTimes } from 'react-icons/fa';
 import { useState } from 'react';
 import {Link} from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -45,23 +45,14 @@ const NavBar = () => {
             </Dropdown.Menu>
           </Dropdown>
           </Link>
-          <Link to="#" className="list-group-item list-group-item-action d-flex align-items-center " >
-          <Dropdown className={style.dropdown}>
-            <Dropdown.Toggle variant="none" id="dropdown-basic" className={`d-flex align-items-center ${style.dropdownToggle}`}>
-            <FaBook className="mr-2" /> Course
-            </Dropdown.Toggle>
-            <Dropdown.Menu style={{backgroundColor:'#693769'}}>
-              <Dropdown.Item href="#/action-3" className='align-items-center '><Link to="/admin/addcourse" className={style.item}>Add Course</Link></Dropdown.Item>
-              <Dropdown.Item href="#/action-2"><Link to="/admin/addcoursematerial" className={style.item}>Add Content</Link></Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-          </Link>
+          
           <Link to="/admin/setting" className="list-group-item list-group-item-action d-flex align-items-center">
           <FaCog className="mr-2" /> Setting
           </Link>
-          <Link to="/login" className="list-group-item list-group-item-action d-flex align-items-center ">
-            <FaDoorOpen className="mr-2" /> SignOut
+          <Link to="/login" className={`list-group-item list-group-item-action border-t mt-[250px] d-flex align-items-center ${style.logout}`}>
+            <FaDoorOpen className="mr-2" /> LogOut
           </Link>
+          
         </div>
       </div>
       <div className={style.topSection}>

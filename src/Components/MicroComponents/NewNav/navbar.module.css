@@ -37,6 +37,7 @@ body {
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
+  border-bottom-left-radius:15px;
 }
 
 #sidebar header {
@@ -69,6 +70,14 @@ body {
 #sidebar .nav a {
   background: none;
   border-bottom: 1px solid #455A64;
+  color: #fff;
+  font-size: 14px;
+  padding: 16px 24px;
+}
+#sidebar .nav  .logout{
+  background: none;
+  border-top: 1px solid #455A64;
+  border-bottom: none;
   color: #fff;
   font-size: 14px;
   padding: 16px 24px;

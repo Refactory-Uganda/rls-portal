@@ -1,16 +1,20 @@
 
 //import NavBar from "../Components/MicroComponents/Navbar/Navbar.jsx";
 import { Link } from 'react-router-dom';
-
 import style from './AdminViewCourses.module.css';
 import {FaEllipsisV, FaTrash, FaEdit} from 'react-icons/fa'
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import Loading from '../Components/Loading';
 import NoData from '../Components/NoData';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+
+
 
 function AdminVeiwCourses(){
     const [data, setData] = useState([]);
+    const [deleteCourseId, setDeleteCourseId] = useState(null);
+    const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
     const[loading, setLoading] = useState(true);
     useEffect(() => {
         const apiUrl = "http://localhost:5000/courses";
@@ -25,22 +29,36 @@ function AdminVeiwCourses(){
             console.error("Error fetching data:", error);
           }
         };
-       
-       
         fetchData();
       }, []);
 
-      
+      const handleDelete = (id) => {
+        // Set the facilitator ID to be deleted and open the confirmation modal
+        setDeleteCourseId(id);
+        setOpenConfirmationModal(true);
+      };
+
+      const handleCloseConfirmationModal = () => {
+        // Close the confirmation modal
+        setOpenConfirmationModal(false);
+      };
+
+
 
       const deleteData = async (id) => {
-        try {
-          await axios.delete(`http://localhost:5000/courses/${id}`);
-          setData(data.filter((course) => course._id !== id));
-          alert("Data deleted successfully");
-        } catch (error) {
-          console.error("Error deleting data:", error);
-          alert(error)
+        if(deleteCourseId){
+          try {
+            await axios.delete(`http://localhost:5000/courses/${id}`);
+            setData(data.filter((course) => course._id !== deleteCourseId));
+            setDeleteCourseId(null)
+            setOpenConfirmationModal(false);
+            alert("Data deleted successfully");
+          } catch (error) {
+            console.error("Error deleting data:", error);
+            alert(error.message)
+          }
         }
+        
       };
 
     
@@ -70,7 +88,7 @@ function AdminVeiwCourses(){
                         <FaEllipsisV />
                         </button>
                         <ul className="dropdown-menu bg-bluegreen" style={{minWidth: '5px', backgroundColor:'#673467'}}>
-                            <li><Link className="dropdown-item " to="#"><FaTrash color='#58C5C8' onClick={()=>deleteData(data._id)}/></Link></li>
+                            <li><Link className="dropdown-item " to="#"><FaTrash color='#58C5C8' onClick={()=>handleDelete(data._id)}/></Link></li>
                             <hr></hr>
                             <li><Link className="dropdown-item" to="/admin/AddCourseEdit"><FaEdit color='#58C5C8'/></Link></li>
                         </ul>
@@ -96,7 +114,22 @@ function AdminVeiwCourses(){
           </div>
           ) }
        
-         
+         {/* Confirmation Modal */}
+      <Dialog open={openConfirmationModal} onClose={handleCloseConfirmationModal}>
+        <DialogTitle>Confirm Deletion</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Are you sure you want to delete this Course?</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseConfirmationModal} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={deleteData} color="warning">
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {/* Confirmation Modal */}
         </>
     )
 }

@@ -1,116 +1,116 @@
-import  { useState } from 'react';
-import axios from 'axios';
+
 import style from './Setting.module.css';
+import { Link } from 'react-router-dom';
+import ToggleSwitch from '../Components/Toggle';
 
 const Setting = () => {
-  const [format, setFormat] = useState({
-    username: "",
-    email:"",
-    fullname:"",
-    phone: "",
-  });
-  const [selectedFile, setSelectedFile] = useState();
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormat(prevState => ({...prevState, [name]: value}));
-  };
-
-  const handleFileUpload = (e) => {
-    setSelectedFile(e.target.files[0]);
-  };
-
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    
-    const formData = new FormData();
-    formData.append('file', selectedFile);
-    formData.append('username', format.username);
-    formData.append('fullname', format.fullname);
-    formData.append('email', format.email);
-    formData.append('phone', format.phone);
-
-    try {
-      const response = await axios.put('/api/user', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleDelete = async () => {
-    try {
-      const response = await axios.delete('/api/user');
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  
 
   return (
     <>
-      <div className={style.body}>
-        <h2 className={style.header}> Setting</h2>
-        <div className={style.profile}>
-          <div>
-            <h5 className={style.header} >Your Avatar</h5>
-            <img  src='/images/profile.jpg' className={style.img}/>
+  <main role="main" className={`bg-white p-8 ${style.main}`}>
+  <div className={`bg-gray-100 p-4 rounded-lg ${style.profile}`}>
+    <h2 className="text-2xl font-bold">Profile</h2>
+    <h3 className="text-lg text-gray-500 mt-4">Profile picture</h3>
+    <div className={`${style.container}`}>
+    <Link
+        to="/admin/accountsetting"
+        className="relative  items-center justify-center  text-lg text-white rounded-full bg-emerald-500"
+      >
+        {" "}
+        CP{" "}
+        <img
+          src="/images/profile.jpg"
+          className={`${style.img}`}
+          alt=""
+        />
+      </Link>
+    </div>
+    <h3 className="text-lg text-gray-500 mt-4">Account settings</h3>
+    <p className="text-sm text-gray-600">
+      Change your password and security options, and access other Google services.{" "}
+      <Link
+        className="text-blue-500 hover:underline"
+        rel="noreferrer"
+        href="/admin/accountsetting"
+      >
+        Manage
+      </Link>
+    </p>
+    <h3 className="text-lg text-gray-500 mt-4">Change name</h3>
+    <p className="text-sm text-gray-600">
+      To change your name, go to your{" "}
+      <Link
+        className="text-blue-500 hover:underline"
+        rel="noreferrer"
+        to="/admin/accountsetting"
+      >
+        account settings
+      </Link>
+      .
+    </p>
+  </div>
+  <div className="hidden">
+    {/* Hidden content */}
+  </div>
+  <div className={`bg-gray-100 p-4 rounded-lg mt-4 ${style.notification}`}>
+    <div>
+      <h2 className="text-2xl font-bold">Notifications</h2>
+      <div className="mt-4">
+        <h3 className="text-lg">Email</h3>
+        <p className="text-sm text-gray-600">
+          These settings apply to the notifications you get by email.{" "}
+          <Link
+            className="text-blue-500 hover:underline"
+            rel="noreferrer"
+            target="_blank"
+            to="/admin/accountsetting"
+          >
+            Learn more
+          </Link>
+        </p>
+        <label className="flex items-center mt-2 cursor-pointer">
+          <div className="flex-1">Allow email notifications</div>
+          <div className="w-20 h-10 bg-gray-200 rounded-full relative">
+          <div className="w-16 h-10 bg-blue-500 flex items-center justify-center  rounded-full shadow-md transform translate-x-8 absolute top-0 left-0">
+            <ToggleSwitch />
           </div>
-          <div className={style.btn}>
-            <button className={style.button}>Upload </button>
-            <input type="file" onChange={handleFileUpload} />
-            <button className={style.button} onClick={handleUpdate}>Update Profile</button>
-            <button className={style.button2} onClick={handleDelete}>Delete Account</button>
           </div>
-        </div>
-        <hr className={style.hr}/>
-        <form className={style.form} onSubmit={handleUpdate}>
-          <div className={style.forms}>
-            <div className={style.label}>
-              <label className={style.lb}>Username</label>
-              <input type='text' name='username' className={style.input}  placeholder=' Input the Username' value={format.username} onChange={handleChange}/>
-            </div>
-            <div className={style.label}>
-              <label className={style.lb}>Full Name</label>
-              <input type='text' name='fullname' className={style.input}  placeholder='Please Input the Full Name' value={format.fullname} onChange={handleChange}/>
-            </div>
+        </label>
+      </div>
+    </div>
+    <div className="mt-4">
+      <div>
+        <h3 className="text-lg">Comments</h3>
+        <label className="flex items-center mt-2 cursor-pointer">
+          <div className="flex-1">Comments on your posts</div>
+          <div className="w-20 h-10 bg-gray-200 rounded-full relative">
+          <div className="w-16 h-10 bg-blue-500 flex items-center justify-center  rounded-full shadow-md transform translate-x-8 absolute top-0 left-0">
+            <ToggleSwitch />
           </div>
-          <hr className={style.hr}/>
-          <div className={style.forms}>
-            <div className={style.label}>
-              <label className={style.lb}>Email address:</label>
-              <input type='email' name='email' className={style.input}  placeholder=' Input the Email address' value={format.email} onChange={handleChange}/>
-            </div>
-            <div className={style.label}>
-              <label className={style.lb}>Phone Number:</label>
-              <input type='text' name='phone' className={style.input}  placeholder=' Input the Phone Number' value={format.phone} onChange={handleChange}/>
-            </div>
           </div>
-        </form>
-        <hr className={style.hr}/>
-        <div>
-          <div>
-            <h2 className={style.header}>Linked Account</h2>
-                  <h4 className={style.head}>connect your google account for easy accesibility</h4>
-              </div>
-              <div className={style.google}>
-                <div className={style.goimg}>
-                  <img src='/images/google.svg' className={style.img1}/>
-                  <h3 className={style.text}>Sign in with Google</h3>
-                </div>
-                <div>
-                <button className={style.button}>Connect </button>
-                </div>
-              </div>
+        </label>
+        <label className="flex items-center mt-2 cursor-pointer">
+          <div className="flex-1">Comments that mention you</div>
+          <div className="w-20 h-10 bg-gray-200 rounded-full relative">
+          <div className="w-16 h-10 bg-blue-500 flex items-center justify-center  rounded-full shadow-md transform translate-x-8 absolute top-0 left-0">
+            <ToggleSwitch />
+          </div>
+          </div>
+        </label>
+        <label className="flex items-center mt-2 cursor-pointer">
+          <div className="flex-1">Private comments on work</div>
+          <div className="w-20 h-10 bg-gray-200 rounded-full relative">
+          <div className="w-16 h-10 bg-blue-500 flex items-center justify-center  rounded-full shadow-md transform translate-x-8 absolute top-0 left-0">
+            <ToggleSwitch />
+          </div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+</main>
 
-            </div>
-            
-           
-       </div>
     </>
   )
 }
