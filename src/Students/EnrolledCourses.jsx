@@ -1,4 +1,3 @@
-
 import demo from '../Components/Pages/demo.json'
 import style from './EnrolledCourses.module.css';
 import {FaEllipsisV, FaTrash, FaEdit} from 'react-icons/fa'
