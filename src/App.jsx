@@ -32,6 +32,7 @@ import Content from "./Components/Pages/Course/content";
 import Material from "./Components/Pages/Course/Material";
 import Project from "./Components/Pages/Course/Project";
 import Forum from "./Students/Forum.jsx";
+import StudentTemplate from "./Students/StudentTemplate";
 // import ViewCourseContent from "./Components/Pages/Student/ViewCourseContent";
 import CourseDetails from "./Students/CourseDetails";
 import Courses from "./Components/Pages/Student/Courses";
@@ -70,20 +71,32 @@ function App() {
               <Route path="/admin/facilitatorModules" element={<FacilitatorModules/>} />
           </Route>
           <Route path="/admin/facilitator-details/:id" element={ <FacilitatorDetails/>} />
-          <Route path ="/student/Navbar" element={<Student/>}/>
-          <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
           <Route path="/facilitator" element={<Facilitator/>}/>
-          <Route path="student/landingPage" element={<LandingPage/>}/> 
-          <Route path="student/ViewMaterial" element={<ViewMaterial/>}/>
-          <Route path="student/ViewAssignments" element={<ViewAssignments/>}/>    
+
+          {/* this the student loged in route */}
+          <Route path="/student" element={<StudentTemplate/>}>
+                <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
+                <Route path="/student/landingPage" element={<LandingPage/>}/>  
+                <Route path="/student/remedialTime" element={< RemedialTime />}/> 
+                <Route path="student/ViewMaterial" element={<ViewMaterial/>}/>
+                <Route path="student/ViewAssignments" element={<ViewAssignments/>}/> 
+                <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route> 
+                <Route path ="/student/course" element={<Courses/>}>
+                    <Route path =":id" element={<CourseDetails/>}/> 
+                </Route>  
+                <Route path= '/student/forum' element={< Forum/>}/>
+                <Route path="/student/categories" element={<CategoriesPage/>}></Route> 
+          </Route>
+          {/* <Route path ="/student/Navbar" element={<Student/>}/>
+          */}
+          <Route path="/facilitator" element={<Facilitator/>}/>
+          {/* <Route path="student/landingPage" element={<LandingPage/>}/> 
+         */}
           {/* <Route path="student/viewcoursecontent" element={<ViewCourseContent/>}/>  */}
-          <Route path="/student/landingPage" element={<LandingPage/>}/>  
-          <Route path ="/student/course" element={<Courses/>}>
-                <Route path =":id" element={<CourseDetails/>}/> 
-            </Route> 
-          <Route path="/student/remedialTime" element={< RemedialTime />}/> 
-          <Route path= '/student/forum' element={< Forum/>}/>
-          <Route path="/student/categories" element={<CategoriesPage/>}></Route>
+          {/* <Route path="/student/landingPage" element={<LandingPage/>}/>  
+         */}
+          {/* <Route path="/student/remedialTime" element={< RemedialTime />}/>  */}
+         
         </Routes>
       </Router>
       
