@@ -31,6 +31,7 @@ import Assignment from "./Components/Pages/Course/Assignment";
 import Content from "./Components/Pages/Course/content";
 import Material from "./Components/Pages/Course/Material";
 import Project from "./Components/Pages/Course/Project";
+import Forum from "./Students/Forum.jsx";
 // import ViewCourseContent from "./Components/Pages/Student/ViewCourseContent";
 
 
@@ -76,7 +77,7 @@ function App() {
           {/* <Route path="student/viewcoursecontent" element={<ViewCourseContent/>}/>  */}
           <Route path="/student/landingPage" element={<LandingPage/>}/>  
           <Route path="/student/remedialTime" element={< RemedialTime />}/> 
-          {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}
+          <Route path= '/student/forum' element={< Forum/>}/>
         </Routes>
       </Router>
       
