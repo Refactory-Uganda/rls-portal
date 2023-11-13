@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './ViewAssignments.module.css';
 import LandingPageNavBar from '../Components/Pages/Student/LandingPageNavBar';
+import Sidebar from "../Components/Pages/Student/sideBar"
 import Card from 'react-bootstrap/Card';
 import demo from '../Components/Pages/demo.json'
 
@@ -8,11 +9,11 @@ const ViewAssignments = () => {
 
   return (
     <>
+    <Sidebar />
       <LandingPageNavBar />
       <div className={style.card}>
-        <h2>Assignments</h2>
-      <div className="main grid grid-cols-1 p-3 sm2:grid-cols-2  md2:grid-cols-3  gap-3 lg:grid-cols-2 xl:grid-cols-3">
-         
+        <h2 style={{marginLeft: '200px'}}>Assignments</h2>
+      <div className="main grid grid-cols-1 p-3 sm2:grid-cols-2  md2:grid-cols-3  gap-3 lg:grid-cols-2 xl:grid-cols-3"  style={{marginLeft: '200px'}}>      
             {
                 demo.map((data)=>(
                     <div key={data.id} className="courseCard rounded-1sm p-4 flex flex-col justify-between" id={style.course}>
@@ -35,6 +36,5 @@ const ViewAssignments = () => {
 };
 
 export default ViewAssignments;
-
 
 
