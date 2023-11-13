@@ -75,24 +75,28 @@ function App() {
 
           {/* this the student loged in route */}
           <Route path="/student" element={<StudentTemplate/>}>
-                <Route path="/student/template/enrolledcourses" element={<EnrolledCourses/>}></Route>
-                <Route path="/student/template/landingPage" element={<LandingPage/>}/>  
-                <Route path="/student/template/remedialTime" element={< RemedialTime />}/> 
+                <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
+                <Route path="/student/landingPage" element={<LandingPage/>}/>  
+                <Route path="/student/remedialTime" element={< RemedialTime />}/> 
+                <Route path="student/ViewMaterial" element={<ViewMaterial/>}/>
+                <Route path="student/ViewAssignments" element={<ViewAssignments/>}/> 
+                <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route> 
+                <Route path ="/student/course" element={<Courses/>}>
+                    <Route path =":id" element={<CourseDetails/>}/> 
+                </Route>  
+                <Route path= '/student/forum' element={< Forum/>}/>
+                <Route path="/student/categories" element={<CategoriesPage/>}></Route> 
           </Route>
-          <Route path ="/student/Navbar" element={<Student/>}/>
-          <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
+          {/* <Route path ="/student/Navbar" element={<Student/>}/>
+          */}
           <Route path="/facilitator" element={<Facilitator/>}/>
-          <Route path="student/landingPage" element={<LandingPage/>}/> 
-          <Route path="student/ViewMaterial" element={<ViewMaterial/>}/>
-          <Route path="student/ViewAssignments" element={<ViewAssignments/>}/>    
+          {/* <Route path="student/landingPage" element={<LandingPage/>}/> 
+         */}
           {/* <Route path="student/viewcoursecontent" element={<ViewCourseContent/>}/>  */}
-          <Route path="/student/landingPage" element={<LandingPage/>}/>  
-          <Route path ="/student/course" element={<Courses/>}>
-                <Route path =":id" element={<CourseDetails/>}/> 
-            </Route> 
-          <Route path="/student/remedialTime" element={< RemedialTime />}/> 
-          <Route path= '/student/forum' element={< Forum/>}/>
-          <Route path="/student/categories" element={<CategoriesPage/>}></Route>
+          {/* <Route path="/student/landingPage" element={<LandingPage/>}/>  
+         */}
+          {/* <Route path="/student/remedialTime" element={< RemedialTime />}/>  */}
+         
         </Routes>
       </Router>
       
