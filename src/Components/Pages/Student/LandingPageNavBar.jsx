@@ -19,10 +19,14 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import { Link } from "react-router-dom";
 import Login from "../Login";
+import { useRef } from "react";
+import { forwardRef } from "react";
+import SearchBar from "../../MicroComponents/Search/SearchBar";
+import SearchResultsList from "../../MicroComponents/Search/SearchResultsList";
 
-function  LandingPageNavBar({ name, ...props }) {
+function  LandingPageNavBar({ name, },ref) {
   const [show, setShow] = useState(false);
-
+  const [results, setResults] = useState([]);
   // const handleClose = () => setShow(false);
   // const handleClose2 = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -31,11 +35,25 @@ function  LandingPageNavBar({ name, ...props }) {
   const toggleNav = () => {
     setExpanded(!expanded);
   };
-  
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const handleSearch = () => {
+    onSearch(searchQuery);
+  };
 
 
   const values = ["md-down"];
   const [fullscreen, setFullscreen] = useState(true);
+
+  const categories = useRef(null);
+  const courses = useRef(null);
+
+  const scrollToSection = (elementRef)=> (
+    window.scrollTo({
+      top: elementRef.current,
+      behavior:"smooth",
+    })
+  )
 
   return (
     <>
@@ -55,9 +73,9 @@ function  LandingPageNavBar({ name, ...props }) {
                 id={style.toggle}
               />
 
-              <Navbar.Brand href="#">
+              <Navbar.Brand href="/student/landingPage">
                 <img
-                  src="../img/refactoryLogoColored.png"
+                  src="/img/refactoryLogoColored.png"
                   alt=""
                   className={style.logoImage}
                 />
@@ -74,7 +92,7 @@ function  LandingPageNavBar({ name, ...props }) {
                 <Offcanvas.Header closeButton>
                   <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
                     <img
-                      src="../img/refactoryLogoColored.png"
+                      src="/img/refactoryLogoColored.png"
                       alt=""
                       className={style.logoImage}
                     />
@@ -90,61 +108,23 @@ function  LandingPageNavBar({ name, ...props }) {
                     {/* Categories */}
                     
                     
-                    <Dropdown>
-                      <Dropdown.Toggle id={style.Courses}>
-                        Categories
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu id={style.Dropdown_menu}>
-                        <Dropdown.Item
-                          href="#/action-1"
-                          id={style.Dropdown_Item}
-                        >
-                           Design
-                          
-                        </Dropdown.Item>
-                        <Dropdown.Item
-                          href="#/action-2"
-                          id={style.Dropdown_Item}
-                        >
-                          {" "}
-                          Security
-                          
-                          
-                        </Dropdown.Item>
-                        <Dropdown.Item
-                          href="#/action-3"
-                          id={style.Dropdown_Item}
-                        >
-                       Data Science
-                        </Dropdown.Item>
-                        <Dropdown.Item
-                          href="#/action-3"
-                          id={style.Dropdown_Item}
-                        >
-                          Web development
-                          
-                        </Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
+                    <Nav.Link href="#scroll-target"  id={style.Courses2}>
+                      Categories
+                    </Nav.Link>
 
                     {/* search */}
                     <div id={style.form2}>
-                      <MDBCol>
-                        <input
-                          className="form-control"
-                          type="text"
-                          placeholder="Search for anything"
-                          aria-label="Search"
-                          id={style.form3}
-                        />
-                      </MDBCol>
+                    <div className="search-bar-container">
+          <SearchBar setResults={setResults} />
+          <SearchResultsList results={results} />
+        </div>
+                   
                     </div>
                   </Nav>
 
                   <Nav>
                     {/* courses */}
-                    <Nav.Link href="#home" id={style.Courses2}>
+                    <Nav.Link href="#scroll-target2" id={style.Courses2}>
                       Courses
                     </Nav.Link>
 
@@ -199,7 +179,7 @@ function  LandingPageNavBar({ name, ...props }) {
                       </Dropdown.Menu>
                     </Dropdown>
 
-                    <FaBell className={style.bellIcon} />
+                    <FaBell id={style.bellIcon} />
                     {/* Profile */}
                     < div className={style.overlay}>
       {['bottom'].map((placement) => (
@@ -314,18 +294,13 @@ function  LandingPageNavBar({ name, ...props }) {
                   <Modal.Header closeButton>
                     <Modal.Title>
                       {" "}
-                      <MDBCol>
-                        <input
-                          className="form-control"
-                          type="text"
-                          placeholder="Search for anything"
-                          aria-label="Search"
-                          id={style.search3}
-                        />
-                      </MDBCol>
+                      <div className="search-bar-container">
+          <SearchBar setResults={setResults} />
+          
+        </div>
                     </Modal.Title>
                   </Modal.Header>
-                  <Modal.Body>Modal body content</Modal.Body>
+                  <Modal.Body><SearchResultsList results={results} /></Modal.Body>
                 </Modal>
               </label>
             </Container>

@@ -1,0 +1,9 @@
+#container{
+    margin-top: 80px;
+}
+.webcategory{
+    height: 400px;
+    background-color: rgba(128, 128, 128, 0.082);
+    max-height: 400px;
+    margin-bottom: 30px;
+}

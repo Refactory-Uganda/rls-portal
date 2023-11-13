@@ -24,15 +24,19 @@ import AddcourseGet from "./Admin/AddcourseGet";
 import LandingPage from "./Students/LandingPage";
 import RemedialTime from "./Students/RemedialTime"
 import ViewMaterial from "./Students/ViewMaterial";
+import ViewAssignments from "./Students/ViewAssignments";
 import FacilitatorDetails from "./Admin/FacilitatorDetails";
 import Topic from "./Components/Pages/Course/Topic";
 import Assignment from "./Components/Pages/Course/Assignment";
 import Content from "./Components/Pages/Course/content";
 import Material from "./Components/Pages/Course/Material";
 import Project from "./Components/Pages/Course/Project";
+import Forum from "./Students/Forum.jsx";
 import StudentTemplate from "./Students/StudentTemplate";
 // import ViewCourseContent from "./Components/Pages/Student/ViewCourseContent";
-
+import CourseDetails from "./Students/CourseDetails";
+import Courses from "./Components/Pages/Student/Courses";
+import CategoriesPage from "./Students/CategoriesPage";
 
 
 
@@ -79,11 +83,16 @@ function App() {
           <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
           <Route path="/facilitator" element={<Facilitator/>}/>
           <Route path="student/landingPage" element={<LandingPage/>}/> 
-          <Route path="student/ViewMaterial" element={<ViewMaterial/>}/>   
+          <Route path="student/ViewMaterial" element={<ViewMaterial/>}/>
+          <Route path="student/ViewAssignments" element={<ViewAssignments/>}/>    
           {/* <Route path="student/viewcoursecontent" element={<ViewCourseContent/>}/>  */}
           <Route path="/student/landingPage" element={<LandingPage/>}/>  
+          <Route path ="/student/course" element={<Courses/>}>
+                <Route path =":id" element={<CourseDetails/>}/> 
+            </Route> 
           <Route path="/student/remedialTime" element={< RemedialTime />}/> 
-          {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}
+          <Route path= '/student/forum' element={< Forum/>}/>
+          <Route path="/student/categories" element={<CategoriesPage/>}></Route>
         </Routes>
       </Router>
       

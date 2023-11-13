@@ -17,76 +17,77 @@ function CoursesCarousel(props) {
       <div className="container-fluid">
         <div className="row" id={style.collaboratorsrow}>
           <div className="col-12" id={style.collaboratorsheading}>
-            We Collaborate with over{" "}
+            {props.heading}
             <a href="" className={style.companies}>
-              20+ Companies
+              {props.companies}
             </a>{" "}
+            <p>{props.paragraph}</p>
           </div>
           <div className="col-12" id={style.collaborators}>
             <Carousel>
               <Carousel.Item id={style.Item}>
                 <ul className={style.ul}>
                   <li className={style.li}>
-                    <img src="../images/Laboremus.png" alt="" />
+                    <img src="/images/Laboremus.png" alt="" />
                   </li>
                   <li className={style.li}>
                     <img
-                      src="../images/the-innovation-village (1).png"
+                      src="/images/the-innovation-village (1).png"
                       alt=""
                     />
                   </li>
                   <li className={style.li}>
-                    <img src="../images/Kanzu_Code.png" alt="" />
+                    <img src="/images/Kanzu_Code.png" alt="" />
                   </li>
                   <li className={style.li}>
-                    <img src="../images/meta.png" alt="" />
+                    <img src="/images/meta.png" alt="" />
                   </li>
                   <li className={style.li}>
-                    <img src="../images/mtn-foundation.png" alt="" />
+                    <img src="/images/mtn-foundation.png" alt="" />
                   </li>
                 </ul>
               </Carousel.Item>
               <Carousel.Item id={style.Item}>
                 <ul className={style.ul}>
                   <li className={style.li}>
-                    <img src="../images/xeno.png" alt="" />
+                    <img src="/images/xeno.png" alt="" />
                   </li>
                   <li className={style.li}>
-                    <img src="../images/unicef.png" alt="" />
+                    <img src="/images/unicef.png" alt="" />
                   </li>
                   <li className={style.li}>
                     <img
-                      src="../images/ministry-of-ict-and-guidance.png"
+                      src="/images/ministry-of-ict-and-guidance.png"
                       alt=""
                     />
                   </li>
                   <li className={style.li}>
-                    <img src="../images/outbox.jpg" alt="" />
+                    <img src="/images/outbox.jpg" alt="" />
                   </li>
                   <li className={style.li}>
-                    <img src="../images/Norad.png" alt="" />
+                    <img src="/images/Norad.png" alt="" />
                   </li>
                 </ul>
               </Carousel.Item>
               <Carousel.Item id={style.Item}>
                 <ul className={style.ul}>
                   <li className={style.li}>
-                    <img src="../images/Propel-Logo-Black.png" alt="" />
+                    <img src="/images/Propel-Logo-Black.png" alt="" />
                   </li>
                   <li className={style.li}>
                     <img
-                      src="../images/stanbic-bank-business-incubator.png"
+                      src="/images/stanbic-bank-business-incubator.png"
                       alt=""
                     />
                   </li>
                   <li className={style.li}>
-                    <img src="../images/Signalytic.png" alt="" />
+                    <img src="/images/Signalytic.png" alt="" />
                   </li>
                   <li className={style.li}>
-                    <img src="../images/Xente.png" alt="" />
+                    <img src="/images/Xente.png" alt="" />
                   </li>
                   <li className={style.li}>
-                    <img src="../images/Titl.png" alt="" />
+                    <img src="/images/Titl.png" alt="" />
                   </li>
                 </ul>
               </Carousel.Item>
