@@ -49,17 +49,10 @@ function Login(props) {
             <div className="col-xl-4 , col-lg-4 , col-md-8 , col-sm-12">
               <div className={LoginCss.formcontainer}>
                 <form onSubmit={handleLogin}>
-                  <div>
-                    <img
-                      src="../images/refactory logo.png"
-                      alt=""
-                      className={LoginCss.loginimage}
-                    />
-                  </div>
                   <div className={LoginCss.inputs}>
                     <input
                       type="text"
-                      placeholder="Enter Username"
+                      placeholder="Enter Username" style={{fontWeight: 'bold',}}
                       className={LoginCss.loginUsernameInput}
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
@@ -68,7 +61,7 @@ function Login(props) {
                   <div className={LoginCss.inputs}>
                     <input
                       type="password"
-                      placeholder="Enter Password"
+                      placeholder="Enter Password" style={{fontWeight: 'bold',}}
                       className={LoginCss.loginPasswordInput}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
