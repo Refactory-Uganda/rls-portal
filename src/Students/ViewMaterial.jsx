@@ -2,6 +2,7 @@ import React from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import { BiCaretRightCircle, BiFile, BiSave } from 'react-icons/bi';
 import MaterialComponent from '../Components/MaterialComponent';
+import Sidebar from "../Components/Pages/Student/sideBar"
 import styles from './ViewMaterial.module.css';
 import LandingPageNavBar from '../Components/Pages/Student/LandingPageNavBar';
 
@@ -14,6 +15,7 @@ const ViewMaterial = () => {
 
   return (
     <>
+    <Sidebar />
       <LandingPageNavBar />
       <Accordion defaultActiveKey="0" className={styles.accordion}>
         <h1>Course Material</h1>
