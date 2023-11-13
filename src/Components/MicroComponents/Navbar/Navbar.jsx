@@ -3,6 +3,8 @@ import { FaCog, FaDoorOpen, FaUserAlt } from 'react-icons/fa';
 import Notification from '../notification/Notification';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import {MdAdd} from 'react-icons/md';
+
 
 
 const popoverContent = (
@@ -32,6 +34,10 @@ const Navbar = () => {
                 <h1></h1>
             </div>
             <div className={style.text}>
+                <Link   to="/admin/addCourse">
+                  <MdAdd className={style.icons}  />
+                
+                </Link>
                 <Notification />
                 <OverlayTrigger trigger="click" placement="bottom" overlay={popoverContent}>
                 <button className={style.btn}>Account <FaUserAlt className='pl-2 pt-2'/></button>
