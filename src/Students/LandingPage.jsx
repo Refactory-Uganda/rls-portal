@@ -13,15 +13,21 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import { useRef } from "react";
 
 function LandingPage(props) {
+ 
+
+
   const [data, setData] = useState([]);
   useEffect(() => {
     const apiUrl = "http://localhost:5000/courses";
     const fetchData = async () => {
       try {
         const response = await axios.get(apiUrl);
-        setData(response.data);
+        if( response.data){
+          
+        setData(response.data );}
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -29,6 +35,7 @@ function LandingPage(props) {
     fetchData();
   }, []);
 
+ 
   const id = useParams()
   
 
@@ -51,10 +58,23 @@ function LandingPage(props) {
       breakpoint: { max: 464, min: 0 },
       items: 2,
     },
+
+    
   };
+
+  const targetRef = useRef();
+  
+
+  useEffect(() => {
+    const scrollButton = document.querySelector('a[href="#scroll-target"]','a[href="#scroll-target2"]');
+    scrollButton.addEventListener('click', () => {
+      targetRef.current.scrollIntoView({ behavior: 'smooth' });
+    });
+  }, []);
 
   return (
     <>
+    {/* div1  heading*/}
       <div className={style.imageDiv}>
         <LandingPageNavbar />
         <div className="container" id={style.container}>
@@ -66,12 +86,14 @@ function LandingPage(props) {
                 </p>{" "}
               </div>
             </div>
-            <div className="col">Right column</div>
+            <div className="col"></div>
           </div>
         </div>
       </div>
-      <CoursesCarousel heading="We Collaborate with over" companies="20+ Companies"/>
 
+      {/* div2  companies*/}
+      <CoursesCarousel heading="We Collaborate with over" companies="20+ Companies"/>
+         {/* div3  launch career*/}
       <div className="container-fluid" id={style.middlediv1}>
         <div className="container">
           <div className="row">
@@ -80,7 +102,7 @@ function LandingPage(props) {
               id={style.middlediv}
             >
               <label htmlFor="">
-                Get to launch your carrier in 3 months or more
+                Get to launch your career in 3 months or more
               </label>{" "}
               <h3 id={style.middlediv}>A Selection of courses to pick from</h3>
             </div>
@@ -92,8 +114,9 @@ function LandingPage(props) {
           </div>
         </div>
       </div>
+      {/* div4  Courses */}
         
-      <div className="container-fluid" style={{padding:"12px"}}>
+      <div className="container-fluid" style={{padding:"12px"}} id="scroll-target2" ref={targetRef}>
       <div className="container-fluid" id={style.Coursedisplay}>
         <Carousel
           responsive={responsive}
@@ -122,11 +145,11 @@ function LandingPage(props) {
         </Carousel>
       </div>
       </div>
+      {/* div5 categories */}
 
-
-      <div className="container-fluid" style={{paddingBottom:"20px"}}>
+      <div className="container-fluid" style={{paddingBottom:"20px"}} id="scroll-target" ref={targetRef}>
         <div className="row">
-          <h5 style={{ marginBottom:"30px", paddingTop:"20px"}}>
+          <h5 style={{ marginBottom:"30px", paddingTop:"20px"}} >
             {" "}
             <strong>Categories </strong>
           </h5>
@@ -189,7 +212,7 @@ function LandingPage(props) {
           </div>
         </div>
       </div>
-
+        {/* div 6  Featured Categories*/}
       <div className="container-fluid" id={style.feacturedtopicscont}>
         <h5>
           {" "}

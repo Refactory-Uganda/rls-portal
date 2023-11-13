@@ -32,6 +32,7 @@ import RemedialTime from "./Students/RemedialTime"
 import FacilitatorDetails from "./Admin/FacilitatorDetails";
 import CourseDetails from "./Students/CourseDetails";
 import Courses from "./Components/Pages/Student/Courses";
+import CategoriesPage from "./Students/CategoriesPage";
 
 function App() {
   return (
@@ -79,7 +80,7 @@ function App() {
             </Route> 
         
           <Route path="/student/remedialTime" element={< RemedialTime />}/> 
-          
+          <Route path="/student/categories" element={<CategoriesPage/>}></Route>
 
           {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}
         </Routes>
