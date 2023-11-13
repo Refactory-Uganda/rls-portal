@@ -31,8 +31,11 @@ import Assignment from "./Components/Pages/Course/Assignment";
 import Content from "./Components/Pages/Course/content";
 import Material from "./Components/Pages/Course/Material";
 import Project from "./Components/Pages/Course/Project";
+import Forum from "./Students/Forum.jsx";
 // import ViewCourseContent from "./Components/Pages/Student/ViewCourseContent";
-
+import CourseDetails from "./Students/CourseDetails";
+import Courses from "./Components/Pages/Student/Courses";
+import CategoriesPage from "./Students/CategoriesPage";
 
 
 
@@ -47,6 +50,11 @@ function App() {
           <Route path="/piechart" element={<PieChart/>}></Route>
           <Route path="/admin" element={<Admin/>}>
               <Route path="/admin/profile" element={<Profile/>}></Route>
+              <Route path="/admin/topic" element={<Topic/>}></Route>
+              <Route path="/admin/assignment" element={<Assignment/>}></Route>
+              <Route path="/admin/content" element={<Content/>}></Route>
+              <Route path="/admin/material" element={<Material/>}></Route>
+              <Route path="/admin/project" element={<Project/>}></Route>
               <Route path="/admin/AddCourseEdit" element={<AddCourseEdit />}></Route>
               <Route path="/admin/AddCourseget" element={<AddcourseGet />}></Route>
               <Route path="/admin/card" element={<Card/>}></Route>
@@ -62,16 +70,20 @@ function App() {
               <Route path="/admin/facilitatorModules" element={<FacilitatorModules/>} />
           </Route>
           <Route path="/admin/facilitator-details/:id" element={ <FacilitatorDetails/>} />
-          <Route path ="/student/Navbar" element={<Student/>}>
-             
-          </Route>
+          <Route path ="/student/Navbar" element={<Student/>}/>
           <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
           <Route path="/facilitator" element={<Facilitator/>}/>
-          <Route path="student/landingPage" element={<LandingPage/>}/>   
+          <Route path="student/landingPage" element={<LandingPage/>}/> 
+          <Route path="student/ViewMaterial" element={<ViewMaterial/>}/>
+          <Route path="student/ViewAssignments" element={<ViewAssignments/>}/>    
           {/* <Route path="student/viewcoursecontent" element={<ViewCourseContent/>}/>  */}
           <Route path="/student/landingPage" element={<LandingPage/>}/>  
+          <Route path ="/student/course" element={<Courses/>}>
+                <Route path =":id" element={<CourseDetails/>}/> 
+            </Route> 
           <Route path="/student/remedialTime" element={< RemedialTime />}/> 
-          {/* <Route path= '/addFacilitator' element={< AddFacilitator/>}/> */}
+          <Route path= '/student/forum' element={< Forum/>}/>
+          <Route path="/student/categories" element={<CategoriesPage/>}></Route>
         </Routes>
       </Router>
       
