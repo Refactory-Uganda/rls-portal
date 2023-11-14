@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
+
+body {
+  overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+/* Toggle Styles */
+
+#viewport {
+  padding-left: 250px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#content {
+  width: 100%;
+  position: relative;
+  margin-right: 0;
+}
+
+/* Sidebar Styles */
+
+#sidebar {
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 200px;
+  height: 100%;
+  margin-left: -250px;
+  margin-top: 60px;
+  overflow-y: auto;
+  background: white;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#sidebar header {
+  background-color: #fff;
+  font-size: 20px;
+  line-height: 52px;
+  text-align: center;
+  padding-top: 6px;
+  padding-bottom: 7px;
+}
+
+#sidebar header a {
+  color: #fff;
+  display: block;
+  text-decoration: none;
+}
+
+
+
+#sidebar header a:hover {
+  color: #fff;
+  
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+}
+
+#sidebar .nav a {
+  background: none;
+  border-bottom: 1px solid white;
+  color: black;
+  font-size: 14px;
+  padding: 16px 24px;
+}
+
+#sidebar .nav .dropdownToggle {
+  background: none;
+  color: #fff;
+  font-size: 14px;
+  padding: 6px 1px;
+}
+#sidebar .nav .dropdownToggle:focus {
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: none !important;
+}
+
+#sidebar .nav .item {
+  background: none;
+  color: #fff;
+  font-size: 14px;
+  padding: 6px 1px;
+  text-decoration: none;
+  border: none;
+}
+
+/* #sidebar .nav a:hover {
+  background: none;
+  color: #693769;
+  border:1px solid #fff;
+  padding: 10px ;
+  background-color: white;
+  border-radius: 20px;
+} */
+
+.topSection {
+    display: none; /* Initially hide the top section */
+  }
+
+
+/* Media Query for Small Screens (Max Width 768px) */
+@media (max-width: 768px) {
+    .topSection {
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        padding: 10px;
+        background-color: white; 
+      }
+      .img1{
+        width:40%;
+      }
+
+      .icon{
+       color: white;
+      }
+
+  #sidebar {
+    left: 0; /* Show the sidebar initially */
+    margin-left: 0;
+  }
+  #content {
+    margin-left: 0;
+  }
+  .toggleIcon {
+    display: block;
+  }
+  
+  /* Adjustments for Small Screen Sidebar */
+  #sidebar header {
+    text-align: left; 
+    padding-top: 9px;
+    padding-bottom: 9px;/* Align the header text to the left */
+  }
+  #sidebar header a {
+    padding-left: 20px; /* Add padding to the logo for spacing */
+  }
+  #sidebar .nav a {
+    text-align: left; /* Align menu items to the left */
+    padding-left: 20px; /* Add padding to the menu items for spacing */
+    padding-right: 20px; /* Add padding to the menu items for spacing */
+  }
+
+  .sidebar-active #sidebar {
+    left: 0;
+  }
+  .sidebar-active #content {
+    margin-left: 250px;
+  }
+
+  #sidebar {
+    /* ... */
+    left: -250px;
+    transition: all 0.3s ease; /* Add a smooth transition for the sidebar */
+  }
+}

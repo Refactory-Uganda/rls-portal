@@ -1,13 +1,16 @@
 import demo from '../Components/Pages/demo.json'
 import style from './EnrolledCourses.module.css';
+import Sidebar from "../Components/Pages/Student/sideBar"
+import LandingPageNavBar from '../Components/Pages/Student/LandingPageNavBar';
 import {FaEllipsisV, FaTrash, FaEdit} from 'react-icons/fa'
 
 
 function EnrolledCourses(){
     return(
         <>
-       
-         <div className="main grid grid-cols-1 p-3 sm2:grid-cols-2  md2:grid-cols-3  gap-3 lg:grid-cols-2 xl:grid-cols-3">
+           <Sidebar />
+      <LandingPageNavBar />
+         <div className="main grid grid-cols-1 p-3 sm2:grid-cols-2  md2:grid-cols-3  gap-3 lg:grid-cols-2 xl:grid-cols-3" style={{marginLeft: '200px', marginTop: '70px'}}>
          
             {
                 demo.map((data)=>(
