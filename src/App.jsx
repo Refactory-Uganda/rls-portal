@@ -87,16 +87,7 @@ function App() {
                 <Route path= '/student/forum' element={< Forum/>}/>
                 <Route path="/student/categories" element={<CategoriesPage/>}></Route> 
           </Route>
-          {/* <Route path ="/student/Navbar" element={<Student/>}/>
-          */}
           <Route path="/facilitator" element={<Facilitator/>}/>
-          {/* <Route path="student/landingPage" element={<LandingPage/>}/> 
-         */}
-          {/* <Route path="student/viewcoursecontent" element={<ViewCourseContent/>}/>  */}
-          {/* <Route path="/student/landingPage" element={<LandingPage/>}/>  
-         */}
-          {/* <Route path="/student/remedialTime" element={< RemedialTime />}/>  */}
-         
         </Routes>
       </Router>
       
