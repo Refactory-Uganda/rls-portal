@@ -164,7 +164,7 @@ function  LandingPageNavBar({ name, },ref) {
 
                       <Dropdown.Menu id={style.Dropdown_menu}>
                         <Dropdown.Item
-                          href="#/action-1"
+                          href="/student/forum"
                           id={style.Dropdown_Item}
                         >
                           Forum
