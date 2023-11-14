@@ -51,12 +51,7 @@ function CoursesCarousel2(props) {
       };
       const targetRef = useRef();
 
-      useEffect(() => {
-        const scrollButton = document.querySelector('a[href="#scroll-target2"]');
-        scrollButton.addEventListener('click', () => {
-          targetRef.current.scrollIntoView({ behavior: 'smooth' });
-        });
-      }, []);
+     
     return (
         <div>
              {/* div4  Courses */}
