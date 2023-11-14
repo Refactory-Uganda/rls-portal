@@ -1,15 +1,17 @@
 import style from "./AddCourse.module.css";
 import axios from "axios";
 import { useState } from "react";
+import Form from "react-bootstrap/Form";
 
 const AddCourse = () => {
   const [course_name, setCourse_name] = useState("");
-  const [image,setImage] = useState();
+  const [image, setImage] = useState();
   const [course_description, setCourse_description] = useState("");
   const [course_duration, setCourse_duration] = useState("");
+  const [course_category, setCourse_category] = useState("");
   // const [status, setStatus] = useState("");
 
-  const handleAddCourses =  async(e) => {
+  const handleAddCourses = async (e) => {
     e.preventDefault();
     console.log(image);
     const formData = new FormData();
@@ -17,11 +19,11 @@ const AddCourse = () => {
     formData.append("image", image);
     formData.append("course_description", course_description);
     formData.append("course_duration", course_duration);
+    formData.append("course_category", course_category);
     const api = "http://localhost:5000/Courses";
-  
 
     try {
-       const response = await axios.post(api, formData, {
+      const response = await axios.post(api, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -30,19 +32,18 @@ const AddCourse = () => {
       console.log("Data posted successfully:", response.data);
     } catch (error) {
       if (error.response) {
-        alert(error)
-          console.log(error.response.data);
-          console.log(error.response.status);
+        alert(error);
+        console.log(error.response.data);
+        console.log(error.response.status);
       } else if (error.request) {
-          // The request was made but no response was received
-          console.log(error.request);
+        // The request was made but no response was received
+        console.log(error.request);
       } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('Error', error.message);
+        // Something happened in setting up the request that triggered an Error
+        console.log("Error", error.message);
       }
-  }
+    }
   };
-   
 
   return (
     <>
@@ -59,9 +60,25 @@ const AddCourse = () => {
               type="text"
               className={style.input}
               placeholder="ADD Course Name"
-              name ="course_name"
+              name="course_name"
               onChange={(e) => setCourse_name(e.target.value)}
             />
+          </div>
+          <div className={style.btn}>
+            <label className={style.label}> Course Category</label>
+            <select
+              aria-label="Default select example"
+              className={style.input}
+              name="course_category"
+              onChange={(e) => setCourse_category(e.target.value)}
+              
+            >
+              <option >ADD Course Category</option>
+              <option value="Web Development">Web Development</option>
+              <option value="Design">Design</option>
+              <option value="Security">Machine Learning</option>
+              <option value="Security">Security</option>
+            </select>
           </div>
           <div className={style.btn}>
             <label htmlFor="" className={style.label}>
@@ -69,7 +86,7 @@ const AddCourse = () => {
             </label>
             <input
               type="file"
-              name= "course_display_icon"
+              name="course_display_icon"
               className={style.input}
               placeholder="ADD Course Icon"
               accept=".png, .jpg, .svg, .jpeg"
@@ -100,9 +117,7 @@ const AddCourse = () => {
               onChange={(e) => setCourse_duration(e.target.value)}
             />
           </div>
-          <button  className={style.button} >
-            Save
-          </button>
+          <button className={style.button}>Save</button>
         </form>
       </div>
     </>

@@ -16,10 +16,10 @@ const Sidebar = () => {
       <div id={style.sidebar}>
         <div className={`list-group list-group-flush ${style.nav}`} >
            
-          <Link to='/admin/' className={`list-group-item list-group-item-action d-flex align-items-center `}>
+          <Link to='/student/enrolledcourses' className={`list-group-item list-group-item-action d-flex align-items-center `}>
             <MdDashboard className="mr-2" /> Home
           </Link>
-          <Link to="/admin/piechart" className="list-group-item list-group-item-action d-flex align-items-center">
+          <Link to="" className="list-group-item list-group-item-action d-flex align-items-center">
             <BsLink className="mr-2" /> Notifications
           </Link>
           <Link to="#" className="list-group-item list-group-item-action d-flex align-items-center">

@@ -19,7 +19,7 @@ function CoursesCarousel(props) {
           <div className="col-12" id={style.collaboratorsheading}>
             {props.heading}
             <a href="" className={style.companies}>
-              {props.companies}
+            &nbsp; {props.companies}
             </a>{" "}
             <p>{props.paragraph}</p>
           </div>

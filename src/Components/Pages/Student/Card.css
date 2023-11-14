@@ -1,0 +1,19 @@
+.item{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 3rem;
+}
+#card2{
+    width: 80%;
+}
+
+.card-img-top{
+margin-left: 20%;
+margin-top: 20px;
+
+
+}
+
+#val{
+    /* background-color: black; */
+}

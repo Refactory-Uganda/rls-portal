@@ -37,6 +37,7 @@ import StudentTemplate from "./Students/StudentTemplate";
 import CourseDetails from "./Students/CourseDetails";
 import Courses from "./Components/Pages/Student/Courses";
 import CategoriesPage from "./Students/CategoriesPage";
+import ForumLandingPage from "./Students/forumLandingPage.jsx";
 
 
 
@@ -78,13 +79,13 @@ function App() {
                 <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
                 <Route path="/student/landingPage" element={<LandingPage/>}/>  
                 <Route path="/student/remedialTime" element={< RemedialTime />}/> 
-                <Route path="student/ViewMaterial" element={<ViewMaterial/>}/>
-                <Route path="student/ViewAssignments" element={<ViewAssignments/>}/> 
+                <Route path="/student/ViewMaterial" element={<ViewMaterial/>}/>
+                <Route path="/student/ViewAssignments" element={<ViewAssignments/>}/> 
                 <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route> 
                 <Route path ="/student/course" element={<Courses/>}>
                     <Route path =":id" element={<CourseDetails/>}/> 
                 </Route>  
-                <Route path= '/student/forum' element={< Forum/>}/>
+                <Route path= '/student/forum' element={< ForumLandingPage/>}/>
                 <Route path="/student/categories" element={<CategoriesPage/>}></Route> 
           </Route>
           <Route path="/facilitator" element={<Facilitator/>}/>

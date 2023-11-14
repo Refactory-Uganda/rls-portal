@@ -1,5 +1,5 @@
 .imageDiv {
-  background-image: url(../public/images/meeting.webp);
+  background-image: url(/images/meeting.webp);
   background-repeat: no-repeat;
   background-size: cover;
   /* background-attachment: fixed; */

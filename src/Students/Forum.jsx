@@ -4,11 +4,17 @@ import SkillCom from '../Components/Pages/Student/SkillCom'
 import NewpostUploader from '../Components/Pages/Student/NewpostUploader'
 import style from './forum.module.css'
 import Post from '../Components/Pages/Student/Post'
+import LandingPageNavBar from '../Components/Pages/Student/LandingPageNavBar'
 export default function Forum() {
   return (
+ <>
+ <div className={style.body}>
+
+{/* <LandingPageNavBar/> */}
+   
      <div className={style.container}>
      {/* Left side components */}
-
+    
      <div className={style.left}>
        <ProfileCom />
        {/* <SkillCom
@@ -31,5 +37,8 @@ export default function Forum() {
        {/* <h1> Right side OF things</h1> */}
      </div>
    </div>
+   </div>
+
+ </>
   )
 }

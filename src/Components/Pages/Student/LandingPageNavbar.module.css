@@ -49,6 +49,7 @@
   box-shadow: none;
 }
 #Courses2 {
+  text-decoration: none;
   color: rgb(7, 7, 7);
   text-transform: uppercase;
   font-weight: 600;
@@ -56,6 +57,17 @@
   border: none;
   background-color: white;
   margin-top: 3px;
+  /* padding-right: 5px; */
+}
+#Courses3 {
+  text-decoration: none;
+  color: rgb(7, 7, 7);
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: smaller;
+  border: none;
+  background-color: white;
+  margin-top: 10px;
   /* padding-right: 5px; */
 }
 
