@@ -108,9 +108,9 @@ function  LandingPageNavBar({ name, },ref) {
                     {/* Categories */}
                     
                     
-                    <Nav.Link href="#scroll-target"  id={style.Courses2}>
+                    <Link to="/student/categories"  id={style.Courses3}>
                       Categories
-                    </Nav.Link>
+                    </Link>
 
                     {/* search */}
                     <div id={style.form2}>
