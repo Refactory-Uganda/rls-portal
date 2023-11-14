@@ -78,8 +78,8 @@ function App() {
                 <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route>
                 <Route path="/student/landingPage" element={<LandingPage/>}/>  
                 <Route path="/student/remedialTime" element={< RemedialTime />}/> 
-                <Route path="student/ViewMaterial" element={<ViewMaterial/>}/>
-                <Route path="student/ViewAssignments" element={<ViewAssignments/>}/> 
+                <Route path="/student/ViewMaterial" element={<ViewMaterial/>}/>
+                <Route path="/student/ViewAssignments" element={<ViewAssignments/>}/> 
                 <Route path="/student/enrolledcourses" element={<EnrolledCourses/>}></Route> 
                 <Route path ="/student/course" element={<Courses/>}>
                     <Route path =":id" element={<CourseDetails/>}/> 
