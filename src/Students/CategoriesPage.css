@@ -1,10 +1,18 @@
 #container{
-    margin-top: 80px;
+    margin-top: 0%;
     height: 100%;
+    text-align: center;
+    background-color:rgba(47, 46, 46, 0.04);
+    padding-bottom: 30px;
+    padding-top: 20px;
 }
 .webcategory{
     height: 400px;
     background-color: rgba(128, 128, 128, 0.082);
     max-height: 400px;
     margin-bottom: 30px;
+}
+.course-filter{
+    font-weight: bold;
+    /* font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
 }
