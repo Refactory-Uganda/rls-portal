@@ -1,15 +1,17 @@
 [
-    {
-        "heading":"Web Development"
-    },
+  { "Heading":{
+    "heading":"Web Development"
+}} , 
+
+   {"Topics":[
     {
         "topic":"Course Overview",
-        "minitopics":[
+        "minitop":[
             {
-                "minitopic":"Course Overview1"      
+                "minitopic":"HTML"      
             },
             {
-                "minitopic":"Course Overview2"
+                "minitopic":"Internet"
             },
             {
                 "minitopic":"Course Overview3"
@@ -24,7 +26,7 @@
     },
     {
         "topic":"HTML",
-        "minitopics":[
+        "minitop":[
             {
                 "minitopic":"HMTL1",
                 "link":"https://www.youtube.com/watch?v=8jLOx1hD3_o&ab_channel=freeCodeCamp.org"
@@ -50,7 +52,7 @@
     },
     {
         "topic":"Internet",
-        "minitopics":[
+        "minitop":[
             {
                 "minitopic":"Internet1",
                 "link":"https://www.youtube.com/watch?v=8jLOx1hD3_o&ab_channel=freeCodeCamp.org"
@@ -75,4 +77,6 @@
             
         ]
     }
+   ] 
+}
 ]

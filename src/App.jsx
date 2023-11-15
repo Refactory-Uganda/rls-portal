@@ -38,6 +38,7 @@ import CourseDetails from "./Students/CourseDetails";
 import Courses from "./Components/Pages/Student/Courses";
 import CategoriesPage from "./Students/CategoriesPage";
 import ForumLandingPage from "./Students/forumLandingPage.jsx";
+import Singlecourse from "./Components/Pages/Student/Singlecourse.jsx";
 
 
 
@@ -87,6 +88,7 @@ function App() {
                 </Route>  
                 <Route path= '/student/forum' element={< ForumLandingPage/>}/>
                 <Route path="/student/categories" element={<CategoriesPage/>}></Route> 
+                <Route path="/student/singlecourse" element={<Singlecourse/>}></Route>
           </Route>
           <Route path="/facilitator" element={<Facilitator/>}/>
         </Routes>

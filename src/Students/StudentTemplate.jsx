@@ -4,7 +4,7 @@ function StudentTemplate(){
     return(
     <>
     <LandingPageNavBar/>
-    <div className="relative top-[70px]">
+    <div className="relative top-[60px]">
     <Outlet></Outlet>
     </div>
    
