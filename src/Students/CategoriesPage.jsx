@@ -23,10 +23,10 @@ function CategoriesPage() {
   return (
     <div>
       <LandingPageNavBar />
-      <div className="container" id="container">
+      <div className="container-fluid" id="container">
         <div className="row">
           <div className="col-12">
-            <h1 className="text-center fw-bold mt-3 mb-5">Course Filter</h1>
+            <h1 className="course-filter">Course Filter</h1>
 
             <Buttons
               menuItems={menuItems}

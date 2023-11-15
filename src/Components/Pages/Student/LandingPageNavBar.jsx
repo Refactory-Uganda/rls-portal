@@ -57,7 +57,7 @@ function  LandingPageNavBar({ name, },ref) {
 
   return (
     <>
-      <div>
+      
         {["lg"].map((expand) => (
           <Navbar
             key={expand}
@@ -313,7 +313,7 @@ function  LandingPageNavBar({ name, },ref) {
             </Container>
           </Navbar>
         ))}
-      </div>
+      
     </>
   );
 }
