@@ -66,10 +66,10 @@ function CoursesCarousel2(props) {
         >
           {data.map((data, index) => (
             <div className="row">
-              <div className="col" id={style.Coursedisplaycol} key={index}>
+              <div className="col" id={style.Coursedisplaycol} key={data._index}>
                 <NavLink href={`./course/${data._id}`} style={{textDecoration:"none"}}>
                 <Card id={style.card} >
-                  <Card.Img src="../images/JavaScript---Thumbnail-1200-x-630.jpg" />
+                  <Card.Img src={data.image} id={style.img}/>
                   <Card.Body id={style.Coursedisplaybody}>
                   <Card.Title> <strong> {data.course_name }{ data.id}</strong></Card.Title>
                     <Card.Text>

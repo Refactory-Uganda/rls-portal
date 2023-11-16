@@ -179,6 +179,11 @@ color: black;
   margin: 5px;
   /* height: auto; */
 }
+#img{
+    height: 150px;
+    width: 150px;
+    margin: auto;
+}
 
 @media (width <= 599px) {
   .div2 {
