@@ -149,7 +149,7 @@ function  LandingPageNavBar({ name, },ref) {
                           Assessment
                         </Dropdown.Item>
                         <Dropdown.Item
-                          href="#/action-3"
+                          href="/student/ViewAssignments"
                           id={style.Dropdown_Item}
                         >
                           Certification

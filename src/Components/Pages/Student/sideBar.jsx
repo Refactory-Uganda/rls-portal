@@ -28,8 +28,8 @@ const Sidebar = () => {
             <BsPeople className="mr-2" />  Enrolled 
             </Dropdown.Toggle>
             <Dropdown.Menu style={{backgroundColor:'white'}}>
-              <Dropdown.Item href="#/action-3" className='align-items-center '  ><Link to="/admin/facilitator" className={style.item} style={{color: 'black',}}> Javascript</Link></Dropdown.Item>
-              <Dropdown.Item href="#/action-3" className='align-items-center '><Link to="/admin/addFacilitator" className={style.item}  style={{color: 'black',}}>Python</Link></Dropdown.Item>
+              <Dropdown.Item href="#/action-3" className='align-items-center '  ><Link to="/student/ViewMaterial" className={style.item} style={{color: 'black',}}> Javascript</Link></Dropdown.Item>
+              <Dropdown.Item href="#/action-3" className='align-items-center '><Link to="/student/ViewMaterial" className={style.item}  style={{color: 'black',}}>Python</Link></Dropdown.Item>
               {/* <Dropdown.Item href="#/action-2"><Link to="/admin/facilitatorcontentadded" className={style.item}>FacilitatorModule</Link></Dropdown.Item> */}
               
             </Dropdown.Menu>
