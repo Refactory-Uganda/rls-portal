@@ -75,7 +75,7 @@ function Landing() {
         <div className="coursewrapper w-[90%] m-auto  md:grid grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-4">
           {
             demo.map((data)=>(
-              <div key={data.id} className="course my-3 rounded-1sm  flex flex-col justify-between " id={styles2.coursecard}>
+              <div key={data.id} className=" my-3 rounded-1sm  flex flex-col justify-between " id={styles2.coursecard}>
                 <div className="div">
                 <div className=" border-solid  w-[100px] m-auto">
                 <img src={data.img} className='w-[100px] m-auto py-10  ' alt="" />

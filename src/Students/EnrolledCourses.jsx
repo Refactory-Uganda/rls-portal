@@ -1,6 +1,7 @@
 import demo from '../Components/Pages/demo.json'
 import style from './EnrolledCourses.module.css';
 import Sidebar from "../Components/Pages/Student/sideBar"
+import { Link } from "react-router-dom";
 import LandingPageNavBar from '../Components/Pages/Student/LandingPageNavBar';
 import {FaEllipsisV, FaTrash, FaEdit} from 'react-icons/fa'
 
@@ -23,7 +24,7 @@ function EnrolledCourses(){
                 <div className="cardContent">
                     <p>{data.description.substring(-1,200)+"........"}</p>
                 </div>
-                <button className={style.button} >View Content</button>
+                <Link to="/student/ViewMaterial" className={style.button} >View Content</Link>
             </div>
                 ))
             }
