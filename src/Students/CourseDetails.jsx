@@ -37,10 +37,8 @@ function CourseDetails(props) {
                 About {data.course_name}
               </h4>
               <p>
-                {data.course_description} Lorem ipsum dolor sit amet
-                consectetur, adipisicing elit. Labore quas, reprehenderit
-                nostrum maiores voluptas accusantium voluptatibus consequuntur
-                nihil est! Quia?
+                {data.course_description} 
+               
                 <br />
                 {}
               </p>
