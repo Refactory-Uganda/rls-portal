@@ -1,8 +1,19 @@
+
+import YouTube from 'react-youtube';
 export default function  SinglecourseIframe(props){
+    const opts = {
+        height: '300',
+        width: '400',
+        playerVars: {
+          // https://developers.google.com/youtube/player_parameters
+          autoplay: 1,
+        },
+      }
     return(
+       
         <>
         <div className="div">
-        <iframe src={props.video} className="w-[90%] h-[90%]"></iframe>
+        <YouTube videoId={props.videoId} opts={opts} />
         </div>
       
         </>

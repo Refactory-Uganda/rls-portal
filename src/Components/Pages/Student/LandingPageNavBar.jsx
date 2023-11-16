@@ -142,6 +142,12 @@ function  LandingPageNavBar({ name, },ref) {
                           Learning Path
                         </Dropdown.Item>
                         <Dropdown.Item
+                          href="/student/remedialTime"
+                          id={style.Dropdown_Item}
+                        >
+                          Remedial time
+                        </Dropdown.Item>
+                        <Dropdown.Item
                           href="#/action-2"
                           id={style.Dropdown_Item}
                         >
@@ -195,6 +201,7 @@ function  LandingPageNavBar({ name, },ref) {
                 <Nav.Link href="#home" id={style.Nav_Link}>
                      <strong>Profile</strong> 
                </Nav.Link>
+               
                <Nav.Link href="#home" id={style.Nav_Link}>
                      <strong> Settings</strong> 
                </Nav.Link>
