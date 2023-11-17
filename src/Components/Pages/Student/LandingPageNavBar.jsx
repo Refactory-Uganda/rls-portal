@@ -172,14 +172,14 @@ function  LandingPageNavBar({ name, },ref) {
                           Remedial time
                         </Dropdown.Item>
                         <Dropdown.Item
-                          href="#/action-2"
+                          href="/student/ViewAssignments"
                           id={style.Dropdown_Item}
                         >
                           {" "}
                           Assessment
                         </Dropdown.Item>
                         <Dropdown.Item
-                          href="/student/ViewAssignments"
+                          href="#/action-3"
                           id={style.Dropdown_Item}
                         >
                           Certification
