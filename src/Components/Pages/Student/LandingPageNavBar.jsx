@@ -23,12 +23,33 @@ import { useRef } from "react";
 import { forwardRef } from "react";
 import SearchBar from "../../MicroComponents/Search/SearchBar";
 import SearchResultsList from "../../MicroComponents/Search/SearchResultsList";
+import { useEffect } from "react";
 
 function  LandingPageNavBar({ name, },ref) {
   const [show, setShow] = useState(false);
   const [results, setResults] = useState([]);
-  // const handleClose = () => setShow(false);
-  // const handleClose2 = () => setShow(false);
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 768);
+
+  const handleResize = () => {
+    setIsLargeScreen(window.innerWidth > 768);
+  };
+  const closeOffcanvas = () => {
+    setShowOffcanvas(false);
+  };
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isLargeScreen) {
+      closeOffcanvas();
+    }
+  }, [isLargeScreen]);
+ 
   const handleShow = () => setShow(true);
   const [expanded, setExpanded] = useState(false);
 
@@ -71,6 +92,7 @@ function  LandingPageNavBar({ name, },ref) {
               <Navbar.Toggle
                 aria-controls={`offcanvasNavbar-expand-${expand}`}
                 id={style.toggle}
+                onClick={() => setShowOffcanvas(!showOffcanvas)}
               />
 
               <Navbar.Brand href="/student/landingPage">
@@ -84,10 +106,12 @@ function  LandingPageNavBar({ name, },ref) {
               {/* Offcanvas */}
 
               <Navbar.Offcanvas
-                // id={`offcanvasNavbar-expand-${expand}`}
+                
                 aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
                 placement="start"
                   id={style.NavBar_Offcanvas}
+                  show={showOffcanvas}
+                  onHide={closeOffcanvas}
               >
                 <Offcanvas.Header closeButton>
                   <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>

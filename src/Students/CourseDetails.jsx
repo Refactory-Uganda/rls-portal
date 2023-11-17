@@ -57,7 +57,7 @@ function CourseDetails(props) {
              <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
               <div className={style.belowimage}>
               <img
-                  src="/images/JavaScript---Thumbnail-1200-x-630.jpg"
+                  src={data.image}
                   alt=""
                   className={style.image}
                 />

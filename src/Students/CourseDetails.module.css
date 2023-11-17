@@ -7,6 +7,9 @@
 
 .image {
   margin-top: 60px;
+  height: 300px;
+  margin: auto;
+  width: 100%;
 }
 #rowinfo {
   box-shadow: 0 3px 8px rgba(83, 44, 86, 0.264);
