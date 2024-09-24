@@ -38,7 +38,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd ./
+          ./
           npm install
 
       - name: Build React App
