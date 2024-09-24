@@ -17,8 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        node-version: [16.x, 18.x]
+        node-version: [20.x]
 
     steps:
       - name: Checkout repository
@@ -35,7 +34,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
@@ -57,4 +56,4 @@ jobs:
       - name: Deploy to production (main branch)
         run: |
           echo "Deploying to production..."
-          # Add deployment commands for your React app, e.g., pushing to AWS S3, Netlify, Vercel, etc.
+          #deployment commands for rls-portal, e.g., pushing to AWS S3, Netlify, Vercel, etc.
