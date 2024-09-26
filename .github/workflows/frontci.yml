@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3 
+        uses: actions/checkout@v3
 
       - name: Cache Node modules
         uses: actions/cache@v3
@@ -39,11 +39,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Start application server
-        run: npm run dev -- --port 5173
+      - name: Build React App
+        run: npm run build
 
       - name: Run frontend tests
-        run: npm run test:e2e
+        run: npm test
 
   deploy:
     if: github.ref == 'refs/heads/main'
@@ -56,4 +56,4 @@ jobs:
       - name: Deploy to production (main branch)
         run: |
           echo "Deploying to production..."
-          # deployment commands for rls-portal, e.g., pushing to AWS S3, Netlify, Vercel, etc.
+          #deployment commands for rls-portal, e.g., pushing to AWS S3, Netlify, Vercel, etc. does this yml file test code?
