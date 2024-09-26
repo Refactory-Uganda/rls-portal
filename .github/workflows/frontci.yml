@@ -14,7 +14,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest 
     strategy:
       matrix:
         node-version: [20.x]
@@ -42,23 +42,14 @@ jobs:
       - name: Start application server
         run: npm run dev &
         env:
-          PORT: 3000 
+          PORT: 3000
 
-      - name: Cache Cypress binary
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/Cypress
-          key: ${{ runner.os }}-cypress-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-cypress-
+      - name: Wait for server to start
+        run: |
+          echo "Waiting for server to start..."
+          sleep 10 # Adjust this duration if necessary
 
-      - name: Install Cypress (if not cached)
-        run: npx cypress install
-
-      - name: Build React App
-        run: npm run build
-
-      - name: Run Cypress tests
+      - name: Run frontend tests
         run: npm run test:e2e
 
   deploy:
@@ -72,4 +63,4 @@ jobs:
       - name: Deploy to production (main branch)
         run: |
           echo "Deploying to production..."
-          #deployment commands for rls-portal, e.g., pushing to AWS S3, Netlify, Vercel, etc.
+          # deployment commands for rls-portal, e.g., pushing to AWS S3, Netlify, Vercel, etc.
