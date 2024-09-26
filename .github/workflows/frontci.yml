@@ -39,6 +39,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Start application server
+        run: npm run dev &
+        env:
+          PORT: 3000 
+
       - name: Cache Cypress binary
         uses: actions/cache@v3
         with:
