@@ -6,7 +6,7 @@ on:
       - main
       - staging
       - development
-  pull_request:
+  pull_request: 
     branches:
       - main
       - staging
