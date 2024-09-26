@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "echo \"No test specified\" && exit 1",
-    "test:e2e": "cypress run"
+    "test:e2e": "cypress run",
+    "cypress:open": "cypress open" // Optional: to run Cypress in interactive mode
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -25,6 +26,7 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "cypress": "^13.15.0" // Add Cypress to devDependencies
   }
 }
