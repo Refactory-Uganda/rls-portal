@@ -42,19 +42,6 @@ jobs:
       - name: Start application server
         run: npm run dev -- --port 5173
 
-      - name: Wait for server to start
-        run: |
-          echo "Waiting for server to start..."
-          for i in {1..10}; do
-            if curl -s --head http://localhost:5173 | grep "200 OK" > /dev/null; then
-              echo "Server is up!"
-              break
-            else
-              echo "Server not yet up, waiting..."
-              sleep 5
-            fi
-          done
-
       - name: Run frontend tests
         run: npm run test:e2e
 
