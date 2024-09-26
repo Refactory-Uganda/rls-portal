@@ -42,6 +42,25 @@ jobs:
       - name: Build React App
         run: npm run build
 
+      - name: Start application server
+        run: npm run dev &
+        env:
+         PORT: 5173
+
+
+      - name: Wait for server to start
+        run: |
+          echo "Waiting for server to start..."
+          for i in {1..10}; do
+            if curl -s --head http://localhost:5173 | grep "200 OK" > /dev/null; then
+              echo "Server is up!"
+              break
+            else
+              echo "Server not yet up, waiting..."
+              sleep 5
+            fi
+          done
+
       - name: Run frontend tests
         run: npm test
 
@@ -56,4 +75,4 @@ jobs:
       - name: Deploy to production (main branch)
         run: |
           echo "Deploying to production..."
-          #deployment commands for rls-portal, e.g., pushing to AWS S3, Netlify, Vercel, etc. does this yml file test code?
+          # deployment commands for rls-portal, e.g., pushing to AWS S3, Netlify, Vercel, etc.
