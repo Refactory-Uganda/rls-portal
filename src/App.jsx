@@ -2,6 +2,7 @@ import React from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Sidebar from './Admin/Sidebar';
 import DashboardContent from './Admin/DashboardContent';
+import DashboardCards from './Admin/DashboardCards';
 import NavBar from './Admin/NavBar';
 
 const App = () => {
@@ -12,6 +13,9 @@ const App = () => {
                 <NavBar />
                 <div className="p-4 flex-1">
                     <DashboardContent />
+                </div>
+                <div>
+                    < DashboardCards/>
                 </div>
             </div>
         </div>

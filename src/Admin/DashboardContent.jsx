@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Dashboard = () => {
+const DashboardContent = () => {
     // State for counts
     const [facilitatorsCount, setFacilitatorsCount] = useState(0);
     const [studentsCount, setStudentsCount] = useState(0);
