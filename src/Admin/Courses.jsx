@@ -39,7 +39,7 @@ function Courses() {
 
   return (
     <div>
-      <h1 className="text-3xl font-semibold mb-6">Courses</h1>
+      {/* <h1 className="text-3xl font-semibold mb-6">Courses</h1> */}
       {/* <button className="inline-block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative">
         Create Course
       </button> */}

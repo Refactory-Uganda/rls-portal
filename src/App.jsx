@@ -12,7 +12,7 @@ const App = () => {
       {/* <Sidebar /> */}
       <Sidebar selectedMenu={selectedMenu} setSelectedMenu={setSelectedMenu} />
       <div className="flex-1 flex flex-col bg-gray-100">
-        <NavBar />
+        <NavBar selectedMenu={selectedMenu} />
         <div className="p-4 flex-1">
           {/* <DashboardContent /> */}
           <DashboardContent selectedMenu={selectedMenu} />
