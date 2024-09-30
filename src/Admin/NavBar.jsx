@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Navbar = () => {
+const Navbar = ({ selectedMenu }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const toggleDropdown = () => {
@@ -9,7 +9,7 @@ const Navbar = () => {
 
     return (
         <nav className="bg-white shadow p-4 flex items-center justify-between">
-            <div className="text-lg font-semibold">Dashboard</div>
+            <div className="text-lg font-semibold">{selectedMenu}</div>
             <div className="flex items-center">
                 
                 <button className="relative mr-4">

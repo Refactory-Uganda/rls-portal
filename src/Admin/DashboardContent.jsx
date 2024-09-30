@@ -31,7 +31,7 @@ const DashboardContent = ({ selectedMenu }) => {
     <div className="flex-1 bg-gray-100 p-6 overflow-auto">
       {selectedMenu === "dashboard" && (
         <div>
-          <h1 className="text-3xl font-semibold mb-4">Dashboard</h1>
+          {/* <h1 className="text-3xl font-semibold mb-4">Dashboard</h1> */}
           {/* Dashboard content goes here */}
           <div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
