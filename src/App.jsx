@@ -1,35 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import Sidebar from "./Admin/Sidebar";
+import DashboardContent from "./Admin/DashboardContent";
+import NavBar from "./Admin/NavBar";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [selectedMenu, setSelectedMenu] = useState("dashboard");
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="flex h-screen">
+      {/* <Sidebar /> */}
+      <Sidebar selectedMenu={selectedMenu} setSelectedMenu={setSelectedMenu} />
+      <div className="flex-1 flex flex-col bg-gray-100">
+        <NavBar selectedMenu={selectedMenu} />
+        <div className="p-4 flex-1">
+          {/* <DashboardContent /> */}
+          <DashboardContent selectedMenu={selectedMenu} />
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default App
+export default App;
