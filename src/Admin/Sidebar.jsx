@@ -32,7 +32,15 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
       href: "#",
       iconClass: "fas fa-chalkboard-teacher",
     },
-
+    {
+      name: "CreateCourse",
+      key: "create course",
+      href: "#",
+      iconClass: "fas fa-chalkboard-teacher",
+    },
+    
+     
+    
     // { href: "#", iconClass: "fas fa-tachometer-alt", label: "Dashboard" },
     // { href: "#", iconClass: "fas fa-book", label: "Courses" },
     // { href: "#", iconClass: "fas fa-chalkboard-teacher", label: "Facilitators" },

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Courses from "./Courses";
+import CreateCourse from "./createCourse";
 
 const DashboardContent = ({ selectedMenu }) => {
   // State for counts
@@ -118,6 +119,7 @@ const DashboardContent = ({ selectedMenu }) => {
         </div>
       )}
       {selectedMenu === "courses" && <Courses />}
+      {selectedMenu === "create course" && <CreateCourse />}
       {/* Add more conditions for other menu items */}
     </div>
   );
