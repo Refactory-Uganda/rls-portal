@@ -1,16 +1,17 @@
-import React from 'react';
+import React from "react";
 
 function CourseCard({ course }) {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-      <img
+      {/* <img
         src={course.imageUrl}
         alt={course.title}
         className="w-full h-48 object-cover"
-      />
+      /> */}
       <div className="p-4">
-        <h2 className="text-xl font-semibold mb-2">{course.title}</h2>
-        <p className="text-gray-600">{course.description}</p>
+        <h2 className="text-xl font-semibold mb-2">{course.courseTitle}</h2>
+        <p className="text-gray-600">{course.courseDescription}</p>
+        <p className="text-gray-600">{course.courseDuration}</p>
         {/* Add more course details or actions if needed */}
       </div>
     </div>
