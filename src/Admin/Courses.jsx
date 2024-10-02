@@ -1,41 +1,57 @@
 import React, { useEffect, useState } from "react";
 import CourseCard from "./CourseCard";
+import api from "../services/api";
 
 function Courses() {
   const [courses, setCourses] = useState([]);
 
   // Fetch course data (replace with your data source)
-  useEffect(() => {
-    // Mock data
-    const mockCourses = [
-      {
-        id: 1,
-        title: "Software Engineering with Javascript",
-        description:
-          "This course delivers full-stack web development training using JavaScript",
-        imageUrl: "/src/assets/courseIcons/JS-icon.png",
-      },
-      {
-        id: 2,
-        title: "Software Engineering with Python",
-        description:
-          "This course delivers full-stack web development training using Python",
-        imageUrl: "/src/assets/courseIcons/py-icon.png",
-      },
-      {
-        id: 3,
-        title: "UI/UX Design",
-        description:
-          "Learn how to apply interactive and visual design principles",
-        imageUrl: "/src/assets/courseIcons/UIUX-Design icon.png",
-      },
-    ];
+  // useEffect(() => {
+  //   // Mock data
+  //   const mockCourses = [
+  //     {
+  //       id: 1,
+  //       title: "Software Engineering with Javascript",
+  //       description:
+  //         "This course delivers full-stack web development training using JavaScript",
+  //       imageUrl: "/src/assets/courseIcons/JS-icon.png",
+  //     },
+  //     {
+  //       id: 2,
+  //       title: "Software Engineering with Python",
+  //       description:
+  //         "This course delivers full-stack web development training using Python",
+  //       imageUrl: "/src/assets/courseIcons/py-icon.png",
+  //     },
+  //     {
+  //       id: 3,
+  //       title: "UI/UX Design",
+  //       description:
+  //         "Learn how to apply interactive and visual design principles",
+  //       imageUrl: "/src/assets/courseIcons/UIUX-Design icon.png",
+  //     },
+  //   ];
 
-    // Simulate API call
-    setTimeout(() => {
-      setCourses(mockCourses);
-    }, 500);
+  //   // Simulate API call
+  //   setTimeout(() => {
+  //     setCourses(mockCourses);
+  //   }, 500);
+  // }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get("/course");
+        setCourses(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
+
+  console.log(courses);
 
   return (
     <div>
