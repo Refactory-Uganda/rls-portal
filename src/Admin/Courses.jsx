@@ -1,75 +1,45 @@
-import React, { useEffect, useState } from "react";
-import CourseCard from "./CourseCard";
+import React, { useState, useEffect } from "react";
+import CourseDetails from "./CourseDetails";
+import CourseList from "./CourseList";
 import api from "../services/api";
 
-function Courses() {
+const Courses = () => {
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const [courses, setCourses] = useState([]);
 
-  // Fetch course data (replace with your data source)
-  // useEffect(() => {
-  //   // Mock data
-  //   const mockCourses = [
-  //     {
-  //       id: 1,
-  //       title: "Software Engineering with Javascript",
-  //       description:
-  //         "This course delivers full-stack web development training using JavaScript",
-  //       imageUrl: "/src/assets/courseIcons/JS-icon.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       title: "Software Engineering with Python",
-  //       description:
-  //         "This course delivers full-stack web development training using Python",
-  //       imageUrl: "/src/assets/courseIcons/py-icon.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       title: "UI/UX Design",
-  //       description:
-  //         "Learn how to apply interactive and visual design principles",
-  //       imageUrl: "/src/assets/courseIcons/UIUX-Design icon.png",
-  //     },
-  //   ];
-
-  //   // Simulate API call
-  //   setTimeout(() => {
-  //     setCourses(mockCourses);
-  //   }, 500);
-  // }, []);
-
+  // Fetch courses from the backend when the component mounts
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchCourses = async () => {
       try {
-        const response = await api.get("/course");
+        const response = await api.get("/course"); // Ensure this endpoint matches your NestJS controller
         setCourses(response.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching courses:", error);
       }
     };
 
-    fetchData();
+    fetchCourses();
   }, []);
 
-  console.log(courses);
+  // Handle deletion of a course
+  const handleDeleteCourse = (deletedCourseId) => {
+    setCourses(courses.filter((course) => course.id !== deletedCourseId));
+    setSelectedCourse(null); // Optionally deselect after deletion
+  };
 
   return (
-    <div>
-      {/* <h1 className="text-3xl font-semibold mb-6">Courses</h1> */}
-      {/* <button className="inline-block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative">
-        Create Course
-      </button> */}
-      {courses.length === 0 ? (
-        <p>Loading courses...</p>
+    <div className="container mx-auto p-4">
+      {selectedCourse ? (
+        <CourseDetails
+          selectedCourse={selectedCourse}
+          setSelectedCourse={setSelectedCourse}
+          onDelete={handleDeleteCourse}
+        />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {courses.map((course) => (
-            <CourseCard key={course.id} course={course} />
-          ))}
-        </div>
+        <CourseList courses={courses} setSelectedCourse={setSelectedCourse} />
       )}
     </div>
   );
-}
+};
 
 export default Courses;
