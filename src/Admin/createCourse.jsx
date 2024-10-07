@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const CreateCourse = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [duration, setDuration] = useState("");
+  const [courseTitle, setcourseTitle] = useState("");
+  const [courseDescription, setcourseDescription] = useState("");
+  const [courseDuration, setcourseDuration] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -12,16 +12,16 @@ const CreateCourse = () => {
     e.preventDefault();
 
     // Validate inputs
-    if (!title || !description || duration === "") {
+    if (!courseTitle || !courseDescription || courseDuration === "") {
       setError("Please fill all the required fields.");
       return;
     }
 
     try {
       const response = await axios.post("http://localhost:3000/course", {
-        title,
-        description,
-        duration,
+        courseTitle,
+        courseDescription,
+        courseDuration,
       });
 
       console.log(response.data); // Handle the response
@@ -30,9 +30,9 @@ const CreateCourse = () => {
       setSuccessMessage("Course created successfully!");
       setError(""); // Clear errors
       // Optionally clear form fields
-      setTitle("");
-      setDescription("");
-      setDuration("");
+      setcourseTitle("");
+      setcourseDescription("");
+      setcourseDuration("");
     } catch (error) {
       // Handle error response
       console.error(error);
@@ -54,10 +54,11 @@ const CreateCourse = () => {
                 Course Title *
               </label>
               <input
-                type="text"
+                name="courseTitle"
+                // type="text"
                 id="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={courseTitle}
+                onChange={(e) => setcourseTitle(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -70,9 +71,10 @@ const CreateCourse = () => {
                 Duration *
               </label>
               <select
+                name="courseDuration"
                 id="duration"
-                value={duration}
-                onChange={(e) => setDuration(e.target.value)}
+                value={courseDuration}
+                onChange={(e) => setcourseDuration(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="" disabled>
@@ -95,9 +97,10 @@ const CreateCourse = () => {
               Description *
             </label>
             <textarea
+              name="courseDescription"
               id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              value={courseDescription}
+              onChange={(e) => setcourseDescription(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Provide a detailed course overview..."
             ></textarea>
