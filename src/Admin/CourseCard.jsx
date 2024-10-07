@@ -1,8 +1,9 @@
 import React from "react";
 
-function CourseCard({ course }) {
+function CourseCard({ course, onClick }) {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300" onClick={onClick}>
+      
       {/* <img
         src={course.imageUrl}
         alt={course.title}

@@ -72,7 +72,7 @@ const CreateCourse = () => {
   };
 
   return (
-    <div class="flex flex-wrap -mx-3 mb-6">
+    <div className="flex flex-wrap -mx-3 mb-6">
       <div className="card p-4 shadow-sm">
         {/* <h2 className="card-title mb-4">Create Course</h2> */}
         {error && <div className="alert alert-danger">{error}</div>}
