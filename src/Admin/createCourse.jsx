@@ -18,11 +18,10 @@ const CreateCourse = () => {
     }
 
     try {
-      // Make a POST request to the NestJS backend
-      const response = await axios.post("http://localhost:3000/courses", {
+      const response = await axios.post("http://localhost:3000/course", {
         title,
         description,
-        duration: Number(duration), // Ensure duration is sent as a number
+        duration,
       });
 
       console.log(response.data); // Handle the response
@@ -43,7 +42,7 @@ const CreateCourse = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-8 bg-white shadow-md rounded-lg">
+    <div className="max-w-xl mx-auto p-10 bg-white shadow-md rounded-lg w-full">
       <div className="mb-4">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex mb-4 space-x-4">
@@ -109,7 +108,7 @@ const CreateCourse = () => {
             <div className="text-green-500">{successMessage}</div>
           )}
 
-          <div className="flex justify-end">
+          <div className="flex justify-center">
             <button
               type="submit"
               className="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
