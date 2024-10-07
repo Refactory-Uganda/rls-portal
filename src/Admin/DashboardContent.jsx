@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import Courses from "./Courses";
 import CreateCourse from "./createCourse";
 import InitialDashboard from "./InitialDashboard";
-import CourseDetails from "./courseDetails";
+
 
 const DashboardContent = ({ selectedMenu }) => {
-  const [selectedCourse, setSelectedCourse] = useState(null);
+  // const [selectedCourse, setSelectedCourse] = useState(null);
   // // State for counts
   // const [facilitatorsCount, setFacilitatorsCount] = useState(0);
   // const [studentsCount, setStudentsCount] = useState(0);
@@ -35,11 +35,7 @@ const DashboardContent = ({ selectedMenu }) => {
     <div className="flex-1 bg-gray-100 p-6 overflow-auto">
       {selectedMenu === "dashboard" && <InitialDashboard />}
       {selectedMenu === "courses" &&
-        (!selectedCourse ? (
-          <Courses selectedCourse={selectedCourse} setSelectedCourse={setSelectedCourse}/>
-        ) : (
-          <CourseDetails selectedCourse={selectedCourse} setSelectedCourse={setSelectedCourse} />
-        ))}
+        <Courses/>}
       {selectedMenu === "create course" && <CreateCourse />}
     </div>
   );
