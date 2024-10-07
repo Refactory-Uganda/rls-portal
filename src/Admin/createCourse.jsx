@@ -1,294 +1,121 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const CreateCourse = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [duration, setDuration] = useState(0);
-  const [modules, setModules] = useState([]);
-  const [courseMaterials, setCourseMaterials] = useState([{ file: null }]);
-  const [requirements, setRequirements] = useState("");
-  const [assessments, setAssessments] = useState([]);
+  const [duration, setDuration] = useState("");
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
-  // collapsing sections
-  const [isModulesOpen, setIsModulesOpen] = useState(true);
-  const [isAssessmentsOpen, setIsAssessmentsOpen] = useState(true);
-
-  const facilitators = [
-    { id: 1, name: "Facilitator 1" },
-    { id: 2, name: "Facilitator 2" },
-    { id: 3, name: "Facilitator 3" },
-  ];
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!title || !description || duration <= 0 || modules.length === 0 || assessments.length === 0) {
+
+    // Validate inputs
+    if (!title || !description || duration === "") {
       setError("Please fill all the required fields.");
       return;
     }
-    // form submission here
-    console.log({
-      title,
-      description,
-      duration,
-      modules,
-      courseMaterials,
-      requirements,
-      assessments,
-    });
-    setError(""); // Clear the error after successful submission
-  };
 
-  const addModule = () => {
-    setModules([
-      ...modules,
-      {
-        moduleTitle: "",
-        facilitator: "",
-        moduleMaterials: [{ file: null }],
-        moduleRequirements: "",
-        moduleDuration: 0,
-      },
-    ]);
-  };
+    try {
+      // Make a POST request to the NestJS backend
+      const response = await axios.post("http://localhost:3000/courses", {
+        title,
+        description,
+        duration: Number(duration), // Ensure duration is sent as a number
+      });
 
-  const handleModuleChange = (index, field, value) => {
-    const updatedModules = [...modules];
-    updatedModules[index][field] = value;
-    setModules(updatedModules);
-  };
+      console.log(response.data); // Handle the response
 
-  const addAssessment = () => {
-    setAssessments([
-      ...assessments,
-      { title: "", type: "", description: "", deadline: "", weight: 0 },
-    ]);
-  };
-
-  const handleAssessmentChange = (index, field, value) => {
-    const updatedAssessments = [...assessments];
-    updatedAssessments[index][field] = value;
-    setAssessments(updatedAssessments);
+      // Display success message
+      setSuccessMessage("Course created successfully!");
+      setError(""); // Clear errors
+      // Optionally clear form fields
+      setTitle("");
+      setDescription("");
+      setDuration("");
+    } catch (error) {
+      // Handle error response
+      console.error(error);
+      setError("An error occurred while creating the course.");
+      setSuccessMessage(""); // Clear success message
+    }
   };
 
   return (
-    <div class="flex flex-wrap -mx-3 mb-6">
-      <div className="card p-4 shadow-sm">
-        {/* <h2 className="card-title mb-4">Create Course</h2> */}
-        {error && <div className="alert alert-danger">{error}</div>}
-        <form onSubmit={handleSubmit} className="row g-3">
-          <div className="col-md-9">
-            <label htmlFor="title" className="form-label">Course Title *</label>
-            <input
-              type="text"
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-              className="form-control"
-            />
+    <div className="max-w-lg mx-auto p-8 bg-white shadow-md rounded-lg">
+      <div className="mb-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="flex mb-4 space-x-4">
+            <div className="flex-1">
+              <label
+                htmlFor="title"
+                className="block text-gray-700 font-bold mb-2"
+              >
+                Course Title *
+              </label>
+              <input
+                type="text"
+                id="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <div className="w-1/4">
+              <label
+                htmlFor="duration"
+                className="block text-gray-700 font-bold mb-2"
+              >
+                Duration *
+              </label>
+              <select
+                id="duration"
+                value={duration}
+                onChange={(e) => setDuration(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="" disabled>
+                  weeks
+                </option>
+                {[...Array(52).keys()].map((week) => (
+                  <option key={week + 1} value={week + 1}>
+                    {week + 1} week{week > 0 ? "s" : ""}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
-          <div className="col-md-3">
-            <label htmlFor="duration" className="form-label">Duration (weeks) *</label>
-            <input
-              type="number"
-              id="duration"
-              value={duration}
-              onChange={(e) => setDuration(Math.max(0, e.target.value))}
-              min="1"
-              required
-              className="form-control"
-            />
-          </div>
-
-          <div className="col-md-12">
-            <label htmlFor="description" className="form-label">Description *</label>
+          <div>
+            <label
+              htmlFor="description"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Description *
+            </label>
             <textarea
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              required
-              className="form-control"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Provide a detailed course overview..."
             ></textarea>
           </div>
 
-          {/* Modules Section */}
-          <div className="mb-3">
-            <label htmlFor="modules" className="form-label">Modules *</label>
+          {error && <div className="text-red-500">{error}</div>}
+          {successMessage && (
+            <div className="text-green-500">{successMessage}</div>
+          )}
+
+          <div className="flex justify-end">
             <button
-              type="button"
-              onClick={() => setIsModulesOpen(!isModulesOpen)}
-              className={`btn btn-${isModulesOpen ? "danger" : "success"} btn-sm mb-2`}
+              type="submit"
+              className="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
             >
-              {isModulesOpen ? "Collapse Modules" : "Expand Modules"}
+              Create Course
             </button>
-
-            {isModulesOpen && (
-              <>
-                <button
-                  type="button"
-                  onClick={addModule}
-                  className="btn btn-purple btn-sm mb-2"
-                >
-                  Add Module
-                </button>
-                {modules.length === 0 && (
-                  <div className="alert alert-info">No modules added yet.</div>
-                )}
-                {modules.map((module, index) => (
-                  <div key={index} className="module-section mb-3">
-                    <input
-                      type="text"
-                      placeholder="Module Title"
-                      value={module.moduleTitle}
-                      onChange={(e) => handleModuleChange(index, "moduleTitle", e.target.value)}
-                      className="form-control mb-2"
-                      required
-                    />
-
-                    <select
-                      value={module.facilitator}
-                      onChange={(e) => handleModuleChange(index, "facilitator", e.target.value)}
-                      className="form-control mb-2"
-                      required
-                    >
-                      <option value="">Select Facilitator</option>
-                      {facilitators.map((facilitator) => (
-                        <option key={facilitator.id} value={facilitator.name}>
-                          {facilitator.name}
-                        </option>
-                      ))}
-                    </select>
-
-                    <label htmlFor={`moduleDuration${index}`} className="form-label">Module Duration (weeks)</label>
-                    <input
-                      type="number"
-                      id={`moduleDuration${index}`}
-                      value={module.moduleDuration}
-                      onChange={(e) => handleModuleChange(index, "moduleDuration", e.target.value)}
-                      min="1"
-                      className="form-control mb-2"
-                      required
-                    />
-
-                    <label htmlFor={`moduleRequirements${index}`} className="form-label">Module Requirements</label>
-                    <input
-                      type="text"
-                      id={`moduleRequirements${index}`}
-                      value={module.moduleRequirements}
-                      onChange={(e) => handleModuleChange(index, "moduleRequirements", e.target.value)}
-                      className="form-control mb-2"
-                    />
-
-                    <label htmlFor={`moduleMaterials${index}`} className="form-label">Module Materials (Upload)</label>
-                    <input
-                      type="file"
-                      id={`moduleMaterials${index}`}
-                      onChange={(e) => {
-                        const updatedModules = [...modules];
-                        updatedModules[index].moduleMaterials[0].file = e.target.files[0];
-                        setModules(updatedModules);
-                      }}
-                      className="form-control mb-2"
-                    />
-                  </div>
-                ))}
-              </>
-            )}
-          </div>
-
-          {/* Assessments Section */}
-          <div className="mb-3">
-            <label htmlFor="assessments" className="form-label">Assessments *</label>
-            <button
-              type="button"
-              onClick={() => setIsAssessmentsOpen(!isAssessmentsOpen)}
-              className={`btn btn-${isAssessmentsOpen ? "danger" : "success"} btn-sm mb-2`}
-            >
-              {isAssessmentsOpen ? "Collapse Assessments" : "Expand Assessments"}
-            </button>
-
-            {isAssessmentsOpen && (
-              <>
-                <button
-                  type="button"
-                  onClick={addAssessment}
-                  className="btn btn-purple btn-sm mb-2"
-                >
-                  Add Assessment
-                </button>
-                {assessments.length === 0 && (
-                  <div className="alert alert-info">No assessments added yet.</div>
-                )}
-                {assessments.map((assessment, index) => (
-                  <div key={index} className="assessment-section mb-3">
-                    <input
-                      type="text"
-                      placeholder="Assessment Title"
-                      value={assessment.title}
-                      onChange={(e) => handleAssessmentChange(index, "title", e.target.value)}
-                      className="form-control mb-2"
-                      required
-                    />
-
-                    <select
-                      value={assessment.type}
-                      onChange={(e) => handleAssessmentChange(index, "type", e.target.value)}
-                      className="form-control mb-2"
-                      required
-                    >
-                      <option value="">Select Assessment Type</option>
-                      <option value="quiz">Quiz</option>
-                      <option value="assignment">Assignment</option>
-                      <option value="project">Project</option>
-                    </select>
-
-                    <textarea
-                      placeholder="Assessment Description"
-                      value={assessment.description}
-                      onChange={(e) => handleAssessmentChange(index, "description", e.target.value)}
-                      className="form-control mb-2"
-                      required
-                    />
-
-                    <input
-                      type="date"
-                      placeholder="Deadline"
-                      value={assessment.deadline}
-                      onChange={(e) => handleAssessmentChange(index, "deadline", e.target.value)}
-                      className="form-control mb-2"
-                      required
-                    />
-
-                    <input
-                      type="number"
-                      placeholder="Weight (%)"
-                      value={assessment.weight}
-                      onChange={(e) => handleAssessmentChange(index, "weight", e.target.value)}
-                      min="0"
-                      max="100"
-                      className="form-control mb-2"
-                      required
-                    />
-                  </div>
-                ))}
-              </>
-            )}
-          </div>
-
-          <div className="col-md-12">
-            <label htmlFor="requirements" className="form-label">Course Requirements</label>
-            <textarea
-              id="requirements"
-              value={requirements}
-              onChange={(e) => setRequirements(e.target.value)}
-              className="form-control"
-            ></textarea>
-          </div>
-
-          <div className="col-md-12">
-            <button type="submit" className="btn btn-primary">Create Course</button>
           </div>
         </form>
       </div>
