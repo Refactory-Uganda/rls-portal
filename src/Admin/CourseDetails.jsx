@@ -1,7 +1,12 @@
 import React from "react";
 import api from "../services/api";
 
-const CourseDetails = ({ selectedCourse, setSelectedCourse, onDelete }) => {
+const CourseDetails = ({
+  selectedCourse,
+  setSelectedCourse,
+  onDelete,
+  setView,
+}) => {
   const handleBackClick = () => {
     setSelectedCourse(null);
   };
@@ -19,6 +24,9 @@ const CourseDetails = ({ selectedCourse, setSelectedCourse, onDelete }) => {
       console.error("Error deleting course:", error);
       alert("Failed to delete the course. Please try again.");
     }
+  };
+  const handleEdit = function () {
+    setView("edit");
   };
 
   return (
@@ -40,7 +48,7 @@ const CourseDetails = ({ selectedCourse, setSelectedCourse, onDelete }) => {
         <div className="mt-4 flex space-x-2">
           <button
             className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
-            // TODO: Implement edit functionality
+            onClick={handleEdit}
           >
             Edit Course
           </button>
