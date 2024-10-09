@@ -2,10 +2,11 @@
 import React from "react";
 import CourseCard from "./CourseCard";
 
-const CourseList = ({ courses, setSelectedCourse }) => {
+const CourseList = ({ courses, setSelectedCourse, view, setView }) => {
   // Handle course card click to display course details
   const handleCourseClick = (course) => {
     setSelectedCourse(course);
+    setView('details')
   };
 
   return (
@@ -20,6 +21,7 @@ const CourseList = ({ courses, setSelectedCourse }) => {
               key={course.id}
               course={course}
               onClick={() => handleCourseClick(course)}
+             
             />
           ))}
         </div>
