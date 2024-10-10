@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Courses from "./Courses";
-import CreateCourse from "./CreateCourse";
+import CreateCourse from "./createCourse";
 import InitialDashboard from "./InitialDashboard";
 
 
