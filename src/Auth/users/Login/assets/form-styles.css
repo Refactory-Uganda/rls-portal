@@ -4,4 +4,36 @@
       display: none;
     }
   }
+
+
+  .form-wrap {
+    width: 100%; /* Make sure your form takes full width */
+  }
+  
+  .column-grid {
+    display: flex;
+    justify-content: space-between; /* Adjust layout */
+  }
+  
+  .column-content {
+    flex: 1;
+    padding: 20px; /* Add some padding */
+  }
+  
+  .email,
+  .password {
+    position: relative; /* Important for positioning the floating labels */
+  }
+  
+  .remember {
+    display: flex;
+    justify-content: space-between; /* Aligns "Remember me" and "Forgot Password" */
+  }
+  
+  .error-message {
+    color: red; /* Change color to whatever you want for errors */
+    text-align: left; /* Align text to the left */
+    margin-bottom: 10px; /* Add some spacing below the error message */
+  }
+  
   

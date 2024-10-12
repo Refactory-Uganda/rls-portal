@@ -1,14 +1,11 @@
 import React from "react";
-import { TextField } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import { useField } from "formik";
 
 export const TextField1 = ({ ...props }) => {
   const [field, meta] = useField(props);
   const errorText = meta.error && meta.touched ? meta.error : "";
-  var name = props.name;
-  // if(meta.error){
-  //   isetSu
-  // }
+
   return (
     <div style={{ width: "100%" }}>
       <div style={{ marginBottom: "5px", marginTop: "10px" }}>
@@ -37,6 +34,9 @@ export const TextField1 = ({ ...props }) => {
             },
           }}
         />
+        <Typography paragraph={true} sx={{ fontSize: 12, color: "red", textAlign: 'left', margin: 2 }}>
+          {errorText}
+        </Typography>
       </div>
     </div>
   );

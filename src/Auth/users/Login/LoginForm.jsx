@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { Button, Snackbar, Alert, Checkbox } from "@mui/material";
-import { Save, Visibility, VisibilityOff } from "@mui/icons-material";
-import { TextField1 } from "../../../microComponents/TextField1";
-import AccessInputs from "../../../microComponents/AccessInputs";
+import { Save } from "@mui/icons-material";
+import { TextField1 } from "../../../microComponents/TextField1"; // Adjust based on your import path
+import AccessInputs from "../../../microComponents/AccessInputs"; // Adjust based on your import path
 import Dashboard from "../../../../src/assets/Images/refactory-IMS-dashboard.png";
 import useLogin from "./hooks/useLogin";
-
 import { LoadingButton } from "@mui/lab";
 import "./assets/form-styles.css";
+
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function LoginForm(props) {
@@ -20,12 +20,17 @@ function LoginForm(props) {
     errorMessage,
     handleLogin,
     setError,
-    showPassword,
-    setShowPassword,
   } = useLogin();
+
+  // Updated validation schema
   const validationSchema = yup.object({
-    email: yup.string().required("Required").email("Provide a valid email"),
-    password: yup.string().required("Required"),
+    email: yup
+      .string()
+      .email("Provide a valid email")
+      .required(""),
+    password: yup
+      .string()
+      .required("Enter your password"),
   });
 
   const buttonState = {
@@ -70,7 +75,7 @@ function LoginForm(props) {
           color: "white",
           textAlign: "center",
           ":hover": {
-            bgcolor: "transparent", // theme.palette.primary.main
+            bgcolor: "transparent",
             color: "#542A52",
             border: "1px solid #542A52",
             boxShadow: "none",
@@ -93,56 +98,104 @@ function LoginForm(props) {
         handleLogin(values, props.userGroup);
       }}
     >
-      {({ handleSubmit }) => {
+      {({ handleSubmit, errors, touched }) => {
         return (
           <form className="form-wrap" onSubmit={handleSubmit} method="POST">
             <div className="main-content">
               <div className="column-grid">
                 <div className="column-content image-area">
-                  <b>
-                    <h1 style={{ fontSize: "36px" }}>
-                      Welcome back{" "}
-                      {props.userGroup.charAt(0).toUpperCase() + props.userGroup.slice(1)}
-                    </h1>
-                  </b>
+                  <h1 style={{ fontSize: "36px" }}>
+                    Welcome back{" "}
+                    {props.userGroup.charAt(0).toUpperCase() + props.userGroup.slice(1)}
+                  </h1>
                   <img src={Dashboard} alt="signupDashboard" />
                 </div>
 
                 <div className="column-content login-area">
-                  {/* <h1>Login to RLS</h1> */}
                   {error && (
-                    <Alert severity="error" onClose={() => setError(false)}>
+                    <Alert severity="error" onClose={() => setError(false)} className="error-message">
                       {errorMessage}
                     </Alert>
                   )}
-                  {/* <p>
-              Enter your details below to access the {props.userGroup}{" "}
-              Dashboard
-            </p> */}
+
                   <div className="email">
-                    {/* <label htmlFor="emailAddress" style={{ textAlign: '' }}>
-                      Email Address<span className="asterisks">*</span>
-                    </label> */}
                     <TextField1
-                      label="Email Address"
                       name="email"
-                      placeholder="Enter a valid Email Address"
+                      placeholder="Email Address" // Placeholder text
                       size="small"
                       fullWidth
-                      sx={{ marginTop: "5px", height: "50px" }} />
-                  </div>
-                  <div className="password">
-                    <AccessInputs
-                      label="Password"
-                      name="password"
-                      placeholder="Enter a valid password"
-                      size="small"
-                      fullWidth
+                      error={touched.email && Boolean(errors.email)} // Check for errors
+                      helperText={touched.email && errors.email} // Display error message
                       sx={{
                         marginTop: "5px",
                         height: "50px",
-                      }} />
+                        position: "relative",
+                        "& input": {
+                          padding: "12px 0", // Adjust padding to align with the design
+                        },
+                        "&::before": {
+                          content: '"Email Address"', // Floating label
+                          position: "absolute",
+                          left: "10px",
+                          top: "15px",
+                          color: "#aaa", // Placeholder color
+                          fontSize: "14px",
+                          pointerEvents: "none",
+                          transition: "0.2s ease all",
+                        },
+                        "&:focus-within::before": {
+                          top: "-10px", // Adjust position when focused
+                          fontSize: "12px",
+                          color: "blue", // Change color when focused
+                        },
+                        "&:has(input:valid)::before": {
+                          top: "-10px", // Adjust position if input is valid
+                          fontSize: "12px",
+                          color: "blue", // Change color if input is valid
+                        },
+                      }}
+                    />
                   </div>
+
+                  <div className="password">
+                    <AccessInputs
+                      name="password"
+                      placeholder="Password" // Placeholder text
+                      size="small"
+                      fullWidth
+                      error={touched.password && Boolean(errors.password)} // Check for errors
+                      helperText={touched.password && errors.password} // Display error message
+                      sx={{
+                        marginTop: "5px",
+                        height: "50px",
+                        position: "relative",
+                        "& input": {
+                          padding: "12px 0", // Adjust padding to align with the design
+                        },
+                        "&::before": {
+                          content: '"Password"', // Floating label
+                          position: "absolute",
+                          left: "10px",
+                          top: "15px",
+                          color: "#aaa", // Placeholder color
+                          fontSize: "14px",
+                          pointerEvents: "none",
+                          transition: "0.2s ease all",
+                        },
+                        "&:focus-within::before": {
+                          top: "-10px", // Adjust position when focused
+                          fontSize: "12px",
+                          color: "blue", // Change color when focused
+                        },
+                        "&:has(input:valid)::before": {
+                          top: "-10px", // Adjust position if input is valid
+                          fontSize: "12px",
+                          color: "blue", // Change color if input is valid
+                        },
+                      }}
+                    />
+                  </div>
+
                   <div className="remember">
                     <p>
                       <span>
