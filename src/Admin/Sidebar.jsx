@@ -38,8 +38,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
       href: "#",
       iconClass: "fas fa-chalkboard-teacher",
     },
-    
-     
+  
     
     // { href: "#", iconClass: "fas fa-tachometer-alt", label: "Dashboard" },
     // { href: "#", iconClass: "fas fa-book", label: "Courses" },
@@ -57,7 +56,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
         <div className="flex items-center justify-between">
           {!isCollapsed && (
             <img
-              src="images/refactory_logo.jpg"
+              src="../src/assets/images/rls-logo-white.png"
               alt="Logo"
               className="h-12 mb-6"
             />
@@ -75,7 +74,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
         {!isCollapsed && (
           <div className="flex items-center">
             <img
-              src="images/profile_icon.jpeg"
+              src="../src/assets/images/profile_icon.jpeg"
               alt="User Avatar"
               className="h-10 w-10 rounded-full"
             />

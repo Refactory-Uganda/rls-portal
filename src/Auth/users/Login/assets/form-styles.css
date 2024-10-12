@@ -1,0 +1,7 @@
+/* Add media queries for responsiveness */
+@media screen and (max-width: 1000px) {
+    .image-area {
+      display: none;
+    }
+  }
+  
