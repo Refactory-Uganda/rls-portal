@@ -23,7 +23,7 @@ const Navbar = ({ selectedMenu }) => {
                         className="flex items-center space-x-2"
                     >
                         <img
-                            src="images/profile_icon.jpeg"
+                            src="../src/assets/images/rls-logo-white.png"
                             alt="User Avatar"
                             className="h-8 w-8 rounded-full"
                         />
