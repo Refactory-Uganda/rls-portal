@@ -34,9 +34,9 @@ export const TextField1 = ({ ...props }) => {
             },
           }}
         />
-        <Typography paragraph={true} sx={{ fontSize: 12, color: "red", textAlign: 'left', margin: 2 }}>
+        {/* <Typography paragraph={true} sx={{ fontSize: 12, color: "red", textAlign: 'left', margin: 2 }}>
           {errorText}
-        </Typography>
+        </Typography> */}
       </div>
     </div>
   );

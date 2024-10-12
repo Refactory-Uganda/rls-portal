@@ -27,7 +27,7 @@ function LoginForm(props) {
     email: yup
       .string()
       .email("Provide a valid email")
-      .required(""),
+      .required("Enter your email"),
     password: yup
       .string()
       .required("Enter your password"),
