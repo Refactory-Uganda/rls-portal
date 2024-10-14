@@ -14,13 +14,7 @@ import "./assets/form-styles.css";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function LoginForm(props) {
-  const {
-    error,
-    loading,
-    errorMessage,
-    handleLogin,
-    setError,
-  } = useLogin();
+  const { error, loading, errorMessage, handleLogin, setError } = useLogin();
 
   // Updated validation schema
   const validationSchema = yup.object({
@@ -28,9 +22,7 @@ function LoginForm(props) {
       .string()
       .email("Provide a valid email")
       .required("Enter your email"),
-    password: yup
-      .string()
-      .required("Enter your password"),
+    password: yup.string().required("Enter your password"),
   });
 
   const buttonState = {
@@ -61,6 +53,8 @@ function LoginForm(props) {
     ),
     false: (
       <Button
+        component={Link}
+        to="/admin"
         fullWidth
         type="submit"
         sx={{
@@ -106,14 +100,19 @@ function LoginForm(props) {
                 <div className="column-content image-area">
                   <h1 style={{ fontSize: "36px" }}>
                     Welcome back{" "}
-                    {props.userGroup.charAt(0).toUpperCase() + props.userGroup.slice(1)}
+                    {props.userGroup.charAt(0).toUpperCase() +
+                      props.userGroup.slice(1)}
                   </h1>
                   <img src={Dashboard} alt="signupDashboard" />
                 </div>
 
                 <div className="column-content login-area">
                   {error && (
-                    <Alert severity="error" onClose={() => setError(false)} className="error-message">
+                    <Alert
+                      severity="error"
+                      onClose={() => setError(false)}
+                      className="error-message"
+                    >
                       {errorMessage}
                     </Alert>
                   )}
