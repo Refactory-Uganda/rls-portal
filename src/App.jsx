@@ -38,15 +38,17 @@ const App = () => {
           path="/admin"
           element={
             // isAuthenticated ?
-            <div className="flex h-screen">
-              <Sidebar
-                selectedMenu={selectedMenu}
-                setSelectedMenu={setSelectedMenu}
-              />
-              <div className="flex-1 flex flex-col bg-gray-100">
-                <NavBar selectedMenu={selectedMenu} />
-                <div className="p-4 flex-1">
-                  <DashboardContent selectedMenu={selectedMenu} />
+            <div>
+              <NavBar selectedMenu={selectedMenu} />
+              <div className="flex h-screen">
+                <Sidebar
+                  selectedMenu={selectedMenu}
+                  setSelectedMenu={setSelectedMenu}
+                />
+                <div className="flex-1 flex flex-col bg-gray-100">
+                  <div className="p-4 flex-1">
+                    <DashboardContent selectedMenu={selectedMenu} />
+                  </div>
                 </div>
               </div>
             </div>

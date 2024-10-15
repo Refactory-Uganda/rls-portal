@@ -38,8 +38,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
       href: "#",
       iconClass: "fas fa-chalkboard-teacher",
     },
-  
-    
+
     // { href: "#", iconClass: "fas fa-tachometer-alt", label: "Dashboard" },
     // { href: "#", iconClass: "fas fa-book", label: "Courses" },
     // { href: "#", iconClass: "fas fa-chalkboard-teacher", label: "Facilitators" },
@@ -50,24 +49,25 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
       className={`flex flex-col h-full transition-all duration-300 text-white ${
         isCollapsed ? "w-20" : "w-64"
       }`}
-      style={{ backgroundColor: "#663367", borderRadius: "20px" }}
+      style={{ backgroundColor: "#663367" }}
     >
       <div className="p-6">
         <div className="flex items-center justify-between">
-          {!isCollapsed && (
+          {/* {!isCollapsed && (
             <img
               src="../src/assets/images/rls-logo-white.png"
               alt="Logo"
               className="h-12 mb-6"
             />
-          )}
+          )} */}
 
           <button
             onClick={toggleSidebar}
             className="text-white focus:outline-none"
             aria-label="Toggle Sidebar"
           >
-            <i className="fas fa-bars"></i>
+            <i className="bi bi-arrow-left-right sidebar-collapse-icon"></i>
+            {/* <i className="fas fa-bars"></i> */}
           </button>
         </div>
 
