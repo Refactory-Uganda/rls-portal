@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const InitialDashboard = () => {
   // State for counts
@@ -9,8 +10,6 @@ const InitialDashboard = () => {
 
   // Simulate fetching data from an API
   useEffect(() => {
-    // Fetch the counts from the backend (API or database)
-    // Replace this with your actual API call
     const fetchData = async () => {
       // Simulate an API call with dummy data
       const data = {
@@ -28,82 +27,86 @@ const InitialDashboard = () => {
   }, []);
 
   return (
-    <div>
-      {/* <h1 className="text-3xl font-semibold mb-4">Dashboard</h1> */}
-      {/* Dashboard content goes here */}
-      <div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div
-            className="relative bg-white p-8 shadow-lg rounded-xl border border-gray-300"
-            style={{ minHeight: "200px" }}
-          >
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold text-gray-800">Facilitators</h3>
-              <span
-                className={`w-6 h-6 rounded-full ${
-                  facilitatorsCount > 0 ? "bg-green-500" : "bg-red-500"
-                } inline-block`}
-                title={facilitatorsCount > 0 ? "Active" : "Inactive"}
-              ></span>
+    <div className="container mt-4">
+      <div className="row mb-4">
+        {/* Facilitators Card */}
+        <div className="col-md-4 mb-3">
+          <div className="card h-100 border border-secondary shadow-sm">
+            <div className="card-body">
+              <div className="d-flex align-items-start mb-3">
+                <span className="material-icons text-primary me-2">people</span> {/* Icon for Facilitators */}
+                <h3 className="card-title">Facilitators</h3>
+                <span
+                  className={`badge rounded-circle ${
+                    facilitatorsCount > 0 ? "bg-success" : "bg-danger"
+                  }`}
+                  title={facilitatorsCount > 0 ? "Active" : "Inactive"}
+                  style={{ width: "24px", height: "24px" }}
+                ></span>
+              </div>
+              <p className="display-3 text-primary">{facilitatorsCount}</p>
+              {/* <p>{facilitatorsCount} Facilitators</p> */}
             </div>
-            <p className="text-5xl font-extrabold text-purple-800 mb-4">
-              {facilitatorsCount}
-            </p>
-            <p className="text-lg text-gray-600">
-              {facilitatorsCount} Facilitators
-            </p>
-          </div>
-
-          <div
-            className="relative bg-white p-8 shadow-lg rounded-xl border border-gray-300"
-            style={{ minHeight: "200px" }}
-          >
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold text-gray-800">Students</h3>
-              <span
-                className={`w-6 h-6 rounded-full ${
-                  studentsCount > 0 ? "bg-green-500" : "bg-red-500"
-                } inline-block`}
-                title={studentsCount > 0 ? "Active" : "Inactive"}
-              ></span>
-            </div>
-            <p className="text-5xl font-extrabold text-blue-800 mb-4">
-              {studentsCount}
-            </p>
-            <p className="text-lg text-gray-600">{studentsCount} Students</p>
-          </div>
-
-          <div
-            className="relative bg-white p-8 shadow-lg rounded-xl border border-gray-300"
-            style={{ minHeight: "200px" }}
-          >
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold text-gray-800">Courses</h3>
-              <span
-                className={`w-6 h-6 rounded-full ${
-                  coursesCount > 0 ? "bg-green-500" : "bg-red-500"
-                } inline-block`}
-                title={coursesCount > 0 ? "Active" : "Inactive"}
-              ></span>
-            </div>
-            <p className="text-5xl font-extrabold text-green-800 mb-4">
-              {coursesCount}
-            </p>
-            <p className="text-lg text-gray-600">{coursesCount} Courses</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div
-            className="bg-purple-700 h-64 rounded"
-            style={{ backgroundColor: "#663367", borderRadius: "20px" }}
-          ></div>
-          <div className="bg-white p-4 shadow rounded">
-            <h3 className="text-lg font-semibold">
-              Events and Class Schedules
-            </h3>
-            <div>
-              {/* Insert calendar or schedule component here */}
+        {/* Students Card */}
+        <div className="col-md-4 mb-3">
+          <div className="card h-100 border border-secondary shadow-sm">
+            <div className="card-body">
+              <div className="d-flex align-items-start mb-3">
+                <span className="material-icons text-info me-2">school</span> {/* Icon for Students */}
+                <h3 className="card-title">Learners</h3>
+                <span
+                  className={`badge rounded-circle ${
+                    studentsCount > 0 ? "bg-success" : "bg-danger"
+                  }`}
+                  title={studentsCount > 0 ? "Active" : "Inactive"}
+                  style={{ width: "24px", height: "24px" }}
+                ></span>
+              </div>
+              <p className="display-3 text-info">{studentsCount}</p>
+              {/* <p>{studentsCount} Students</p> */}
+            </div>
+          </div>
+        </div>
+
+        {/* Courses Card */}
+        <div className="col-md-4 mb-3">
+          <div className="card h-100 border border-secondary shadow-sm">
+            <div className="card-body">
+              <div className="d-flex align-items-start mb-3">
+                <span className="material-icons text-success me-2">book</span> {/* Icon for Courses */}
+                <h3 className="card-title">Courses</h3>
+                <span
+                  className={`badge rounded-circle ${
+                    coursesCount > 0 ? "bg-success" : "bg-danger"
+                  }`}
+                  title={coursesCount > 0 ? "Active" : "Inactive"}
+                  style={{ width: "24px", height: "24px" }}
+                ></span>
+              </div>
+              <p className="display-3 text-success">{coursesCount}</p>
+              {/* <p>{coursesCount} Courses</p> */}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Additional content */}
+      <div className="row mb-4">
+        {/* Placeholder for chart */}
+        <div className="col-md-6 mb-3">
+          <div className="card bg-secondary text-white h-100" style={{ borderRadius: "20px" }}>
+            <div className="card-body"></div>
+          </div>
+        </div>
+
+        {/* Events and Class Schedules */}
+        <div className="col-md-6 mb-3">
+          <div className="card h-100">
+            <div className="card-body">
+              <h3 className="card-title">Events and Class Schedules</h3>
               <p>Calendar goes here</p>
             </div>
           </div>

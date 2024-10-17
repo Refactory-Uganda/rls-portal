@@ -39,12 +39,12 @@ const CourseDetails = ({
       </button>
       <div className="bg-white rounded-lg shadow-md p-6">
         <h1 className="text-3xl font-bold text-gray-800">
-          {selectedCourse.courseTitle}
+          {selectedCourse.Title}
         </h1>
         <p className="text-gray-600 text-lg mt-2">
-          Duration: {selectedCourse.courseDuration}
+          Duration: {selectedCourse.Duration}
         </p>
-        <p className="text-gray-700 mt-4">{selectedCourse.courseDescription}</p>
+        <p className="text-gray-700 mt-4">{selectedCourse.Description}</p>
         <div className="mt-4 flex space-x-2">
           <button
             className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"

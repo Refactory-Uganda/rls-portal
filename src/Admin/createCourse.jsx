@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "../../src/assets/css/createCourse.css";
 
 const CreateCourse = () => {
-  const [courseTitle, setcourseTitle] = useState("");
-  const [courseDescription, setcourseDescription] = useState("");
-  const [courseDuration, setcourseDuration] = useState("");
+  const [Title, setTitle] = useState("");
+  const [Description, setDescription] = useState("");
+  const [Duration, setDuration] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -12,70 +13,68 @@ const CreateCourse = () => {
     e.preventDefault();
 
     // Validate inputs
-    if (!courseTitle || !courseDescription || courseDuration === "") {
+    if (!Title || !Description || Duration === "") {
       setError("Please fill all the required fields.");
       return;
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/course", {
-        courseTitle,
-        courseDescription,
-        courseDuration,
+      const response = await axios.post("http://localhost:3000/courses", {
+        Title,
+        Description,
+        Duration,
       });
 
-      console.log(response.data); // Handle the response
+      console.log(response.data);
 
-      // Display success message
       setSuccessMessage("Course created successfully!");
-      setError(""); // Clear errors
-      // Optionally clear form fields
-      setcourseTitle("");
-      setcourseDescription("");
-      setcourseDuration("");
+      setError("");
+      // Clear form fields
+      setTitle("");
+      setDescription("");
+      setDuration("");
     } catch (error) {
-      // Handle error response
       console.error(error);
       setError("An error occurred while creating the course.");
-      setSuccessMessage(""); // Clear success message
+      setSuccessMessage("");
     }
   };
 
   return (
-    <div className="max-w-xl mx-auto p-10 bg-white shadow-md rounded-lg w-full">
-      <div className="mb-4">
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex mb-4 space-x-4">
-            <div className="flex-1">
-              <label
-                htmlFor="title"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Course Title *
+    <div className="container mt-5">
+      <div className="card p-4 shadow">
+        <h3 className="mb-4 font-weight-bold" style={{ fontSize: "1.5rem" }}>
+          Create Course
+        </h3>
+
+        <form onSubmit={handleSubmit}>
+          <div className="row mb-3">
+            <div className="col-md-8">
+              <label htmlFor="title" className="form-label text-start d-block">
+                Title <span className="text-danger">*</span>
               </label>
               <input
-                name="courseTitle"
-                // type="text"
+                type="text"
+                className="form-control custom-focus"
                 id="title"
-                value={courseTitle}
-                onChange={(e) => setcourseTitle(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={Title}
+                placeholder="e.g., Introduction to Web Development"
+                onChange={(e) => setTitle(e.target.value)}
               />
             </div>
 
-            <div className="w-1/4">
+            <div className="col-md-4">
               <label
                 htmlFor="duration"
-                className="block text-gray-700 font-bold mb-2"
+                className="form-label text-start d-block"
               >
-                Duration *
+                Duration <span className="text-danger">*</span>
               </label>
               <select
-                name="courseDuration"
+                className="form-select custom-focus"
                 id="duration"
-                value={courseDuration}
-                onChange={(e) => setcourseDuration(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={Duration}
+                onChange={(e) => setDuration(e.target.value)}
               >
                 <option value="" disabled>
                   weeks
@@ -89,36 +88,48 @@ const CreateCourse = () => {
             </div>
           </div>
 
-          <div>
+          <div className="mb-3">
             <label
               htmlFor="description"
-              className="block text-gray-700 font-bold mb-2"
+              className="form-label text-start d-block"
             >
-              Description *
+              Description <span className="text-danger">*</span>
             </label>
             <textarea
-              name="courseDescription"
+              className="form-control custom-focus"
               id="description"
-              value={courseDescription}
-              onChange={(e) => setcourseDescription(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={Description}
+              onChange={(e) => setDescription(e.target.value)}
               placeholder="Provide a detailed course overview..."
             ></textarea>
           </div>
 
-          {error && <div className="text-red-500">{error}</div>}
-          {successMessage && (
-            <div className="text-green-500">{successMessage}</div>
-          )}
+          {/* Error and Success Messages */}
+          {error && <p className="text-danger">{error}</p>}
+          {successMessage && <p className="text-success">{successMessage}</p>}
 
-          <div className="flex justify-center">
+          <div className="d-flex justify-content-end">
             <button
               type="submit"
-              className="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="mt-4 px-4 py-2"
+              style={{
+                backgroundColor: "#663367", // Button color
+                color: "white", // Text color
+                border: "none",
+                borderRadius: "0.375rem", // Equivalent to Bootstrap's rounded-md
+                transition: "background-color 0.3s", // Smooth transition for hover
+              }}
+              onMouseOver={(e) =>
+                (e.currentTarget.style.backgroundColor = "rgba(102, 51, 103, 0.5)") // 50% opacity on hover
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.backgroundColor = "#663367") // Reset to original color
+              }
             >
               Create Course
             </button>
           </div>
+
         </form>
       </div>
     </div>

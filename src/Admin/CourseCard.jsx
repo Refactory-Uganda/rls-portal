@@ -10,9 +10,9 @@ function CourseCard({ course, onClick }) {
         className="w-full h-48 object-cover"
       /> */}
       <div className="p-4">
-        <h2 className="text-xl font-semibold mb-2">{course.courseTitle}</h2>
-        <p className="text-gray-600">{course.courseDescription}</p>
-        <p className="text-gray-600">{course.courseDuration}</p>
+        <h2 className="text-xl font-semibold mb-2">{course.Title}</h2>
+        <p className="text-gray-600">{course.Description}</p>
+        <p className="text-gray-600">{course.Duration}</p>
         {/* Add more course details or actions if needed */}
       </div>
     </div>

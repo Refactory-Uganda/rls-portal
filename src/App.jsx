@@ -7,14 +7,14 @@ import {
   Navigate,
 } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import "bootstrap/dist/css/bootstrap.min.css"; 
 import Sidebar from "./Admin/Sidebar";
 import DashboardContent from "./Admin/DashboardContent";
 import NavBar from "./Admin/NavBar";
 import Login from "./Login/Login";
 import useAuth from "./Hooks/useAuth";
-// import LoginWelcome from "./Login/LoginWelcome";
 
-//Logins
+// Logins
 import LoginWelcome from "./Auth/users/LoginWelcome";
 import AdminLogin from "./Auth/users/AdminLogin";
 import FacilitatorLogin from "./Auth/users/FacilitatorLogin";
@@ -28,8 +28,8 @@ const App = () => {
     <Router>
       <Routes>
         {/* Public routes */}
-        <Route path="/" element={<LoginWelcome />} /> {/* Home page */}
-        <Route path="/login" element={<Login />} /> {/* Login page */}
+        <Route path="/" element={<LoginWelcome />} />
+        <Route path="/login" element={<Login />} /> 
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/facilitator/login" element={<FacilitatorLogin />} />
         <Route path="/learner/login" element={<LearnerLogin />} />
@@ -37,22 +37,21 @@ const App = () => {
         <Route
           path="/admin"
           element={
-            // isAuthenticated ?
-            <div>
+            <div className="d-flex flex-column h-100">
               <NavBar selectedMenu={selectedMenu} />
-              <div className="flex h-screen">
+              <div className="d-flex flex-grow-1">
                 <Sidebar
                   selectedMenu={selectedMenu}
                   setSelectedMenu={setSelectedMenu}
                 />
-                <div className="flex-1 flex flex-col bg-gray-100">
-                  <div className="p-4 flex-1">
-                    <DashboardContent selectedMenu={selectedMenu} />
-                  </div>
+                <div className="flex-grow-1 bg-light">
+                  <DashboardContent selectedMenu={selectedMenu} />
                 </div>
               </div>
             </div>
-            // : (
+            // Uncomment this line to enable authentication check
+            // isAuthenticated ? (
+            // ) : (
             //   <Navigate to="/login" />
             // )
           }
