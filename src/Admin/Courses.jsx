@@ -3,6 +3,7 @@ import CourseDetails from "./CourseDetails";
 import CourseList from "./CourseList";
 import api from "../services/api";
 import EditCourse from "./EditCourse";
+import CreateCourse from "./createCourse";
 
 const Courses = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
@@ -78,6 +79,12 @@ const Courses = () => {
           selectedCourse={selectedCourse}
           onUpdateSuccess={handleEditSuccess}
           onCancel={() => setView("details")}
+        />
+      )}
+      {view === "createCourse" && selectedCourse && (
+        <CreateCourse
+        setView={setView}
+          onCancel={() => setView("list")}
         />
       )}
     </div>
