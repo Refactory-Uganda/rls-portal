@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 const Navbar = ({ selectedMenu }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -8,44 +10,37 @@ const Navbar = ({ selectedMenu }) => {
   };
 
   return (
-    <nav className="bg-white shadow p-4 flex items-center justify-between">
-      <img src="../src/assets/Images/login-logo.png" className="h-12" />
-      <div className="flex items-center">
-        <button className="relative mr-4">
-          <span className="material-icons text-gray-500">notifications</span>
-          <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+    <nav className="navbar navbar-light bg-light px-4 shadow-sm">
+      <a href="#" className="navbar-brand">
+        <img src="../src/assets/Images/login-logo.png" className="h-12" alt="Logo" />
+      </a>
+      
+      <div className="d-flex align-items-center">
+        <button className="btn btn-link position-relative me-4">
+          <span className="material-icons text-secondary">notifications</span>
+          <span className="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
         </button>
 
-        <div className="relative">
-          <button
-            onClick={toggleDropdown}
-            className="flex items-center space-x-2"
+        <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown} className="d-inline-block">
+          <DropdownToggle
+            tag="button"
+            className="btn btn-link d-flex align-items-center p-0"
+            data-toggle="dropdown"
           >
             <img
               src="../src/assets/images/rls-logo-white.png"
               alt="User Avatar"
-              className="h-8 w-8 rounded-full"
+              className="rounded-circle me-2"
+              style={{ width: '32px', height: '32px' }}
             />
-            <span className="material-icons text-gray-500">expand_more</span>
-          </button>
+            <span className="material-icons text-secondary">expand_more</span>
+          </DropdownToggle>
 
-          {dropdownOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-              <a
-                href="#"
-                className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-              >
-                Profile
-              </a>
-              <a
-                href="#"
-                className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-              >
-                Logout
-              </a>
-            </div>
-          )}
-        </div>
+          <DropdownMenu end>
+            <DropdownItem href="#">Profile</DropdownItem>
+            <DropdownItem href="#">Logout</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
       </div>
     </nav>
   );
