@@ -14,7 +14,7 @@ const Courses = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await api.get("/course"); // Ensure this endpoint matches your NestJS controller
+        const response = await api.get("/courses"); // Ensure this endpoint matches your NestJS controller
         setCourses(response.data);
       } catch (error) {
         console.error("Error fetching courses:", error);

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../../src/assets/css/navbar.css';
 
 const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -13,18 +14,18 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
     { name: "Courses", key: "courses", href: "#", iconClass: "fas fa-book" },
     { name: "Learners", key: "learners", href: "#", iconClass: "fas fa-user-graduate" },
     { name: "Facilitators", key: "facilitators", href: "#", iconClass: "fas fa-chalkboard-teacher" },
-    { name: "Create Course", key: "create-course", href: "#", iconClass: "fas fa-chalkboard-teacher" },
+    { name: "Create Course", key: "createCourse", href: "#", iconClass: "fas fa-chalkboard-teacher" },
   ];
 
   return (
     <div
       className={`d-flex flex-column vh-100`}
       style={{
-        backgroundColor: 'rgba(102, 51, 103)', 
+        backgroundColor: 'rgba(102, 51, 103)',
         color: 'white',
         width: isCollapsed ? "80px" : "250px",
+        transition: "width 0.3s"
       }}
-  
     >
       <div className="p-3">
         <div className="d-flex justify-content-between align-items-center">
@@ -48,7 +49,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
         )}
       </div>
 
-      <nav className="flex-grow-1 p-3">
+      <nav className="flex-grow-1 p-3" id="nav-items">
         {menuItems.map((item) => (
           <a
             key={item.key}

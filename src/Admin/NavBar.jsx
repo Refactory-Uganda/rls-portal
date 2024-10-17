@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import '../../src/assets/css/navbar.css';
 
 const Navbar = ({ selectedMenu }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -10,9 +11,9 @@ const Navbar = ({ selectedMenu }) => {
   };
 
   return (
-    <nav className="navbar navbar-light bg-light px-4 shadow-sm">
+    <nav className="navbar navbar-light bg-light shadow-sm">
       <a href="#" className="navbar-brand">
-        <img src="../src/assets/Images/login-logo.png" className="h-12" alt="Logo" />
+        <img src="../src/assets/Images/login-logo.png" className="h-4" alt="Logo" />
       </a>
       
       <div className="d-flex align-items-center">

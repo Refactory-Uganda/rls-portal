@@ -1,0 +1,4 @@
+.custom-focus:focus {
+    outline: 2px solid #663367; /* Change to your desired outline color */
+    box-shadow: none; /* Remove Bootstrap's default shadow */
+  }

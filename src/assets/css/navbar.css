@@ -1,0 +1,23 @@
+.h-4 {
+    height: 35px; 
+    width: auto;
+}
+
+#nav-items a {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    background-color: transparent; /* Default background */
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+  
+  #nav-items a:hover {
+    background-color: rgba(102, 51, 103, 0.5); /* 50% opacity of #663367 */
+  }
+  
+  #nav-items a.active {
+    background-color: rgba(102, 51, 103, 0.5); /* 50% opacity for active menu */
+  }
+  
