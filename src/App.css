@@ -77,3 +77,10 @@ a {
   background-color: #542b55;
   color: white;
 }
+.my-textfield {
+
+  border-bottom: none;
+
+  outline: none;
+
+}
