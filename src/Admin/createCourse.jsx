@@ -183,7 +183,7 @@ const CreateCourse = () => {
                     htmlFor="description"
                     className="form-label text-start d-block"
                   >
-                   Title
+                    Title
                   </label>
                   <textarea
                     className="form-control custom-focus"
@@ -227,25 +227,26 @@ const CreateCourse = () => {
               className="btn btn-primary secondary-action-btn mb-3"
               onClick={() => setShowAddTopic(true)}
             >
-              + Add another topic
+              Add another topic
             </button>
           )}
 
           {/* Display Added Topics */}
           {topics.length > 0 && (
             <div className="mb-3">
-              <h5>Added Topics</h5>
+              <h5>Topics</h5>
               <ul className="list-group">
                 {topics.map((topic, index) => (
                   <li
                     key={index}
-                    className="list-group-item d-flex justify-content-between align-items-center"
+                    className="list-group-item d-flex justify-content-between align-items-center mb-2 p-2" // Adjust padding here (e.g., p-2)
                   >
-                    <span>{topic.title}</span>
+                    <span className="small">{topic.title}</span>{" "}
+                    {/* Optionally reduce font size */}
                     <div className="d-flex">
                       <button
                         type="button"
-                        className="btn btn-link text-primary me-2"
+                        className="btn btn-link btn-purple me-2"
                         onClick={() => editTopic(index)}
                       >
                         <FontAwesomeIcon icon={faEdit} /> {/* Edit Icon */}
