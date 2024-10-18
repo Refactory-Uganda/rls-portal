@@ -18,7 +18,7 @@ const CourseDetails = ({
 
     try {
       console.log("Deleting course with ID:", selectedCourse.id);
-      await api.delete(`/course/${selectedCourse.id}`); // Ensure this endpoint matches your NestJS controller
+      await api.delete(`/courses/${selectedCourse.id}`); // Ensure this endpoint matches your NestJS controller
       onDelete(selectedCourse.id); // Update UI after deletion
     } catch (error) {
       console.error("Error deleting course:", error);

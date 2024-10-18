@@ -15,22 +15,17 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
 
   useEffect(() => {
     if (selectedCourse && selectedCourse.id) {
-      fetchCourseData();
+      setCourseToEdit({
+        Title: selectedCourse.Title || "",
+        Description: selectedCourse.Description || "",
+        Duration: selectedCourse.Duration || "",
+      });
+      setLoading(false);
     } else {
       setError("No course selected for editing.");
       setLoading(false);
     }
-  }, [selectedCourse?.id]);
-
-  const fetchCourseData = async () => {
-    try {
-      setCourseToEdit(selectedCourse);
-      setLoading(false);
-    } catch (err) {
-      setError("Failed to fetch course data");
-      setLoading(false);
-    }
-  };
+  }, [selectedCourse]);
 
   const handleChange = (e) => {
     setCourseToEdit({
@@ -41,22 +36,27 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!courseToEdit.Title || !courseToEdit.Description || !courseToEdit.Duration) {
+      setError("All fields are required.");
+      return;
+    }
+
     setSubmitting(true);
     setError("");
     setEditSuccessMessage("");
 
     try {
       const response = await axios.put(
-        `http://localhost:3000/course/${selectedCourse.id}`,
+        `http://localhost:3000/courses/${selectedCourse.id}`,
         courseToEdit
       );
       if (onUpdateSuccess) {
         onUpdateSuccess(response.data);
       }
       setEditSuccessMessage("Course updated successfully!");
-      setSubmitting(false);
     } catch (err) {
-      setError("Failed to update course");
+      setError("Failed to update course.");
+    } finally {
       setSubmitting(false);
     }
   };
@@ -100,7 +100,7 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
                 onChange={handleChange}
               >
                 <option value="" disabled>
-                  weeks
+                  Select weeks
                 </option>
                 {[...Array(52).keys()].map((week) => (
                   <option key={week + 1} value={week + 1}>

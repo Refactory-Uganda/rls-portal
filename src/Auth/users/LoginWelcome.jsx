@@ -11,7 +11,7 @@ export default function LoginWelcome() {
       <Grid className="content-container">
         <div className="contents">
           <img src={logo} alt="logo" className="login-logo" />
-          <h1> Welcome to the refactory-IMS </h1>
+          <h1> Welcome to the Refactory-LS </h1>
           {userGroups.map((role, index) => {
             return (
               <React.Fragment key={index}>

@@ -14,7 +14,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
     { name: "Courses", key: "courses", href: "#", iconClass: "fas fa-book" },
     { name: "Learners", key: "learners", href: "#", iconClass: "fas fa-user-graduate" },
     { name: "Facilitators", key: "facilitators", href: "#", iconClass: "fas fa-chalkboard-teacher" },
-    { name: "Create Course", key: "createCourse", href: "#", iconClass: "fas fa-chalkboard-teacher" },
+    { name: "Create Course", key: "createCourse", href: "#", iconClass: "fas fa-plus-circle" }, // Updated icon for clarity
   ];
 
   return (
@@ -36,15 +36,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
 
         {!isCollapsed && (
           <div className="d-flex align-items-center mt-3">
-            <img
-              src="../src/assets/images/profile_icon.jpeg"
-              alt="User Avatar"
-              className="rounded-circle"
-              style={{ width: '40px', height: '40px' }}
-            />
-            <div className="ms-2">
-              <p>Hi, Admin</p>
-            </div>
+            {/* User avatar can go here if needed */}
           </div>
         )}
       </div>
@@ -57,7 +49,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
             className="d-flex align-items-center py-2 text-decoration-none text-white"
             href={item.href}
           >
-            <i className={`${item.iconClass} me-2`}></i>
+            <i className={`${item.iconClass} icon-large me-4`}></i> {/* Apply icon-large class */}
             {!isCollapsed && <span>{item.name}</span>}
           </a>
         ))}
@@ -68,7 +60,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
           href="#"
           className="d-flex align-items-center py-2 text-decoration-none text-white"
         >
-          <i className="fas fa-sign-out-alt me-2"></i>
+          <i className="fas fa-sign-out-alt icon-large me-2"></i> {/* Apply icon-large class */}
           {!isCollapsed && <span>Logout</span>}
         </a>
       </div>
