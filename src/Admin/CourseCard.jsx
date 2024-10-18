@@ -2,18 +2,17 @@ import React from "react";
 
 function CourseCard({ course, onClick }) {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300" onClick={onClick}>
-      
-      {/* <img
-        src={course.imageUrl}
-        alt={course.title}
-        className="w-full h-48 object-cover"
-      /> */}
-      <div className="p-4">
-        <h2 className="text-xl font-semibold mb-2">{course.Title}</h2>
-        <p className="text-gray-600">{course.Description}</p>
-        <p className="text-gray-600">{course.Duration}</p>
-        {/* Add more course details or actions if needed */}
+    <div className="col">
+      <div className="card p-4 text-start course-card">
+        <div className="card-body">
+          <h5 className="card-title">{course.Title}</h5>
+          <p className="card-text">{course.Description}</p>
+          <p className="card-text">Topics: 5</p>
+          <p className="card-text">Facilitator: Steven</p>
+          <a href="#" className="btn btn-primary action-btn">
+            View course
+          </a>
+        </div>
       </div>
     </div>
   );

@@ -34,7 +34,7 @@
 }
 
 .card {
-  padding: 2em;
+  padding: 1em;
 }
 
 .read-the-docs {
@@ -47,4 +47,33 @@ a {
 .sidebar-collapse-icon {
   margin-bottom: 1.5rem;
   display: block;
+}
+
+.course-card {
+  height: 100%;
+}
+
+.action-btn {
+  background-color: #663367;
+  color: white;
+}
+.action-btn:hover {
+  background-color: #542b55;
+  color: white;
+}
+.courseList-btn-container {
+  padding: 0.5rem;
+  text-align: left;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.secondary-action-btn {
+  background-color: white;
+  color: #663367;
+  border: 0.1rem solid #663367;
+}
+.secondary-action-btn:hover {
+  background-color: #542b55;
+  color: white;
 }
