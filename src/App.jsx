@@ -44,7 +44,7 @@ const App = () => {
                   selectedMenu={selectedMenu}
                   setSelectedMenu={setSelectedMenu}
                 />
-                <div className="flex-grow-1 bg-light">
+                <div className="flex-grow-1 bg-light dash-content">
                   <DashboardContent selectedMenu={selectedMenu} />
                 </div>
               </div>

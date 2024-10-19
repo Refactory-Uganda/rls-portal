@@ -78,6 +78,26 @@ a {
   color: white;
 }
 .btn-purple {
-  color: #663367; /* Adjust this color to your desired shade of purple */
+  color: #663367; 
+}
+
+.btn-purple {
+  background-color: #663367; 
+  color: white;
+}
+
+.btn-purple:hover {
+  background-color: #663367; 
+}
+
+.btn-delete {
+  background-color: #663367; 
+  color: white;
+  transition: background-color 0.3s; 
+}
+
+.btn-delete:hover {
+  background-color: red; 
+  color: white;
 }
 

@@ -9,9 +9,9 @@ function CourseCard({ course, onClick }) {
           <p className="card-text">{course.Description}</p>
           <p className="card-text">Topics: 5</p>
           <p className="card-text">Facilitator: Steven</p>
-          <a href="#" className="btn btn-primary action-btn">
+          <button onClick={onClick} className="btn btn-primary action-btn">
             View course
-          </a>
+          </button>
         </div>
       </div>
     </div>

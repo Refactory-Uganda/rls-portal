@@ -12,11 +12,12 @@ export default function LoginWelcome() {
         <div className="contents">
           <img src={logo} alt="logo" className="login-logo" />
           <h1> Welcome to the Refactory-LS </h1>
+          <br /> <br /> <br />
           {userGroups.map((role, index) => {
             return (
               <React.Fragment key={index}>
                 <p className="caption">
-                  {role.info} <br /> click button below to continue
+                  {/* {role.info} <br /> click button below to continue */}
                 </p>
                 <Button
                   component={Link}
