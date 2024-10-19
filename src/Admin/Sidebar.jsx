@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../src/assets/css/navbar.css';
+import '../../src/assets/css/sidebar.css';
 
 const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -14,7 +14,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
     { name: "Courses", key: "courses", href: "#", iconClass: "fas fa-book" },
     { name: "Learners", key: "learners", href: "#", iconClass: "fas fa-user-graduate" },
     { name: "Facilitators", key: "facilitators", href: "#", iconClass: "fas fa-chalkboard-teacher" },
-    { name: "Create Course", key: "createCourse", href: "#", iconClass: "fas fa-plus-circle" }, // Updated icon for clarity
+    // { name: "Create Course", key: "createCourse", href: "#", iconClass: "fas fa-plus-circle" },
   ];
 
   return (
@@ -33,23 +33,17 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
             <i className="bi bi-arrow-left-right"></i>
           </button>
         </div>
-
-        {!isCollapsed && (
-          <div className="d-flex align-items-center mt-3">
-            {/* User avatar can go here if needed */}
-          </div>
-        )}
       </div>
 
-      <nav className="flex-grow-1 p-3" id="nav-items">
+      <nav className="flex-grow-1 p-3 sidebar-nav" id="nav-items">
         {menuItems.map((item) => (
           <a
             key={item.key}
             onClick={() => setSelectedMenu(item.key)}
-            className="d-flex align-items-center py-2 text-decoration-none text-white"
+            className={`d-flex align-items-center py-2 text-decoration-none text-white sidebar-btn ${selectedMenu === item.key ? "active" : ""}`}
             href={item.href}
           >
-            <i className={`${item.iconClass} icon-large me-4`}></i> {/* Apply icon-large class */}
+            <i className={`${item.iconClass} icon-large me-2`}></i>
             {!isCollapsed && <span>{item.name}</span>}
           </a>
         ))}
@@ -60,7 +54,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
           href="#"
           className="d-flex align-items-center py-2 text-decoration-none text-white"
         >
-          <i className="fas fa-sign-out-alt icon-large me-2"></i> {/* Apply icon-large class */}
+          <i className="fas fa-sign-out-alt icon-large me-2"></i>
           {!isCollapsed && <span>Logout</span>}
         </a>
       </div>

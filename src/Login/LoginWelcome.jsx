@@ -11,9 +11,10 @@ export default function LoginWelcome() {
           <img src={logo} alt="logo" className="login-logo" />
           <br />
           <h1> Welcome to the Refactory-LS. </h1>
-          <p className="caption">
+          <br />
+          {/* <p className="caption">
             Are you a refactory Facilitator, <br /> click button below to continue
-          </p>
+          </p> */}
           <Button
             component={Link}
             to="/login"
@@ -39,11 +40,11 @@ export default function LoginWelcome() {
           >
             Facilitator
           </Button>
-          <p className="caption">
+          {/* <p className="caption">
             Are you a Learner,
             <br />
             click button below to continue
-          </p>
+          </p> */}
           <Button
             component={Link}
             to="/login"
@@ -70,11 +71,11 @@ export default function LoginWelcome() {
             Learner
           </Button>
 
-          <p className="caption">
+          {/* <p className="caption">
             Are you an Admin,
             <br />
             click button below to continue
-          </p>
+          </p> */}
           <Button
             component={Link}
             to="/admin/login"

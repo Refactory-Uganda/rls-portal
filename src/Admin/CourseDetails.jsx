@@ -7,9 +7,11 @@ const CourseDetails = ({
   onDelete,
   setView,
 }) => {
-  const handleBackClick = () => {
-    setSelectedCourse(null);
-  };
+const handleBackClick = () => {
+  setSelectedCourse(null); // Reset the selected course
+  setView("list"); // Change the view to "list" to show the course list
+};
+
 
   const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete this course?")) {
@@ -25,39 +27,43 @@ const CourseDetails = ({
       alert("Failed to delete the course. Please try again.");
     }
   };
-  const handleEdit = function () {
+
+  const handleEdit = () => {
     setView("edit");
   };
 
   return (
-    <div className="container mx-auto my-8">
+    <div className="container my-4">
       <button
-        className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4 hover:bg-blue-600"
+        className="btn btn-primary action-btn"
         onClick={handleBackClick}
       >
         Back to Courses
       </button>
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h1 className="text-3xl font-bold text-gray-800">
-          {selectedCourse.Title}
-        </h1>
-        <p className="text-gray-600 text-lg mt-2">
-          Duration: {selectedCourse.Duration}
-        </p>
-        <p className="text-gray-700 mt-4">{selectedCourse.Description}</p>
-        <div className="mt-4 flex space-x-2">
-          <button
-            className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
-            onClick={handleEdit}
-          >
-            Edit Course
-          </button>
-          <button
-            className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
-            onClick={handleDelete}
-          >
-            Delete Course
-          </button>
+      <div className="card mt-4">
+        <div className="card-body">
+          <h1 className="card-title">{selectedCourse.Title}</h1>
+          <p className="card-text">Duration: {selectedCourse.Duration}</p>
+          <p className="card-text">{selectedCourse.Description}</p>
+          <div className="mt-3 d-flex justify-content-end">
+            <button
+              className="btn btn-purple me-2" // Custom purple button for edit
+              onClick={handleEdit}
+              title="Edit Course" // Tooltip
+            >
+              <i className="fas fa-edit"></i> {/* Font Awesome edit icon */}
+            </button>
+            <button
+              className="btn btn-outline-secondary" // Use outline for plain background
+              onClick={handleDelete}
+              title="Delete Course" // Tooltip
+              style={{ position: 'relative' }} // To allow hover effect
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'red'} // Change background on hover
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'} // Revert background on leave
+            >
+              <i className="fas fa-trash"></i> {/* Font Awesome trash icon */}
+            </button>
+          </div>
         </div>
       </div>
     </div>
