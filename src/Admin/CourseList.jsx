@@ -7,7 +7,7 @@ const CourseList = ({ courses, setSelectedCourse, view, setView }) => {
     setSelectedCourse(course);
     setView("details");
   };
-
+  console.log(courses);
   return (
     <div className="container">
       <div className="container courseList-btn-container">

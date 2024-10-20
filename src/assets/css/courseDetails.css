@@ -1,0 +1,16 @@
+.course-details-btn-container {
+  text-align: left;
+  display: flex;
+  gap: 1.5rem;
+}
+.course-and-topics-details-container {
+  text-align: left;
+}
+.topic-list-item {
+  cursor: pointer;
+}
+
+.topic-list-item:hover {
+  border-top: 0.2rem solid #663367;
+  border-bottom: 0.2rem solid #663367;
+}
