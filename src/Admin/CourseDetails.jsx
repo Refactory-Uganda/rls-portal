@@ -63,7 +63,7 @@ const CourseDetails = ({
           <div className="card-body">
             <h6 className="card-title">Course title: {selectedCourse.Title}</h6>
             <h6 className="card-subtitle mb-2 text-body-secondary">
-              Duration: {selectedCourse.Duration} weeks
+              Duration: {selectedCourse.Duration}
             </h6>
             <h6 className="card-subtitle mb-2 text-body-secondary">
               Facilitator: Steven Kawooya
