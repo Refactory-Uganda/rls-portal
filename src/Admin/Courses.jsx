@@ -68,6 +68,8 @@ const Courses = () => {
           setSelectedCourse={setSelectedCourse}
           onDelete={handleDeleteCourse}
           setView={setView}
+          error={error}
+          setError={setError}
         />
       )}
 

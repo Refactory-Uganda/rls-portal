@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import "../../src/assets/css/courseDetails.css";
 
@@ -7,7 +7,22 @@ const CourseDetails = ({
   setSelectedCourse,
   onDelete,
   setView,
+  error,
+  setError,
 }) => {
+  const [topics, setTopics] = useState([]);
+  useEffect(() => {
+    const fetchTopics = async () => {
+      try {
+        const response = await api.get(`/topic`);
+        setTopics(response.data);
+      } catch (error) {
+        console.error("Error fetching topics", error);
+        setError("Fetching Topics failed. Please try again later");
+      }
+    };
+    fetchTopics();
+  }, []);
   const handleBackClick = () => {
     setSelectedCourse(null); // Reset the selected course
     setView("list"); // Change the view to "list" to show the course list
@@ -31,7 +46,7 @@ const CourseDetails = ({
   const handleEdit = () => {
     setView("edit");
   };
-
+  console.log(topics);
   return (
     <div className="container mx-auto my-8">
       <div className="container courseList-btn-container">
@@ -49,7 +64,7 @@ const CourseDetails = ({
           <div className="card-body">
             <h6 className="card-title">Course title: {selectedCourse.Title}</h6>
             <h6 className="card-subtitle mb-2 text-body-secondary">
-              Duration: {selectedCourse.Duration}
+              Duration: {selectedCourse.Duration} weeks
             </h6>
             <h6 className="card-subtitle mb-2 text-body-secondary">
               Facilitator: Steven Kawooya
@@ -68,7 +83,7 @@ const CourseDetails = ({
               advancement.
             </p>
             <div className="continer course-details-btn-container">
-              <button
+              {/* <button
                 className="btn btn-primary action-btn"
                 onClick={handleEdit}
               >
@@ -79,6 +94,27 @@ const CourseDetails = ({
                 onClick={handleDelete}
               >
                 Delete Course
+              </button> */}
+              <button
+                className="btn btn-purple me-2" // Custom purple button for edit
+                onClick={handleEdit}
+                title="Edit Course" // Tooltip
+              >
+                <i className="fas fa-edit"></i> {/* Font Awesome edit icon */}
+              </button>
+              <button
+                className="btn btn-outline-secondary" // Use outline for plain background
+                onClick={handleDelete}
+                title="Delete Course" // Tooltip
+                style={{ position: "relative" }} // To allow hover effect
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.backgroundColor = "red")
+                } // Change background on hover
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.backgroundColor = "transparent")
+                } // Revert background on leave
+              >
+                <i className="fas fa-trash"></i> {/* Font Awesome trash icon */}
               </button>
             </div>
           </div>
@@ -88,24 +124,17 @@ const CourseDetails = ({
         <div className="course-topics-container card col-md-4 d-flex">
           <ol className="list-group list-group-numbered">
             <h4>Topics</h4>
-            <li className="list-group-item d-flex justify-content-between align-items-start">
-              <div className="ms-2 me-auto">
-                <div className="fw-bold">Introduction</div>
-                Lessons: 04
-              </div>
-            </li>
-            <li className="list-group-item d-flex justify-content-between align-items-start">
-              <div className="ms-2 me-auto">
-                <div className="fw-bold">Fundamentals</div>
-                Lessons: 04
-              </div>
-            </li>
-            <li className="list-group-item d-flex justify-content-between align-items-start">
-              <div className="ms-2 me-auto">
-                <div className="fw-bold">Applications</div>
-                Lessons: 04
-              </div>
-            </li>
+            {topics.map((topic) => (
+              <li
+                className="list-group-item d-flex justify-content-between align-items-start topic-list-item"
+                key={topic.id}
+              >
+                <div className="ms-2 me-auto">
+                  <div className="fw-bold">{topic.Title}</div>
+                  Lessons: 04
+                </div>
+              </li>
+            ))}
           </ol>
         </div>
       </div>
