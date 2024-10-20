@@ -1,0 +1,8 @@
+.course-details-btn-container {
+  text-align: left;
+  display: flex;
+  gap: 1.5rem;
+}
+.course-and-topics-details-container {
+  text-align: left;
+}
