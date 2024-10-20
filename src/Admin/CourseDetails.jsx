@@ -14,8 +14,7 @@ const CourseDetails = ({
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        const response = await api.get(`/topic`);
-        setTopics(response.data);
+        setTopics(selectedCourse.topics)
       } catch (error) {
         console.error("Error fetching topics", error);
         setError("Fetching Topics failed. Please try again later");
