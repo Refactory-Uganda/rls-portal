@@ -39,7 +39,7 @@ const App = () => {
           element={
             <div className="d-flex flex-column h-100">
               <NavBar selectedMenu={selectedMenu} />
-              <div className="d-flex flex-grow-1">
+              <div className="d-flex flex-grow-1 main-sidebar-content">
                 <Sidebar
                   selectedMenu={selectedMenu}
                   setSelectedMenu={setSelectedMenu}

@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 0rem;
   text-align: center;
+  background-color: white !important;
 }
 
 .logo {
@@ -100,4 +101,13 @@ a {
   background-color: red; 
   color: white;
 }
+
+.main-sidebar-content {
+  margin-top: 5.5rem;
+}
+
+.dash-content {
+  margin-left: 15rem;
+}
+
 
