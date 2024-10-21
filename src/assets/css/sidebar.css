@@ -1,8 +1,17 @@
 .sidebar-btn:hover {
     color: #663367;
     background-color: #965d97;
+    border-radius: 10px;
+    width: 230px;
+    border: black;
 }
 
 .sidebar-btn {
     width: 100%;
+}
+
+.sidebar {
+    position: fixed;
+    z-index: 800;
+    height: 85%;
 }

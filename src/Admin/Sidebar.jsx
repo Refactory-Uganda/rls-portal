@@ -19,7 +19,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
 
   return (
     <div
-      className={`d-flex flex-column vh-100`}
+      className={`d-flex flex-column sidebar`}
       style={{
         backgroundColor: 'rgba(102, 51, 103)',
         color: 'white',
