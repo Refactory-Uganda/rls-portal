@@ -15,3 +15,9 @@
     z-index: 800;
     height: 85%;
 }
+
+.sidebar li.active 
+{
+  background-color: white;
+  color: #663367;
+}
