@@ -9,7 +9,7 @@ const CreateCourse = () => {
   const [Description, setDescription] = useState("");
   const [Duration, setDuration] = useState("");
   const [topics, setTopics] = useState([]);
-  const [newTopic, setNewTopic] = useState({ title: "", description: "" });
+  const [newTopic, setNewTopic] = useState({ Title: "", Description: "" });
   const [showAddTopic, setShowAddTopic] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
@@ -37,7 +37,7 @@ const CreateCourse = () => {
 
       // Create topics associated with the course
       const topicRequests = topics.map((topic) =>
-        axios.post(`http://localhost:3000/topics/${courseId}`, {
+        axios.post(`http://localhost:3000/topic/${courseId}`, {
           ...topic,
           courseId,
         })
@@ -62,7 +62,7 @@ const CreateCourse = () => {
 
   const addTopic = () => {
     // Allow adding topic if at least one field is filled
-    if (!newTopic.title && !newTopic.description) {
+    if (!newTopic.Title && !newTopic.Description) {
       setError("Please fill in at least one of the topic fields.");
       return;
     }
@@ -80,7 +80,7 @@ const CreateCourse = () => {
       setTopics((prevTopics) => [...prevTopics, newTopic]);
     }
 
-    setNewTopic({ title: "", description: "" });
+    setNewTopic({ Title: "", Description: "" });
     setShowAddTopic(false); // Hide the add topic fields
     setError(""); // Reset error
   };
@@ -98,14 +98,14 @@ const CreateCourse = () => {
     if (filteredTopics.length === 0) {
       // Reset to show the add topic section if all topics are deleted
       setShowAddTopic(true);
-      setNewTopic({ title: "", description: "" });
+      setNewTopic({ Title: "", Description: "" });
       setIsEditing(false);
       setEditIndex(null);
     } else if (isEditing && index === editIndex) {
       // Reset editing state if the edited topic is deleted
       setIsEditing(false);
       setEditIndex(null);
-      setNewTopic({ title: "", description: "" });
+      setNewTopic({ Title: "", Description: "" });
     }
   };
 
@@ -188,9 +188,9 @@ const CreateCourse = () => {
                   <textarea
                     className="form-control custom-focus"
                     placeholder="Topic Title"
-                    value={newTopic.title}
+                    value={newTopic.Title}
                     onChange={(e) =>
-                      setNewTopic({ ...newTopic, title: e.target.value })
+                      setNewTopic({ ...newTopic, Title: e.target.value })
                     }
                   ></textarea>
                 </div>
@@ -204,9 +204,9 @@ const CreateCourse = () => {
                   <textarea
                     className="form-control custom-focus"
                     placeholder="Provide a detailed  overview..."
-                    value={newTopic.description}
+                    value={newTopic.Description}
                     onChange={(e) =>
-                      setNewTopic({ ...newTopic, description: e.target.value })
+                      setNewTopic({ ...newTopic, Description: e.target.value })
                     }
                   ></textarea>
                 </div>
@@ -241,7 +241,7 @@ const CreateCourse = () => {
                     key={index}
                     className="list-group-item d-flex justify-content-between align-items-center mb-2 p-2" // Adjust padding here (e.g., p-2)
                   >
-                    <span className="small">{topic.title}</span>{" "}
+                    <span className="small">{topic.Title}</span>{" "}
                     {/* Optionally reduce font size */}
                     <div className="d-flex">
                       <button
