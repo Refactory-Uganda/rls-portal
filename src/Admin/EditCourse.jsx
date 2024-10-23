@@ -9,10 +9,10 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
     Title: "",
     Description: "",
     Duration: "",
-    topics: [], // Add topics here
+    topics: [],
   });
-  const [newTopic, setNewTopic] = useState({ title: "", description: "" });
-  const [showAddTopic, setShowAddTopic] = useState(false);
+  const [newTopic, setNewTopic] = useState({ Title: "", Description: "" });
+  const [showAddTopic, setShowAddTopic] = useState(true);
   const [isEditingTopic, setIsEditingTopic] = useState(false);
   const [editTopicIndex, setEditTopicIndex] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -26,7 +26,7 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
         Title: selectedCourse.Title || "",
         Description: selectedCourse.Description || "",
         Duration: selectedCourse.Duration || "",
-        topics: selectedCourse.topics || [], // Load existing topics
+        topics: selectedCourse.topics || [],
       });
       setLoading(false);
     } else {
@@ -43,15 +43,15 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
   };
 
   const addTopic = () => {
-    if (!newTopic.title && !newTopic.description) {
+    if (!newTopic.Title && !newTopic.Description) {
       setError("Please fill in at least one of the topic fields.");
       return;
     }
 
     const updatedTopics = isEditingTopic
       ? courseToEdit.topics.map((topic, index) =>
-          index === editTopicIndex ? newTopic : topic
-        )
+        index === editTopicIndex ? newTopic : topic
+      )
       : [...courseToEdit.topics, newTopic];
 
     setCourseToEdit({
@@ -59,67 +59,84 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
       topics: updatedTopics,
     });
 
-    setNewTopic({ title: "", description: "" });
+    setNewTopic({ Title: "", Description: "" });
     setShowAddTopic(false);
     setIsEditingTopic(false);
     setEditTopicIndex(null);
+    setError("");
   };
 
   const editTopic = (index) => {
-    setNewTopic(courseToEdit.topics[index]);
+    const topicToEdit = courseToEdit.topics[index];
+    setNewTopic(topicToEdit);
     setIsEditingTopic(true);
     setEditTopicIndex(index);
     setShowAddTopic(true);
   };
 
-  const deleteTopic = (index) => {
+  const deleteTopic = async (index) => {
+    const topicToDelete = courseToEdit.topics[index];
+
+    // If the topic has an `id`, delete it from the server
+    if (topicToDelete.id) {
+      try {
+        await axios.delete(`http://localhost:3000/topics/${topicToDelete.id}`);
+      } catch (error) {
+        setError("Error deleting the topic.");
+        return;
+      }
+    }
+
     const updatedTopics = courseToEdit.topics.filter((_, i) => i !== index);
     setCourseToEdit({
       ...courseToEdit,
       topics: updatedTopics,
     });
-    setIsEditingTopic(false);
-    setNewTopic({ title: "", description: "" });
-    setShowAddTopic(false);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!courseToEdit.Title || !courseToEdit.Description || !courseToEdit.Duration) {
-      setError("All fields are required.");
+    if (!courseToEdit.Title || !courseToEdit.Description || courseToEdit.Duration === "") {
+      setError("Please fill all the required fields.");
       return;
     }
 
-    setSubmitting(true);
-    setError("");
-    setEditSuccessMessage("");
-
     try {
-      // Update the course
-      const response = await axios.put(
-        `http://localhost:3000/courses/${selectedCourse.id}`,
-        courseToEdit
-      );
+      setSubmitting(true);
 
-      //Update topics
-      const topicRequests = courseToEdit.topics.map((topic) =>
-        axios.put(`/topic/${selectedCourse.id}`, topic)
-      );
+      // Update the course
+      await axios.put(`http://localhost:3000/courses/${selectedCourse.id}`, {
+        Title: courseToEdit.Title,
+        Description: courseToEdit.Description,
+        Duration: courseToEdit.Duration,
+      });
+
+      // Update or create topics associated with the course
+      const topicRequests = courseToEdit.topics.map((topic) => {
+        if (topic.id) {
+          return axios.put(`http://localhost:3000/topic/${topic.id}`, topic);
+        } else {
+          return axios.post(`http://localhost:3000/topic/${courseId}`, {
+            ...topic,
+            courseId: selectedCourse.id,
+          });
+        }
+      });
+
       await Promise.all(topicRequests);
 
-      if (onUpdateSuccess) {
-        onUpdateSuccess(response.data);
-      }
       setEditSuccessMessage("Course and topics updated successfully!");
-    } catch (err) {
-      setError("Failed to update course.");
-    } finally {
+      setError("");
+
+      if (onUpdateSuccess) onUpdateSuccess();
+
+      setSubmitting(false);
+    } catch (error) {
+      setError("An error occurred while updating the course and topics.");
+      setEditSuccessMessage("");
       setSubmitting(false);
     }
   };
-
-  if (loading) return <p>Loading course data...</p>;
-  if (error) return <p className="text-danger">{error}</p>;
 
   return (
     <div className="container mt-5">
@@ -182,67 +199,59 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
             ></textarea>
           </div>
 
-          {/* Add/Edit Topic Section */}
-          {showAddTopic ? (
+          {showAddTopic && (
             <div className="mb-3">
               <h5>{isEditingTopic ? "Edit Topic" : "Add Topic"}</h5>
               <div className="row mb-2">
                 <div className="col-md-6">
-                  <label htmlFor="topicTitle" className="form-label text-start d-block">
-                    Title
-                  </label>
-                  <textarea
+                  <label className="form-label text-start d-block">Title</label>
+                  <input
+                    type="text"
                     className="form-control custom-focus"
-                    id="topicTitle"
                     placeholder="Topic Title"
-                    value={newTopic.title}
-                    onChange={(e) => setNewTopic({ ...newTopic, title: e.target.value })}
-                  ></textarea>
+                    value={newTopic.Title}
+                    onChange={(e) =>
+                      setNewTopic({ ...newTopic, Title: e.target.value })
+                    }
+                  />
                 </div>
                 <div className="col-md-6">
-                  <label htmlFor="topicDescription" className="form-label text-start d-block">
-                    Description
-                  </label>
+                  <label className="form-label text-start d-block">Description</label>
                   <textarea
                     className="form-control custom-focus"
-                    id="topicDescription"
                     placeholder="Provide a detailed overview..."
-                    value={newTopic.description}
-                    onChange={(e) => setNewTopic({ ...newTopic, description: e.target.value })}
+                    value={newTopic.Description}
+                    onChange={(e) =>
+                      setNewTopic({ ...newTopic, Description: e.target.value })
+                    }
                   ></textarea>
                 </div>
               </div>
               <div className="d-flex justify-content-end">
-                <button
-                  type="button"
-                  className="btn btn-primary secondary-action-btn"
-                  onClick={addTopic}
-                >
+                <button type="button" className="btn btn-primary secondary-action-btn" onClick={addTopic}>
                   {isEditingTopic ? "Update Topic" : "Add Topic"}
                 </button>
               </div>
             </div>
-          ) : (
+          )}
+
+          {!showAddTopic && (
             <button
               type="button"
               className="btn btn-primary secondary-action-btn mb-3"
               onClick={() => setShowAddTopic(true)}
             >
-              {isEditingTopic ? "Edit Topic" : "Add another topic"}
+              Add another topic
             </button>
           )}
 
-          {/* Display Topics */}
           {courseToEdit.topics.length > 0 && (
             <div className="mb-3">
               <h5>Topics</h5>
               <ul className="list-group">
                 {courseToEdit.topics.map((topic, index) => (
-                  <li
-                    key={index}
-                    className="list-group-item d-flex justify-content-between align-items-center mb-2 p-2"
-                  >
-                    <span className="small">{topic.title}</span>
+                  <li key={index} className="list-group-item d-flex justify-content-between align-items-center mb-2 p-2">
+                    <span className="small">{topic.Title}</span>
                     <div className="d-flex">
                       <button
                         type="button"
@@ -265,18 +274,12 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
             </div>
           )}
 
-          {/* Error and Success Messages */}
-          {error && <p className="text-danger">{error}</p>}
-          {editSuccessMessage && <p className="text-success">{editSuccessMessage}</p>}
-
-          <div className="d-flex justify-content-center">
-            <button
-              type="submit"
-              className="btn btn-primary action-btn"
-              disabled={submitting}
-            >
-              {submitting ? "Saving..." : "Save Changes"}
+          <div className="mt-3 d-flex justify-content-between">
+            <button type="submit" className="btn btn-primary primary-action-btn" disabled={submitting}>
+              {submitting ? "Updating..." : "Update Course"}
             </button>
+            {editSuccessMessage && <span className="text-success">{editSuccessMessage}</span>}
+            {error && <span className="text-danger">{error}</span>}
           </div>
         </form>
       </div>
