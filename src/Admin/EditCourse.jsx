@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import '../../src/assets/css/createCourse.css';
+import "../../src/assets/css/createCourse.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
@@ -50,8 +50,8 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
 
     const updatedTopics = isEditingTopic
       ? courseToEdit.topics.map((topic, index) =>
-        index === editTopicIndex ? newTopic : topic
-      )
+          index === editTopicIndex ? newTopic : topic
+        )
       : [...courseToEdit.topics, newTopic];
 
     setCourseToEdit({
@@ -94,29 +94,80 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
     });
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!courseToEdit.Title || !courseToEdit.Description || courseToEdit.Duration === "") {
+  //     setError("Please fill all the required fields.");
+  //     return;
+  //   }
+
+  //   try {
+  //     setSubmitting(true);
+
+  //     // Update the course
+  //     await axios.put(`http://localhost:3000/courses/${selectedCourse.id}`, {
+  //       Title: courseToEdit.Title,
+  //       Description: courseToEdit.Description,
+  //       Duration: courseToEdit.Duration,
+  //     });
+
+  //     // Update or create topics associated with the course
+  //     const topicRequests = courseToEdit.topics.map((topic) => {
+  //       if (topic.id) {
+  //         return axios.put(`http://localhost:3000/topic/${topic.id}`, topic);
+  //       } else {
+  //         return axios.post(`http://localhost:3000/topic/${courseId}`, {
+  //           ...topic,
+  //           courseId: selectedCourse.id,
+  //         });
+  //       }
+  //     });
+
+  //     await Promise.all(topicRequests);
+
+  //     setEditSuccessMessage("Course and topics updated successfully!");
+  //     setError("");
+
+  //     if (onUpdateSuccess) onUpdateSuccess();
+
+  //     setSubmitting(false);
+  //   } catch (error) {
+  //     setError("An error occurred while updating the course and topics.");
+  //     setEditSuccessMessage("");
+  //     setSubmitting(false);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!courseToEdit.Title || !courseToEdit.Description || courseToEdit.Duration === "") {
-      setError("Please fill all the required fields.");
+    if (
+      !courseToEdit.Title ||
+      !courseToEdit.Description ||
+      !courseToEdit.Duration
+    ) {
+      setError("All fields are required.");
       return;
     }
 
+    setSubmitting(true);
+    setError("");
+    setEditSuccessMessage("");
+
     try {
-      setSubmitting(true);
+      // First, update the course
+      const courseResponse = await axios.put(
+        `http://localhost:3000/courses/${selectedCourse.id}`,
+        courseToEdit
+      );
 
-      // Update the course
-      await axios.put(`http://localhost:3000/courses/${selectedCourse.id}`, {
-        Title: courseToEdit.Title,
-        Description: courseToEdit.Description,
-        Duration: courseToEdit.Duration,
-      });
-
-      // Update or create topics associated with the course
+      // Update topics (assuming each topic has an ID)
       const topicRequests = courseToEdit.topics.map((topic) => {
         if (topic.id) {
+          // Update existing topics
           return axios.put(`http://localhost:3000/topic/${topic.id}`, topic);
         } else {
-          return axios.post(`http://localhost:3000/topic/${courseId}`, {
+          // Create new topics (if a new one doesn't have an ID)
+          return axios.post(`http://localhost:3000/topic`, {
             ...topic,
             courseId: selectedCourse.id,
           });
@@ -125,15 +176,15 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
 
       await Promise.all(topicRequests);
 
+      // Notify parent component of success
+      if (onUpdateSuccess) {
+        onUpdateSuccess(courseResponse.data);
+      }
+
       setEditSuccessMessage("Course and topics updated successfully!");
-      setError("");
-
-      if (onUpdateSuccess) onUpdateSuccess();
-
-      setSubmitting(false);
-    } catch (error) {
-      setError("An error occurred while updating the course and topics.");
-      setEditSuccessMessage("");
+    } catch (err) {
+      setError("Failed to update course or topics.");
+    } finally {
       setSubmitting(false);
     }
   };
@@ -163,7 +214,10 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
             </div>
 
             <div className="col-md-4">
-              <label htmlFor="duration" className="form-label text-start d-block">
+              <label
+                htmlFor="duration"
+                className="form-label text-start d-block"
+              >
                 Duration <span className="text-danger">*</span>
               </label>
               <select
@@ -186,7 +240,10 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="description" className="form-label text-start d-block">
+            <label
+              htmlFor="description"
+              className="form-label text-start d-block"
+            >
               Description <span className="text-danger">*</span>
             </label>
             <textarea
@@ -216,7 +273,9 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
                   />
                 </div>
                 <div className="col-md-6">
-                  <label className="form-label text-start d-block">Description</label>
+                  <label className="form-label text-start d-block">
+                    Description
+                  </label>
                   <textarea
                     className="form-control custom-focus"
                     placeholder="Provide a detailed overview..."
@@ -228,7 +287,11 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
                 </div>
               </div>
               <div className="d-flex justify-content-end">
-                <button type="button" className="btn btn-primary secondary-action-btn" onClick={addTopic}>
+                <button
+                  type="button"
+                  className="btn btn-primary secondary-action-btn"
+                  onClick={addTopic}
+                >
                   {isEditingTopic ? "Update Topic" : "Add Topic"}
                 </button>
               </div>
@@ -250,7 +313,10 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
               <h5>Topics</h5>
               <ul className="list-group">
                 {courseToEdit.topics.map((topic, index) => (
-                  <li key={index} className="list-group-item d-flex justify-content-between align-items-center mb-2 p-2">
+                  <li
+                    key={index}
+                    className="list-group-item d-flex justify-content-between align-items-center mb-2 p-2"
+                  >
                     <span className="small">{topic.Title}</span>
                     <div className="d-flex">
                       <button
@@ -275,10 +341,16 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
           )}
 
           <div className="mt-3 d-flex justify-content-between">
-            <button type="submit" className="btn btn-primary primary-action-btn" disabled={submitting}>
+            <button
+              type="submit"
+              className="btn btn-primary primary-action-btn"
+              disabled={submitting}
+            >
               {submitting ? "Updating..." : "Update Course"}
             </button>
-            {editSuccessMessage && <span className="text-success">{editSuccessMessage}</span>}
+            {editSuccessMessage && (
+              <span className="text-success">{editSuccessMessage}</span>
+            )}
             {error && <span className="text-danger">{error}</span>}
           </div>
         </form>
