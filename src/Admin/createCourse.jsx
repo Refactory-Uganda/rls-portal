@@ -578,8 +578,7 @@ const CreateCourse = () => {
                                     </h6>
                                     <div className="btn-group">
                                       <button
-                                        type="button"
-                                        className="btn btn-outline-primary btn-sm"
+                                        className="btn btn-purple me-2"
                                         onClick={() =>
                                           handleLessonAction(
                                             "edit",
@@ -590,9 +589,9 @@ const CreateCourse = () => {
                                       >
                                         <FontAwesomeIcon
                                           icon={faEdit}
-                                          className="me-1"
+                                          className="btn btn-purple me-2"
                                         />
-                                        Edit
+                                        
                                       </button>
                                       <button
                                         type="button"
