@@ -12,8 +12,8 @@
 
 .sidebar {
     position: fixed;
-    z-index: 800;
-    height: 85%;
+    z-index: 1000;
+    height: 88%;
 }
 
 .sidebar li.active 

@@ -10,11 +10,16 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
     Description: "",
     Duration: "",
     topics: [],
+    lessons: [],
   });
   const [newTopic, setNewTopic] = useState({ Title: "", Description: "" });
+  const [newLesson, setNewLesson] = useState({ Title: "", Description: "" });
   const [showAddTopic, setShowAddTopic] = useState(true);
+  const [showAddLesson, setShowAddLesson] = useState(true);
   const [isEditingTopic, setIsEditingTopic] = useState(false);
+  const [isEditingLesson, setIsEditingLesson] = useState(false);
   const [editTopicIndex, setEditTopicIndex] = useState(null);
+  const [editLessonIndex, setEditLessonIndex] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -27,6 +32,7 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
         Description: selectedCourse.Description || "",
         Duration: selectedCourse.Duration || "",
         topics: selectedCourse.topics || [],
+        lessons: selectedCourse.lessons || [],
       });
       setLoading(false);
     } else {
@@ -77,10 +83,9 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
   const deleteTopic = async (index) => {
     const topicToDelete = courseToEdit.topics[index];
 
-    // If the topic has an `id`, delete it from the server
     if (topicToDelete.id) {
       try {
-        await axios.delete(`http://localhost:3000/topics/${topicToDelete.id}`);
+        await axios.delete(`http://localhost:3000/topic/${topicToDelete.id}`);
       } catch (error) {
         setError("Error deleting the topic.");
         return;
@@ -94,57 +99,60 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
     });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (!courseToEdit.Title || !courseToEdit.Description || courseToEdit.Duration === "") {
-  //     setError("Please fill all the required fields.");
-  //     return;
-  //   }
+  const addLesson = () => {
+    if (!newLesson.Title && !newLesson.Description) {
+      setError("Please fill in at least one of the lesson fields.");
+      return;
+    }
 
-  //   try {
-  //     setSubmitting(true);
+    const updatedLessons = isEditingLesson
+      ? courseToEdit.lessons.map((lesson, index) =>
+          index === editLessonIndex ? newLesson : lesson
+        )
+      : [...courseToEdit.lessons, newLesson];
 
-  //     // Update the course
-  //     await axios.put(`http://localhost:3000/courses/${selectedCourse.id}`, {
-  //       Title: courseToEdit.Title,
-  //       Description: courseToEdit.Description,
-  //       Duration: courseToEdit.Duration,
-  //     });
+    setCourseToEdit({
+      ...courseToEdit,
+      lessons: updatedLessons,
+    });
 
-  //     // Update or create topics associated with the course
-  //     const topicRequests = courseToEdit.topics.map((topic) => {
-  //       if (topic.id) {
-  //         return axios.put(`http://localhost:3000/topic/${topic.id}`, topic);
-  //       } else {
-  //         return axios.post(`http://localhost:3000/topic/${courseId}`, {
-  //           ...topic,
-  //           courseId: selectedCourse.id,
-  //         });
-  //       }
-  //     });
+    setNewLesson({ Title: "", Description: "" });
+    setShowAddLesson(false);
+    setIsEditingLesson(false);
+    setEditLessonIndex(null);
+    setError("");
+  };
 
-  //     await Promise.all(topicRequests);
+  const editLesson = (index) => {
+    const lessonToEdit = courseToEdit.lessons[index];
+    setNewLesson(lessonToEdit);
+    setIsEditingLesson(true);
+    setEditLessonIndex(index);
+    setShowAddLesson(true);
+  };
 
-  //     setEditSuccessMessage("Course and topics updated successfully!");
-  //     setError("");
+  const deleteLesson = async (index) => {
+    const lessonToDelete = courseToEdit.lessons[index];
 
-  //     if (onUpdateSuccess) onUpdateSuccess();
+    if (lessonToDelete.id) {
+      try {
+        await axios.delete(`http://localhost:3000/lesson/${lessonToDelete.id}`);
+      } catch (error) {
+        setError("Error deleting the lesson.");
+        return;
+      }
+    }
 
-  //     setSubmitting(false);
-  //   } catch (error) {
-  //     setError("An error occurred while updating the course and topics.");
-  //     setEditSuccessMessage("");
-  //     setSubmitting(false);
-  //   }
-  // };
+    const updatedLessons = courseToEdit.lessons.filter((_, i) => i !== index);
+    setCourseToEdit({
+      ...courseToEdit,
+      lessons: updatedLessons,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      !courseToEdit.Title ||
-      !courseToEdit.Description ||
-      !courseToEdit.Duration
-    ) {
+    if (!courseToEdit.Title || !courseToEdit.Description || !courseToEdit.Duration) {
       setError("All fields are required.");
       return;
     }
@@ -154,19 +162,15 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
     setEditSuccessMessage("");
 
     try {
-      // First, update the course
       const courseResponse = await axios.put(
         `http://localhost:3000/courses/${selectedCourse.id}`,
         courseToEdit
       );
 
-      // Update topics (assuming each topic has an ID)
       const topicRequests = courseToEdit.topics.map((topic) => {
         if (topic.id) {
-          // Update existing topics
           return axios.put(`http://localhost:3000/topic/${topic.id}`, topic);
         } else {
-          // Create new topics (if a new one doesn't have an ID)
           return axios.post(`http://localhost:3000/topic`, {
             ...topic,
             courseId: selectedCourse.id,
@@ -174,16 +178,26 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
         }
       });
 
-      await Promise.all(topicRequests);
+      const lessonRequests = topicToEdit.lessons.map((lesson) => {
+        if (lesson.id) {
+          return axios.put(`http://localhost:3000/lesson/${lesson.id}`, lesson);
+        } else {
+          return axios.post(`http://localhost:3000/lesson`, {
+            ...lesson,
+            topicId: topicToEdit.id,
+          });
+        }
+      });
 
-      // Notify parent component of success
+      await Promise.all([...topicRequests, ...lessonRequests]);
+
       if (onUpdateSuccess) {
         onUpdateSuccess(courseResponse.data);
       }
 
-      setEditSuccessMessage("Course and topics updated successfully!");
+      setEditSuccessMessage("Course, topics, and lessons updated successfully!");
     } catch (err) {
-      setError("Failed to update course or topics.");
+      setError("Failed to update course, topics, or lessons.");
     } finally {
       setSubmitting(false);
     }
@@ -256,6 +270,7 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
             ></textarea>
           </div>
 
+          {/* Topics Section */}
           {showAddTopic && (
             <div className="mb-3">
               <h5>{isEditingTopic ? "Edit Topic" : "Add Topic"}</h5>
@@ -265,93 +280,154 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
                   <input
                     type="text"
                     className="form-control custom-focus"
-                    placeholder="Topic Title"
+                    name="Title"
                     value={newTopic.Title}
                     onChange={(e) =>
                       setNewTopic({ ...newTopic, Title: e.target.value })
                     }
                   />
                 </div>
+
                 <div className="col-md-6">
                   <label className="form-label text-start d-block">
                     Description
                   </label>
-                  <textarea
+                  <input
+                    type="text"
                     className="form-control custom-focus"
-                    placeholder="Provide a detailed overview..."
+                    name="Description"
                     value={newTopic.Description}
                     onChange={(e) =>
                       setNewTopic({ ...newTopic, Description: e.target.value })
                     }
-                  ></textarea>
+                  />
                 </div>
               </div>
-              <div className="d-flex justify-content-end">
-                <button
-                  type="button"
-                  className="btn btn-primary secondary-action-btn"
-                  onClick={addTopic}
-                >
-                  {isEditingTopic ? "Update Topic" : "Add Topic"}
-                </button>
-              </div>
+
+              <button
+                type="button"
+                className="btn btn-primary mb-2"
+                onClick={addTopic}
+              >
+                {isEditingTopic ? "Update Topic" : "Add Topic"}
+              </button>
             </div>
           )}
 
-          {!showAddTopic && (
-            <button
-              type="button"
-              className="btn btn-primary secondary-action-btn mb-3"
-              onClick={() => setShowAddTopic(true)}
-            >
-              Add another topic
-            </button>
-          )}
-
-          {courseToEdit.topics.length > 0 && (
+          {/* Lesson Section */}
+          {showAddLesson && (
             <div className="mb-3">
-              <h5>Topics</h5>
-              <ul className="list-group">
-                {courseToEdit.topics.map((topic, index) => (
-                  <li
-                    key={index}
-                    className="list-group-item d-flex justify-content-between align-items-center mb-2 p-2"
-                  >
-                    <span className="small">{topic.Title}</span>
-                    <div className="d-flex">
-                      <button
-                        type="button"
-                        className="btn btn-link btn-purple me-2"
-                        onClick={() => editTopic(index)}
-                      >
-                        <FontAwesomeIcon icon={faEdit} />
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-link text-danger"
-                        onClick={() => deleteTopic(index)}
-                      >
-                        <FontAwesomeIcon icon={faTrash} />
-                      </button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              <h5>{isEditingLesson ? "Edit Lesson" : "Add Lesson"}</h5>
+              <div className="row mb-2">
+                <div className="col-md-6">
+                  <label className="form-label text-start d-block">Title</label>
+                  <input
+                    type="text"
+                    className="form-control custom-focus"
+                    name="Title"
+                    value={newLesson.Title}
+                    onChange={(e) =>
+                      setNewLesson({ ...newLesson, Title: e.target.value })
+                    }
+                  />
+                </div>
+
+                <div className="col-md-6">
+                  <label className="form-label text-start d-block">
+                    Description
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control custom-focus"
+                    name="Description"
+                    value={newLesson.Description}
+                    onChange={(e) =>
+                      setNewLesson({
+                        ...newLesson,
+                        Description: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+              </div>
+
+              <button
+                type="button"
+                className="btn btn-primary mb-2"
+                onClick={addLesson}
+              >
+                {isEditingLesson ? "Update Lesson" : "Add Lesson"}
+              </button>
             </div>
           )}
 
-          <div className="mt-3 d-flex justify-content-between">
+          {/* Display Topics */}
+          <h5 className="mt-4">Topics</h5>
+          <ul className="list-group mb-3">
+            {courseToEdit.topics.map((topic, index) => (
+              <li
+                className="list-group-item d-flex justify-content-between align-items-center"
+                key={index}
+              >
+                <span>
+                  <strong>{topic.Title}</strong> - {topic.Description}
+                </span>
+                <span>
+                  <FontAwesomeIcon
+                    icon={faEdit}
+                    className="text-primary me-3 cursor-pointer"
+                    onClick={() => editTopic(index)}
+                  />
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    className="text-danger cursor-pointer"
+                    onClick={() => deleteTopic(index)}
+                  />
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          {/* Display Lessons */}
+          <h5 className="mt-4">Lessons</h5>
+          <ul className="list-group mb-3">
+            {courseToEdit.lessons.map((lesson, index) => (
+              <li
+                className="list-group-item d-flex justify-content-between align-items-center"
+                key={index}
+              >
+                <span>
+                  <strong>{lesson.Title}</strong> - {lesson.Description}
+                </span>
+                <span>
+                  <FontAwesomeIcon
+                    icon={faEdit}
+                    className="text-primary me-3 cursor-pointer"
+                    onClick={() => editLesson(index)}
+                  />
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    className="text-danger cursor-pointer"
+                    onClick={() => deleteLesson(index)}
+                  />
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          {editSuccessMessage && (
+            <div className="alert alert-success">{editSuccessMessage}</div>
+          )}
+          {error && <div className="alert alert-danger">{error}</div>}
+
+          <div className="text-end">
             <button
               type="submit"
-              className="btn btn-primary primary-action-btn"
+              className="btn btn-success"
               disabled={submitting}
             >
-              {submitting ? "Updating..." : "Update Course"}
+              {submitting ? "Submitting..." : "Update Course"}
             </button>
-            {editSuccessMessage && (
-              <span className="text-success">{editSuccessMessage}</span>
-            )}
-            {error && <span className="text-danger">{error}</span>}
           </div>
         </form>
       </div>

@@ -46,6 +46,7 @@ const CourseDetails = ({
     setView("edit");
   };
   console.log(topics);
+  console.log(selectedCourse);
   return (
     <div className="container mx-auto my-8">
       <div className="container courseList-btn-container">

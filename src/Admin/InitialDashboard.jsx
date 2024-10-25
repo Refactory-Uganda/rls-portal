@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import '../../src/assets/css/initialdashboard.css';
 
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -57,9 +58,9 @@ const InitialDashboard = () => {
 
   return (
     <div className="container mt-4">
-      <div className="row mb-4">
+      <div className="row mb-3">
         {/* Facilitators Card */}
-        <div className="col-md-4 mb-3">
+        <div className="col-md-4 mb-3 dash-cards">
           <div className="card h-100 border border-secondary shadow-sm">
             <div className="card-body">
               <div className="d-flex align-items-start mb-3">
@@ -72,16 +73,16 @@ const InitialDashboard = () => {
                 <h3 className="card-title" style={{ color: "black" }}>
                   Facilitators
                 </h3>
-                <span
+                {/* <span
                   className={`badge rounded-circle ${
                     facilitatorsCount > 0 ? "bg-success" : "bg-danger"
                   }`}
                   title={facilitatorsCount > 0 ? "Active" : "Inactive"}
                   style={{ width: "24px", height: "24px" }}
-                ></span>
+                ></span> */}
               </div>
               <p
-                className="display-3"
+                className="display-3 card-numbers"
                 style={{ color: "rgb(56, 191, 195)" }} // Refactory Cerulean for numbers
               >
                 {facilitatorsCount}
@@ -91,7 +92,7 @@ const InitialDashboard = () => {
         </div>
 
         {/* Students Card */}
-        <div className="col-md-4 mb-3">
+        <div className="col-md-4 mb-3 dash-cards">
           <div className="card h-100 border border-secondary shadow-sm">
             <div className="card-body">
               <div className="d-flex align-items-start mb-3">
@@ -104,16 +105,16 @@ const InitialDashboard = () => {
                 <h3 className="card-title" style={{ color: "black" }}>
                   Learners
                 </h3>
-                <span
+                {/* <span
                   className={`badge rounded-circle ${
                     studentsCount > 0 ? "bg-success" : "bg-danger"
                   }`}
                   title={studentsCount > 0 ? "Active" : "Inactive"}
                   style={{ width: "24px", height: "24px" }}
-                ></span>
+                ></span> */}
               </div>
               <p
-                className="display-3"
+                className="display-3 card-numbers"
                 style={{ color: "rgb(56, 191, 195)" }} // Refactory Cerulean for numbers
               >
                 {studentsCount}
@@ -123,7 +124,7 @@ const InitialDashboard = () => {
         </div>
 
         {/* Courses Card */}
-        <div className="col-md-4 mb-3">
+        <div className="col-md-4 mb-3 dash-cards">
           <div className="card h-100 border border-secondary shadow-sm">
             <div className="card-body">
               <div className="d-flex align-items-start mb-3">
@@ -136,16 +137,16 @@ const InitialDashboard = () => {
                 <h3 className="card-title" style={{ color: "black" }}>
                   Courses
                 </h3>
-                <span
+                {/* <span
                   className={`badge rounded-circle ${
                     coursesCount > 0 ? "bg-success" : "bg-danger"
                   }`}
                   title={coursesCount > 0 ? "Active" : "Inactive"}
                   style={{ width: "24px", height: "24px" }}
-                ></span>
+                ></span> */}
               </div>
               <p
-                className="display-3"
+                className="display-3 card-numbers"
                 style={{ color: "rgb(56, 191, 195)" }} // Refactory Cerulean for numbers
               >
                 {coursesCount}
