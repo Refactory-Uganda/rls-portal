@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import "../../src/assets/css/courseDetails.css";
+import TopicsList from "./TopicsList";
 
 const CourseDetails = ({
   selectedCourse,
@@ -14,7 +15,7 @@ const CourseDetails = ({
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        setTopics(selectedCourse.topics)
+        setTopics(selectedCourse.topics);
       } catch (error) {
         console.error("Error fetching topics", error);
         setError("Fetching Topics failed. Please try again later");
@@ -121,7 +122,7 @@ const CourseDetails = ({
 
         {/* Topics Container */}
         <div className="course-topics-container card col-md-4 d-flex">
-          <ol className="list-group list-group-numbered">
+          {/* <ol className="list-group list-group-numbered">
             <h4>Topics</h4>
             {topics.map((topic) => (
               <li
@@ -134,7 +135,8 @@ const CourseDetails = ({
                 </div>
               </li>
             ))}
-          </ol>
+          </ol> */}
+          <TopicsList topics={topics} />
         </div>
       </div>
     </div>
