@@ -91,9 +91,10 @@ const CreateCourse = () => {
 
         await Promise.all(
           topic.Lessons.map((lesson) =>
-            axios.post("http://localhost:3000/lesson/{topic_id}", {
+            axios.post(`http://localhost:3000/lesson/${topicId}`, {
               title: lesson.title,
               text: lesson.text,
+              topicId: topicId,
             })
           )
         );
@@ -464,7 +465,7 @@ const CreateCourse = () => {
                             </h6>
                             <button
                               type="button"
-                              className= "btn btn-primary secondary-action-btn"
+                              className="btn btn-primary secondary-action-btn"
                               onClick={() => {
                                 if (showAddLessonIndex === topicIndex) {
                                   setShowAddLessonIndex(null);
@@ -591,7 +592,6 @@ const CreateCourse = () => {
                                           icon={faEdit}
                                           className="btn btn-purple me-2"
                                         />
-                                        
                                       </button>
                                       <button
                                         type="button"
