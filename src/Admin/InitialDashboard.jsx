@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import '../../src/assets/css/initialdashboard.css';
 
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -59,7 +60,7 @@ const InitialDashboard = () => {
     <div className="container mt-4">
       <div className="row mb-4">
         {/* Facilitators Card */}
-        <div className="col-md-4 mb-3">
+        <div className="col-md-4 mb-3 dash-cards">
           <div className="card h-100 border border-secondary shadow-sm">
             <div className="card-body">
               <div className="d-flex align-items-start mb-3">
@@ -81,7 +82,7 @@ const InitialDashboard = () => {
                 ></span>
               </div>
               <p
-                className="display-3"
+                className="display-3 card-numbers"
                 style={{ color: "rgb(56, 191, 195)" }} // Refactory Cerulean for numbers
               >
                 {facilitatorsCount}
@@ -91,7 +92,7 @@ const InitialDashboard = () => {
         </div>
 
         {/* Students Card */}
-        <div className="col-md-4 mb-3">
+        <div className="col-md-4 mb-3 dash-cards">
           <div className="card h-100 border border-secondary shadow-sm">
             <div className="card-body">
               <div className="d-flex align-items-start mb-3">
@@ -113,7 +114,7 @@ const InitialDashboard = () => {
                 ></span>
               </div>
               <p
-                className="display-3"
+                className="display-3 card-numbers"
                 style={{ color: "rgb(56, 191, 195)" }} // Refactory Cerulean for numbers
               >
                 {studentsCount}
@@ -123,7 +124,7 @@ const InitialDashboard = () => {
         </div>
 
         {/* Courses Card */}
-        <div className="col-md-4 mb-3">
+        <div className="col-md-4 mb-3 dash-cards">
           <div className="card h-100 border border-secondary shadow-sm">
             <div className="card-body">
               <div className="d-flex align-items-start mb-3">
@@ -145,7 +146,7 @@ const InitialDashboard = () => {
                 ></span>
               </div>
               <p
-                className="display-3"
+                className="display-3 card-numbers"
                 style={{ color: "rgb(56, 191, 195)" }} // Refactory Cerulean for numbers
               >
                 {coursesCount}
@@ -158,7 +159,7 @@ const InitialDashboard = () => {
       {/* Additional content */}
       <div className="row mb-4">
         {/* Pie chart for highly taken courses */}
-        <div className="col-md-6 mb-3">
+        <div className="col-md-6 mb-3 dash-cards">
           <div
             className="card"
             style={{ backgroundColor: "white", borderRadius: "20px" }}

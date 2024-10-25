@@ -1,0 +1,11 @@
+.dash-cards {
+    height: 8rem;
+}
+
+.card-numbers {
+    color: #663367;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    text-align: right;
+}
