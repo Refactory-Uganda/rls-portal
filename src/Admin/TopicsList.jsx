@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../../src/assets/css/topicsList.css";
 
 const TopicsList = ({ selectedCourse }) => {
   const [activeTopic, setActiveTopic] = useState(null);
@@ -12,11 +13,11 @@ const TopicsList = ({ selectedCourse }) => {
     // <div className="container">
     <div className="accordion" id="topicsAccordion">
       {selectedCourse.topics.map((topic) => (
-        <div className="card" key={topic.id}>
-          <div className="card-header" id={`heading${topic.id}`}>
+        <div className="card topic-cover-card" key={topic.id}>
+          <div className="topic-card" id={`heading${topic.id}`}>
             <h2 className="mb-0">
               <button
-                className="btn btn-link"
+                className="btn btn-link topic-btn"
                 type="button"
                 onClick={() => toggleTopic(topic.id)}
                 aria-expanded={activeTopic === topic.id}
@@ -29,15 +30,15 @@ const TopicsList = ({ selectedCourse }) => {
 
           <div
             id={`collapse${topic.id}`}
-            className={`collapse ${activeTopic === topic.id ? "show" : ""}`}
+            className={`collapse ${activeTopic === topic.id ? "show" : ""} `}
             aria-labelledby={`heading${topic.id}`}
             data-parent="#topicsAccordion"
           >
-            <div className="card-body">
+            <div className="card-body lesson-card">
               <ul className="list-group">
-                {topic.Lesson.map((lesson, index) => (
-                  <li className="list-group-item" key={index}>
-                    {lesson}
+                {topic.Lesson.map((lesson) => (
+                  <li className="list-group-item lesson-list-item" key={lesson.id}>
+                    {lesson.title}
                   </li>
                 ))}
               </ul>

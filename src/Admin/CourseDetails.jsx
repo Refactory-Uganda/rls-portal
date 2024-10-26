@@ -121,20 +121,6 @@ const CourseDetails = ({
 
         {/* Topics Container */}
         <div className="course-topics-container card col-md-4 d-flex">
-          {/* <ol className="list-group list-group-numbered">
-            <h4>Topics</h4>
-            {topics.map((topic) => (
-              <li
-                className="list-group-item d-flex justify-content-between align-items-start topic-list-item"
-                key={topic.id}
-              >
-                <div className="ms-2 me-auto">
-                  <div className="fw-bold">{topic.Title}</div>
-                  Lessons: 04
-                </div>
-              </li>
-            ))}
-          </ol> */}
           <TopicsList selectedCourse={selectedCourse} />
         </div>
       </div>

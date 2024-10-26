@@ -91,9 +91,10 @@ const CreateCourse = () => {
 
         await Promise.all(
           topic.Lessons.map((lesson) =>
-            axios.post("http://localhost:3000/lesson/{topic_id}", {
+            axios.post(`http://localhost:3000/lesson/${topicId}`, {
               title: lesson.title,
               text: lesson.text,
+              topicId: topicId,
             })
           )
         );
@@ -220,27 +221,6 @@ const CreateCourse = () => {
       topics.length > 0,
       topics.every((topic) => topic.Lessons.length > 0),
     ].filter(Boolean).length;
-
-    const progress = (completedSteps / totalSteps) * 100;
-
-    // return (
-    //   <div className="mb-4">
-    //     <div className="d-flex justify-content-between mb-2">
-    //       <small className="text-muted">Course completion</small>
-    //       <small className="text-muted">{Math.round(progress)}%</small>
-    //     </div>
-    //     <div className="progress" style={{ height: "8px" }}>
-    //       <div
-    //         className="progress-bar "
-    //         role="progressbar"
-    //         style={{ width: `${progress}%`, backgroundColor: "#663367" }}
-    //         aria-valuenow={progress}
-    //         aria-valuemin="0"
-    //         aria-valuemax="100"
-    //       />
-    //     </div>
-    //   </div>
-    // );
   };
 
   return (
@@ -464,7 +444,7 @@ const CreateCourse = () => {
                             </h6>
                             <button
                               type="button"
-                              className= "btn btn-primary secondary-action-btn"
+                              className="btn btn-primary secondary-action-btn"
                               onClick={() => {
                                 if (showAddLessonIndex === topicIndex) {
                                   setShowAddLessonIndex(null);
@@ -591,7 +571,6 @@ const CreateCourse = () => {
                                           icon={faEdit}
                                           className="btn btn-purple me-2"
                                         />
-                                        
                                       </button>
                                       <button
                                         type="button"

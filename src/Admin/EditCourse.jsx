@@ -80,7 +80,10 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
     // If the topic has an `id`, delete it from the server
     if (topicToDelete.id) {
       try {
-        await axios.delete(`http://localhost:3000/topics/${topicToDelete.id}`);
+        await axios.delete(
+          // eslint-disable-next-line no-undef
+          `${process.env.VITE_API_BASE_URL}/topics/${topicToDelete.id}`
+        );
       } catch (error) {
         setError("Error deleting the topic.");
         return;
@@ -268,7 +271,16 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
                     placeholder="Topic Title"
                     value={newTopic.Title}
                     onChange={(e) =>
-                      setNewTopic({ ...newTopic, Title: e.target.value })
+                      setNewTopic({
+                        ...newTopic,
+                        Title: e.target.value,
+                        Lesson: [
+                          {
+                            text: "This is the content",
+                            title: "Trial lesson 0006678 007",
+                          },
+                        ],
+                      })
                     }
                   />
                 </div>
