@@ -11,18 +11,17 @@ const CourseDetails = ({
   error,
   setError,
 }) => {
-  const [topics, setTopics] = useState([]);
-  useEffect(() => {
-    const fetchTopics = async () => {
-      try {
-        setTopics(selectedCourse.topics);
-      } catch (error) {
-        console.error("Error fetching topics", error);
-        setError("Fetching Topics failed. Please try again later");
-      }
-    };
-    fetchTopics();
-  }, []);
+  // const [topics, setTopics] = useState([]);
+  // useEffect(() => {
+  //   const fetchTopics = async () => {
+  //     try {
+  //       setTopics(selectedCourse.topics);
+  //     } catch (error) {
+  //       console.error("Error fetching topics", error);
+  //     }
+  //   };
+  //   fetchTopics();
+  // }, [selectedCourse.topics]);
   const handleBackClick = () => {
     setSelectedCourse(null); // Reset the selected course
     setView("list"); // Change the view to "list" to show the course list
@@ -46,7 +45,7 @@ const CourseDetails = ({
   const handleEdit = () => {
     setView("edit");
   };
-  console.log(topics);
+  // console.log(topics);
   return (
     <div className="container mx-auto my-8">
       <div className="container courseList-btn-container">
@@ -136,7 +135,7 @@ const CourseDetails = ({
               </li>
             ))}
           </ol> */}
-          <TopicsList topics={topics} />
+          <TopicsList selectedCourse={selectedCourse} />
         </div>
       </div>
     </div>
