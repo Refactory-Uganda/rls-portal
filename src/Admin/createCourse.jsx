@@ -14,7 +14,6 @@ import {
 import axios from "axios";
 
 const CreateCourse = () => {
-  // ... existing state declarations remain the same ...
   const [courseData, setCourseData] = useState({
     Title: "",
     Description: "",
@@ -51,9 +50,9 @@ const CreateCourse = () => {
   // Event Handlers
   const handleLessonInputChange = (e) => {
     const { name, value } = e.target;
-    setNewLesson(prev => ({
+    setNewLesson((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -92,9 +91,10 @@ const CreateCourse = () => {
 
         await Promise.all(
           topic.Lessons.map((lesson) =>
-            axios.post("http://localhost:3000/lesson/{topic_id}", {
+            axios.post(`http://localhost:3000/lesson/${topicId}`, {
               title: lesson.title,
               text: lesson.text,
+              topicId: topicId,
             })
           )
         );
@@ -221,41 +221,25 @@ const CreateCourse = () => {
       topics.length > 0,
       topics.every((topic) => topic.Lessons.length > 0),
     ].filter(Boolean).length;
-
-    const progress = (completedSteps / totalSteps) * 100;
-
-    return (
-      <div className="mb-4">
-        <div className="d-flex justify-content-between mb-2">
-          <small className="text-muted">Course completion</small>
-          <small className="text-muted">{Math.round(progress)}%</small>
-        </div>
-        <div className="progress" style={{ height: "8px" }}>
-          <div
-            className="progress-bar bg-success"
-            role="progressbar"
-            style={{ width: `${progress}%` }}
-            aria-valuenow={progress}
-            aria-valuemin="0"
-            aria-valuemax="100"
-          />
-        </div>
-      </div>
-    );
   };
 
   return (
-    <div className="container py-5">
+    <div className="container py-1">
       <div className="row justify-content-center">
         <div className="col-lg-10">
           <div className="card shadow border-0">
-            <div className="card-header bg-primary bg-gradient text-white py-3">
+            <div
+              className="card-header  text-white py-3"
+              style={{ backgroundColor: "#663367", color: "white" }}
+            >
               <div className="d-flex align-items-center">
                 <FontAwesomeIcon
                   icon={faGraduationCap}
                   className="me-3"
                   size="2x"
+                  style={{ color: "#38BFC3" }}
                 />
+
                 <div>
                   <h3 className="mb-0">Create New Course</h3>
                   <small>Fill in the details below to create your course</small>
@@ -272,7 +256,8 @@ const CreateCourse = () => {
                     <h5 className="card-title mb-4 d-flex align-items-center">
                       <FontAwesomeIcon
                         icon={faBook}
-                        className="me-2 text-primary"
+                        className="me-2"
+                        style={{ color: "#38BFC3" }}
                       />
                       Course Details
                     </h5>
@@ -283,7 +268,7 @@ const CreateCourse = () => {
                           <input
                             type="text"
                             name="Title"
-                            className="form-control"
+                            className="form-control custom-focus"
                             id="courseTitle"
                             value={courseData.Title}
                             onChange={handleCourseInputChange}
@@ -297,7 +282,7 @@ const CreateCourse = () => {
                         <div className="form-floating">
                           <select
                             name="Duration"
-                            className="form-select"
+                            className="form-select custom-focus"
                             id="courseDuration"
                             value={courseData.Duration}
                             onChange={handleCourseInputChange}
@@ -317,7 +302,7 @@ const CreateCourse = () => {
                         <div className="form-floating">
                           <textarea
                             name="Description"
-                            className="form-control"
+                            className="form-control custom-focus"
                             id="courseDescription"
                             value={courseData.Description}
                             onChange={handleCourseInputChange}
@@ -336,17 +321,14 @@ const CreateCourse = () => {
                     <h5 className="mb-0 d-flex align-items-center">
                       <FontAwesomeIcon
                         icon={faList}
-                        className="me-2 text-primary"
+                        className="me-2"
+                        style={{ color: "#38BFC3" }}
                       />
                       Course Topics
                     </h5>
                     <button
                       type="button"
-                      className={`btn ${
-                        showAddTopic
-                          ? "btn-outline-danger"
-                          : "btn-outline-primary"
-                      }`}
+                      className="btn btn-primary secondary-action-btn"
                       onClick={() => setShowAddTopic(!showAddTopic)}
                     >
                       <FontAwesomeIcon
@@ -363,7 +345,7 @@ const CreateCourse = () => {
                         <div className="form-floating mb-3">
                           <input
                             type="text"
-                            className="form-control"
+                            className="form-control custom-focus"
                             id="topicTitle"
                             value={newTopic.Title}
                             onChange={(e) =>
@@ -378,7 +360,7 @@ const CreateCourse = () => {
                         </div>
                         <div className="form-floating mb-3">
                           <textarea
-                            className="form-control"
+                            className="form-control custom-focus"
                             id="topicDescription"
                             value={newTopic.Description}
                             onChange={(e) =>
@@ -396,7 +378,7 @@ const CreateCourse = () => {
                         </div>
                         <button
                           type="button"
-                          className="btn btn-primary"
+                          className="btn btn-primary secondary-action-btn"
                           onClick={() =>
                             handleTopicAction(
                               editingStates.isEditingTopic ? "update" : "add"
@@ -462,11 +444,7 @@ const CreateCourse = () => {
                             </h6>
                             <button
                               type="button"
-                              className={`btn ${
-                                showAddLessonIndex === topicIndex
-                                  ? "btn-outline-danger"
-                                  : "btn-outline-primary"
-                              } btn-sm`}
+                              className="btn btn-primary secondary-action-btn"
                               onClick={() => {
                                 if (showAddLessonIndex === topicIndex) {
                                   setShowAddLessonIndex(null);
@@ -503,7 +481,7 @@ const CreateCourse = () => {
                                 <div className="form-floating mb-3">
                                   <input
                                     type="text"
-                                    className="form-control"
+                                    className="form-control custom-focus"
                                     id="lessonTitle"
                                     value={newLesson.title || ""}
                                     onChange={(e) =>
@@ -520,7 +498,7 @@ const CreateCourse = () => {
                                 </div>
                                 <div className="form-floating mb-3">
                                   <textarea
-                                    className="form-control"
+                                    className="form-control custom-focus"
                                     id="lessontext"
                                     value={newLesson.text || ""}
                                     onChange={(e) =>
@@ -538,7 +516,7 @@ const CreateCourse = () => {
                                 </div>
                                 <button
                                   type="button"
-                                  className="btn btn-primary btn-sm"
+                                  className="btn btn-primary secondary-action-btn"
                                   onClick={() =>
                                     handleLessonAction(
                                       editingStates.isEditingLesson
@@ -580,8 +558,7 @@ const CreateCourse = () => {
                                     </h6>
                                     <div className="btn-group">
                                       <button
-                                        type="button"
-                                        className="btn btn-outline-primary btn-sm"
+                                        className="btn btn-purple me-2"
                                         onClick={() =>
                                           handleLessonAction(
                                             "edit",
@@ -592,9 +569,8 @@ const CreateCourse = () => {
                                       >
                                         <FontAwesomeIcon
                                           icon={faEdit}
-                                          className="me-1"
+                                          className="btn btn-purple me-2"
                                         />
-                                        Edit
                                       </button>
                                       <button
                                         type="button"
@@ -632,6 +608,11 @@ const CreateCourse = () => {
                   <button
                     type="submit"
                     className="btn btn-success btn-lg"
+                    style={{
+                      backgroundColor: "#663367",
+                      color: "#fff",
+                      borderColor: "#663367",
+                    }}
                     disabled={
                       !courseData.Title ||
                       !courseData.Description ||

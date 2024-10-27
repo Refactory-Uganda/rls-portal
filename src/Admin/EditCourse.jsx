@@ -85,7 +85,7 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
 
     if (topicToDelete.id) {
       try {
-        await axios.delete(`http://localhost:3000/topic/${topicToDelete.id}`);
+        await axios.delete(`http://localhost:3000/topics/${topicToDelete.id}`);
       } catch (error) {
         setError("Error deleting the topic.");
         return;
@@ -283,7 +283,16 @@ const EditCourse = ({ selectedCourse, onUpdateSuccess }) => {
                     name="Title"
                     value={newTopic.Title}
                     onChange={(e) =>
-                      setNewTopic({ ...newTopic, Title: e.target.value })
+                      setNewTopic({
+                        ...newTopic,
+                        Title: e.target.value,
+                        Lesson: [
+                          {
+                            text: "This is the content",
+                            title: "Trial lesson 0006678 007",
+                          },
+                        ],
+                      })
                     }
                   />
                 </div>
