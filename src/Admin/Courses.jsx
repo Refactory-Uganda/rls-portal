@@ -87,6 +87,12 @@ const Courses = () => {
           onCancel={() => setView("list")}
         />
       )}
+      {view === "courseView" && (
+        <C
+          onCreateSuccess={handleCreateSuccess} // Handle successful course creation
+          onCancel={() => setView("list")}
+        />
+      )}
     </div>
   );
 };

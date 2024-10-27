@@ -25,6 +25,13 @@ const TopicsList = ({ selectedCourse }) => {
               >
                 {topic.Title}
               </button>
+              <button
+                className="btn btn-purple me-2" // Custom purple button for edit
+                // onClick={}
+                title="Edit Topic" // Tooltip
+              >
+                <i className="fas fa-edit"></i> {/* Font Awesome edit icon */}
+              </button>
             </h2>
           </div>
 
@@ -37,7 +44,10 @@ const TopicsList = ({ selectedCourse }) => {
             <div className="card-body lesson-card">
               <ul className="list-group">
                 {topic.Lesson.map((lesson) => (
-                  <li className="list-group-item lesson-list-item" key={lesson.id}>
+                  <li
+                    className="list-group-item lesson-list-item"
+                    key={lesson.id}
+                  >
                     {lesson.title}
                   </li>
                 ))}
