@@ -3,7 +3,7 @@ import api from "../services/api";
 import "../../src/assets/css/courseDetails.css";
 import TopicsList from "./TopicsList";
 
-const CourseDetails = ({
+const CourseContentView = ({
   selectedCourse,
   setSelectedCourse,
   onDelete,
@@ -59,7 +59,7 @@ const CourseDetails = ({
 
       <div className="course-and-topics-details-container row d-flex align-items-stretch">
         {/* Course Details */}
-        <div className="card col-md-12 d-flex">
+        <div className="card col-md-8 d-flex">
           <div className="card-body">
             <h6 className="card-title">Course title: {selectedCourse.Title}</h6>
             <h6 className="card-subtitle mb-2 text-body-secondary">
@@ -120,7 +120,7 @@ const CourseDetails = ({
         </div>
 
         {/* Topics Container */}
-        <div className="course-topics-container card col-md-12 d-flex">
+        <div className="course-topics-container card col-md-4 d-flex">
           <TopicsList selectedCourse={selectedCourse} />
         </div>
       </div>
@@ -128,4 +128,5 @@ const CourseDetails = ({
   );
 };
 
-export default CourseDetails;
+
+export default CourseContentView;
