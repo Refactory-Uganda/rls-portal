@@ -49,6 +49,14 @@ const TopicsList = ({ selectedCourse }) => {
                     key={lesson.id}
                   >
                     {lesson.title}
+                    <button
+                      className="btn btn-green me-2" // Custom purple button for edit
+                      // onClick={}
+                      title="Edit Topic" // Tooltip
+                    >
+                      <i className="fas fa-edit"></i>{" "}
+                      {/* Font Awesome edit icon */}
+                    </button>
                   </li>
                 ))}
               </ul>
