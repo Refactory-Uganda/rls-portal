@@ -23,7 +23,9 @@ const CourseDetails = ({
 
   const [duration, setDuration] = useState(selectedCourse.Duration);
   const [courseTitle, setCourseTitle] = useState(selectedCourse.Title);
-  const [courseDescription, setCourseDescription] = useState(selectedCourse.Description);
+  const [courseDescription, setCourseDescription] = useState(
+    selectedCourse.Description
+  );
 
   const handleBackClick = () => {
     setSelectedCourse(null);
@@ -48,37 +50,41 @@ const CourseDetails = ({
     setShowCourseModal(true);
   };
 
-  const handleEditTopic = (topic) => {
-    setCurrentTopic(topic);
-    setShowTopicModal(true);
-  };
+  // const handleEditTopic = (topic) => {
+  //   setCurrentTopic(topic);
+  //   setShowTopicModal(true);
+  // };
 
-  const handleEditLesson = (lesson) => {
-    setCurrentLesson(lesson);
-    setShowLessonModal(true);
-  };
+  // const handleEditLesson = (lesson) => {
+  //   setCurrentLesson(lesson);
+  //   setShowLessonModal(true);
+  // };
 
   const handleCloseCourseModal = () => {
     setShowCourseModal(false);
   };
 
-  const handleCloseTopicModal = () => {
-    setShowTopicModal(false);
-    setCurrentTopic(null);
-  };
+  // const handleCloseTopicModal = () => {
+  //   setShowTopicModal(false);
+  //   setCurrentTopic(null);
+  // };
 
-  const handleCloseLessonModal = () => {
-    setShowLessonModal(false);
-    setCurrentLesson(null);
-  };
+  // const handleCloseLessonModal = () => {
+  //   setShowLessonModal(false);
+  //   setCurrentLesson(null);
+  // };
 
   const handleUpdateCourse = async () => {
-    const updatedCourse = { Title: courseTitle, Duration: duration, Description: courseDescription };
+    const updatedCourse = {
+      Title: courseTitle,
+      Duration: duration,
+      Description: courseDescription,
+    };
 
     try {
       await api.patch(`/courses/${selectedCourse.id}`, updatedCourse);
       setShowSuccess(true);
-      setSelectedCourse(prev => ({
+      setSelectedCourse((prev) => ({
         ...prev,
         Title: courseTitle,
         Duration: duration,
@@ -107,74 +113,81 @@ const CourseDetails = ({
   //   }
   // };
 
-  const handleUpdateTopic = async (e) => {
-    e.preventDefault(); // Prevent form submission from reloading the page
-  
-    // Make sure updatedTopic has the latest form values
-    const updatedTopic = {
-      ...currentTopic,
-      Title: e.target.title.value,
-      Description: e.target.description.value,
-    };
-  
-    try {
-      // Check updated data being sent
-      console.log("Sending updated topic:", updatedTopic);
-  
-      const response = await api.patch(`/topic/${updatedTopic.id}`, updatedTopic);
-      
-      // Verify API response
-      if (response.status === 200) {
-        console.log("API responded with updated topic:", response.data);
-        
-        const updatedTopics = selectedCourse.topics.map((topic) =>
-          topic.id === updatedTopic.id ? response.data : topic
-        );
-        
-        // Update state
-        setSelectedCourse((prev) => ({
-          ...prev,
-          topics: updatedTopics,
-        }));
-        
-        setShowTopicSuccess(true);
-        handleCloseTopicModal();
-      } else {
-        console.error("API responded with status:", response.status);
-        alert("Failed to update the topic. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error updating topic:", error);
-      alert("Failed to update the topic. Please try again.");
-    }
-  };
-  
+  // const handleUpdateTopic = async (e) => {
+  //   e.preventDefault(); // Prevent form submission from reloading the page
 
-  const handleUpdateLesson = async (updatedLesson) => {
-    try {
-      await api.patch(`/lesson/${updatedLesson.id}`, updatedLesson);
-      const updatedTopics = selectedCourse.topics.map(topic => {
-        if (topic.id === currentTopic.id) {
-          const updatedLessons = topic.Lesson.map(lesson =>
-            lesson.id === updatedLesson.id ? { ...lesson, ...updatedLesson } : lesson
-          );
-          return { ...topic, Lesson: updatedLessons };
-        }
-        return topic;
-      });
-      setSelectedCourse(prev => ({ ...prev, topics: updatedTopics }));
-      setShowLessonSuccess(true);
-      handleCloseLessonModal();
-    } catch (error) {
-      console.error("Error updating lesson:", error);
-      alert("Failed to update the lesson. Please try again.");
-    }
-  };
+  //   // Make sure updatedTopic has the latest form values
+  //   const updatedTopic = {
+  //     ...currentTopic,
+  //     Title: e.target.title.value,
+  //     Description: e.target.description.value,
+  //   };
+
+  //   try {
+  //     // Check updated data being sent
+  //     console.log("Sending updated topic:", updatedTopic);
+
+  //     const response = await api.patch(
+  //       `/topic/${updatedTopic.id}`,
+  //       updatedTopic
+  //     );
+
+  //     // Verify API response
+  //     if (response.status === 200) {
+  //       console.log("API responded with updated topic:", response.data);
+
+  //       const updatedTopics = selectedCourse.topics.map((topic) =>
+  //         topic.id === updatedTopic.id ? response.data : topic
+  //       );
+
+  //       // Update state
+  //       setSelectedCourse((prev) => ({
+  //         ...prev,
+  //         topics: updatedTopics,
+  //       }));
+
+  //       setShowTopicSuccess(true);
+  //       handleCloseTopicModal();
+  //     } else {
+  //       console.error("API responded with status:", response.status);
+  //       alert("Failed to update the topic. Please try again.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error updating topic:", error);
+  //     alert("Failed to update the topic. Please try again.");
+  //   }
+  // };
+
+  // const handleUpdateLesson = async (updatedLesson) => {
+  //   try {
+  //     await api.patch(`/lesson/${updatedLesson.id}`, updatedLesson);
+  //     const updatedTopics = selectedCourse.topics.map((topic) => {
+  //       if (topic.id === currentTopic.id) {
+  //         const updatedLessons = topic.Lesson.map((lesson) =>
+  //           lesson.id === updatedLesson.id
+  //             ? { ...lesson, ...updatedLesson }
+  //             : lesson
+  //         );
+  //         return { ...topic, Lesson: updatedLessons };
+  //       }
+  //       return topic;
+  //     });
+  //     setSelectedCourse((prev) => ({ ...prev, topics: updatedTopics }));
+  //     setShowLessonSuccess(true);
+  //     handleCloseLessonModal();
+  //   } catch (error) {
+  //     console.error("Error updating lesson:", error);
+  //     alert("Failed to update the lesson. Please try again.");
+  //   }
+  // };
 
   return (
     <div className="container mx-auto my-8">
       <div className="container courseList-btn-container">
-        <button className="btn btn-primary action-btn" onClick={handleBackClick}>
+        <button
+          className="btn btn-primary action-btn"
+          onClick={handleBackClick}
+        >
           <i className="bi bi-arrow-left"></i> Back to Courses
         </button>
       </div>
@@ -197,14 +210,16 @@ const CourseDetails = ({
               Course objective:
             </h6>
             <p className="card-text">
-              This course equips learners with essential knowledge and practical skills in {selectedCourse.Title}, enabling them to apply key concepts in real-world situations.
+              This course equips learners with essential knowledge and practical
+              skills in {selectedCourse.Title}, enabling them to apply key
+              concepts in real-world situations.
             </p>
             <div className="container course-details-btn-container">
               <button
                 className="btn btn-purple me-2"
                 onClick={handleEditCourse}
                 title="Edit Course"
-                style={{ height: '3rem' }}
+                style={{ height: "3rem" }}
               >
                 <i className="fas fa-edit"></i>
               </button>
@@ -212,9 +227,13 @@ const CourseDetails = ({
                 className="btn secondary-action-btn"
                 onClick={handleDelete}
                 title="Delete Course"
-                style={{ height: '3rem' }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "red")}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+                style={{ height: "3rem" }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.backgroundColor = "red")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.backgroundColor = "transparent")
+                }
               >
                 <i className="fas fa-trash"></i>
               </button>
@@ -226,10 +245,11 @@ const CourseDetails = ({
         <div className="course-topics-container card col-md-12 d-flex">
           <TopicsList
             selectedCourse={selectedCourse}
-            onEditTopic={handleEditTopic}
-            onEditLesson={handleEditLesson}
-            onUpdateTopic={handleUpdateTopic}
-            onUpdateLesson={handleUpdateLesson}
+            setSelectedCourse={setSelectedCourse}
+            // handleEditTopic={handleEditTopic}
+            // handleEditLesson={handleEditLesson}
+            // handleUpdateTopic={handleUpdateTopic}
+            // handleUpdateLesson={handleUpdateLesson}
           />
         </div>
       </div>
@@ -240,10 +260,12 @@ const CourseDetails = ({
           <Modal.Title>Edit Course</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={(e) => {
-            e.preventDefault();
-            handleUpdateCourse();
-          }}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleUpdateCourse();
+            }}
+          >
             <div className="mb-3">
               <label>Title</label>
               <input
@@ -255,7 +277,11 @@ const CourseDetails = ({
             </div>
             <div className="mb-3">
               <label>Duration (Weeks)</label>
-              <select className="form-control" value={duration} onChange={(e) => setDuration(e.target.value)}>
+              <select
+                className="form-control"
+                value={duration}
+                onChange={(e) => setDuration(e.target.value)}
+              >
                 {[...Array(52)].map((_, i) => (
                   <option key={i + 1} value={i + 1}>
                     {i + 1} week{i !== 0 ? "s" : ""}
@@ -271,8 +297,9 @@ const CourseDetails = ({
                 onChange={(e) => setCourseDescription(e.target.value)}
               ></textarea>
             </div>
-            <button type="submit" className="btn action-btn">Update Course</button>
-
+            <button type="submit" className="btn action-btn">
+              Update Course
+            </button>
           </form>
         </Modal.Body>
       </Modal>
