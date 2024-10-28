@@ -20,7 +20,7 @@
 
 .modal-content {
   border-radius: 10px;
-  background-color: #f8f9fa; 
+  background-color: #f8f9fa;
 }
 
 .modal-header {
@@ -28,7 +28,7 @@
 }
 
 .modal-title {
-  color: rgb(56, 191, 195); 
+  color: rgb(56, 191, 195);
 }
 
 .modal-body {
@@ -36,6 +36,9 @@
 }
 
 .btn-success {
-  background-color: #28a745; 
+  background-color: #28a745;
   border: none;
+}
+.topic-cover-card {
+  padding: 0;
 }

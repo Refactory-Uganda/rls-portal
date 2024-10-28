@@ -106,7 +106,11 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
   return (
     <div className="accordion" id="topicsAccordion">
       {selectedCourse.topics.map((topic) => (
-        <div className="card topic-cover-card" key={topic.id}>
+        <div
+          className="card topic-cover-card"
+          key={topic.id}
+          style={{ padding: 0 }}
+        >
           <div className="topic-card" id={`heading${topic.id}`}>
             <h2 className="mb-0">
               <button
@@ -120,10 +124,24 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
               </button>
               <button
                 className="btn btn-purple me-2"
+                // onClick={() => handleEditTopic(topic)}
+                title="Add Lesson"
+              >
+                <i className="bi bi-plus-square-fill"></i>
+              </button>
+              <button
+                className="btn btn-purple me-2"
                 onClick={() => handleEditTopic(topic)}
                 title="Edit Topic"
               >
                 <i className="fas fa-edit"></i>
+              </button>
+              <button
+                className="btn btn-purple me-2"
+                // onClick={() => handleEditLesson(lesson)}
+                title="Delete Topic"
+              >
+                <i className="fas fa-trash"></i>
               </button>
             </h2>
           </div>
@@ -148,6 +166,13 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
                       title="Edit Lesson"
                     >
                       <i className="fas fa-edit"></i>
+                    </button>
+                    <button
+                      className="btn btn-green me-2"
+                      // onClick={() => handleEditLesson(lesson)}
+                      title="Delete Lesson"
+                    >
+                      <i className="fas fa-trash"></i>
                     </button>
                   </li>
                 ))}
