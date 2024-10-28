@@ -196,7 +196,9 @@ const CourseDetails = ({
         {/* Course Details */}
         <div className="card col-md-12 d-flex">
           <div className="card-body">
-            <h6 className="card-title">Course title: {selectedCourse.Title}</h6>
+            <h2 className="card-title">
+              <strong>{selectedCourse.Title}</strong>
+            </h2>
             <h6 className="card-subtitle mb-2 text-body-secondary">
               Duration: {selectedCourse.Duration}
             </h6>
@@ -214,12 +216,11 @@ const CourseDetails = ({
               skills in {selectedCourse.Title}, enabling them to apply key
               concepts in real-world situations.
             </p>
-            <div className="container course-details-btn-container">
+            <div className="course-details-btn-container">
               <button
                 className="btn btn-purple me-2"
                 onClick={handleEditCourse}
                 title="Edit Course"
-                style={{ height: "3rem" }}
               >
                 <i className="fas fa-edit"></i>
               </button>
@@ -227,7 +228,6 @@ const CourseDetails = ({
                 className="btn secondary-action-btn"
                 onClick={handleDelete}
                 title="Delete Course"
-                style={{ height: "3rem" }}
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.backgroundColor = "red")
                 }
@@ -237,6 +237,13 @@ const CourseDetails = ({
               >
                 <i className="fas fa-trash"></i>
               </button>
+              <a
+                href="#"
+                className="btn btn-primary secondary-action-btn"
+                // onClick={() => setView("createCourse")}
+              >
+                Add Topics
+              </a>
             </div>
           </div>
         </div>
