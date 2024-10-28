@@ -1,23 +1,44 @@
-.sidebar-btn:hover {
-    color: #663367;
-    background-color: #965d97;
-    border-radius: 10px;
-    width: 230px;
-    border: black;
+.sidebar {
+    position: fixed;
+    z-index: 1000;
+    height: 88%;
 }
 
 .sidebar-btn {
-    width: 100%;
+    width: 100%; 
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    line-height: 1.5rem;
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    border-radius: 0; /* Removes extra rounded borders */
 }
 
-.sidebar {
-    position: fixed;
-    z-index: 800;
-    height: 85%;
+.sidebar-btn:hover {
+    background-color: #965d97;
+    color: #663367;
+    border-radius: 10px;
 }
 
-.sidebar li.active 
-{
-  background-color: white;
-  color: #663367;
+.sidebar-btn.active {
+    background-color: #965d97;
+    color: #663367;
+    border-radius: 2px;
+}
+
+.sidebar-nav a.sidebar-btn {
+    padding: 1rem 1.5rem; 
+}
+
+.icon-large {
+    font-size: 1rem;
+    margin-right: 10px;
+}
+
+.sidebar .sidebar-nav a span {
+    display: inline-block;
+    transition: opacity 0.3s ease;
 }

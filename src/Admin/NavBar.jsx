@@ -24,10 +24,10 @@ const Navbar = ({ email }) => {
   return (
     <nav className="navbar navbar-light bg-light shadow-sm">
       <a href="#" className="navbar-brand">
-        <img src="../src/assets/Images/login-logo.png" className="h-4" alt="Logo" />
+        <img src="../src/assets/Images/login-logo.png" className="h-4 nav-logo" alt="Logo" />
       </a>
 
-      <div className="ms-8" style={{ fontSize: '30px', marginRight: '600px', marginTop: '5px' }}>
+      <div className="ms-8" style={{ fontSize: '25px', marginRight: '600px', marginTop: '15px' }}>
         <p>Hi, Admin</p>
       </div>
 

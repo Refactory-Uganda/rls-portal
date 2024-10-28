@@ -17,3 +17,25 @@
 .course-topics-container {
   padding: 0;
 }
+
+.modal-content {
+  border-radius: 10px;
+  background-color: #f8f9fa; 
+}
+
+.modal-header {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modal-title {
+  color: rgb(56, 191, 195); 
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.btn-success {
+  background-color: #28a745; 
+  border: none;
+}
