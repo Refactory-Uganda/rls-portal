@@ -13,6 +13,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { Modal, Button } from 'react-bootstrap';
+import AddQuiz from './AddQuiz';
+
 
 const CreateCourse = () => {
   const [courseData, setCourseData] = useState({
@@ -571,23 +573,12 @@ const CreateCourse = () => {
                                     <Button style={{ backgroundColor: "#663367" }} onClick={toggleQuizModal}>
         Add Quiz
       </Button>
-      <Modal show={isQuizModalOpen} onHide={toggleQuizModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Quiz to {lesson.title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {/* Quiz form inputs will go here */}
-          <p>Add questions and options here.</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={toggleQuizModal}>
-            Close
-          </Button>
-          <Button variant="primary">
-            Save Quiz
-          </Button>
-        </Modal.Footer>
-      </Modal>
+
+      <AddQuiz 
+        isQuizModalOpen={isQuizModalOpen} 
+        toggleQuizModal={toggleQuizModal} 
+        lessonTitle={lesson.title} 
+      />
                                       <button
                                         className="btn btn-purple me-2"
                                         onClick={() =>
