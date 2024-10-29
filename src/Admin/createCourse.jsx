@@ -224,7 +224,8 @@ const CreateCourse = () => {
   };
 
   return (
-    <div className="container py-1">
+    <div className="container py-1 pe-7">
+      
       <div className="row justify-content-center">
         <div className="col-lg-10">
           <div className="card shadow border-0">
@@ -251,7 +252,7 @@ const CreateCourse = () => {
               {renderProgressBar()}
 
               <form onSubmit={handleSubmit}>
-                <div className="card mb-4 border-0 bg-light">
+                <div className=" mb-4">
                   <div className="card-body">
                     <h5 className="card-title mb-4 d-flex align-items-center">
                       <FontAwesomeIcon
@@ -408,41 +409,7 @@ const CreateCourse = () => {
                         <div className="d-flex justify-content-between align-items-center">
                           <h5 className="mb-0">{topic.Title}</h5>
                           <div className="btn-group">
-                            <button
-                              type="button"
-                              className="btn btn-outline-primary btn-sm"
-                              onClick={() =>
-                                handleTopicAction("edit", topicIndex)
-                              }
-                            >
-                              <FontAwesomeIcon icon={faEdit} className="me-1" />
-                              Edit
-                            </button>
-                            <button
-                              type="button"
-                              className="btn btn-outline-danger btn-sm"
-                              onClick={() =>
-                                handleTopicAction("delete", topicIndex)
-                              }
-                            >
-                              <FontAwesomeIcon
-                                icon={faTrash}
-                                className="me-1"
-                              />
-                              Delete
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="card-body">
-                        <p className="text-muted mb-4">{topic.Description}</p>
-
-                        <div className="lessons-section">
-                          <div className="d-flex justify-content-between align-items-center mb-3">
-                            <h6 className="mb-0">
-                              Lessons ({topic.Lessons.length})
-                            </h6>
-                            <button
+                          <button
                               type="button"
                               className="btn btn-primary secondary-action-btn"
                               onClick={() => {
@@ -473,6 +440,42 @@ const CreateCourse = () => {
                                   : "Cancel"
                                 : "Add Lesson"}
                             </button>
+                            <button
+                              type="button"
+                              className="btn btn-outline-primary btn-sm"
+                              onClick={() =>
+                                handleTopicAction("edit", topicIndex)
+                              }
+                            >
+                              <FontAwesomeIcon icon={faEdit} className="me-1" />
+                              Edit
+                            </button>
+                            <button
+                              type="button"
+                              className="btn btn-outline-danger btn-sm"
+                              onClick={() =>
+                                handleTopicAction("delete", topicIndex)
+                              }
+                            >
+                              <FontAwesomeIcon
+                                icon={faTrash}
+                                className="me-1"
+                              />
+                              Delete
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="card-body">
+                        {/* <p className="text-muted mb-4">{topic.Description}</p> */}
+
+                        <div className="lessons-section">
+                          <div className="d-flex justify-content-between align-items-center mb-3">
+                            <h6 className="mb-0">
+                              Lessons 
+                              {/* ({topic.Lessons.length}) */}
+                            </h6>
+                            
                           </div>
 
                           {showAddLessonIndex === topicIndex && (
@@ -551,9 +554,9 @@ const CreateCourse = () => {
                                 <div className="card-body">
                                   <div className="d-flex justify-content-between align-items-center mb-2">
                                     <h6 className="mb-0">
-                                      <span className="text-muted me-2">
+                                      {/* <span className="text-muted me-2">
                                         #{lessonIndex + 1}
-                                      </span>
+                                      </span> */}
                                       {lesson.title}
                                     </h6>
                                     <div className="btn-group">
@@ -591,9 +594,9 @@ const CreateCourse = () => {
                                       </button>
                                     </div>
                                   </div>
-                                  <p className="text-muted mb-0 small">
+                                  {/* <p className="text-muted mb-0 small">
                                     {lesson.text}
-                                  </p>
+                                  </p> */}
                                 </div>
                               </div>
                             ))}
