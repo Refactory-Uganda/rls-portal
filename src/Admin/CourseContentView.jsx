@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import "../../src/assets/css/courseDetails.css";
 import TopicsList from "./TopicsList";
+import ContentList from "./ContentList";
 
 const CourseContentView = ({
   selectedCourse,
@@ -11,20 +12,11 @@ const CourseContentView = ({
   error,
   setError,
 }) => {
-  // const [topics, setTopics] = useState([]);
-  // useEffect(() => {
-  //   const fetchTopics = async () => {
-  //     try {
-  //       setTopics(selectedCourse.topics);
-  //     } catch (error) {
-  //       console.error("Error fetching topics", error);
-  //     }
-  //   };
-  //   fetchTopics();
-  // }, [selectedCourse.topics]);
+  const [lessonToview, setLessonToView] = useState(null);
+
   const handleBackClick = () => {
-    setSelectedCourse(null); // Reset the selected course
-    setView("list"); // Change the view to "list" to show the course list
+    // setSelectedCourse(null); // Reset the selected course
+    setView("details"); // Change the view to "list" to show the course list
   };
 
   const handleDelete = async () => {
@@ -45,7 +37,10 @@ const CourseContentView = ({
   const handleEdit = () => {
     setView("edit");
   };
-  // console.log(topics);
+  const handleViewLessonContent = (lesson) => {
+    setLessonToView(lesson);
+  };
+  console.log(selectedCourse);
   return (
     <div className="container mx-auto my-8">
       <div className="container courseList-btn-container">
@@ -53,80 +48,35 @@ const CourseContentView = ({
           className="btn btn-primary action-btn"
           onClick={handleBackClick}
         >
-          <i className="bi bi-arrow-left"></i> Back to Courses
+          <i className="bi bi-arrow-left"></i> Back to Courses Details
         </button>
       </div>
 
       <div className="course-and-topics-details-container row d-flex align-items-stretch">
-        {/* Course Details */}
+        {/* Content view window */}
         <div className="card col-md-8 d-flex">
-          <div className="card-body">
-            <h6 className="card-title">Course title: {selectedCourse.Title}</h6>
-            <h6 className="card-subtitle mb-2 text-body-secondary">
-              Duration: {selectedCourse.Duration}
-            </h6>
-            <h6 className="card-subtitle mb-2 text-body-secondary">
-              Facilitator: Steven Kawooya
-            </h6>
-            <h6 className="card-subtitle mb-2 text-body-secondary">
-              Award: Certificate
-            </h6>
-            <h6 className="card-subtitle mb-2 text-body-secondary">
-              Course objective:
-            </h6>
-            <p className="card-text">
-              This course equips learners with essential knowledge and practical
-              skills in {selectedCourse.Title}, enabling them to apply key
-              concepts in real-world situations. By the end, participants will
-              confidently use their new expertise for professional or academic
-              advancement.
-            </p>
-            <div className="continer course-details-btn-container">
-              {/* <button
-                className="btn btn-primary action-btn"
-                onClick={handleEdit}
-              >
-                Edit Course
-              </button>
-              <button
-                className="btn btn-primary secondary-action-btn"
-                onClick={handleDelete}
-              >
-                Delete Course
-              </button> */}
-              <button
-                className="btn btn-purple me-2" // Custom purple button for edit
-                onClick={handleEdit}
-                title="Edit Course" // Tooltip
-              >
-                <i className="fas fa-edit"></i> {/* Font Awesome edit icon */}
-              </button>
-              <button
-                className="btn btn-outline-secondary" // Use outline for plain background
-                onClick={handleDelete}
-                title="Delete Course" // Tooltip
-                style={{ position: "relative" }} // To allow hover effect
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.backgroundColor = "red")
-                } // Change background on hover
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.backgroundColor = "transparent")
-                } // Revert background on leave
-              >
-                <i className="fas fa-trash"></i> {/* Font Awesome trash icon */}
-              </button>
-            </div>
-          </div>
+          {lessonToview ? (
+            <>
+              <h3>{lessonToview.title}</h3>
+              <p>{lessonToview.text}</p>
+            </>
+          ) : (
+            ""
+          )}
         </div>
 
         {/* Topics Container */}
         <div className="course-topics-container card col-md-4 d-flex">
-          <TopicsList selectedCourse={selectedCourse} />
+          <ContentList
+            selectedCourse={selectedCourse}
+            handleViewLessonContent={handleViewLessonContent}
+            lessonToview={lessonToview}
+            setLessonToView={setLessonToView}
+          />
         </div>
       </div>
     </div>
   );
 };
-
 
 export default CourseContentView;

@@ -4,6 +4,7 @@ import CourseList from "./CourseList";
 import api from "../services/api";
 import EditCourse from "./EditCourse";
 import CreateCourse from "./createCourse"; // Ensure the path is correct
+import CourseContentView from "./CourseContentView";
 
 const Courses = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
@@ -87,10 +88,13 @@ const Courses = () => {
           onCancel={() => setView("list")}
         />
       )}
-      {view === "courseView" && (
-        <C
+      {view === "contentView" && (
+        <CourseContentView
+        setView={setView}
+          selectedCourse={selectedCourse}
+          setSelectedCourse={setSelectedCourse}
           onCreateSuccess={handleCreateSuccess} // Handle successful course creation
-          onCancel={() => setView("list")}
+          // onCancel={() => setView("list")}
         />
       )}
     </div>
