@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import api from "../services/api";
 import "../../src/assets/css/courseDetails.css";
 import TopicsList from "./TopicsList";
@@ -21,11 +21,28 @@ const CourseDetails = ({
   const [showTopicSuccess, setShowTopicSuccess] = useState(false);
   const [showLessonSuccess, setShowLessonSuccess] = useState(false);
 
+  // State for course details
   const [duration, setDuration] = useState(selectedCourse.Duration);
   const [courseTitle, setCourseTitle] = useState(selectedCourse.Title);
   const [courseDescription, setCourseDescription] = useState(
     selectedCourse.Description
   );
+
+  // State for adding topics
+  const [showAddTopicModal, setShowAddTopicModal] = useState(false);
+  const [topicTitle, setTopicTitle] = useState("");
+  const [topicDescription, setTopicDescription] = useState("");
+
+  // Set courseId from selectedCourse
+  const courseId = selectedCourse.id; // Assuming selectedCourse has an 'id' field
+
+  useEffect(() => {
+    // Reset topic fields when modal closes
+    if (!showAddTopicModal) {
+      setTopicTitle("");
+      setTopicDescription("");
+    }
+  }, [showAddTopicModal]);
 
   const handleBackClick = () => {
     setSelectedCourse(null);
@@ -50,29 +67,9 @@ const CourseDetails = ({
     setShowCourseModal(true);
   };
 
-  // const handleEditTopic = (topic) => {
-  //   setCurrentTopic(topic);
-  //   setShowTopicModal(true);
-  // };
-
-  // const handleEditLesson = (lesson) => {
-  //   setCurrentLesson(lesson);
-  //   setShowLessonModal(true);
-  // };
-
   const handleCloseCourseModal = () => {
     setShowCourseModal(false);
   };
-
-  // const handleCloseTopicModal = () => {
-  //   setShowTopicModal(false);
-  //   setCurrentTopic(null);
-  // };
-
-  // const handleCloseLessonModal = () => {
-  //   setShowLessonModal(false);
-  //   setCurrentLesson(null);
-  // };
 
   const handleUpdateCourse = async () => {
     const updatedCourse = {
@@ -97,89 +94,25 @@ const CourseDetails = ({
     }
   };
 
-  // const handleUpdateTopic = async () => {
-  //   const updatedTopic = currentTopic;
-  //   try {
-  //     await api.patch(`/topic/${updatedTopic.id}`, updatedTopic);
-  //     const updatedTopics = selectedCourse.topics.map(topic =>
-  //       topic.id === updatedTopic.id ? { ...topic, ...updatedTopic } : topic
-  //     );
-  //     setSelectedCourse(prev => ({ ...prev, topics: updatedTopics }));
-  //     setShowTopicSuccess(true);
-  //     handleCloseTopicModal();
-  //   } catch (error) {
-  //     console.error("Error updating topic:", error);
-  //     alert("Failed to update the topic. Please try again.");
-  //   }
-  // };
+  const handleAddTopic = async () => {
+    const newTopic = {
+      Title: topicTitle,
+      Description: topicDescription,
+    };
 
-  // const handleUpdateTopic = async (e) => {
-  //   e.preventDefault(); // Prevent form submission from reloading the page
+    try {
+      await api.post(`/topic/${courseId}`, newTopic);
+      setShowTopicSuccess(true);
+      setShowAddTopicModal(false);
+    } catch (error) {
+      console.error("Error adding topic:", error);
+      alert("Failed to add the topic. Please try again.");
+    }
+  };
 
-  //   // Make sure updatedTopic has the latest form values
-  //   const updatedTopic = {
-  //     ...currentTopic,
-  //     Title: e.target.title.value,
-  //     Description: e.target.description.value,
-  //   };
-
-  //   try {
-  //     // Check updated data being sent
-  //     console.log("Sending updated topic:", updatedTopic);
-
-  //     const response = await api.patch(
-  //       `/topic/${updatedTopic.id}`,
-  //       updatedTopic
-  //     );
-
-  //     // Verify API response
-  //     if (response.status === 200) {
-  //       console.log("API responded with updated topic:", response.data);
-
-  //       const updatedTopics = selectedCourse.topics.map((topic) =>
-  //         topic.id === updatedTopic.id ? response.data : topic
-  //       );
-
-  //       // Update state
-  //       setSelectedCourse((prev) => ({
-  //         ...prev,
-  //         topics: updatedTopics,
-  //       }));
-
-  //       setShowTopicSuccess(true);
-  //       handleCloseTopicModal();
-  //     } else {
-  //       console.error("API responded with status:", response.status);
-  //       alert("Failed to update the topic. Please try again.");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error updating topic:", error);
-  //     alert("Failed to update the topic. Please try again.");
-  //   }
-  // };
-
-  // const handleUpdateLesson = async (updatedLesson) => {
-  //   try {
-  //     await api.patch(`/lesson/${updatedLesson.id}`, updatedLesson);
-  //     const updatedTopics = selectedCourse.topics.map((topic) => {
-  //       if (topic.id === currentTopic.id) {
-  //         const updatedLessons = topic.Lesson.map((lesson) =>
-  //           lesson.id === updatedLesson.id
-  //             ? { ...lesson, ...updatedLesson }
-  //             : lesson
-  //         );
-  //         return { ...topic, Lesson: updatedLessons };
-  //       }
-  //       return topic;
-  //     });
-  //     setSelectedCourse((prev) => ({ ...prev, topics: updatedTopics }));
-  //     setShowLessonSuccess(true);
-  //     handleCloseLessonModal();
-  //   } catch (error) {
-  //     console.error("Error updating lesson:", error);
-  //     alert("Failed to update the lesson. Please try again.");
-  //   }
-  // };
+  const handleCloseAddTopicModal = () => {
+    setShowAddTopicModal(false);
+  };
 
   return (
     <div className="container mx-auto my-8">
@@ -237,13 +170,12 @@ const CourseDetails = ({
               >
                 <i className="fas fa-trash"></i>
               </button>
-              <a
-                href="#"
+              <button
                 className="btn btn-primary secondary-action-btn"
-                // onClick={() => setView("createCourse")}
+                onClick={() => setShowAddTopicModal(true)}
               >
                 Add Topics
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -253,10 +185,6 @@ const CourseDetails = ({
           <TopicsList
             selectedCourse={selectedCourse}
             setSelectedCourse={setSelectedCourse}
-            // handleEditTopic={handleEditTopic}
-            // handleEditLesson={handleEditLesson}
-            // handleUpdateTopic={handleUpdateTopic}
-            // handleUpdateLesson={handleUpdateLesson}
           />
         </div>
       </div>
@@ -311,33 +239,60 @@ const CourseDetails = ({
         </Modal.Body>
       </Modal>
 
-      {/* Toast for Success Messages */}
+      {/* Add Topic Modal */}
+      <Modal show={showAddTopicModal} onHide={handleCloseAddTopicModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Topic</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleAddTopic();
+            }}
+          >
+            <div className="mb-3">
+              <label>Title</label>
+              <input
+                type="text"
+                className="form-control"
+                value={topicTitle}
+                onChange={(e) => setTopicTitle(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <label>Description</label>
+              <textarea
+                className="form-control"
+                value={topicDescription}
+                onChange={(e) => setTopicDescription(e.target.value)}
+              ></textarea>
+            </div>
+            <button type="submit" className="btn action-btn">
+              Add Topic
+            </button>
+          </form>
+        </Modal.Body>
+      </Modal>
+
+      {/* Success Toasts */}
       <Toast
         onClose={() => setShowSuccess(false)}
         show={showSuccess}
         delay={3000}
         autohide
-        className="position-fixed bottom-0 end-0 m-3"
+        className="toast-success"
       >
-        <Toast.Body>Course successfully updated!</Toast.Body>
+        <Toast.Body>Course updated successfully!</Toast.Body>
       </Toast>
       <Toast
         onClose={() => setShowTopicSuccess(false)}
         show={showTopicSuccess}
         delay={3000}
         autohide
-        className="position-fixed bottom-0 end-0 m-3"
+        className="toast-success"
       >
-        <Toast.Body>Topic successfully updated!</Toast.Body>
-      </Toast>
-      <Toast
-        onClose={() => setShowLessonSuccess(false)}
-        show={showLessonSuccess}
-        delay={3000}
-        autohide
-        className="position-fixed bottom-0 end-0 m-3"
-      >
-        <Toast.Body>Lesson successfully updated!</Toast.Body>
+        <Toast.Body>Topic added successfully!</Toast.Body>
       </Toast>
     </div>
   );
