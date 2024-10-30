@@ -158,7 +158,11 @@ const ContentList = ({
   return (
     <div className="accordion" id="topicsAccordion">
       {selectedCourse.topics.map((topic) => (
-        <div className="card topic-cover-card" key={topic.id}>
+        <div
+          className="card topic-cover-card"
+          key={topic.id}
+          style={{ padding: "0" }}
+        >
           <div className="topic-card">
             <h2 className="mb-0">
               <button
