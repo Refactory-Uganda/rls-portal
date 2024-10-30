@@ -1,31 +1,36 @@
 .topic-card {
-    padding: 0;
-    background-color: #663367;
-  
-    text-decoration: none;
-  }
-  .topic-cover-card {
-    padding: 0;
-  }
-  .topic-btn {
-    text-decoration: none;
-    color: #fff;
-  }
-  .topic-btn:hover {
-    color: #e1dbdb;
-  }
-  .lesson-card {
-    padding: 0;
-  }
-  .lesson-list-item {
-    background-color: #38bfc3;
-    border-radius: 0;
-  }
-  .lesson-list-item:hover {
-    cursor: pointer;
-    color: #663367;
-  }
-  .card {
-    padding: 0;
-  }
-  
+  padding: 0;
+  background-color: #663367;
+
+  text-decoration: none;
+}
+.topic-cover-card {
+  padding: 0;
+}
+.topic-btn {
+  text-decoration: none;
+  color: #fff;
+}
+.topic-btn:hover {
+  color: #e1dbdb;
+}
+.lesson-card {
+  padding: 0;
+}
+.lesson-list-item {
+  background-color: #38bfc3;
+  border-radius: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.lesson-list-item:hover {
+  cursor: pointer;
+  color: #663367;
+}
+.card {
+  padding: 0;
+}
+.topic-list-tem {
+  display: flex;
+  justify-content: space-between;
+}

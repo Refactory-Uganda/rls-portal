@@ -37,7 +37,9 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
   const handleDeleteTopic = async (topicId) => {
     try {
       await api.delete(`/topic/${topicId}`);
-      const updatedTopics = selectedCourse.topics.filter((topic) => topic.id !== topicId);
+      const updatedTopics = selectedCourse.topics.filter(
+        (topic) => topic.id !== topicId
+      );
       setSelectedCourse((prev) => ({ ...prev, topics: updatedTopics }));
       showToast("Topic deleted successfully");
     } catch (error) {
@@ -51,7 +53,9 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
       await api.delete(`/lesson/${lessonId}`);
       const updatedTopics = selectedCourse.topics.map((topic) => {
         if (topic.id === topicId) {
-          const updatedLessons = topic.Lesson.filter((lesson) => lesson.id !== lessonId);
+          const updatedLessons = topic.Lesson.filter(
+            (lesson) => lesson.id !== lessonId
+          );
           return { ...topic, Lesson: updatedLessons };
         }
         return topic;
@@ -123,7 +127,9 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
       const updatedTopics = selectedCourse.topics.map((topic) => {
         if (topic.id === currentTopic.id) {
           const updatedLessons = topic.Lesson.map((lesson) =>
-            lesson.id === currentLesson.id ? { ...lesson, ...updatedLesson } : lesson
+            lesson.id === currentLesson.id
+              ? { ...lesson, ...updatedLesson }
+              : lesson
           );
           return { ...topic, Lesson: updatedLessons };
         }
@@ -146,9 +152,13 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
   return (
     <div className="accordion" id="topicsAccordion">
       {selectedCourse.topics.map((topic) => (
-        <div className="card topic-cover-card" key={topic.id} style={{ padding: '0' }}>
+        <div
+          className="card topic-cover-card"
+          key={topic.id}
+          style={{ padding: "0" }}
+        >
           <div className="topic-card">
-            <h2 className="mb-0">
+            <h2 className="mb-0 topic-list-item">
               <button
                 className="btn btn-link topic-btn"
                 type="button"
@@ -158,50 +168,60 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
               >
                 {topic.Title}
               </button>
-              <button
-                className="btn btn-purple me-2"
-                onClick={() => handleAddLessonClick(topic)}
-                title="Add Lesson"
-              >
-                <i className="bi bi-plus-square-fill"></i>
-              </button>
-              <button
-                className="btn btn-purple me-2"
-                onClick={() => handleEditTopic(topic)}
-                title="Edit Topic"
-              >
-                <i className="fas fa-edit"></i>
-              </button>
-              <button
-                className="btn btn-purple me-2"
-                onClick={() => handleDeleteTopic(topic.id)}
-                title="Delete Topic"
-              >
-                <i className="fas fa-trash"></i>
-              </button>
+              <span>
+                <button
+                  className="btn btn-purple me-2"
+                  onClick={() => handleAddLessonClick(topic)}
+                  title="Add Lesson"
+                >
+                  <i className="bi bi-plus-square-fill"></i>
+                </button>
+                <button
+                  className="btn btn-purple me-2"
+                  onClick={() => handleEditTopic(topic)}
+                  title="Edit Topic"
+                >
+                  <i className="fas fa-edit"></i>
+                </button>
+                <button
+                  className="btn btn-purple me-2"
+                  onClick={() => handleDeleteTopic(topic.id)}
+                  title="Delete Topic"
+                >
+                  <i className="fas fa-trash"></i>
+                </button>
+              </span>
             </h2>
           </div>
 
-          <div id={`collapse${topic.id}`} className={`collapse ${activeTopic === topic.id ? "show" : ""}`}>
+          <div
+            id={`collapse${topic.id}`}
+            className={`collapse ${activeTopic === topic.id ? "show" : ""}`}
+          >
             <div className="card-body lesson-card">
               <ul className="list-group">
                 {topic.Lesson.map((lesson) => (
-                  <li className="list-group-item lesson-list-item" key={lesson.id}>
+                  <li
+                    className="list-group-item lesson-list-item"
+                    key={lesson.id}
+                  >
                     {lesson.title}
-                    <button
-                      className="btn btn-green me-2"
-                      onClick={() => handleEditLesson(lesson)}
-                      title="Edit Lesson"
-                    >
-                      <i className="fas fa-edit"></i>
-                    </button>
-                    <button
-                      className="btn btn-green me-2"
-                      onClick={() => handleDeleteLesson(lesson.id, topic.id)}
-                      title="Delete Lesson"
-                    >
-                      <i className="fas fa-trash"></i>
-                    </button>
+                    <span>
+                      <button
+                        className="btn btn-green me-2"
+                        onClick={() => handleEditLesson(lesson)}
+                        title="Edit Lesson"
+                      >
+                        <i className="fas fa-edit"></i>
+                      </button>
+                      <button
+                        className="btn btn-green me-2"
+                        onClick={() => handleDeleteLesson(lesson.id, topic.id)}
+                        title="Delete Lesson"
+                      >
+                        <i className="fas fa-trash"></i>
+                      </button>
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -211,7 +231,10 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
       ))}
 
       {/* Add Lesson Modal */}
-      <Modal show={showAddLessonModal} onHide={() => setShowAddLessonModal(false)}>
+      <Modal
+        show={showAddLessonModal}
+        onHide={() => setShowAddLessonModal(false)}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Add Lesson</Modal.Title>
         </Modal.Header>
@@ -219,19 +242,33 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
           <form onSubmit={handleAddLesson}>
             <div className="mb-3">
               <label>Title</label>
-              <input type="text" className="form-control" name="title" required />
+              <input
+                type="text"
+                className="form-control"
+                name="title"
+                required
+              />
             </div>
             <div className="mb-3">
               <label>Text</label>
-              <textarea className="form-control" name="text" required></textarea>
+              <textarea
+                className="form-control"
+                name="text"
+                required
+              ></textarea>
             </div>
-            <button type="submit" className="btn action-btn">Add Lesson</button>
+            <button type="submit" className="btn action-btn">
+              Add Lesson
+            </button>
           </form>
         </Modal.Body>
       </Modal>
 
       {/* Edit Topic Modal */}
-      <Modal show={showEditTopicModal} onHide={() => setShowEditTopicModal(false)}>
+      <Modal
+        show={showEditTopicModal}
+        onHide={() => setShowEditTopicModal(false)}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Edit Topic</Modal.Title>
         </Modal.Header>
@@ -239,19 +276,35 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
           <form onSubmit={handleEditTopicSubmit}>
             <div className="mb-3">
               <label>Title</label>
-              <input type="text" className="form-control" name="title" defaultValue={currentTopic?.Title || ""} required />
+              <input
+                type="text"
+                className="form-control"
+                name="title"
+                defaultValue={currentTopic?.Title || ""}
+                required
+              />
             </div>
             <div className="mb-3">
               <label>Description</label>
-              <textarea className="form-control" name="description" defaultValue={currentTopic?. Description || ""} required></textarea>
+              <textarea
+                className="form-control"
+                name="description"
+                defaultValue={currentTopic?.Description || ""}
+                required
+              ></textarea>
             </div>
-            <button type="submit" className="btn action-btn">Save Changes</button>
+            <button type="submit" className="btn action-btn">
+              Save Changes
+            </button>
           </form>
         </Modal.Body>
       </Modal>
 
       {/* Edit Lesson Modal */}
-      <Modal show={showEditLessonModal} onHide={() => setShowEditLessonModal(false)}>
+      <Modal
+        show={showEditLessonModal}
+        onHide={() => setShowEditLessonModal(false)}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Edit Lesson</Modal.Title>
         </Modal.Header>
@@ -259,19 +312,37 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
           <form onSubmit={handleEditLessonSubmit}>
             <div className="mb-3">
               <label>Title</label>
-              <input type="text" className="form-control" name="title" defaultValue={currentLesson?.title || ""} required />
+              <input
+                type="text"
+                className="form-control"
+                name="title"
+                defaultValue={currentLesson?.title || ""}
+                required
+              />
             </div>
             <div className="mb-3">
               <label>Text</label>
-              <textarea className="form-control" name="text" defaultValue={currentLesson?.text || ""} required></textarea>
+              <textarea
+                className="form-control"
+                name="text"
+                defaultValue={currentLesson?.text || ""}
+                required
+              ></textarea>
             </div>
-            <button type="submit" className="btn action-btn">Save Changes</button>
+            <button type="submit" className="btn action-btn">
+              Save Changes
+            </button>
           </form>
         </Modal.Body>
       </Modal>
 
       {/* Success Toast */}
-      <Toast onClose={() => setShowSuccessToast(false)} show={showSuccessToast} delay={3000} autohide>
+      <Toast
+        onClose={() => setShowSuccessToast(false)}
+        show={showSuccessToast}
+        delay={3000}
+        autohide
+      >
         <Toast.Body>{successMessage}</Toast.Body>
       </Toast>
     </div>

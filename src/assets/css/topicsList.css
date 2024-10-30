@@ -28,3 +28,7 @@
 /* .card {
   padding: 0;
 } */
+.topic-list-item {
+  display: flex;
+  justify-content: space-between;
+}

@@ -164,7 +164,7 @@ const ContentList = ({
           style={{ padding: "0" }}
         >
           <div className="topic-card">
-            <h2 className="mb-0">
+            <h2 className="mb-0 topic-list-tem">
               <button
                 className="btn btn-link topic-btn"
                 type="button"
@@ -174,6 +174,7 @@ const ContentList = ({
               >
                 {topic.Title}
               </button>
+              <span>
               <button
                 className="btn btn-purple me-2"
                 onClick={() => handleAddLessonClick(topic)}
@@ -195,6 +196,7 @@ const ContentList = ({
               >
                 <i className="fas fa-trash"></i>
               </button>
+              </span>
             </h2>
           </div>
 
@@ -211,20 +213,29 @@ const ContentList = ({
                     onClick={() => handleViewLessonContent(lesson)}
                   >
                     {lesson.title}
-                    <button
-                      className="btn btn-green me-2"
-                      onClick={() => handleEditLesson(lesson)}
-                      title="Edit Lesson"
-                    >
-                      <i className="fas fa-edit"></i>
-                    </button>
-                    <button
-                      className="btn btn-green me-2"
-                      onClick={() => handleDeleteLesson(lesson.id, topic.id)}
-                      title="Delete Lesson"
-                    >
-                      <i className="fas fa-trash"></i>
-                    </button>
+                    <span>
+                      <button
+                        className="btn me-2"
+                        // onClick={() => handleAddLessonClick(topic)}
+                        title="Add Quiz"
+                      >
+                        <i className="bi bi-plus-square-fill"></i>
+                      </button>
+                      <button
+                        className="btn btn-green me-2"
+                        onClick={() => handleEditLesson(lesson)}
+                        title="Edit Lesson"
+                      >
+                        <i className="fas fa-edit"></i>
+                      </button>
+                      <button
+                        className="btn btn-green me-2"
+                        onClick={() => handleDeleteLesson(lesson.id, topic.id)}
+                        title="Delete Lesson"
+                      >
+                        <i className="fas fa-trash"></i>
+                      </button>
+                    </span>
                   </li>
                 ))}
               </ul>
