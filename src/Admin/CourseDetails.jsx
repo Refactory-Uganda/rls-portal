@@ -176,6 +176,12 @@ const CourseDetails = ({
               >
                 Add Topics
               </button>
+              <button
+                className="btn btn-primary action-btn"
+                onClick={() => setView("contentView")}
+              >
+                Take Course
+              </button>
             </div>
           </div>
         </div>
