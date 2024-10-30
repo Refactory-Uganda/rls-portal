@@ -19,7 +19,7 @@ function AddQuiz({ isQuizModalOpen, toggleQuizModal, lessonTitle }) {
       }
 
       // Step 1: Create the Quiz
-      const quizResponse = await axios.post('http://localhost:3000/quizzes', { title: quizTitle });
+      const quizResponse = await axios.post('http://localhost:3000/quizzes/{lesson_id}', { title: quizTitle });
       const quizId = quizResponse.data.id;
 
       // Step 2: Create Questions and Options
@@ -33,7 +33,7 @@ function AddQuiz({ isQuizModalOpen, toggleQuizModal, lessonTitle }) {
 
         // Create Options for the Question
         for (const option of question.options) {
-          await axios.post('http://localhost:3000/options', {
+          await axios.post('http://localhost:3000/options', { 
             questionId,
             text: option.text,
             isCorrect: option.isCorrect,
