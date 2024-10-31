@@ -2,52 +2,17 @@ import React, { useState } from 'react';
 import { Modal, Button, Form, Alert, Container, Row, Col, Card } from 'react-bootstrap';
 import axios from 'axios';
 
-function AddQuiz({ isQuizModalOpen, toggleQuizModal, lessonTitle }) {
+function AddQuiz({ isQuizModalOpen, toggleQuizModal, lessonTitle, lessonId }) {
   const [quizTitle, setQuizTitle] = useState('');
+  const [quizDescription, setQuizDescription] = useState('');
   const [questions, setQuestions] = useState([
-    { questionText: '', options: [{ text: '', isCorrect: false }] }
+    { text: '', order: 0, answer: '', explanation: '', options: [{ optionText: '', iscorrect: false, order: 0 }] }
   ]);
   const [formErrors, setFormErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const saveQuiz = async () => {
-    try {
-      // Validate form data
-      const errors = validateForm();
-      if (Object.keys(errors).length > 0) {
-        setFormErrors(errors);
-        return;
-      }
-
-      // Step 1: Create the Quiz
-      const quizResponse = await axios.post('http://localhost:3000/quizzes/{lesson_id}', { title: quizTitle });
-      const quizId = quizResponse.data.id;
-
-      // Step 2: Create Questions and Options
-      for (const question of questions) {
-        // Create the Question
-        const questionResponse = await axios.post('http://localhost:3000/questions', {
-          quizId,
-          questionText: question.questionText,
-        });
-        const questionId = questionResponse.data.id;
-
-        // Create Options for the Question
-        for (const option of question.options) {
-          await axios.post('http://localhost:3000/options', { 
-            questionId,
-            text: option.text,
-            isCorrect: option.isCorrect,
-          });
-        }
-      }
-
-      console.log('Quiz, questions, and options saved successfully');
-      toggleQuizModal(); // Close modal on success
-    } catch (error) {
-      console.error('Error saving quiz, questions, or options:', error);
-      setFormErrors({ general: 'Error saving quiz. Please try again.' });
-    }
-  };
+  // Add debug logging of props
+  console.log('AddQuiz Props:', { isQuizModalOpen, lessonTitle, lessonId });
 
   const validateForm = () => {
     const errors = {};
@@ -56,45 +21,140 @@ function AddQuiz({ isQuizModalOpen, toggleQuizModal, lessonTitle }) {
       errors.quizTitle = 'Quiz title is required';
     }
 
-    for (let i = 0; i < questions.length; i++) {
-      if (!questions[i].questionText.trim()) {
-        errors[`question-${i}`] = `Question ${i + 1} is required`;
+    questions.forEach((question, i) => {
+      if (!question.text.trim()) {
+        errors[`question-${i}`] = `Question ${i + 1} text is required`;
       }
 
-      if (questions[i].options.filter((opt) => opt.isCorrect).length !== 1) {
-        errors[`question-${i}`] = `Please select one correct answer for question ${i + 1}`;
+      const correctAnswers = question.options.filter(opt => opt.iscorrect).length;
+      if (correctAnswers !== 1) {
+        errors[`question-${i}-options`] = `Question ${i + 1} must have exactly one correct answer`;
       }
-    }
+
+      const emptyOptions = question.options.some(opt => !opt.optionText.trim());
+      if (emptyOptions) {
+        errors[`question-${i}-options`] = `All options for question ${i + 1} must have text`;
+      }
+    });
 
     return errors;
   };
 
+  const saveQuiz = async () => {
+    try {
+      setIsSubmitting(true);
+      setFormErrors({});
+
+      const errors = validateForm();
+      if (Object.keys(errors).length > 0) {
+        setFormErrors(errors);
+        setIsSubmitting(false);
+        return;
+      }
+
+      console.log('Creating quiz with lessonId:', lessonId);
+
+      // Create quiz
+      const quizData = {
+        title: quizTitle,
+        description: quizDescription || ' ',
+        lessonId
+      };
+      console.log('Quiz data:', quizData);
+
+      const quizResponse = await axios.post('http://localhost:3000/quizzes', quizData);
+      console.log('Quiz response:', quizResponse.data);
+
+      const quizId = quizResponse.data.id;
+
+      // Create questions and options
+      for (const [index, question] of questions.entries()) {
+        // Find the correct option
+        const correctOption = question.options.find(opt => opt.iscorrect);
+        
+        const questionData = {
+          text: question.text,
+          order: index,
+          answer: correctOption?.optionText || '',
+          explanation: question.explanation || ' ',
+          quizId: quizId
+        };
+        console.log('Question data:', questionData);
+
+        const questionResponse = await axios.post('http://localhost:3000/questions', questionData);
+        console.log('Question response:', questionResponse.data);
+
+        const questionId = questionResponse.data.id;
+
+        // Create options
+        for (const [optIndex, option] of question.options.entries()) {
+          const optionData = {
+            optionText: option.optionText,
+            iscorrect: option.iscorrect,
+            order: optIndex,
+            questionId: questionId
+          };
+          console.log('Option data:', optionData);
+
+          const optionResponse = await axios.post('http://localhost:3000/options', optionData);
+          console.log('Option response:', optionResponse.data);
+        }
+      }
+
+      toggleQuizModal();
+    } catch (error) {
+      console.error('Error details:', {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status,
+        error: error
+      });
+
+      setFormErrors({
+        general: error.response?.data?.message || 
+                error.response?.data?.error || 
+                error.message || 
+                'An error occurred while saving the quiz'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const handleAddQuestion = () => {
-    setQuestions([...questions, { questionText: '', options: [{ text: '', isCorrect: false }] }]);
+    setQuestions([
+      ...questions,
+      { text: '', order: questions.length, answer: '', explanation: '', options: [{ optionText: '', iscorrect: false, order: 0 }] }
+    ]);
   };
 
   const handleAddOption = (questionIndex) => {
     const updatedQuestions = [...questions];
-    updatedQuestions[questionIndex].options.push({ text: '', isCorrect: false });
+    const currentOptions = updatedQuestions[questionIndex].options;
+    updatedQuestions[questionIndex].options.push({ 
+      optionText: '', 
+      iscorrect: false, 
+      order: currentOptions.length 
+    });
     setQuestions(updatedQuestions);
   };
 
-  const handleQuestionChange = (e, index) => {
+  const handleQuestionChange = (e, index, field) => {
     const updatedQuestions = [...questions];
-    updatedQuestions[index].questionText = e.target.value;
+    updatedQuestions[index][field] = e.target.value;
     setQuestions(updatedQuestions);
   };
 
   const handleOptionChange = (e, questionIndex, optionIndex) => {
     const updatedQuestions = [...questions];
-    updatedQuestions[questionIndex].options[optionIndex].text = e.target.value;
+    updatedQuestions[questionIndex].options[optionIndex].optionText = e.target.value;
     setQuestions(updatedQuestions);
   };
 
   const handleCorrectAnswerChange = (questionIndex, optionIndex) => {
     const updatedQuestions = [...questions];
     updatedQuestions[questionIndex].options.forEach((opt, idx) => {
-      opt.isCorrect = idx === optionIndex;  // Only one correct answer per question
+      opt.iscorrect = idx === optionIndex;
     });
     setQuestions(updatedQuestions);
   };
@@ -105,92 +165,126 @@ function AddQuiz({ isQuizModalOpen, toggleQuizModal, lessonTitle }) {
         <Modal.Title>Add Quiz to {lessonTitle}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {Object.keys(formErrors).length > 0 && (
+        {formErrors.general && (
           <Alert variant="danger">
-            {formErrors.general || 'Please fix the errors below.'}
+            <div><strong>Error:</strong></div>
+            <div>{formErrors.general}</div>
           </Alert>
         )}
 
         <Container>
-          <Card>
-            <Card.Body>
-              <Form>
-                <Form.Group as={Row} controlId="quizTitle">
-                  <Form.Label column sm={3}>Quiz Title</Form.Label>
-                  <Col sm={9}>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Quiz Title</Form.Label>
+              <Form.Control
+                type="text"
+                value={quizTitle}
+                onChange={(e) => setQuizTitle(e.target.value)}
+                placeholder="Enter quiz title"
+                isInvalid={!!formErrors.quizTitle}
+              />
+              <Form.Control.Feedback type="invalid">
+                {formErrors.quizTitle}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Quiz Description</Form.Label>
+              <Form.Control
+                type="text"
+                value={quizDescription}
+                onChange={(e) => setQuizDescription(e.target.value)}
+                placeholder="Enter quiz description"
+              />
+            </Form.Group>
+
+            {questions.map((question, qIndex) => (
+              <Card key={qIndex} className="mb-3">
+                <Card.Body>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Question {qIndex + 1}</Form.Label>
                     <Form.Control
-                    
                       type="text"
-                      value={quizTitle}
-                      onChange={(e) => setQuizTitle(e.target.value)}
-                      placeholder="Enter quiz title"
+                      value={question.text}
+                      onChange={(e) => handleQuestionChange(e, qIndex, 'text')}
+                      placeholder="Enter question text"
+                      isInvalid={!!formErrors[`question-${qIndex}`]}
                     />
-                    {formErrors.quizTitle && (
-                      <Form.Text className="text-danger">{formErrors.quizTitle}</Form.Text>
-                    )}
-                  </Col>
-                </Form.Group>
+                    <Form.Control.Feedback type="invalid">
+                      {formErrors[`question-${qIndex}`]}
+                    </Form.Control.Feedback>
+                  </Form.Group>
 
-                {questions.map((question, qIndex) => (
-                  <Card key={qIndex} className="mb-3">
-                    <Card.Body>
-                      <Form.Group as={Row} controlId={`question-${qIndex}`}>
-                        <Form.Label column sm={3}>Question {qIndex + 1}</Form.Label>
-                        <Col sm={9}>
-                          <Form.Control
-                            type="text"
-                            value={question.questionText}
-                            onChange={(e) => handleQuestionChange(e, qIndex)}
-                            placeholder="Enter question text"
-                          />
-                          {formErrors[`question-${qIndex}`] && (
-                            <Form.Text className="text-danger">
-                              {formErrors[`question-${qIndex}`]}
-                            </Form.Text>
-                          )}
-                        </Col>
-                      </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Answer Explanation</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={question.explanation}
+                      onChange={(e) => handleQuestionChange(e, qIndex, 'explanation')}
+                      placeholder="Enter explanation for the correct answer"
+                    />
+                  </Form.Group>
 
-                      {question.options.map((option, oIndex) => (
-                        <Form.Group key={oIndex} as={Row} controlId={`option-${qIndex}-${oIndex}`}>
-                          <Col sm={9} className="offset-sm-3">
-                            <Form.Control
-                              type="text"
-                              value={option.text}
-                              onChange={(e) => handleOptionChange(e, qIndex, oIndex)}
-                              placeholder="Enter option text"
-                            />
-                            <Form.Check
-                              type="radio"
-                              label="Correct answer"
-                              checked={option.isCorrect}
-                              onChange={() => handleCorrectAnswerChange(qIndex, oIndex)}
-                            />
-                          </Col>
-                        </Form.Group>
-                      ))}
+                  {question.options.map((option, oIndex) => (
+                    <Row key={oIndex} className="mb-2">
+                      <Col>
+                        <Form.Control
+                          type="text"
+                          value={option.optionText}
+                          onChange={(e) => handleOptionChange(e, qIndex, oIndex)}
+                          placeholder={`Option ${oIndex + 1}`}
+                          isInvalid={!!formErrors[`question-${qIndex}-options`]}
+                        />
+                      </Col>
+                      <Col xs="auto">
+                        <Form.Check
+                          type="radio"
+                          name={`correct-answer-${qIndex}`}
+                          label="Correct"
+                          checked={option.iscorrect}
+                          onChange={() => handleCorrectAnswerChange(qIndex, oIndex)}
+                        />
+                      </Col>
+                    </Row>
+                  ))}
+                  
+                  {question.options.length < 4 && (
+                    <Button
+                      variant="link"
+                      onClick={() => handleAddOption(qIndex)}
+                      className="mt-2"
+                    >
+                      + Add Option
+                    </Button>
+                  )}
 
-                      <Button variant="link" onClick={() => handleAddOption(qIndex)}>
-                        + Add Option
-                      </Button>
-                    </Card.Body>
-                  </Card>
-                ))}
+                  {!!formErrors[`question-${qIndex}-options`] && (
+                    <div className="text-danger mt-2">
+                      {formErrors[`question-${qIndex}-options`]}
+                    </div>
+                  )}
+                </Card.Body>
+              </Card>
+            ))}
 
-                <Button variant="link" onClick={handleAddQuestion}>
-                  + Add Question
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
+            {questions.length < 10 && (
+              <Button variant="link" onClick={handleAddQuestion}>
+                + Add Question
+              </Button>
+            )}
+          </Form>
         </Container>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={toggleQuizModal}>
-          Close
+          Cancel
         </Button>
-        <Button variant="primary" onClick={saveQuiz}>
-          Save Quiz
+        <Button 
+          variant="primary" 
+          onClick={saveQuiz}
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? 'Saving...' : 'Save Quiz'}
         </Button>
       </Modal.Footer>
     </Modal>
