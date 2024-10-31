@@ -12,6 +12,9 @@ import {
   faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { Modal, Button } from 'react-bootstrap';
+import AddQuiz from './AddQuiz';
+
 
 const CreateCourse = () => {
   const [courseData, setCourseData] = useState({
@@ -19,6 +22,13 @@ const CreateCourse = () => {
     Description: "",
     Duration: "",
   });
+
+  // function Lesson({ lesson }) {
+    const [isQuizModalOpen, setQuizModalOpen] = useState(false);
+  
+    const toggleQuizModal = () => {
+      setQuizModalOpen(!isQuizModalOpen);
+    };
 
   const [topics, setTopics] = useState([]);
   const [newTopic, setNewTopic] = useState({
@@ -409,6 +419,8 @@ const CreateCourse = () => {
                         <div className="d-flex justify-content-between align-items-center">
                           <h5 className="mb-0">{topic.Title}</h5>
                           <div className="btn-group">
+
+                            
                           <button
                               type="button"
                               className="btn btn-primary secondary-action-btn"
@@ -560,6 +572,15 @@ const CreateCourse = () => {
                                       {lesson.title}
                                     </h6>
                                     <div className="btn-group">
+                                    <Button style={{ backgroundColor: "#663367" }} onClick={toggleQuizModal}>
+        Add Quiz
+      </Button>
+
+      <AddQuiz 
+        isQuizModalOpen={isQuizModalOpen} 
+        toggleQuizModal={toggleQuizModal} 
+        lessonTitle={lesson.title} 
+      />
                                       <button
                                         className="btn btn-purple me-2"
                                         onClick={() =>
