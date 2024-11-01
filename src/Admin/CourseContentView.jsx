@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import "../../src/assets/css/courseDetails.css";
+import "../../src/assets/css/courseContentView.css";
 import TopicsList from "./TopicsList";
 import ContentList from "./ContentList";
 
@@ -74,6 +75,28 @@ const CourseContentView = ({
             setLessonToView={setLessonToView}
           />
         </div>
+      </div>
+      <div className="container quiz-btn-container">
+        {lessonToview ? (
+          <>
+            <a
+              href="#"
+              className="btn btn-primary action-btn"
+              // onClick={() => setView("createCourse")}
+            >
+              Take Lesson Quiz
+            </a>
+            <a
+              href="#"
+              className="btn btn-primary secondary-action-btn"
+              // onClick={() => setView("createCourse")}
+            >
+              Edit Quiz
+            </a>
+          </>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
