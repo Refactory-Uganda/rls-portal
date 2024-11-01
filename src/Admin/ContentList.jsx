@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Toast } from "react-bootstrap";
 import "../../src/assets/css/ContentList.css";
 import api from "../services/api";
+import AddQuiz from './AddQuiz';
+
 
 const ContentList = ({
   selectedCourse,
@@ -17,6 +19,13 @@ const ContentList = ({
   const [showEditTopicModal, setShowEditTopicModal] = useState(false);
   const [showEditLessonModal, setShowEditLessonModal] = useState(false);
   const [showAddLessonModal, setShowAddLessonModal] = useState(false);
+  const [isQuizModalOpen, setQuizModalOpen] = useState(false);
+
+ 
+  
+  const toggleQuizModal = () => {
+    setQuizModalOpen(!isQuizModalOpen);
+  };
 
   // Selected Topic and Lesson for Editing
   const [currentTopic, setCurrentTopic] = useState(null);
@@ -217,10 +226,18 @@ const ContentList = ({
                       <button
                         className="btn me-2"
                         // onClick={() => handleAddLessonClick(topic)}
+                        onClick={toggleQuizModal}
+                        
                         title="Add Quiz"
                       >
                         <i className="bi bi-plus-square-fill"></i>
                       </button>
+                      <AddQuiz 
+        isQuizModalOpen={isQuizModalOpen} 
+        toggleQuizModal={toggleQuizModal} 
+        lessonTitle={lesson.title} 
+        lessonId={lesson.id}
+      />
                       <button
                         className="btn btn-green me-2"
                         onClick={() => handleEditLesson(lesson)}
@@ -349,7 +366,7 @@ const ContentList = ({
           </form>
         </Modal.Body>
       </Modal>
-
+      
       {/* Success Toast */}
       <Toast
         onClose={() => setShowSuccessToast(false)}
