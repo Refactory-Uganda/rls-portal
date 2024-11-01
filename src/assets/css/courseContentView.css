@@ -1,0 +1,6 @@
+.quiz-btn-container {
+  text-align: left;
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.2rem;
+}
