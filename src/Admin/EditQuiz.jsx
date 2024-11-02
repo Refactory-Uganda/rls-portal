@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Modal, Button, Form, Alert, Container, Row, Col, Card } from 'react-bootstrap';
 import axios from 'axios';
 
@@ -8,12 +8,6 @@ function EditQuiz({ isEditModalOpen, toggleQuizModal, quizData }) {
   const [questions, setQuestions] = useState(quizData?.questions || []);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => {
-    setQuizTitle(quizData?.title || '');
-    setQuizDescription(quizData?.description || '');
-    setQuestions(quizData?.questions || []);
-  }, [quizData]);
 
   const validateForm = () => {
     const errors = {};
@@ -57,11 +51,11 @@ function EditQuiz({ isEditModalOpen, toggleQuizModal, quizData }) {
   };
 
   const handleAddQuestion = () => {
-    setQuestions([
-      ...questions,
+    setQuestions(prevQuestions => [
+      ...prevQuestions,
       {
         text: '',
-        order: questions.length,
+        order: prevQuestions.length,
         answer: '',
         explanation: '',
         options: [{ optionText: '', iscorrect: false, order: 0 }],
@@ -70,38 +64,63 @@ function EditQuiz({ isEditModalOpen, toggleQuizModal, quizData }) {
   };
 
   const handleDeleteQuestion = (index) => {
-    setQuestions(questions.filter((_, i) => i !== index));
+    if (window.confirm('Are you sure you want to delete this question?')) {
+      setQuestions(prevQuestions => prevQuestions.filter((_, i) => i !== index));
+    }
   };
 
   const handleQuestionChange = (e, index, field) => {
-    const updatedQuestions = [...questions];
-    updatedQuestions[index][field] = e.target.value;
-    setQuestions(updatedQuestions);
+    setQuestions(prevQuestions =>
+      prevQuestions.map((question, i) =>
+        i === index ? { ...question, [field]: e.target.value } : question
+      )
+    );
   };
 
   const handleAddOption = (questionIndex) => {
-    const updatedQuestions = [...questions];
-    updatedQuestions[questionIndex].options.push({ optionText: '', iscorrect: false, order: updatedQuestions[questionIndex].options.length });
-    setQuestions(updatedQuestions);
+    setQuestions(prevQuestions => {
+      const updatedQuestions = [...prevQuestions];
+      updatedQuestions[questionIndex].options.push({
+        optionText: '',
+        iscorrect: false,
+        order: updatedQuestions[questionIndex].options.length,
+      });
+      return updatedQuestions;
+    });
   };
 
   const handleDeleteOption = (questionIndex, optionIndex) => {
-    const updatedQuestions = [...questions];
-    updatedQuestions[questionIndex].options = updatedQuestions[questionIndex].options.filter((_, i) => i !== optionIndex);
-    setQuestions(updatedQuestions);
+    if (window.confirm('Are you sure you want to delete this option?')) {
+      setQuestions(prevQuestions => {
+        const updatedQuestions = [...prevQuestions];
+        updatedQuestions[questionIndex].options = updatedQuestions[questionIndex].options.filter(
+          (_, i) => i !== optionIndex
+        );
+        return updatedQuestions;
+      });
+    }
   };
 
   const handleOptionChange = (e, questionIndex, optionIndex) => {
-    const updatedQuestions = [...questions];
-    updatedQuestions[questionIndex].options[optionIndex].optionText = e.target.value;
-    setQuestions(updatedQuestions);
+    setQuestions(prevQuestions => {
+      const updatedQuestions = [...prevQuestions];
+      updatedQuestions[questionIndex].options[optionIndex].optionText = e.target.value;
+      return updatedQuestions;
+    });
   };
 
   const handleCorrectAnswerChange = (questionIndex, optionIndex) => {
-    const updatedQuestions = [...questions];
-    updatedQuestions[questionIndex].options.forEach((opt, idx) => (opt.iscorrect = idx === optionIndex));
-    setQuestions(updatedQuestions);
+    setQuestions(prevQuestions => {
+      const updatedQuestions = [...prevQuestions];
+      updatedQuestions[questionIndex].options = updatedQuestions[questionIndex].options.map(
+        (opt, idx) => ({ ...opt, iscorrect: idx === optionIndex })
+      );
+      return updatedQuestions;
+    });
   };
+
+  console.log(quizData)
+  console.log(questions)
 
   return (
     <Modal show={isEditModalOpen} onHide={toggleQuizModal} size="lg">
