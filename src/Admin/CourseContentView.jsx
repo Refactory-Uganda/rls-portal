@@ -45,20 +45,22 @@ const CourseContentView = ({ selectedCourse, setView }) => {
   };
 
   // Function to fetch the quiz for the selected lesson
-  const fetchQuizForLesson = async (lessonId) => {
-    setLoadingQuiz(true);
-    setError(null);
-    try {
-      const response = await axios.get(`http://localhost:3000/quizzes?lessonId=${lessonId}`);
-      setQuiz(response.data); 
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoadingQuiz(false);
-    }
-  };
-
+  // const fetchQuizForLesson = async (lessonId) => {
+  //   setLoadingQuiz(true);
+  //   setError(null);
+  //   try {
+  //     const response = await axios.get(`http://localhost:3000/quizzes?lessonId=${lessonId}`);
+  //     setQuiz(response.data); 
+  //   } catch (err) {
+  //     setError(err.message);
+  //   } finally {
+  //     setLoadingQuiz(false);
+  //   }
+  // };
   console.log(lessonToview)
+
+  setQuiz(lessonToview.quiz)
+  console.log(quiz)
 
   return (
     <div className="container mx-auto my-8">
@@ -89,7 +91,7 @@ const CourseContentView = ({ selectedCourse, setView }) => {
         </div>
       ) : (
         // Render quiz view when "Take Lesson Quiz" is clicked
-        <QuizView quiz={quiz} onBack={() => setIsQuizViewOpen(false)} />
+        <QuizView quiz={quiz}  onBack={() => setIsQuizViewOpen(false)} />
       )}
 
       <div className="container quiz-btn-container">

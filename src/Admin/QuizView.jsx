@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const QuizView = ({ lessonId, onBack }) => {
-  const [quiz, setQuiz] = useState(null);
+const QuizView = ({ lessonId, onBack, quiz }) => {
+  // const [quiz, setQuiz] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchQuiz = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3000/quizzes?lessonId=${lessonId}`);
-        setQuiz(response.data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchQuiz = async () => {
+  //     try {
+  //       const response = await axios.get(`http://localhost:3000/quizzes?lessonId=${lessonId}`);
+  //       setQuiz(response.data);
+  //     } catch (err) {
+  //       setError(err.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchQuiz();
-  }, [lessonId]);
+  //   fetchQuiz();
+  // }, [lessonId]);
 
-  if (loading) return <p>Loading quiz...</p>;
-  if (error) return <p>Error fetching quiz: {error}</p>;
+  // if (loading) return <p>Loading quiz...</p>;
+  // if (error) return <p>Error fetching quiz: {error}</p>;
 
   if (!quiz || !quiz.questions) {
     return (
@@ -32,6 +32,8 @@ const QuizView = ({ lessonId, onBack }) => {
       </div>
     );
   }
+
+   console.log(quiz);
 
   return (
     <div>
