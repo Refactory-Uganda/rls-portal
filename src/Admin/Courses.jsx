@@ -17,7 +17,7 @@ const Courses = () => {
     const fetchCourses = async () => {
       try {
         const response = await api.get("/courses"); // Ensure this endpoint matches your backend
-        setCourses(response.data);
+        setCourses(response.data.courses);
       } catch (error) {
         console.error("Error fetching courses:", error);
         setError("Failed to fetch courses. Please try again later.");
