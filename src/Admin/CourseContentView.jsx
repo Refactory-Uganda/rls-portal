@@ -5,7 +5,7 @@ import EditQuiz from "./EditQuiz";
 import QuizView from "./QuizView"; // New component to display the quiz
 
 const CourseContentView = ({ selectedCourse, setView }) => {
-  const [lessonToview, setLessonToView] = useState(null);
+  const [lessonToView, setLessonToView] = useState(null);
   const [isEditQuizModalOpen, setIsEditQuizModalOpen] = useState(false);
   const [isQuizViewOpen, setIsQuizViewOpen] = useState(false); // New state for quiz view
   const [quiz, setQuiz] = useState(null);
@@ -25,9 +25,11 @@ const CourseContentView = ({ selectedCourse, setView }) => {
   const handleViewLessonContent = async (lesson) => {
     try {
       // Fetch the lesson details from the API using the lessonId
-      const response = await axios.get(`http://localhost:3000/lesson/${lesson.id}`);
+      const response = await axios.get(
+        `http://localhost:3000/lesson/${lesson.id}`
+      );
       const lessonData = response.data;
-  
+      console.log(lessonData);
       // Set the fetched lesson data to view
       setLessonToView(lessonData);
       setIsQuizViewOpen(false); // Reset quiz view when switching lessons
@@ -36,12 +38,13 @@ const CourseContentView = ({ selectedCourse, setView }) => {
       // You might want to handle errors, e.g., show a message to the user
     }
   };
-  
 
-  const toggleEditQuizModal = () => setIsEditQuizModalOpen(!isEditQuizModalOpen);
+  const toggleEditQuizModal = () =>
+    setIsEditQuizModalOpen(!isEditQuizModalOpen);
 
   const handleTakeQuizClick = () => {
     setIsQuizViewOpen(true); // Open quiz view
+    setQuiz(lessonToView.quiz);
   };
 
   // Function to fetch the quiz for the selected lesson
@@ -50,59 +53,68 @@ const CourseContentView = ({ selectedCourse, setView }) => {
   //   setError(null);
   //   try {
   //     const response = await axios.get(`http://localhost:3000/quizzes?lessonId=${lessonId}`);
-  //     setQuiz(response.data); 
+  //     setQuiz(response.data);
   //   } catch (err) {
   //     setError(err.message);
   //   } finally {
   //     setLoadingQuiz(false);
   //   }
   // };
-  console.log(lessonToview)
+  // console.log(lessonToView);
 
-  setQuiz(lessonToview.quiz)
-  console.log(quiz)
+  // setQuiz(lessonToView.quiz);
+  // console.log(quiz);
 
   return (
     <div className="container mx-auto my-8">
-      <div className="container courseList-btn-container">
-        <button className="btn btn-primary action-btn" onClick={handleBackClick}>
-          <i className="bi bi-arrow-left"></i> Back to Course Details
-        </button>
-      </div>
-
       {!isQuizViewOpen ? ( // Show course content if quiz view is not open
-        <div className="course-and-topics-details-container row d-flex align-items-stretch">
-          <div className="card col-md-8 d-flex">
-            {lessonToview && (
-              <>
-                <h3>{lessonToview.title}</h3>
-                <p>{lessonToview.text}</p>
-              </>
-            )}
+        <>
+          <div className="container courseList-btn-container">
+            <button
+              className="btn btn-primary action-btn"
+              onClick={handleBackClick}
+            >
+              <i className="bi bi-arrow-left"></i> Back to Course Details
+            </button>
           </div>
-          <div className="course-topics-container card col-md-4 d-flex">
-            <ContentList
-              selectedCourse={selectedCourse}
-              handleViewLessonContent={handleViewLessonContent}
-              lessonToview={lessonToview}
-              setLessonToView={setLessonToView}
-            />
+          <div className="course-and-topics-details-container row d-flex align-items-stretch">
+            <div className="card col-md-8 d-flex">
+              {lessonToView && (
+                <>
+                  <h3>{lessonToView.title}</h3>
+                  <p>{lessonToView.text}</p>
+                </>
+              )}
+            </div>
+            <div className="course-topics-container card col-md-4 d-flex">
+              <ContentList
+                selectedCourse={selectedCourse}
+                handleViewLessonContent={handleViewLessonContent}
+                lessonToView={lessonToView}
+                setLessonToView={setLessonToView}
+              />
+            </div>
           </div>
-        </div>
+        </>
       ) : (
         // Render quiz view when "Take Lesson Quiz" is clicked
-        <QuizView quiz={quiz}  onBack={() => setIsQuizViewOpen(false)} />
+        <QuizView
+          quiz={quiz}
+          setQuiz={setQuiz}
+          onBack={() => setIsQuizViewOpen(false)}
+          lessonToView={lessonToView}
+        />
       )}
 
       <div className="container quiz-btn-container">
-        {lessonToview && !isQuizViewOpen && (
+        {lessonToView && !isQuizViewOpen && (
           <>
             <a
               href="#"
               className="btn btn-primary action-btn"
               onClick={(e) => {
                 e.preventDefault();
-                handleTakeQuizClick(); 
+                handleTakeQuizClick();
               }}
             >
               Take Lesson Quiz
@@ -125,7 +137,7 @@ const CourseContentView = ({ selectedCourse, setView }) => {
         <EditQuiz
           isEditModalOpen={isEditQuizModalOpen}
           toggleQuizModal={toggleEditQuizModal}
-          quizData={lessonToview.quiz} 
+          quizData={lessonToView.quiz}
         />
       )}
 

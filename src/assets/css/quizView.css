@@ -1,0 +1,11 @@
+.quiz-content-container {
+  text-align: left;
+  /* display: flex;
+  gap: 1.5rem; */
+}
+.btn-container {
+  text-align: left;
+}
+.quiz-question-list-item {
+  margin-bottom: 0.8rem;
+}
