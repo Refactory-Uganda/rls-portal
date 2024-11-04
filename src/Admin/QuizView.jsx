@@ -44,7 +44,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
   return (
     <div>
       <div className="btn-container">
-        <button onClick={onBack} className="btn btn-secondary mb-3">
+        <button onClick={onBack} className="btn action-btn mb-3">
           Back to Lesson
         </button>
         <h3>{quiz.title}</h3>
