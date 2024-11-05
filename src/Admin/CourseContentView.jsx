@@ -3,6 +3,7 @@ import api from "../services/api";
 import "../../src/assets/css/courseDetails.css";
 import TopicsList from "./TopicsList";
 import ContentList from "./ContentList";
+import DisplayRichText from "./displayrichtext";
 
 const CourseContentView = ({
   selectedCourse,
@@ -19,24 +20,6 @@ const CourseContentView = ({
     setView("details"); // Change the view to "list" to show the course list
   };
 
-  // const handleDelete = async () => {
-  //   if (!window.confirm("Are you sure you want to delete this course?")) {
-  //     return;
-  //   }
-
-  //   try {
-  //     console.log("Deleting course with ID:", selectedCourse.id);
-  //     await api.delete(`/courses/${selectedCourse.id}`); // Ensure this endpoint matches your NestJS controller
-  //     onDelete(selectedCourse.id); // Update UI after deletion
-  //   } catch (error) {
-  //     console.error("Error deleting course:", error);
-  //     alert("Failed to delete the course. Please try again.");
-  //   }
-  // };
-
-  // const handleEdit = () => {
-  //   setView("edit");
-  // };
   const handleViewLessonContent = (lesson) => {
     setLessonToView(lesson);
   };
@@ -56,10 +39,9 @@ const CourseContentView = ({
         {/* Content view window */}
         <div className="card col-md-8 d-flex">
           {lessonToview ? (
-            <>
-              <h3>{lessonToview.title}</h3>
-              <p>{lessonToview.text}</p>
-            </>
+            <div>
+              <DisplayRichText htmlContent={lessonToview.text} />
+            </div>
           ) : (
             ""
           )}

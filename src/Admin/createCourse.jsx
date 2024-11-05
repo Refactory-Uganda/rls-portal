@@ -10,9 +10,9 @@ import {
   faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { Button } from 'react-bootstrap';
-import AddQuiz from './AddQuiz';
-import RichTextEditor from './RichTextEditor'; 
+import { Button } from "react-bootstrap";
+import AddQuiz from "./AddQuiz";
+import RichTextEditor from "./RichTextEditor";
 const CreateCourse = () => {
   const [courseData, setCourseData] = useState({
     Title: "",
@@ -229,10 +229,8 @@ const CreateCourse = () => {
     ].filter(Boolean).length;
   };
 
-
   return (
     <div className="container py-1 pe-7">
-      
       <div className="row justify-content-center">
         <div className="col-lg-10">
           <div className="card shadow border-0">
@@ -416,9 +414,7 @@ const CreateCourse = () => {
                         <div className="d-flex justify-content-between align-items-center">
                           <h5 className="mb-0">{topic.Title}</h5>
                           <div className="btn-group">
-
-                            
-                          <button
+                            <button
                               type="button"
                               className="btn btn-primary secondary-action-btn"
                               onClick={() => {
@@ -481,10 +477,9 @@ const CreateCourse = () => {
                         <div className="lessons-section">
                           <div className="d-flex justify-content-between align-items-center mb-3">
                             <h6 className="mb-0">
-                              Lessons 
+                              Lessons
                               {/* ({topic.Lessons.length}) */}
                             </h6>
-                            
                           </div>
 
                           {showAddLessonIndex === topicIndex && (
@@ -509,17 +504,15 @@ const CreateCourse = () => {
                                   </label>
                                 </div>
                                 <div className="form-floating mb-3">
-
-                                <div>
-                                <label>Lesson Content</label>
-<RichTextEditor
-  value={newLesson.text} // Use newLesson.text instead of lessonContent
-  onChange={(value) => handleLessonInputChange('text', value)} // Ensure you're using the correct handler
-/>
-
-      </div>
-
-
+                                  <div>
+                                    <label>Lesson Content</label>
+                                    <RichTextEditor
+                                      value={newLesson.text} // Use newLesson.text instead of lessonContent
+                                      onChange={(value) =>
+                                        handleLessonInputChange("text", value)
+                                      } // Ensure you're using the correct handler
+                                    />
+                                  </div>
 
                                   {/* <textarea
                                     className="form-control custom-focus"
@@ -581,15 +574,18 @@ const CreateCourse = () => {
                                       {lesson.title}
                                     </h6>
                                     <div className="btn-group">
-                                    <Button style={{ backgroundColor: "#663367" }} onClick={toggleQuizModal}>
-        Add Quiz
-      </Button>
+                                      <Button
+                                        style={{ backgroundColor: "#663367" }}
+                                        onClick={toggleQuizModal}
+                                      >
+                                        Add Quiz
+                                      </Button>
 
-      <AddQuiz 
-        isQuizModalOpen={isQuizModalOpen} 
-        toggleQuizModal={toggleQuizModal} 
-        lessonTitle={lesson.title} 
-      />
+                                      <AddQuiz
+                                        isQuizModalOpen={isQuizModalOpen}
+                                        toggleQuizModal={toggleQuizModal}
+                                        lessonTitle={lesson.title}
+                                      />
                                       <button
                                         className="btn btn-purple me-2"
                                         onClick={() =>
