@@ -4,6 +4,8 @@ import "../../src/assets/css/courseDetails.css";
 import TopicsList from "./TopicsList";
 import ContentList from "./ContentList";
 import DisplayRichText from "./displayrichtext";
+import RichTextEditor from "./RichTextEditor";
+
 
 const CourseContentView = ({
   selectedCourse,
@@ -20,6 +22,7 @@ const CourseContentView = ({
     setView("details"); // Change the view to "list" to show the course list
   };
 
+  
   const handleViewLessonContent = (lesson) => {
     setLessonToView(lesson);
   };
