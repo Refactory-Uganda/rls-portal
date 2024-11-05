@@ -90,7 +90,7 @@ const Courses = () => {
       )}
       {view === "contentView" && (
         <CourseContentView
-        setView={setView}
+          setView={setView}
           selectedCourse={selectedCourse}
           setSelectedCourse={setSelectedCourse}
           onCreateSuccess={handleCreateSuccess} // Handle successful course creation

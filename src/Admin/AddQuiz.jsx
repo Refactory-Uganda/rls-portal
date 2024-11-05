@@ -69,10 +69,14 @@ function AddQuiz({ isQuizModalOpen, toggleQuizModal, lessonTitle, lessonId }) {
         console.log('Question data:', questionData);
         const questionResponse = await axios.post('http://localhost:3000/questions', questionData);
         console.log('Question response:', questionResponse.data);
-        const questionId = questionResponse.data.id;
+        const questionId = questionResponse.data.Question.id;
+        console.log(questionResponse.data.Question.id);
+
+
 
         // Create options
         for (const [optIndex, option] of question.options.entries()) {
+          console.log(questionId);
           const optionData = {
             optionText: option.optionText,
             iscorrect: option.iscorrect,

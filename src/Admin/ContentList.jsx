@@ -3,8 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Toast } from "react-bootstrap";
 import "../../src/assets/css/ContentList.css";
 import api from "../services/api";
-import AddQuiz from './AddQuiz';
-
+import AddQuiz from "./AddQuiz";
 
 const ContentList = ({
   selectedCourse,
@@ -21,8 +20,6 @@ const ContentList = ({
   const [showAddLessonModal, setShowAddLessonModal] = useState(false);
   const [isQuizModalOpen, setQuizModalOpen] = useState(false);
 
- 
-  
   const toggleQuizModal = () => {
     setQuizModalOpen(!isQuizModalOpen);
   };
@@ -184,27 +181,27 @@ const ContentList = ({
                 {topic.Title}
               </button>
               <span>
-              <button
-                className="btn btn-purple me-2"
-                onClick={() => handleAddLessonClick(topic)}
-                title="Add Lesson"
-              >
-                <i className="bi bi-plus-square-fill"></i>
-              </button>
-              <button
-                className="btn btn-purple me-2"
-                onClick={() => handleEditTopic(topic)}
-                title="Edit Topic"
-              >
-                <i className="fas fa-edit"></i>
-              </button>
-              <button
-                className="btn btn-purple me-2"
-                onClick={() => handleDeleteTopic(topic.id)}
-                title="Delete Topic"
-              >
-                <i className="fas fa-trash"></i>
-              </button>
+                <button
+                  className="btn btn-purple me-2"
+                  onClick={() => handleAddLessonClick(topic)}
+                  title="Add Lesson"
+                >
+                  <i className="bi bi-plus-square-fill"></i>
+                </button>
+                <button
+                  className="btn btn-purple me-2"
+                  onClick={() => handleEditTopic(topic)}
+                  title="Edit Topic"
+                >
+                  <i className="fas fa-edit"></i>
+                </button>
+                <button
+                  className="btn btn-purple me-2"
+                  onClick={() => handleDeleteTopic(topic.id)}
+                  title="Delete Topic"
+                >
+                  <i className="fas fa-trash"></i>
+                </button>
               </span>
             </h2>
           </div>
@@ -227,17 +224,16 @@ const ContentList = ({
                         className="btn me-2"
                         // onClick={() => handleAddLessonClick(topic)}
                         onClick={toggleQuizModal}
-                        
                         title="Add Quiz"
                       >
                         <i className="bi bi-plus-square-fill"></i>
                       </button>
-                      <AddQuiz 
-        isQuizModalOpen={isQuizModalOpen} 
-        toggleQuizModal={toggleQuizModal} 
-        lessonTitle={lesson.title} 
-        lessonId={lesson.id}
-      />
+                      <AddQuiz
+                        isQuizModalOpen={isQuizModalOpen}
+                        toggleQuizModal={toggleQuizModal}
+                        lessonTitle={lesson.title}
+                        lessonId={lesson.id}
+                      />
                       <button
                         className="btn btn-green me-2"
                         onClick={() => handleEditLesson(lesson)}
@@ -366,7 +362,7 @@ const ContentList = ({
           </form>
         </Modal.Body>
       </Modal>
-      
+
       {/* Success Toast */}
       <Toast
         onClose={() => setShowSuccessToast(false)}
