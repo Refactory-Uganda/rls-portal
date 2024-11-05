@@ -4,7 +4,6 @@ import { Modal, Toast } from "react-bootstrap";
 import "../../src/assets/css/ContentList.css";
 import api from "../services/api";
 import AddQuiz from './AddQuiz';
-import RichTextEditor from "./RichTextEditor";
 
 
 const ContentList = ({
@@ -354,12 +353,12 @@ const ContentList = ({
             </div>
             <div className="mb-3">
               <label>Text</label>
-              <RichTextEditor
+              <textarea
                 className="form-control"
                 name="text"
                 defaultValue={currentLesson?.text || ""}
                 required
-              />
+              ></textarea>
             </div>
             <button type="submit" className="btn action-btn">
               Save Changes
