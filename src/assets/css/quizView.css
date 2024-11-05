@@ -1,11 +1,35 @@
 .quiz-content-container {
-  text-align: left;
-  /* display: flex;
-  gap: 1.5rem; */
+  margin-top: 20px;
 }
-.btn-container {
-  text-align: left;
-}
+
 .quiz-question-list-item {
-  margin-bottom: 0.8rem;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.question-input,
+.option-input {
+  width: 100%;
+  margin: 5px 0;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.option-container {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  margin: 0 5px;
 }
