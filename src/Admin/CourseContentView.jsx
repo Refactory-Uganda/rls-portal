@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ContentList from "./ContentList";
+
+import DisplayRichText from "./displayrichtext";
+import RichTextEditor from "./RichTextEditor";
+
 import EditQuiz from "./EditQuiz";
 import QuizView from "./QuizView"; // New component to display the quiz
+
 
 const CourseContentView = ({ selectedCourse, setView }) => {
   const [lessonToView, setLessonToView] = useState(null);
@@ -15,6 +20,7 @@ const CourseContentView = ({ selectedCourse, setView }) => {
   const handleBackClick = () => {
     setView("details");
   };
+
 
   // const handleViewLessonContent = (lesson) => {
   //   setLessonToView(lesson);
@@ -64,6 +70,7 @@ const CourseContentView = ({ selectedCourse, setView }) => {
 
   // setQuiz(lessonToView.quiz);
   // console.log(quiz);
+
 
   return (
     <div className="container mx-auto my-8">
@@ -133,6 +140,19 @@ const CourseContentView = ({ selectedCourse, setView }) => {
         )}
       </div>
 
+
+      <div className="course-and-topics-details-container row d-flex align-items-stretch">
+        {/* Content view window */}
+        <div className="card col-md-8 d-flex">
+          {lessonToview ? (
+            <div>
+              <DisplayRichText htmlContent={lessonToview.text} />
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+
       {isEditQuizModalOpen && (
         <EditQuiz
           isEditModalOpen={isEditQuizModalOpen}
@@ -140,6 +160,7 @@ const CourseContentView = ({ selectedCourse, setView }) => {
           quizData={lessonToView.quiz}
         />
       )}
+
 
       {loadingQuiz && <p>Loading quiz...</p>}
       {error && <p>Error fetching quiz: {error}</p>}
