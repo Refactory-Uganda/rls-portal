@@ -5,17 +5,14 @@ import {
   faTrash,
   faPlus,
   faMinus,
-  faChevronDown,
-  faChevronUp,
   faBook,
   faList,
   faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { Modal, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import AddQuiz from './AddQuiz';
-
-
+import RichTextEditor from './RichTextEditor'; 
 const CreateCourse = () => {
   const [courseData, setCourseData] = useState({
     Title: "",
@@ -23,12 +20,11 @@ const CreateCourse = () => {
     Duration: "",
   });
 
-  // function Lesson({ lesson }) {
-    const [isQuizModalOpen, setQuizModalOpen] = useState(false);
-  
-    const toggleQuizModal = () => {
-      setQuizModalOpen(!isQuizModalOpen);
-    };
+  const [isQuizModalOpen, setQuizModalOpen] = useState(false);
+
+  const toggleQuizModal = () => {
+    setQuizModalOpen(!isQuizModalOpen);
+  };
 
   const [topics, setTopics] = useState([]);
   const [newTopic, setNewTopic] = useState({
@@ -39,7 +35,7 @@ const CreateCourse = () => {
 
   const [newLesson, setNewLesson] = useState({
     title: "",
-    text: "",
+    text: "", // This will store the lesson content in HTML format
   });
 
   const [showAddTopic, setShowAddTopic] = useState(false);
@@ -58,8 +54,8 @@ const CreateCourse = () => {
   });
 
   // Event Handlers
-  const handleLessonInputChange = (e) => {
-    const { name, value } = e.target;
+  const handleLessonInputChange = (name, value) => {
+    // Update newLesson content directly using Quill's HTML value
     setNewLesson((prev) => ({
       ...prev,
       [name]: value,
@@ -232,6 +228,7 @@ const CreateCourse = () => {
       topics.every((topic) => topic.Lessons.length > 0),
     ].filter(Boolean).length;
   };
+
 
   return (
     <div className="container py-1 pe-7">
@@ -512,7 +509,19 @@ const CreateCourse = () => {
                                   </label>
                                 </div>
                                 <div className="form-floating mb-3">
-                                  <textarea
+
+                                <div>
+                                <label>Lesson Content</label>
+<RichTextEditor
+  value={newLesson.text} // Use newLesson.text instead of lessonContent
+  onChange={(value) => handleLessonInputChange('text', value)} // Ensure you're using the correct handler
+/>
+
+      </div>
+
+
+
+                                  {/* <textarea
                                     className="form-control custom-focus"
                                     id="lessontext"
                                     value={newLesson.text || ""}
@@ -527,7 +536,7 @@ const CreateCourse = () => {
                                   />
                                   <label htmlFor="lessontext">
                                     Lesson Content
-                                  </label>
+                                  </label> */}
                                 </div>
                                 <button
                                   type="button"
