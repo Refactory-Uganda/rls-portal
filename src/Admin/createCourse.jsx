@@ -505,7 +505,7 @@ const CreateCourse = () => {
                                 </div>
                                 <div className="form-floating mb-3">
                                   <div>
-                                    <label>Lesson Content</label>
+                                    <label style={{ textAlign: "left", display: "block"}}>Lesson Content</label>
                                     <RichTextEditor
                                       value={newLesson.text} // Use newLesson.text instead of lessonContent
                                       onChange={(value) =>

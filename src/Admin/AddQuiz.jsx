@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form, Alert, Container, Row, Col, Card } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faPlus, 
+  faSave, 
+  faTimes, 
+  faTrash, 
+  faQuestionCircle,
+  faInfoCircle,
+  faCheckCircle,
+  faExclamationTriangle
+} from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 function AddQuiz({ isQuizModalOpen, toggleQuizModal, lessonTitle, lessonId }) {
@@ -42,7 +53,6 @@ function AddQuiz({ isQuizModalOpen, toggleQuizModal, lessonTitle, lessonId }) {
         setIsSubmitting(false);
         return;
       }
-      console.log('Creating quiz with lessonId:', lessonId);
 
       // Create quiz
       const quizData = {
@@ -50,11 +60,8 @@ function AddQuiz({ isQuizModalOpen, toggleQuizModal, lessonTitle, lessonId }) {
         description: quizDescription || ' ',
         lessonId
       };
-      console.log('Quiz data:', quizData);
       const quizResponse = await axios.post('http://localhost:3000/quizzes', quizData);
-      console.log('Quiz response:', quizResponse.data);
       const quizId = quizResponse.data.id;
-      
 
       // Create questions and options
       for (const [index, question] of questions.entries()) {
@@ -66,26 +73,18 @@ function AddQuiz({ isQuizModalOpen, toggleQuizModal, lessonTitle, lessonId }) {
           explanation: question.explanation || ' ',
           quizId: quizId
         };
-        console.log('Question data:', questionData);
         const questionResponse = await axios.post('http://localhost:3000/questions', questionData);
-        console.log('Question response:', questionResponse.data);
         const questionId = questionResponse.data.Question.id;
-        console.log(questionResponse.data.Question.id);
-
-
 
         // Create options
         for (const [optIndex, option] of question.options.entries()) {
-          console.log(questionId);
           const optionData = {
             optionText: option.optionText,
             iscorrect: option.iscorrect,
             order: optIndex,
             questionId: questionId
           };
-          console.log('Option data:', optionData);
-          const optionResponse = await axios.post('http://localhost:3000/options', optionData);
-          console.log('Option response:', optionResponse.data);
+          await axios.post('http://localhost:3000/options', optionData);
         }
       }
       toggleQuizModal();
@@ -145,125 +144,221 @@ function AddQuiz({ isQuizModalOpen, toggleQuizModal, lessonTitle, lessonId }) {
     setQuestions(updatedQuestions);
   };
 
+  const handleRemoveQuestion = (indexToRemove) => {
+    if (questions.length > 1) {
+      setQuestions(questions.filter((_, index) => index !== indexToRemove));
+    }
+  };
+
+  const handleRemoveOption = (questionIndex, optionIndex) => {
+    if (questions[questionIndex].options.length > 1) {
+      const updatedQuestions = [...questions];
+      updatedQuestions[questionIndex].options = updatedQuestions[questionIndex].options
+        .filter((_, index) => index !== optionIndex);
+      setQuestions(updatedQuestions);
+    }
+  };
+
   return (
-    <Modal show={isQuizModalOpen} onHide={toggleQuizModal} size="lg">
-      <Modal.Header closeButton>
-        <Modal.Title>Add Quiz to {lessonTitle}</Modal.Title>
+    <Modal show={isQuizModalOpen} onHide={toggleQuizModal} size="lg" className="quiz-modal">
+      <Modal.Header closeButton className="text-white"  style={{ backgroundColor: '#663367' }}>
+        <Modal.Title>
+          Add Quiz to {lessonTitle}
+        </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="bg-light">
         {formErrors.general && (
-          <Alert variant="danger">
-            <div><strong>Error:</strong></div>
-            <div>{formErrors.general}</div>
+          <Alert variant="danger" className="d-flex align-items-center">
+            <div>
+              <strong>Error:</strong>
+              <div>{formErrors.general}</div>
+            </div>
           </Alert>
         )}
         <Container>
-          <Form>
-            <Form.Group className="mb-3">
-              <Form.Label>Quiz Title</Form.Label>
-              <Form.Control
-                type="text"
-                value={quizTitle}
-                onChange={(e) => setQuizTitle(e.target.value)}
-                placeholder="Enter quiz title"
-                isInvalid={!!formErrors.quizTitle}
-              />
-              <Form.Control.Feedback type="invalid">
-                {formErrors.quizTitle}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Quiz Description</Form.Label>
-              <Form.Control
-                type="text"
-                value={quizDescription}
-                onChange={(e) => setQuizDescription(e.target.value)}
-                placeholder="Enter quiz description"
-              />
-            </Form.Group>
+          <Form className="py-3">
+            <Card className="shadow-sm mb-4">
+              <Card.Body>
+                <Form.Group className="mb-3">
+                  <Form.Label className="fw">
+                    Quiz Title
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={quizTitle}
+                    onChange={(e) => setQuizTitle(e.target.value)}
+                    placeholder="Enter quiz title"
+                    isInvalid={!!formErrors.quizTitle}
+                    className="form-control-lg"
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {formErrors.quizTitle}
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label className="fw">
+                    Quiz Description
+                  </Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    value={quizDescription}
+                    onChange={(e) => setQuizDescription(e.target.value)}
+                    placeholder="Enter quiz description"
+                    className="form-control-lg"
+                  />
+                </Form.Group>
+              </Card.Body>
+            </Card>
+
             {questions.map((question, qIndex) => (
-              <Card key={qIndex} className="mb-3">
+              <Card key={qIndex} className="shadow-sm mb-4 question-card">
+                <Card.Header className="text-white d-flex justify-content-between align-items-center" style={{ backgroundColor: '#38BFC3' }}>
+                  <h5 className="mb-0">Question {qIndex + 1}</h5>
+                  {questions.length > 1 && (
+                    <Button
+                      variant="outline-light"
+                      size="sm"
+                      onClick={() => handleRemoveQuestion(qIndex)}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </Button>
+                  )}
+                </Card.Header>
                 <Card.Body>
                   <Form.Group className="mb-3">
-                    <Form.Label>Question {qIndex + 1}</Form.Label>
                     <Form.Control
                       type="text"
                       value={question.text}
                       onChange={(e) => handleQuestionChange(e, qIndex, 'text')}
                       placeholder="Enter question text"
                       isInvalid={!!formErrors[`question-${qIndex}`]}
+                      className="form-control-lg mb-2"
                     />
                     <Form.Control.Feedback type="invalid">
                       {formErrors[`question-${qIndex}`]}
                     </Form.Control.Feedback>
                   </Form.Group>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Answer Explanation</Form.Label>
+                  <Form.Group className="mb-4">
+                    <Form.Label className="text-muted">
+                      Answer Explanation
+                    </Form.Label>
                     <Form.Control
-                      type="text"
+                      as="textarea"
+                      rows={2}
                       value={question.explanation}
                       onChange={(e) => handleQuestionChange(e, qIndex, 'explanation')}
                       placeholder="Enter explanation for the correct answer"
                     />
                   </Form.Group>
-                  {question.options.map((option, oIndex) => (
-                    <Row key={oIndex} className="mb-2">
-                      <Col>
-                        <Form.Control
-                          type="text"
-                          value={option.optionText}
-                          onChange={(e) => handleOptionChange(e, qIndex, oIndex)}
-                          placeholder={`Option ${oIndex + 1}`}
-                          isInvalid={!!formErrors[`question-${qIndex}-options`]}
-                        />
-                      </Col>
-                      <Col xs="auto">
-                        <Form.Check
-                          type="radio"
-                          name={`correct-answer-${qIndex}`}
-                          label="Correct"
-                          checked={option.iscorrect}
-                          onChange={() => handleCorrectAnswerChange(qIndex, oIndex)}
-                        />
-                      </Col>
-                    </Row>
-                  ))}
-                  {question.options.length < 4 && (
-                    <Button
-                      variant="link"
-                      onClick={() => handleAddOption(qIndex)}
-                      className="mt-2"
-                    >
-                      + Add Option
-                    </Button>
-                  )}
-                  {!!formErrors[`question-${qIndex}-options`] && (
-                    <div className="text-danger mt-2">
-                      {formErrors[`question-${qIndex}-options`]}
+                  
+                  <div className="options-container p-3 bg-light rounded">
+                    <h6 className="mb-3">Answer Options</h6>
+                    {question.options.map((option, oIndex) => (
+                      <Row key={oIndex} className="mb-3 align-items-center">
+                        <Col xs={1} className="text-center">
+                          {String.fromCharCode(65 + oIndex)}.
+                        </Col>
+                        <Col>
+                          <Form.Control
+                            type="text"
+                            value={option.optionText}
+                            onChange={(e) => handleOptionChange(e, qIndex, oIndex)}
+                            placeholder={`Option ${oIndex + 1}`}
+                            isInvalid={!!formErrors[`question-${qIndex}-options`]}
+                          />
+                        </Col>
+                        <Col xs={3} className="d-flex align-items-center">
+                          <Form.Check
+                            type="radio"
+                            name={`correct-answer-${qIndex}`}
+                            className="custom-radio"
+                            label={
+                              <span className="ms-2">
+                                <FontAwesomeIcon 
+                                  icon={faCheckCircle} 
+                                  style={{ color: option.iscorrect ? "#663367" : "" }}
+                                /> Correct
+                              </span>
+                            }
+                            checked={option.iscorrect}
+                            onChange={() => handleCorrectAnswerChange(qIndex, oIndex)}
+                          />
+                        </Col>
+                        <Col xs={1}>
+                          {question.options.length > 1 && (
+                           
+                             <button
+                             className="btn secondary-action-btn"
+                             onClick={() => handleRemoveOption(qIndex, oIndex)}
+                             title="Delete option"
+                             onMouseEnter={(e) =>
+                               (e.currentTarget.style.backgroundColor = "red")
+                             }
+                             onMouseLeave={(e) =>
+                               (e.currentTarget.style.backgroundColor = "transparent")
+                             }
+                           >
+                             <i className="fas fa-trash"></i>
+                           </button>
+                          )}
+                        </Col>
+                      </Row>
+                    ))}
+                    {question.options.length < 4 && (
+                      <div className="d-flex justify-content-end mt-2">
+                      
+                      <button
+                className="btn btn-primary secondary-action-btn"
+                onClick={() => handleAddOption(qIndex)}
+              >
+                Add Option
+              </button>
                     </div>
-                  )}
+                    )}
+                    {!!formErrors[`question-${qIndex}-options`] && (
+                      <div className="text-danger mt-2">
+                        <FontAwesomeIcon icon={faExclamationTriangle} className="me-2" />
+                        {formErrors[`question-${qIndex}-options`]}
+                      </div>
+                    )}
+                  </div>
                 </Card.Body>
               </Card>
             ))}
+            
             {questions.length < 10 && (
-              <Button variant="link" onClick={handleAddQuestion}>
-                + Add Question
-              </Button>
+              <div className="d-flex justify-content-end mt-2">
+             
+              <button
+                className="btn btn-primary secondary-action-btn"
+                onClick={handleAddQuestion}
+              >
+                Add New Question
+              </button>
+              </div>
+              
             )}
           </Form>
         </Container>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={toggleQuizModal}>
-          Cancel
-        </Button>
-        <Button 
-          variant="primary" 
-          onClick={saveQuiz}
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? 'Saving...' : 'Save Quiz'}
-        </Button>
+      <Modal.Footer className="border-top">
+        
+        <button
+                className="btn btn-primary secondary-action-btn"
+                onClick={toggleQuizModal}
+              >
+                cancel
+              </button>
+
+        
+        <button
+                className="btn btn-primary action-btn"
+                onClick={saveQuiz}
+              >
+            
+                {isSubmitting ? 'Saving...' : 'Save Quiz'}
+              </button>
       </Modal.Footer>
     </Modal>
   );
