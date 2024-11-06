@@ -11,9 +11,9 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
 
   const menuItems = [
     { name: "Dashboard", key: "dashboard", href: "#", iconClass: "fas fa-tachometer-alt" },
-    { name: "Courses", key: "courses", href: "#", iconClass: "fas fa-book", active: true },
+    { name: "Modules", key: "modules", href: "#", iconClass: "fas fa-book", active: true },
     { name: "Learners", key: "learners", href: "#", iconClass: "fas fa-user-graduate" },
-    // { name: "Facilitators", key: "facilitators", href: "#", iconClass: "fas fa-chalkboard-teacher" },
+    { name: "Resources", key: "resources", href: "#", iconClass: "fas fa-chalkboard-teacher" },
     // { name: "Create Course", key: "createCourse", href: "#", iconClass: "fas fa-plus-circle" },
   ];
 
