@@ -1,0 +1,55 @@
+.facilitator-dashboard-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%; /* To make it take up the entire content space */
+  }
+  
+  .overview-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e0e0e0;
+    border: 2px solid #663367;
+    border-radius: 8px;
+    height: 150px;
+  }
+  
+  .modules-section {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    padding-top: 30px;
+  }
+  
+  .module-card {
+    background-color: white;
+    border: 2px solid black;
+    color: black;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    flex: 1;
+    min-width: 100px;
+  }
+  
+  .progress-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    gap: 20px;
+    padding-top: 35px;
+  }
+  
+  .progress-card {
+    background-color: rgb(56, 191, 195);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
