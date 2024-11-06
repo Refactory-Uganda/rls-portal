@@ -116,3 +116,7 @@ a {
 }
 
 
+.custom-radio .form-check-input:checked {
+  background-color: #38BFC3;
+  border-color: #38BFC3;
+}
