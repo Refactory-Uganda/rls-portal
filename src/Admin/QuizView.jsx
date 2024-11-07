@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import "../assets/css/quizView.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import api from "../services/api";
 
 const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editing, setEditing] = useState(false);
   const [editedQuiz, setEditedQuiz] = useState({ ...quiz });
+  const [userAnswers, setUserAnswers] = useState({}); // Track user answers
+  const [score, setScore] = useState(null); // Track user score after submission
 
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/quizzes/${lessonToView.quiz.id}`
-        );
+        const response = await api.get(`/quizzes/${lessonToView.quiz.id}`);
         setQuiz(response.data);
         setEditedQuiz(response.data);
       } catch (err) {
@@ -35,7 +35,8 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
     if (name === "questionText") {
       updatedQuiz.questions[questionIndex].text = value;
     } else if (name === "optionText") {
-      updatedQuiz.questions[questionIndex].Option[optionIndex].optionText = value;
+      updatedQuiz.questions[questionIndex].Option[optionIndex].optionText =
+        value;
     }
 
     setEditedQuiz(updatedQuiz);
@@ -43,15 +44,41 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
 
   const handleEditSubmit = (e) => {
     e.preventDefault();
-    // Add code here to submit editedQuiz to your backend if needed
+    // Submit editedQuiz to the backend if needed
     setQuiz(editedQuiz);
-    setEditing(false); // Close the editing mode
+    setEditing(false); // Close editing mode
   };
 
   const handleDeleteQuestion = (questionIndex) => {
     const updatedQuiz = { ...editedQuiz };
     updatedQuiz.questions.splice(questionIndex, 1);
     setEditedQuiz(updatedQuiz);
+  };
+
+  const handleOptionChange = (questionId, optionId) => {
+    setUserAnswers({
+      ...userAnswers,
+      [questionId]: optionId,
+    });
+  };
+
+  const handleQuizSubmit = (e) => {
+    e.preventDefault();
+    let calculatedScore = 0;
+
+    quiz.questions.forEach((question) => {
+      const userAnswer = userAnswers[question.id];
+      const correctOption = question.Option.find(
+        (opt) => opt.iscorrect === true
+      );
+
+      if (userAnswer === correctOption.id) {
+        calculatedScore += question.points || 1; // Add points or default to 1
+      }
+    });
+
+    setScore(calculatedScore);
+    console.log(calculatedScore);
   };
 
   if (loading) return <p>Loading quiz...</p>;
@@ -75,7 +102,10 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
           Back to Lesson
         </button>
         <h3>{quiz.title}</h3>
-        <button onClick={() => setEditing(!editing)} className="btn btn-primary mb-3">
+        <button
+          onClick={() => setEditing(!editing)}
+          className="btn btn-primary secondary-action-btn mb-3"
+        >
           <FontAwesomeIcon icon={faEdit} /> Edit Quiz
         </button>
       </div>
@@ -92,7 +122,11 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
                   onChange={(e) => handleEditChange(e, qIndex)}
                   className="question-input"
                 />
-                <button type="button" onClick={() => handleDeleteQuestion(qIndex)} className="btn btn-danger">
+                <button
+                  type="button"
+                  onClick={() => handleDeleteQuestion(qIndex)}
+                  className="btn btn-danger"
+                >
                   <FontAwesomeIcon icon={faTrash} /> Delete
                 </button>
                 {question.Option.map((option, oIndex) => (
@@ -108,22 +142,43 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
                 ))}
               </div>
             ))}
-            <button type="submit" className="btn btn-success">Save Changes</button>
+            <button type="submit" className="btn btn-success">
+              Save Changes
+            </button>
           </form>
         ) : (
-          quiz.questions.map((question, index) => (
-            <div key={question.id} className="quiz-question-list-item">
-              <h5>{`Q${index + 1}: ${question.text}`}</h5>
-              {question.Option.map((option) => (
-                <div key={option.id} className="option-container">
-                  <input type="radio" name={`question-${index}`} />
-                  <label>{option.optionText}</label>
-                </div>
-              ))}
+          <form onSubmit={handleQuizSubmit}>
+            {quiz.questions.map((question, index) => (
+              <div key={question.id} className="quiz-question-list-item">
+                <h5>{`Q${index + 1}: ${question.text}`}</h5>
+                {question.Option.map((option) => (
+                  <div key={option.id} className="option-container">
+                    <input
+                      type="radio"
+                      name={`question-${index}`}
+                      onChange={() =>
+                        handleOptionChange(question.id, option.id)
+                      }
+                      checked={userAnswers[question.id] === option.id}
+                    />
+                    <label>{` ${option.optionText}`}</label>
+                  </div>
+                ))}
+              </div>
+            ))}
+            <div>
+              <button type="submit" className="btn btn-primary action-btn mt-3">
+                Submit Quiz
+              </button>
             </div>
-          ))
+          </form>
         )}
       </div>
+      {score !== null && (
+        <div className="score-display">
+          <p>Your Score: {score}</p>
+        </div>
+      )}
     </div>
   );
 };

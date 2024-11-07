@@ -96,7 +96,7 @@ const CourseContentView = ({ selectedCourse, setView }) => {
             </a>
             <a
               href="#"
-              className="btn btn-primary action-btn"
+              className="btn btn-primary secondary-action-btn action-btn"
               onClick={(e) => {
                 e.preventDefault();
                 toggleEditQuizModal();
