@@ -48,7 +48,7 @@ function LoginForm(props) {
           textAlign: "center",
         }}
       >
-        Signing in
+        Logging in
       </LoadingButton>
     ),
     false: (

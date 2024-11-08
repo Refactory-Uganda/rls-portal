@@ -1,20 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../src/assets/css/sidebar.css';
 
 const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(window.innerWidth < 768); // Default to collapsed on smaller screens
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
   };
+
+  // Handle screen resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsCollapsed(window.innerWidth < 768); // Collapse if the width is smaller than 768px
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize); // Cleanup event listener
+  }, []);
 
   const menuItems = [
     { name: "Dashboard", key: "dashboard", href: "#", iconClass: "fas fa-tachometer-alt" },
     { name: "Courses", key: "courses", href: "#", iconClass: "fas fa-book", active: true },
     { name: "Learners", key: "learners", href: "#", iconClass: "fas fa-user-graduate" },
     { name: "Facilitators", key: "facilitators", href: "#", iconClass: "fas fa-chalkboard-teacher" },
-    // { name: "Create Course", key: "createCourse", href: "#", iconClass: "fas fa-plus-circle" },
   ];
 
   return (
