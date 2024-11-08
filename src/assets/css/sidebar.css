@@ -2,6 +2,7 @@
     position: fixed;
     z-index: 1000;
     height: 88%;
+    transition: width 0.3s ease; /* Smooth transition for resizing */
 }
 
 .sidebar-btn {
@@ -14,7 +15,7 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     text-decoration: none;
     transition: background-color 0.3s ease;
-    border-radius: 0; /* Removes extra rounded borders */
+    border-radius: 0;
 }
 
 .sidebar-btn:hover {
@@ -41,4 +42,15 @@
 .sidebar .sidebar-nav a span {
     display: inline-block;
     transition: opacity 0.3s ease;
+}
+
+/* Media query to ensure the sidebar is compressed on smaller screens */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 80px; /* Sidebar compressed on small screens */
+  }
+
+  .sidebar-btn span {
+    display: none; /* Hide text when collapsed */
+  }
 }
