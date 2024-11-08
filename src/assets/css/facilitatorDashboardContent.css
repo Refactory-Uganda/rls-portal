@@ -1,55 +1,102 @@
 .facilitator-dashboard-content {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    height: 100%; /* To make it take up the entire content space */
-  }
-  
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+}
+
+/* Overview Section */
+.overview-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e0e0e0;
+  border: 2px solid #663367;
+  border-radius: 8px;
+  height: 150px;
+}
+
+/* Modules Section */
+.modules-section {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+  gap: 20px;
+  padding-top: 30px;
+  justify-content: space-around;
+}
+
+.module-card {
+  background-color: white;
+  border: 2px solid black;
+  color: black;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  flex: 1;
+  min-width: 100px;
+  max-width: 200px; /* Limits the card width on larger screens */
+}
+
+/* Progress Section */
+.progress-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns for larger screens */
+  gap: 20px;
+  padding-top: 35px;
+}
+
+.progress-card {
+  background-color: rgb(56, 191, 195);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .overview-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #e0e0e0;
-    border: 2px solid #663367;
-    border-radius: 8px;
-    height: 150px;
+      height: 120px; /* Adjust the height on smaller screens */
   }
-  
+
   .modules-section {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
-    padding-top: 30px;
+      gap: 10px;
+      justify-content: center;
   }
-  
+
   .module-card {
-    background-color: white;
-    border: 2px solid black;
-    color: black;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    flex: 1;
-    min-width: 100px;
+      min-width: 80px;
+      padding: 10px;
   }
-  
+
   .progress-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Two columns */
-    gap: 20px;
-    padding-top: 35px;
+      grid-template-columns: 1fr; /* Stacks progress cards on smaller screens */
   }
-  
+}
+
+@media (max-width: 480px) {
+  .facilitator-dashboard-content {
+      padding: 10px;
+  }
+
+  .overview-section {
+      font-size: 0.9rem;
+      padding: 10px;
+  }
+
+  .module-card {
+      padding: 8px;
+      font-size: 0.9rem;
+  }
+
   .progress-card {
-    background-color: rgb(56, 191, 195);
-    color: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
+      flex-direction: column; /* Stacks text and icon vertically */
+      font-size: 0.9rem;
+      padding: 15px;
   }
-  
+}
