@@ -1,6 +1,6 @@
 .topic-card {
   padding: 0;
-  background-color: #663367;
+  background-color: rgb(204, 203, 203);
 
   text-decoration: none;
 }
@@ -18,7 +18,7 @@
   padding: 0;
 }
 .lesson-list-item {
-  background-color: #38bfc3;
+  background-color: white;
   border-radius: 0;
   display: flex;
   justify-content: space-between;

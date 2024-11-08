@@ -5,17 +5,14 @@ import {
   faTrash,
   faPlus,
   faMinus,
-  faChevronDown,
-  faChevronUp,
   faBook,
   faList,
   faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { Modal, Button } from 'react-bootstrap';
-import AddQuiz from './AddQuiz';
-
-
+import { Button } from "react-bootstrap";
+import AddQuiz from "./AddQuiz";
+import RichTextEditor from "./RichTextEditor";
 const CreateCourse = () => {
   const [courseData, setCourseData] = useState({
     Title: "",
@@ -23,12 +20,11 @@ const CreateCourse = () => {
     Duration: "",
   });
 
-  // function Lesson({ lesson }) {
-    const [isQuizModalOpen, setQuizModalOpen] = useState(false);
-  
-    const toggleQuizModal = () => {
-      setQuizModalOpen(!isQuizModalOpen);
-    };
+  const [isQuizModalOpen, setQuizModalOpen] = useState(false);
+
+  const toggleQuizModal = () => {
+    setQuizModalOpen(!isQuizModalOpen);
+  };
 
   const [topics, setTopics] = useState([]);
   const [newTopic, setNewTopic] = useState({
@@ -39,7 +35,7 @@ const CreateCourse = () => {
 
   const [newLesson, setNewLesson] = useState({
     title: "",
-    text: "",
+    text: "", // This will store the lesson content in HTML format
   });
 
   const [showAddTopic, setShowAddTopic] = useState(false);
@@ -58,8 +54,8 @@ const CreateCourse = () => {
   });
 
   // Event Handlers
-  const handleLessonInputChange = (e) => {
-    const { name, value } = e.target;
+  const handleLessonInputChange = (name, value) => {
+    // Update newLesson content directly using Quill's HTML value
     setNewLesson((prev) => ({
       ...prev,
       [name]: value,
@@ -235,7 +231,6 @@ const CreateCourse = () => {
 
   return (
     <div className="container py-1 pe-7">
-      
       <div className="row justify-content-center">
         <div className="col-lg-10">
           <div className="card shadow border-0">
@@ -419,9 +414,7 @@ const CreateCourse = () => {
                         <div className="d-flex justify-content-between align-items-center">
                           <h5 className="mb-0">{topic.Title}</h5>
                           <div className="btn-group">
-
-                            
-                          <button
+                            <button
                               type="button"
                               className="btn btn-primary secondary-action-btn"
                               onClick={() => {
@@ -484,10 +477,9 @@ const CreateCourse = () => {
                         <div className="lessons-section">
                           <div className="d-flex justify-content-between align-items-center mb-3">
                             <h6 className="mb-0">
-                              Lessons 
+                              Lessons
                               {/* ({topic.Lessons.length}) */}
                             </h6>
-                            
                           </div>
 
                           {showAddLessonIndex === topicIndex && (
@@ -512,7 +504,17 @@ const CreateCourse = () => {
                                   </label>
                                 </div>
                                 <div className="form-floating mb-3">
-                                  <textarea
+                                  <div>
+                                    <label style={{ textAlign: "left", display: "block"}}>Lesson Content</label>
+                                    <RichTextEditor
+                                      value={newLesson.text} // Use newLesson.text instead of lessonContent
+                                      onChange={(value) =>
+                                        handleLessonInputChange("text", value)
+                                      } // Ensure you're using the correct handler
+                                    />
+                                  </div>
+
+                                  {/* <textarea
                                     className="form-control custom-focus"
                                     id="lessontext"
                                     value={newLesson.text || ""}
@@ -527,7 +529,7 @@ const CreateCourse = () => {
                                   />
                                   <label htmlFor="lessontext">
                                     Lesson Content
-                                  </label>
+                                  </label> */}
                                 </div>
                                 <button
                                   type="button"
@@ -572,15 +574,18 @@ const CreateCourse = () => {
                                       {lesson.title}
                                     </h6>
                                     <div className="btn-group">
-                                    <Button style={{ backgroundColor: "#663367" }} onClick={toggleQuizModal}>
-        Add Quiz
-      </Button>
+                                      <Button
+                                        style={{ backgroundColor: "#663367" }}
+                                        onClick={toggleQuizModal}
+                                      >
+                                        Add Quiz
+                                      </Button>
 
-      <AddQuiz 
-        isQuizModalOpen={isQuizModalOpen} 
-        toggleQuizModal={toggleQuizModal} 
-        lessonTitle={lesson.title} 
-      />
+                                      <AddQuiz
+                                        isQuizModalOpen={isQuizModalOpen}
+                                        toggleQuizModal={toggleQuizModal}
+                                        lessonTitle={lesson.title}
+                                      />
                                       <button
                                         className="btn btn-purple me-2"
                                         onClick={() =>

@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Toast } from "react-bootstrap";
 import "../../src/assets/css/topicsList.css";
 import api from "../services/api";
+import RichTextEditor from "./RichTextEditor";
 
 const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
   const [activeTopic, setActiveTopic] = useState(null);
@@ -251,11 +252,12 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
             </div>
             <div className="mb-3">
               <label>Text</label>
-              <textarea
+              {/* <textarea
                 className="form-control"
                 name="text"
                 required
-              ></textarea>
+              ></textarea> */}
+              <RichTextEditor className="form-control" name="text" required />
             </div>
             <button type="submit" className="btn action-btn">
               Add Lesson
@@ -322,12 +324,18 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
             </div>
             <div className="mb-3">
               <label>Text</label>
-              <textarea
+              <RichTextEditor
                 className="form-control"
                 name="text"
                 defaultValue={currentLesson?.text || ""}
                 required
-              ></textarea>
+              />
+              {/* <textarea
+                className="form-control"
+                name="text"
+                defaultValue={currentLesson?.text || ""}
+                required
+              ></textarea> */}
             </div>
             <button type="submit" className="btn action-btn">
               Save Changes
