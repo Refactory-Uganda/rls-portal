@@ -20,6 +20,11 @@ import AdminLogin from "./Auth/users/AdminLogin";
 import FacilitatorLogin from "./Auth/users/FacilitatorLogin";
 import LearnerLogin from "./Auth/users/LearnerLogin";
 
+// Import Facilitator Components
+import FacilitatorNavbar from "./Facilitator/FacilitatorNavbar";
+import FacilitatorSidebar from "./Facilitator/FacilitatorSidebar";
+import FacilitatorDashboardContent from "./Facilitator/FacilitatorDashboardContent";
+
 const App = () => {
   const { isAuthenticated } = useAuth();
   const [selectedMenu, setSelectedMenu] = useState("dashboard");
@@ -27,12 +32,14 @@ const App = () => {
   return (
     <Router>
       <Routes>
+        
         {/* Public routes */}
         <Route path="/" element={<LoginWelcome />} />
         <Route path="/login" element={<Login />} /> 
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/facilitator/login" element={<FacilitatorLogin />} />
         <Route path="/learner/login" element={<LearnerLogin />} />
+
         {/* Protected Admin routes */}
         <Route
           path="/admin"
@@ -56,6 +63,30 @@ const App = () => {
             // )
           }
         />
+
+         {/* Protected Facilitator routes */}
+         <Route
+          path="/facilitator"
+          element={
+            // isAuthenticated && user.role === "facilitator" ? (
+              <div className="d-flex flex-column h-100">
+                <FacilitatorNavbar selectedMenu={selectedMenu} />
+                <div className="d-flex flex-grow-1 main-sidebar-content">
+                  <FacilitatorSidebar
+                    selectedMenu={selectedMenu}
+                    setSelectedMenu={setSelectedMenu}
+                  />
+                  <div className="flex-grow-1 bg-light dash-content">
+                    <FacilitatorDashboardContent selectedMenu={selectedMenu} />
+                  </div>
+                </div>
+              </div>
+            // ) : (
+            //   <Navigate to="/facilitator/login" />
+            // )
+          }
+        />
+
       </Routes>
     </Router>
   );

@@ -210,14 +210,17 @@
 
 import React, { useEffect, useState } from "react";
 import "../assets/css/quizView.css";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Modal, Button, Form } from "react-bootstrap";
 import api from "../services/api";
 
 const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
+  // const [quiz, setQuiz] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   const [editing, setEditing] = useState(false);
   const [editedQuiz, setEditedQuiz] = useState({ ...quiz });
   const [userAnswers, setUserAnswers] = useState({});
@@ -233,7 +236,6 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
       try {
         const response = await api.get(`/quizzes/${lessonToView.quiz.id}`);
         setQuiz(response.data);
-        setEditedQuiz(response.data);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -355,6 +357,8 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
     );
   }
 
+  console.log(quiz);
+
   return (
     <div>
       <div className="btn-container">
@@ -424,6 +428,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
             Submit Quiz
           </button>
         </form>
+        
       </div>
       {score !== null && <p>Your Score: {score}</p>}
 
