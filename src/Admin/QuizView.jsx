@@ -1,7 +1,218 @@
+// import React, { useEffect, useState } from "react";
+// import "../assets/css/quizView.css";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+// import { Modal, Button, Form, Alert, Container, Row, Col, Card } from 'react-bootstrap';
+// import api from "../services/api";
+
+// const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+//   const [editing, setEditing] = useState(false);
+//   const [editedQuiz, setEditedQuiz] = useState({ ...quiz });
+//   const [userAnswers, setUserAnswers] = useState({}); // Track user answers
+//   const [score, setScore] = useState(null); // Track user score after submission
+
+//   useEffect(() => {
+//     const fetchQuiz = async () => {
+//       try {
+//         const response = await api.get(`/quizzes/${lessonToView.quiz.id}`);
+//         setQuiz(response.data);
+//         setEditedQuiz(response.data);
+//       } catch (err) {
+//         setError(err.message);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchQuiz();
+//   }, [lessonId]);
+
+//   const handleEditChange = (e, questionIndex, optionIndex) => {
+//     const { name, value } = e.target;
+//     const updatedQuiz = { ...editedQuiz };
+
+//     if (name === "questionText") {
+//       updatedQuiz.questions[questionIndex].text = value;
+//     } else if (name === "optionText") {
+//       updatedQuiz.questions[questionIndex].option[optionIndex].optionText =
+//         value;
+//     }
+
+//     setEditedQuiz(updatedQuiz);
+//   };
+
+//   const handleEditSubmit = (e) => {
+//     e.preventDefault();
+//     // Submit editedQuiz to the backend if needed
+//     setQuiz(editedQuiz);
+//     setEditing(false); // Close editing mode
+//   };
+
+//   const handleDeleteQuestion = (questionIndex) => {
+//     const updatedQuiz = { ...editedQuiz };
+//     updatedQuiz.questions.splice(questionIndex, 1);
+//     setEditedQuiz(updatedQuiz);
+//   };
+
+//   const handleOptionChange = (questionId, optionId) => {
+//     setUserAnswers({
+//       ...userAnswers,
+//       [questionId]: optionId,
+//     });
+//   };
+
+//   const handleQuizSubmit = (e) => {
+//     e.preventDefault();
+//     let calculatedScore = 0;
+
+//     quiz.questions.forEach((question) => {
+//       const userAnswer = userAnswers[question.id];
+//       const correctOption = question.option.find(
+//         (opt) => opt.iscorrect === true
+//       );
+
+//       if (userAnswer === correctOption.id) {
+//         calculatedScore += question.points || 1; // Add points or default to 1
+//       }
+//     });
+
+//     setScore(calculatedScore);
+//     console.log(calculatedScore);
+//     console.log(userAnswers);
+//   };
+
+//   if (loading) return <p>Loading quiz...</p>;
+//   if (error) return <p>Error fetching quiz: {error}</p>;
+
+//   if (!quiz || !quiz.questions) {
+//     return (
+//       <div>
+//         <button onClick={onBack} className="btn btn-secondary mb-3">
+//           Back to Lesson
+//         </button>
+//         <p>No quiz available for this lesson.</p>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div>
+//       <div className="btn-container">
+//         <button onClick={onBack} className="btn action-btn mb-3">
+//           Back to Lesson
+//         </button>
+//         <h3>{`${quiz.title}`}</h3>
+//         <a>
+//           <FontAwesomeIcon icon={faEdit} />
+//         </a>
+//         <button
+//           onClick={() => setEditing(!editing)}
+//           className="btn btn-primary secondary-action-btn mb-3"
+//         >
+//           <FontAwesomeIcon icon={faEdit} /> Edit Quiz
+//         </button>
+//       </div>
+//       <div className="quiz-content-container">
+//         {editing ? (
+//           <form onSubmit={handleEditSubmit}>
+//             {editedQuiz.questions.map((question, qIndex) => (
+//               <div key={question.id} className="quiz-question-list-item">
+//                 <h5>{`Q${qIndex + 1}:`}</h5>
+//                 <input
+//                   type="text"
+//                   name="questionText"
+//                   value={question.text}
+//                   onChange={(e) => handleEditChange(e, qIndex)}
+//                   className="question-input"
+//                 />
+//                 <button
+//                   type="button"
+//                   onClick={() => handleDeleteQuestion(qIndex)}
+//                   className="btn btn-danger"
+//                 >
+//                   <FontAwesomeIcon icon={faTrash} /> Delete
+//                 </button>
+//                 {question.option.map((option, oIndex) => (
+//                   <div key={option.id} className="option-container">
+//                     <input
+//                       type="text"
+//                       name="optionText"
+//                       value={option.optionText}
+//                       onChange={(e) => handleEditChange(e, qIndex, oIndex)}
+//                       className="option-input"
+//                     />
+//                   </div>
+//                 ))}
+//               </div>
+//             ))}
+//             <button type="submit" className="btn btn-success">
+//               Save Changes
+//             </button>
+//           </form>
+//         ) : (
+//           <form onSubmit={handleQuizSubmit}>
+//             {quiz.questions.map((question, index) => (
+//               <div key={question.id} className="quiz-question-list-item">
+//                 <h5>
+//                   {`Q${index + 1}: ${question.text}`}
+//                   <button
+//                     className="btn btn-purple me-2"
+//                     // onClick={() => handleEditTopic(topic)}
+//                     title="Edit Question"
+//                   >
+//                     <i className="fas fa-edit"></i>
+//                   </button>
+//                   <button
+//                     className="btn btn-purple me-2"
+//                     // onClick={() => handleDeleteTopic(topic.id)}
+//                     title="Delete Question"
+//                   >
+//                     <i className="fas fa-trash"></i>
+//                   </button>
+//                 </h5>
+
+//                 {question.option.map((option) => (
+//                   <div key={option.id} className="option-container">
+//                     <input
+//                       type="radio"
+//                       name={`question-${index}`}
+//                       onChange={() =>
+//                         handleOptionChange(question.id, option.id)
+//                       }
+//                       checked={userAnswers[question.id] === option.id}
+//                     />
+//                     <label>{` ${option.optionText}`}</label>
+//                   </div>
+//                 ))}
+//               </div>
+//             ))}
+//             <div>
+//               <button type="submit" className="btn btn-primary action-btn mt-3">
+//                 Submit Quiz
+//               </button>
+//             </div>
+//           </form>
+//         )}
+//       </div>
+//       {score !== null && (
+//         <div className="score-display">
+//           <p>Your Score: {score}</p>
+//         </div>
+//       )}
+
+//     </div>
+//   );
+// };
+
+// export default QuizView;
+
 import React, { useEffect, useState } from "react";
 import "../assets/css/quizView.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { Modal, Button, Form } from "react-bootstrap";
 import api from "../services/api";
 
 const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
@@ -9,8 +220,13 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
   const [error, setError] = useState(null);
   const [editing, setEditing] = useState(false);
   const [editedQuiz, setEditedQuiz] = useState({ ...quiz });
-  const [userAnswers, setUserAnswers] = useState({}); // Track user answers
-  const [score, setScore] = useState(null); // Track user score after submission
+  const [userAnswers, setUserAnswers] = useState({});
+  const [score, setScore] = useState(null);
+
+  const [showQuizEditModal, setShowQuizEditModal] = useState(false);
+  const [showQuestionEditModal, setShowQuestionEditModal] = useState(false);
+  const [showDeleteQuizModal, setShowDeleteQuizModal] = useState(false);
+  const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(null);
 
   useEffect(() => {
     const fetchQuiz = async () => {
@@ -24,35 +240,41 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
         setLoading(false);
       }
     };
-
     fetchQuiz();
   }, [lessonId]);
 
-  const handleEditChange = (e, questionIndex, optionIndex) => {
-    const { name, value } = e.target;
-    const updatedQuiz = { ...editedQuiz };
-
-    if (name === "questionText") {
-      updatedQuiz.questions[questionIndex].text = value;
-    } else if (name === "optionText") {
-      updatedQuiz.questions[questionIndex].Option[optionIndex].optionText =
-        value;
+  const handleEditQuizSubmit = async () => {
+    try {
+      await api.patch(`/quizzes/${quiz.id}`, {
+        title: editedQuiz.title,
+        description: editedQuiz.description,
+      });
+      setQuiz(editedQuiz);
+      setShowQuizEditModal(false);
+    } catch (error) {
+      console.error("Failed to update quiz:", error);
     }
-
-    setEditedQuiz(updatedQuiz);
   };
 
-  const handleEditSubmit = (e) => {
-    e.preventDefault();
-    // Submit editedQuiz to the backend if needed
-    setQuiz(editedQuiz);
-    setEditing(false); // Close editing mode
+  const handleEditQuestionSubmit = async () => {
+    const question = editedQuiz.questions[selectedQuestionIndex];
+    try {
+      await api.patch(`/quizzes/${question.id}`, question);
+      setQuiz(editedQuiz);
+      setShowQuestionEditModal(false);
+    } catch (error) {
+      console.error("Failed to update question:", error);
+    }
   };
 
-  const handleDeleteQuestion = (questionIndex) => {
-    const updatedQuiz = { ...editedQuiz };
-    updatedQuiz.questions.splice(questionIndex, 1);
-    setEditedQuiz(updatedQuiz);
+  const handleDeleteQuiz = async () => {
+    try {
+      await api.delete(`/quizzes/${quiz.id}`);
+      setShowDeleteQuizModal(false);
+      onBack(); // Go back to the previous screen after deleting
+    } catch (error) {
+      console.error("Failed to delete quiz:", error);
+    }
   };
 
   const handleOptionChange = (questionId, optionId) => {
@@ -65,20 +287,58 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
   const handleQuizSubmit = (e) => {
     e.preventDefault();
     let calculatedScore = 0;
-
     quiz.questions.forEach((question) => {
       const userAnswer = userAnswers[question.id];
-      const correctOption = question.Option.find(
+      const correctOption = question.option.find(
         (opt) => opt.iscorrect === true
       );
-
       if (userAnswer === correctOption.id) {
-        calculatedScore += question.points || 1; // Add points or default to 1
+        calculatedScore += question.points || 1;
       }
     });
-
     setScore(calculatedScore);
-    console.log(calculatedScore);
+  };
+
+  const addOption = (questionIndex) => {
+    const updatedQuiz = { ...editedQuiz };
+    if (updatedQuiz.questions[questionIndex].option.length < 4) {
+      updatedQuiz.questions[questionIndex].option.push({
+        id: Date.now(),
+        optionText: "",
+        iscorrect: false,
+      });
+      setEditedQuiz(updatedQuiz);
+    }
+  };
+
+  const deleteOption = (questionIndex, optionIndex) => {
+    const updatedQuiz = { ...editedQuiz };
+    updatedQuiz.questions[questionIndex].option.splice(optionIndex, 1);
+    setEditedQuiz(updatedQuiz);
+  };
+
+  const addQuestion = () => {
+    const updatedQuiz = { ...editedQuiz };
+    updatedQuiz.questions.push({
+      id: Date.now(),
+      text: "",
+      option: [{ id: Date.now() + 1, optionText: "", iscorrect: false }],
+    });
+    setEditedQuiz(updatedQuiz);
+  };
+
+  const deleteQuestion = async (questionId) => {
+    try {
+      await api.delete(`/questions/${questionId}`);
+      const updatedQuiz = { ...editedQuiz };
+      updatedQuiz.questions = updatedQuiz.questions.filter(
+        (q) => q.id !== questionId
+      );
+      setEditedQuiz(updatedQuiz);
+      setQuiz(updatedQuiz);
+    } catch (error) {
+      console.error("Failed to delete question:", error);
+    }
   };
 
   if (loading) return <p>Loading quiz...</p>;
@@ -101,84 +361,236 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
         <button onClick={onBack} className="btn action-btn mb-3">
           Back to Lesson
         </button>
-        <h3>{quiz.title}</h3>
-        <button
-          onClick={() => setEditing(!editing)}
-          className="btn btn-primary secondary-action-btn mb-3"
+        <h3>{`${quiz.title}`}</h3>
+        <Button
+          onClick={() => setShowQuizEditModal(true)}
+          className="btn btn-primary action-btn"
         >
-          <FontAwesomeIcon icon={faEdit} /> Edit Quiz
-        </button>
+          <FontAwesomeIcon icon={faEdit} />
+        </Button>
+        <Button
+          title="Delete Quiz"
+          onClick={() => setShowDeleteQuizModal(true)}
+          className="ms-2 secondary-action-btn"
+        >
+          <FontAwesomeIcon icon={faTrash} />
+        </Button>
+        <Button
+          onClick={addQuestion}
+          className="btn btn-success mb-3 secondary-action-btn"
+          title="Add Question"
+        >
+          <i className="bi bi-plus-square-fill"></i>
+        </Button>
       </div>
       <div className="quiz-content-container">
-        {editing ? (
-          <form onSubmit={handleEditSubmit}>
-            {editedQuiz.questions.map((question, qIndex) => (
-              <div key={question.id} className="quiz-question-list-item">
-                <h5>{`Q${qIndex + 1}:`}</h5>
-                <input
-                  type="text"
-                  name="questionText"
-                  value={question.text}
-                  onChange={(e) => handleEditChange(e, qIndex)}
-                  className="question-input"
-                />
-                <button
-                  type="button"
-                  onClick={() => handleDeleteQuestion(qIndex)}
-                  className="btn btn-danger"
+        <form onSubmit={handleQuizSubmit}>
+          {quiz.questions.map((question, qIndex) => (
+            <div key={question.id} className="quiz-question-list-item">
+              <h5>
+                {`Q${qIndex + 1}: ${question.text}`}
+                <Button
+                  className="btn btn-purple me-2"
+                  onClick={() => {
+                    setSelectedQuestionIndex(qIndex);
+                    setShowQuestionEditModal(true);
+                  }}
                 >
-                  <FontAwesomeIcon icon={faTrash} /> Delete
-                </button>
-                {question.Option.map((option, oIndex) => (
-                  <div key={option.id} className="option-container">
-                    <input
-                      type="text"
-                      name="optionText"
-                      value={option.optionText}
-                      onChange={(e) => handleEditChange(e, qIndex, oIndex)}
-                      className="option-input"
-                    />
-                  </div>
-                ))}
-              </div>
-            ))}
-            <button type="submit" className="btn btn-success">
-              Save Changes
-            </button>
-          </form>
-        ) : (
-          <form onSubmit={handleQuizSubmit}>
-            {quiz.questions.map((question, index) => (
-              <div key={question.id} className="quiz-question-list-item">
-                <h5>{`Q${index + 1}: ${question.text}`}</h5>
-                {question.Option.map((option) => (
-                  <div key={option.id} className="option-container">
-                    <input
-                      type="radio"
-                      name={`question-${index}`}
-                      onChange={() =>
-                        handleOptionChange(question.id, option.id)
-                      }
-                      checked={userAnswers[question.id] === option.id}
-                    />
-                    <label>{` ${option.optionText}`}</label>
-                  </div>
-                ))}
-              </div>
-            ))}
-            <div>
-              <button type="submit" className="btn btn-primary action-btn mt-3">
-                Submit Quiz
-              </button>
+                  <FontAwesomeIcon icon={faEdit} />
+                </Button>
+                <Button
+                  title="Delete Question"
+                  variant="danger"
+                  onClick={() => deleteQuestion(question.id)}
+                  className="ms-2 secondary-action-btn"
+                >
+                  <FontAwesomeIcon icon={faTrash} />
+                </Button>
+              </h5>
+              {question.option.map((option) => (
+                <div key={option.id} className="option-container">
+                  <input
+                    type="radio"
+                    name={`question-${qIndex}`}
+                    onChange={() => handleOptionChange(question.id, option.id)}
+                    checked={userAnswers[question.id] === option.id}
+                  />
+                  <label>{` ${option.optionText}`}</label>
+                </div>
+              ))}
             </div>
-          </form>
-        )}
+          ))}
+          <button type="submit" className="btn btn-primary action-btn mt-3">
+            Submit Quiz
+          </button>
+        </form>
       </div>
-      {score !== null && (
-        <div className="score-display">
-          <p>Your Score: {score}</p>
-        </div>
-      )}
+      {score !== null && <p>Your Score: {score}</p>}
+
+      {/* Modal to Edit Quiz Details */}
+      <Modal
+        show={showQuizEditModal}
+        onHide={() => setShowQuizEditModal(false)}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Quiz</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Quiz Title</Form.Label>
+              <Form.Control
+                type="text"
+                value={editedQuiz.title}
+                onChange={(e) =>
+                  setEditedQuiz({ ...editedQuiz, title: e.target.value })
+                }
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Quiz Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={editedQuiz.description}
+                onChange={(e) =>
+                  setEditedQuiz({ ...editedQuiz, description: e.target.value })
+                }
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            className="secondary-action-btn"
+            variant="secondary"
+            onClick={() => setShowQuizEditModal(false)}
+          >
+            Close
+          </Button>
+          <Button
+            className="action-btn"
+            variant="primary"
+            onClick={handleEditQuizSubmit}
+          >
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Modal to Edit Selected Question */}
+      <Modal
+        show={showQuestionEditModal}
+        onHide={() => setShowQuestionEditModal(false)}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Question</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedQuestionIndex !== null && (
+            <Form>
+              <Form.Group>
+                <Form.Label>Question Text</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={editedQuiz.questions[selectedQuestionIndex].text}
+                  onChange={(e) => {
+                    const updatedQuiz = { ...editedQuiz };
+                    updatedQuiz.questions[selectedQuestionIndex].text =
+                      e.target.value;
+                    setEditedQuiz(updatedQuiz);
+                  }}
+                />
+              </Form.Group>
+              {editedQuiz.questions[selectedQuestionIndex].option.map(
+                (option, oIndex) => (
+                  <div
+                    key={option.id}
+                    className="d-flex align-items-center option-edit-list-item"
+                  >
+                    <Form.Control
+                      type="text"
+                      value={option.optionText}
+                      onChange={(e) => {
+                        const updatedQuiz = { ...editedQuiz };
+                        updatedQuiz.questions[selectedQuestionIndex].option[
+                          oIndex
+                        ].optionText = e.target.value;
+                        setEditedQuiz(updatedQuiz);
+                      }}
+                    />
+                    <Button
+                      variant="danger"
+                      onClick={() =>
+                        deleteOption(selectedQuestionIndex, oIndex)
+                      }
+                      className="ms-2 secondary-action-btn"
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </Button>
+                  </div>
+                )
+              )}
+              <Button
+                // variant="success"
+                onClick={() => addOption(selectedQuestionIndex)}
+                className="mt-3 secondary-action-btn"
+                disabled={
+                  editedQuiz.questions[selectedQuestionIndex].option.length >= 4
+                }
+              >
+                Add Option
+              </Button>
+            </Form>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            className="secondary-action-btn"
+            variant="secondary"
+            onClick={() => setShowQuestionEditModal(false)}
+          >
+            Close
+          </Button>
+          <Button
+            variant="primary"
+            onClick={handleEditQuestionSubmit}
+            className="action-btn"
+          >
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Modal to Confirm Delete Quiz */}
+      <Modal
+        show={showDeleteQuizModal}
+        onHide={() => setShowDeleteQuizModal(false)}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete this quiz? This action cannot be
+          undone.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            className="action-btn"
+            onClick={() => setShowDeleteQuizModal(false)}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="danger"
+            onClick={handleDeleteQuiz}
+            className="secondary-action-btn"
+          >
+            Delete Quiz
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
