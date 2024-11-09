@@ -21,6 +21,9 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
+  // RichTextEditor State for Add/Edit Lesson
+  const [lessonText, setLessonText] = useState("");
+
   const toggleTopic = (id) => {
     setActiveTopic(activeTopic === id ? null : id);
   };
@@ -32,6 +35,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
 
   const handleEditLesson = (lesson) => {
     setCurrentLesson(lesson);
+    setLessonText(lesson.text); // Populate editor with lesson content for editing
     setShowEditLessonModal(true);
   };
 
@@ -71,6 +75,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
 
   const handleAddLessonClick = (topic) => {
     setCurrentTopic(topic);
+    setLessonText(""); // Clear the editor for new lesson
     setShowAddLessonModal(true);
   };
 
@@ -78,11 +83,11 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
     e.preventDefault();
     const newLesson = {
       title: e.target.title.value,
-      text: e.target.text.value,
+      text: lessonText,
     };
     try {
       const response = await api.post(`/lesson/${currentTopic.id}`, newLesson);
-      const addedLesson = response.data; // Assuming response contains new lesson data
+      const addedLesson = response.data;
       const updatedTopics = selectedCourse.topics.map((topic) =>
         topic.id === currentTopic.id
           ? { ...topic, Lesson: [...topic.Lesson, addedLesson] }
@@ -121,7 +126,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
     e.preventDefault();
     const updatedLesson = {
       title: e.target.title.value,
-      text: e.target.text.value,
+      text: lessonText,
     };
     try {
       await api.patch(`/lesson/${currentLesson.id}`, updatedLesson);
@@ -150,14 +155,14 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
     setShowSuccessToast(true);
   };
 
+  const handleLessonTextChange = (event) => {
+    setLessonText(event.target.value);
+  };
+
   return (
     <div className="accordion" id="topicsAccordion">
       {selectedCourse.topics.map((topic) => (
-        <div
-          className="card topic-cover-card"
-          key={topic.id}
-          style={{ padding: "0" }}
-        >
+        <div className="card topic-cover-card" key={topic.id} style={{ padding: "0" }}>
           <div className="topic-card">
             <h2 className="mb-0 topic-list-item">
               <button
@@ -202,10 +207,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
             <div className="card-body lesson-card">
               <ul className="list-group">
                 {topic.Lesson.map((lesson) => (
-                  <li
-                    className="list-group-item lesson-list-item"
-                    key={lesson.id}
-                  >
+                  <li className="list-group-item lesson-list-item" key={lesson.id}>
                     {lesson.title}
                     <span>
                       <button
@@ -232,10 +234,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
       ))}
 
       {/* Add Lesson Modal */}
-      <Modal
-        show={showAddLessonModal}
-        onHide={() => setShowAddLessonModal(false)}
-      >
+      <Modal show={showAddLessonModal} onHide={() => setShowAddLessonModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Add Lesson</Modal.Title>
         </Modal.Header>
@@ -243,34 +242,24 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
           <form onSubmit={handleAddLesson}>
             <div className="mb-3">
               <label>Title</label>
-              <input
-                type="text"
-                className="form-control"
-                name="title"
-                required
-              />
+              <input type="text" className="form-control" name="title" required />
             </div>
             <div className="mb-3">
               <label>Text</label>
-              {/* <textarea
-                className="form-control"
-                name="text"
+              <RichTextEditor
+                value={lessonText}
+                onChange={handleLessonTextChange}
+                name="lessonText"
                 required
-              ></textarea> */}
-              <RichTextEditor className="form-control" name="text" required />
+              />
             </div>
-            <button type="submit" className="btn action-btn">
-              Add Lesson
-            </button>
+            <button type="submit" className="btn action-btn">Add Lesson</button>
           </form>
         </Modal.Body>
       </Modal>
 
       {/* Edit Topic Modal */}
-      <Modal
-        show={showEditTopicModal}
-        onHide={() => setShowEditTopicModal(false)}
-      >
+      <Modal show={showEditTopicModal} onHide={() => setShowEditTopicModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Topic</Modal.Title>
         </Modal.Header>
@@ -282,7 +271,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
                 type="text"
                 className="form-control"
                 name="title"
-                defaultValue={currentTopic?.Title || ""}
+                defaultValue={currentTopic?.Title}
                 required
               />
             </div>
@@ -291,22 +280,17 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
               <textarea
                 className="form-control"
                 name="description"
-                defaultValue={currentTopic?.Description || ""}
+                defaultValue={currentTopic?.Description}
                 required
-              ></textarea>
+              />
             </div>
-            <button type="submit" className="btn action-btn">
-              Save Changes
-            </button>
+            <button type="submit" className="btn action-btn">Save Changes</button>
           </form>
         </Modal.Body>
       </Modal>
 
       {/* Edit Lesson Modal */}
-      <Modal
-        show={showEditLessonModal}
-        onHide={() => setShowEditLessonModal(false)}
-      >
+      <Modal show={showEditLessonModal} onHide={() => setShowEditLessonModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Lesson</Modal.Title>
         </Modal.Header>
@@ -318,28 +302,20 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
                 type="text"
                 className="form-control"
                 name="title"
-                defaultValue={currentLesson?.title || ""}
+                defaultValue={currentLesson?.title}
                 required
               />
             </div>
             <div className="mb-3">
               <label>Text</label>
               <RichTextEditor
-                className="form-control"
-                name="text"
-                defaultValue={currentLesson?.text || ""}
+                value={lessonText}
+                onChange={handleLessonTextChange}
+                name="lessonText"
                 required
               />
-              {/* <textarea
-                className="form-control"
-                name="text"
-                defaultValue={currentLesson?.text || ""}
-                required
-              ></textarea> */}
             </div>
-            <button type="submit" className="btn action-btn">
-              Save Changes
-            </button>
+            <button type="submit" className="btn action-btn">Save Changes</button>
           </form>
         </Modal.Body>
       </Modal>
