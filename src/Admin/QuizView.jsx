@@ -76,19 +76,63 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
     });
   };
 
-  const handleQuizSubmit = (e) => {
+  // const handleQuizSubmit = (e) => {
+  //   e.preventDefault();
+  //   let calculatedScore = 0;
+  //   quiz.questions.forEach((question) => {
+  //     const userAnswer = userAnswers[question.id];
+  //     const correctOption = question.option.find(
+  //       (opt) => opt.iscorrect === true
+  //     );
+  //     if (userAnswer === correctOption.id) {
+  //       calculatedScore += question.points || 1;
+  //     }
+  //   });
+  //   setScore(calculatedScore);
+  // };
+
+  const handleQuizSubmit = async (e) => {
     e.preventDefault();
-    let calculatedScore = 0;
-    quiz.questions.forEach((question) => {
-      const userAnswer = userAnswers[question.id];
-      const correctOption = question.option.find(
-        (opt) => opt.iscorrect === true
+
+    try {
+      // Step 1: Create a new assessment entry and get the attemptId
+      const assessmentResponse = await api.post("/quizzes/start", {
+        quizId: quiz.id, // Assuming `quiz.id` uniquely identifies the quiz
+      });
+      const attemptId = assessmentResponse.data.id;
+
+      const answers = [];
+
+      // Step 2: Build the answers array without calculating the score
+      quiz.questions.forEach((question) => {
+        const userAnswer = userAnswers[question.id];
+
+        answers.push({
+          attemptId: attemptId,
+          questionId: question.id,
+          optionId: userAnswer,
+        });
+      });
+
+      // Step 3: Submit the quiz with answers to the backend
+      const submissionResponse = await api.post(
+        `/quizzes/${attemptId}/submitQuiz`,
+        {
+          quizId: quiz.id,
+          answers: answers,
+        }
       );
-      if (userAnswer === correctOption.id) {
-        calculatedScore += question.points || 1;
-      }
-    });
-    setScore(calculatedScore);
+
+      // Step 4: Display the score returned by the backend
+      console.log(submissionResponse);
+      const score = submissionResponse.data.data.score;
+      setScore(score);
+
+      alert(`Quiz submitted successfully! Your score: ${score}`);
+    } catch (error) {
+      console.error("Error submitting quiz:", error);
+      alert("There was an error submitting your quiz. Please try again.");
+    }
   };
 
   const addOption = (questionIndex) => {
@@ -218,7 +262,6 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
             Submit Quiz
           </button>
         </form>
-        
       </div>
       {score !== null && <p>Your Score: {score}</p>}
 
