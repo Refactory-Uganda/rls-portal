@@ -111,9 +111,12 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
       // Display the score returned by the backend
       console.log(submissionResponse);
       const score = submissionResponse.data.data.score;
+      const maxScore = submissionResponse.data.data.maxScore;
       setScore(score);
 
-      alert(`Quiz submitted successfully! Your score: ${score}`);
+      alert(
+        `Quiz submitted successfully! Your score: ${score} out of ${maxScore}`
+      );
     } catch (error) {
       console.error("Error submitting quiz:", error);
       alert("There was an error submitting your quiz. Please try again.");
