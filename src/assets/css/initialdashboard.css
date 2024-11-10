@@ -2,12 +2,18 @@
     height: 8rem;
 }
 
+h3 {
+    font-size: 25px;
+    font-weight: 100px;
+}
+
 .card-numbers {
     color: #663367;
     font-size: 1.8rem;
     text-align: right;
     font-weight: bold;
 }
+
 
 /* Responsive Styles */
 @media screen and (max-width: 768px) {

@@ -9,10 +9,10 @@
 }
 .topic-btn {
   text-decoration: none;
-  color: #fff;
+  color: black;
 }
 .topic-btn:hover {
-  color: #e1dbdb;
+  color: #fff;
 }
 .lesson-card {
   padding: 0;
@@ -22,10 +22,11 @@
   border-radius: 0;
   display: flex;
   justify-content: space-between;
+  color: black;
 }
 .lesson-list-item:hover {
   cursor: pointer;
-  color: #663367;
+  color: grey;
 }
 .card {
   padding: 0;

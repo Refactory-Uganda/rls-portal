@@ -92,9 +92,9 @@ const CourseContentView = ({ selectedCourse, setView }) => {
                 handleTakeQuizClick();
               }}
             >
-              Take Lesson Quiz
+             View Quiz
             </a>
-            <a
+            {/* <a
               href="#"
               className="btn btn-primary secondary-action-btn action-btn"
               onClick={(e) => {
@@ -103,7 +103,7 @@ const CourseContentView = ({ selectedCourse, setView }) => {
               }}
             >
               Edit Quiz
-            </a>
+            </a> */}
           </>
         )}
       </div>

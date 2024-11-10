@@ -180,7 +180,7 @@ const CourseDetails = ({
                 className="btn btn-primary action-btn"
                 onClick={() => setView("contentView")}
               >
-                Take Course
+                View Topics
               </button>
             </div>
           </div>
