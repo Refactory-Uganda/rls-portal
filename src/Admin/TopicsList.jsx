@@ -84,6 +84,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
     const newLesson = {
       title: e.target.title.value,
       text: lessonText,
+      topicId: currentTopic.id,
     };
     try {
       const response = await api.post(`/lesson/${currentTopic.id}`, newLesson);
@@ -162,7 +163,11 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
   return (
     <div className="accordion" id="topicsAccordion">
       {selectedCourse.topics.map((topic) => (
-        <div className="card topic-cover-card" key={topic.id} style={{ padding: "0" }}>
+        <div
+          className="card topic-cover-card"
+          key={topic.id}
+          style={{ padding: "0" }}
+        >
           <div className="topic-card">
             <h2 className="mb-0 topic-list-item">
               <button
@@ -207,7 +212,10 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
             <div className="card-body lesson-card">
               <ul className="list-group">
                 {topic.Lesson.map((lesson) => (
-                  <li className="list-group-item lesson-list-item" key={lesson.id}>
+                  <li
+                    className="list-group-item lesson-list-item"
+                    key={lesson.id}
+                  >
                     {lesson.title}
                     <span>
                       <button
@@ -219,7 +227,9 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
                       </button>
                       <button
                         className="btn btn-green me-2"
-                        onClick={() => handleDeleteLesson(lesson.id, topic.id)}
+                        onClick={() =>
+                          handleDeleteLesson(lesson.id, lesson.topicId)
+                        }
                         title="Delete Lesson"
                       >
                         <i className="fas fa-trash"></i>
@@ -234,7 +244,10 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
       ))}
 
       {/* Add Lesson Modal */}
-      <Modal show={showAddLessonModal} onHide={() => setShowAddLessonModal(false)}>
+      <Modal
+        show={showAddLessonModal}
+        onHide={() => setShowAddLessonModal(false)}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Add Lesson</Modal.Title>
         </Modal.Header>
@@ -242,7 +255,12 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
           <form onSubmit={handleAddLesson}>
             <div className="mb-3">
               <label>Title</label>
-              <input type="text" className="form-control" name="title" required />
+              <input
+                type="text"
+                className="form-control"
+                name="title"
+                required
+              />
             </div>
             <div className="mb-3">
               <label>Text</label>
@@ -253,13 +271,18 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
                 required
               />
             </div>
-            <button type="submit" className="btn action-btn">Add Lesson</button>
+            <button type="submit" className="btn action-btn">
+              Add Lesson
+            </button>
           </form>
         </Modal.Body>
       </Modal>
 
       {/* Edit Topic Modal */}
-      <Modal show={showEditTopicModal} onHide={() => setShowEditTopicModal(false)}>
+      <Modal
+        show={showEditTopicModal}
+        onHide={() => setShowEditTopicModal(false)}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Edit Topic</Modal.Title>
         </Modal.Header>
@@ -284,13 +307,18 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
                 required
               />
             </div>
-            <button type="submit" className="btn action-btn">Save Changes</button>
+            <button type="submit" className="btn action-btn">
+              Save Changes
+            </button>
           </form>
         </Modal.Body>
       </Modal>
 
       {/* Edit Lesson Modal */}
-      <Modal show={showEditLessonModal} onHide={() => setShowEditLessonModal(false)}>
+      <Modal
+        show={showEditLessonModal}
+        onHide={() => setShowEditLessonModal(false)}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Edit Lesson</Modal.Title>
         </Modal.Header>
@@ -315,7 +343,9 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
                 required
               />
             </div>
-            <button type="submit" className="btn action-btn">Save Changes</button>
+            <button type="submit" className="btn action-btn">
+              Save Changes
+            </button>
           </form>
         </Modal.Body>
       </Modal>
@@ -324,7 +354,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
       <Toast
         onClose={() => setShowSuccessToast(false)}
         show={showSuccessToast}
-        delay={3000}
+        delay={1000}
         autohide
       >
         <Toast.Body>{successMessage}</Toast.Body>
