@@ -21,6 +21,9 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
+  // RichTextEditor State for Add/Edit Lesson
+  const [lessonText, setLessonText] = useState("");
+
   const toggleTopic = (id) => {
     setActiveTopic(activeTopic === id ? null : id);
   };
@@ -32,6 +35,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
 
   const handleEditLesson = (lesson) => {
     setCurrentLesson(lesson);
+    setLessonText(lesson.text); // Populate editor with lesson content for editing
     setShowEditLessonModal(true);
   };
 
@@ -71,6 +75,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
 
   const handleAddLessonClick = (topic) => {
     setCurrentTopic(topic);
+    setLessonText(""); // Clear the editor for new lesson
     setShowAddLessonModal(true);
   };
 
@@ -78,12 +83,13 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const newLesson = {
-      title: formData.get("title"),
-      text: formData.get("text"),
+      title: e.target.title.value,
+      text: lessonText,
+      topicId: currentTopic.id,
     };
     try {
       const response = await api.post(`/lesson/${currentTopic.id}`, newLesson);
-      const addedLesson = response.data; // Assuming response contains new lesson data
+      const addedLesson = response.data;
       const updatedTopics = selectedCourse.topics.map((topic) =>
         topic.id === currentTopic.id
           ? { ...topic, Lesson: [...topic.Lesson, addedLesson] }
@@ -122,7 +128,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
     e.preventDefault();
     const updatedLesson = {
       title: e.target.title.value,
-      text: e.target.text.value,
+      text: lessonText,
     };
     try {
       await api.patch(`/lesson/${currentLesson.id}`, updatedLesson);
@@ -149,6 +155,10 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
   const showToast = (message) => {
     setSuccessMessage(message);
     setShowSuccessToast(true);
+  };
+
+  const handleLessonTextChange = (event) => {
+    setLessonText(event.target.value);
   };
 
   return (
@@ -218,7 +228,9 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
                       </button>
                       <button
                         className="btn btn-green me-2"
-                        onClick={() => handleDeleteLesson(lesson.id, topic.id)}
+                        onClick={() =>
+                          handleDeleteLesson(lesson.id, lesson.topicId)
+                        }
                         title="Delete Lesson"
                       >
                         <i className="fas fa-trash"></i>
@@ -253,12 +265,12 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
             </div>
             <div className="mb-3">
               <label>Text</label>
-              {/* <textarea
-                className="form-control"
-                name="text"
+              <RichTextEditor
+                value={lessonText}
+                onChange={handleLessonTextChange}
+                name="lessonText"
                 required
-              ></textarea> */}
-              <RichTextEditor className="form-control" name="text" required />
+              />
             </div>
             <button type="submit" className="btn action-btn">
               Add Lesson
@@ -283,7 +295,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
                 type="text"
                 className="form-control"
                 name="title"
-                defaultValue={currentTopic?.Title || ""}
+                defaultValue={currentTopic?.Title}
                 required
               />
             </div>
@@ -292,9 +304,9 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
               <textarea
                 className="form-control"
                 name="description"
-                defaultValue={currentTopic?.Description || ""}
+                defaultValue={currentTopic?.Description}
                 required
-              ></textarea>
+              />
             </div>
             <button type="submit" className="btn action-btn">
               Save Changes
@@ -319,24 +331,18 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
                 type="text"
                 className="form-control"
                 name="title"
-                defaultValue={currentLesson?.title || ""}
+                defaultValue={currentLesson?.title}
                 required
               />
             </div>
             <div className="mb-3">
               <label>Text</label>
               <RichTextEditor
-                className="form-control"
-                name="text"
-                defaultValue={currentLesson?.text || ""}
+                value={lessonText}
+                onChange={handleLessonTextChange}
+                name="lessonText"
                 required
               />
-              {/* <textarea
-                className="form-control"
-                name="text"
-                defaultValue={currentLesson?.text || ""}
-                required
-              ></textarea> */}
             </div>
             <button type="submit" className="btn action-btn">
               Save Changes
@@ -349,7 +355,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
       <Toast
         onClose={() => setShowSuccessToast(false)}
         show={showSuccessToast}
-        delay={3000}
+        delay={1000}
         autohide
       >
         <Toast.Body>{successMessage}</Toast.Body>

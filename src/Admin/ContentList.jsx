@@ -42,8 +42,9 @@ const ContentList = ({
     setShowEditTopicModal(true);
   };
 
+ 
   const handleEditLesson = (lesson) => {
-    setCurrentLesson(lesson);
+    setCurrentLesson(lesson || { title: "", text: "" }); // Set fallback
     setShowEditLessonModal(true);
   };
 
@@ -130,20 +131,32 @@ const ContentList = ({
   };
 
   const handleEditLessonSubmit = async (e) => {
+    // e.preventDefault();
+    // const updatedLesson = {
+    //   title: e.target.title.value,
+    //   text: e.target.text.value,
     e.preventDefault();
+    if (!currentLesson) return; // Guard clause
+
     const updatedLesson = {
       title: e.target.title.value,
-      text: e.target.text.value,
+      text: currentLesson.text, // Use text from state
     };
+    console.log(currentLesson);
     try {
       await api.patch(`/lesson/${currentLesson.id}`, updatedLesson);
+      console.log(currentTopic);
       const updatedTopics = selectedCourse.topics.map((topic) => {
+        console.log(topic);
+
         if (topic.id === currentTopic.id) {
-          const updatedLessons = topic.Lesson.map((lesson) =>
+          const updatedLessons = topic.Lesson.map((lesson) => {
+            console.log(lesson);
+            console.log(currentLesson);
             lesson.id === currentLesson.id
               ? { ...lesson, ...updatedLesson }
-              : lesson
-          );
+              : lesson;
+          });
           return { ...topic, Lesson: updatedLessons };
         }
         return topic;
@@ -351,11 +364,33 @@ const ContentList = ({
             <div className="mb-3">
               <label>Text</label>
               <RichTextEditor
+                name="text"
+                value={currentLesson?.text || ""}
+                onChange={(e) =>
+                  setCurrentLesson((prev) => ({
+                    ...prev,
+                    text: e.target.value,
+                  }))
+                }
+                required
+
+                // className="form-control"
+                // name="text"
+                // value={currentLesson?.text || ""}
+                // onChange={(e) =>
+                //   setCurrentLesson({ ...currentLesson, text: e.target.value })
+                // } // Update lesson text on change
+                // required
+              />
+              {/* <RichTextEditor
                 className="form-control"
                 name="text"
-                defaultValue={currentLesson?.text || ""}
+                value={currentLesson?.text || ""}
+                onChange={(e) =>
+                  setCurrentLesson({ ...currentLesson, text: e.target.value })
+                } // Update lesson text on change
                 required
-              />
+              /> */}
               {/* <textarea
                 className="form-control"
                 name="text"
