@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../src/assets/css/sidebar.css';
 
-const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
+const FacilitatorSidebar = ({ selectedMenu, setSelectedMenu }) => { 
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const toggleSidebar = () => {
@@ -10,11 +11,11 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
   };
 
   const menuItems = [
-    { name: "Dashboard", key: "dashboard", href: "#", iconClass: "fas fa-tachometer-alt" },
-    { name: "Modules", key: "modules", href: "#", iconClass: "fas fa-book", active: true },
-    { name: "Learners", key: "learners", href: "#", iconClass: "fas fa-user-graduate" },
-    { name: "Resources", key: "resources", href: "#", iconClass: "fas fa-chalkboard-teacher" },
-    // { name: "Create Course", key: "createCourse", href: "#", iconClass: "fas fa-plus-circle" },
+    { name: "Dashboard", key: "dashboard", path: "/facilitator", iconClass: "fas fa-tachometer-alt" },
+    { name: "Courses", key: "courses", path: "/facilitator/courses", iconClass: "fas fa-book",},
+    { name: "Learners", key: "learners", path: "/facilitator/learners", iconClass: "fas fa-user-graduate" },
+    { name: "Resources", key: "resources", path: "/facilitator/resources", iconClass: "fas fa-chalkboard-teacher" },
+    { name: "Assignments", key: "assignments", path: "/facilitator/assignments", iconClass: "fas fa-book" },
   ];
 
   return (
@@ -37,29 +38,29 @@ const Sidebar = ({ selectedMenu, setSelectedMenu }) => {
 
       <nav className="flex-grow-1 p-3 sidebar-nav" id="nav-items">
         {menuItems.map((item) => (
-          <a
+          <Link
             key={item.key}
+            to={item.path} // Use to attribute for navigation
             onClick={() => setSelectedMenu(item.key)}
             className={`d-flex align-items-center py-2 text-decoration-none text-white sidebar-btn ${selectedMenu === item.key ? "active" : ""}`}
-            href={item.href}
           >
             <i className={`${item.iconClass} icon-large me-2`}></i>
             {!isCollapsed && <span>{item.name}</span>}
-          </a>
+          </Link>
         ))}
       </nav>
 
       <div className="p-3">
-        <a
-          href="#"
+        <Link
+          to="/logout" // Assuming you have a logout route
           className="d-flex align-items-center py-2 text-decoration-none text-white"
         >
           <i className="fas fa-sign-out-alt icon-large me-2"></i>
           {!isCollapsed && <span>Logout</span>}
-        </a>
+        </Link>
       </div>
     </div>
   );
 };
 
-export default Sidebar;
+export default FacilitatorSidebar;

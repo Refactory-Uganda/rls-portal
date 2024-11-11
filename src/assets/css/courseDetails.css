@@ -11,8 +11,8 @@
 }
 
 .topic-list-item:hover {
-  border-top: 0.2rem solid #663367;
-  border-bottom: 0.2rem solid #663367;
+  border-top: 0.2rem solid #fff;
+  border-bottom: 0.2rem solid #fff;
 }
 .course-topics-container {
   padding: 0;

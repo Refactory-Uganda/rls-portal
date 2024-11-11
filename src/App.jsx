@@ -14,6 +14,7 @@ import NavBar from "./Admin/NavBar";
 import Login from "./Login/Login";
 import useAuth from "./Hooks/useAuth";
 
+
 // Logins
 import LoginWelcome from "./Auth/users/LoginWelcome";
 import AdminLogin from "./Auth/users/AdminLogin";
@@ -24,6 +25,8 @@ import LearnerLogin from "./Auth/users/LearnerLogin";
 import FacilitatorNavbar from "./Facilitator/FacilitatorNavbar";
 import FacilitatorSidebar from "./Facilitator/FacilitatorSidebar";
 import FacilitatorDashboardContent from "./Facilitator/FacilitatorDashboardContent";
+import AssignmentsContent from "./Facilitator/AssignmentsContent"; 
+
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -56,34 +59,63 @@ const App = () => {
                 </div>
               </div>
             </div>
-            // Uncomment this line to enable authentication check
-            // isAuthenticated ? (
-            // ) : (
-            //   <Navigate to="/login" />
-            // )
+          }
+        />
+        
+        {/* Admin-specific route for Assignments page */}
+        <Route
+          path="/admin/assignments"
+          element={
+            <div className="d-flex flex-column h-100">
+              <NavBar selectedMenu={selectedMenu} />
+              <div className="d-flex flex-grow-1 main-sidebar-content">
+                <Sidebar
+                  selectedMenu={selectedMenu}
+                  setSelectedMenu={setSelectedMenu}
+                />
+                <div className="flex-grow-1 bg-light dash-content">
+                  <AssignmentsContent /> {/* Renders the Assignments page */}
+                </div>
+              </div>
+            </div>
           }
         />
 
-         {/* Protected Facilitator routes */}
-         <Route
+        {/* Protected Facilitator routes */}
+        <Route
           path="/facilitator"
           element={
-            // isAuthenticated && user.role === "facilitator" ? (
-              <div className="d-flex flex-column h-100">
-                <FacilitatorNavbar selectedMenu={selectedMenu} />
-                <div className="d-flex flex-grow-1 main-sidebar-content">
-                  <FacilitatorSidebar
-                    selectedMenu={selectedMenu}
-                    setSelectedMenu={setSelectedMenu}
-                  />
-                  <div className="flex-grow-1 bg-light dash-content">
-                    <FacilitatorDashboardContent selectedMenu={selectedMenu} />
-                  </div>
+            <div className="d-flex flex-column h-100">
+              <FacilitatorNavbar selectedMenu={selectedMenu} />
+              <div className="d-flex flex-grow-1 main-sidebar-content">
+                <FacilitatorSidebar
+                  selectedMenu={selectedMenu}
+                  setSelectedMenu={setSelectedMenu}
+                />
+                <div className="flex-grow-1 bg-light dash-content">
+                  <FacilitatorDashboardContent selectedMenu={selectedMenu} />
                 </div>
               </div>
-            // ) : (
-            //   <Navigate to="/facilitator/login" />
-            // )
+            </div>
+          }
+        />
+
+        {/* Facilitator-specific route for Assignments page (optional) */}
+        <Route
+          path="/facilitator/assignments"
+          element={
+            <div className="d-flex flex-column h-100">
+              <FacilitatorNavbar selectedMenu={selectedMenu} />
+              <div className="d-flex flex-grow-1 main-sidebar-content">
+                <FacilitatorSidebar
+                  selectedMenu={selectedMenu}
+                  setSelectedMenu={setSelectedMenu}
+                />
+                <div className="flex-grow-1 bg-light dash-content">
+                  <AssignmentsContent /> {/* Renders the Assignments page */}
+                </div>
+              </div>
+            </div>
           }
         />
 

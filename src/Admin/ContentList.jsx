@@ -196,21 +196,21 @@ const ContentList = ({
               </button>
               <span>
                 <button
-                  className="btn btn-purple me-2"
+                  className="btn btn-green me-2"
                   onClick={() => handleAddLessonClick(topic)}
                   title="Add Lesson"
                 >
                   <i className="bi bi-plus-square-fill"></i>
                 </button>
                 <button
-                  className="btn btn-purple me-2"
+                  className="btn btn-green me-2"
                   onClick={() => handleEditTopic(topic)}
                   title="Edit Topic"
                 >
                   <i className="fas fa-edit"></i>
                 </button>
                 <button
-                  className="btn btn-purple me-2"
+                  className="btn btn-green me-2"
                   onClick={() => handleDeleteTopic(topic.id)}
                   title="Delete Topic"
                 >

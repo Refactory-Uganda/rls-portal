@@ -81,6 +81,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
 
   const handleAddLesson = async (e) => {
     e.preventDefault();
+    const formData = new FormData(e.target);
     const newLesson = {
       title: e.target.title.value,
       text: lessonText,
@@ -102,7 +103,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
       alert("Failed to add the lesson. Please try again.");
     }
   };
-
+  
   const handleEditTopicSubmit = async (e) => {
     e.preventDefault();
     const updatedTopic = {
@@ -181,21 +182,21 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
               </button>
               <span>
                 <button
-                  className="btn btn-purple me-2"
+                  className="btn btn-green me-2"
                   onClick={() => handleAddLessonClick(topic)}
                   title="Add Lesson"
                 >
                   <i className="bi bi-plus-square-fill"></i>
                 </button>
                 <button
-                  className="btn btn-purple me-2"
+                  className="btn btn-green me-2"
                   onClick={() => handleEditTopic(topic)}
                   title="Edit Topic"
                 >
                   <i className="fas fa-edit"></i>
                 </button>
                 <button
-                  className="btn btn-purple me-2"
+                  className="btn btn-green me-2"
                   onClick={() => handleDeleteTopic(topic.id)}
                   title="Delete Topic"
                 >
