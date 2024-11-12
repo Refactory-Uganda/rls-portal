@@ -13,12 +13,19 @@ import axios from "axios";
 import { Button } from "react-bootstrap";
 import AddQuiz from "./AddQuiz";
 import RichTextEditor from "./RichTextEditor";
+
 const CreateCourse = () => {
   const [courseData, setCourseData] = useState({
     Title: "",
     Description: "",
     Duration: "",
+    courseOutline: [],
+    requirements: [],
+    status: "DRAFT",
   });
+
+  // const [feedback, setFeedback] = useState({ error: "", success: "" });
+  const [outlineInput, setOutlineInput] = useState(""); // To handle outline field
 
   const [isQuizModalOpen, setQuizModalOpen] = useState(false);
 
@@ -62,9 +69,53 @@ const CreateCourse = () => {
     }));
   };
 
+  // const handleCourseInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setCourseData((prev) => ({ ...prev, [name]: value }));
+  //   setFeedback({ error: "", success: "" });
+  // };
+
+  // =====================================
+  const handleOutlineChange = (e) => {
+    setOutlineInput(e.target.value);
+  };
+
+  const addOutlineItem = () => {
+    if (outlineInput.trim()) {
+      setCourseData((prev) => ({
+        ...prev,
+        courseOutline: [...prev.courseOutline, outlineInput.trim()],
+      }));
+      setOutlineInput("");
+    }
+  };
+
+  // =====================================
+
   const handleCourseInputChange = (e) => {
     const { name, value } = e.target;
-    setCourseData((prev) => ({ ...prev, [name]: value }));
+  
+    setCourseData((prev) => {
+      // Handle adding to arrays for courseOutline and additionalArrayField
+      if (name === "courseOutline") {
+        return {
+          ...prev,
+          courseOutline: [...prev.courseOutline, value],
+        };
+      } else if (name === "requirements") {
+        return {
+          ...prev,
+          requirements: [...prev.requirements, value],
+        };
+      } else {
+        // Handle other fields normally
+        return {
+          ...prev,
+          [name]: value,
+        };
+      }
+    });
+  
     setFeedback({ error: "", success: "" });
   };
 
@@ -97,7 +148,7 @@ const CreateCourse = () => {
 
         await Promise.all(
           topic.Lessons.map((lesson) =>
-            axios.post(`http://localhost:3000/lesson/${topicId}`, {
+            api.post(`/lesson/${topicId}`, {
               title: lesson.title,
               text: lesson.text,
               topicId: topicId,
@@ -106,7 +157,7 @@ const CreateCourse = () => {
         );
       }
 
-      setCourseData({ Title: "", Description: "", Duration: "" });
+      setCourseData({ Title: "", Description: "", Duration: "", status: "" });
       setTopics([]);
       setFeedback({ error: "", success: "Course created successfully!" });
     } catch (error) {
@@ -318,6 +369,74 @@ const CreateCourse = () => {
                           <label htmlFor="courseDescription">Description</label>
                         </div>
                       </div>
+                      {/* =============== */}
+                      {/* <div className="col-12">
+                        <div className="form-floating">
+                          <textarea
+                            name="courseOutline"
+                            className="form-control custom-focus"
+                            id="courseDescription"
+                            value={courseData.courseOutline}
+                            onChange={handleCourseInputChange}
+                            style={{ height: "50px" }}
+                            placeholder="Enter course outline"
+                          />
+                          <label htmlFor="courseOutline">courseOutline</label>
+                        </div>
+                      </div> */}
+
+                      <div className="form-group">
+                        <label>Course Outline</label>
+                        <input
+                          type="text"
+                          value={outlineInput}
+                          onChange={handleOutlineChange}
+                        />
+                        <button type="button" onClick={addOutlineItem}>
+                          Add to Outline
+                        </button>
+                        <ul>
+                          {courseData.courseOutline.map((item, index) => (
+                            <li key={index}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="form-group">
+                        <label>Requirements</label>
+                        <input
+                          type="text"
+                          value={requirements}
+                          onChange={handleOutlineChange}
+                        />
+                        <button type="button" onClick={addOutlineItem}>
+                          Add to Outline
+                        </button>
+                        <ul>
+                          {courseData.courseOutline.map((item, index) => (
+                            <li key={index}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* =============================== */}
+                      <div className="col-12">
+                        <div className="form-floating">
+                          <select
+                            name="status"
+                            className="form-control custom-focus"
+                            id="status"
+                            value={courseData.status}
+                            onChange={handleCourseInputChange}
+                            style={{ height: "50px" }}
+                            placeholder="Enter course outline"
+                          >
+                            <option value="DRAFT">DRAFT</option>
+                            <option value="PUBLISHED">PUBLISHED</option>
+                          </select>
+
+                          <label htmlFor="courseOutline">status</label>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -505,7 +624,14 @@ const CreateCourse = () => {
                                 </div>
                                 <div className="form-floating mb-3">
                                   <div>
-                                    <label style={{ textAlign: "left", display: "block"}}>Lesson Content</label>
+                                    <label
+                                      style={{
+                                        textAlign: "left",
+                                        display: "block",
+                                      }}
+                                    >
+                                      Lesson Content
+                                    </label>
                                     <RichTextEditor
                                       value={newLesson.text} // Use newLesson.text instead of lessonContent
                                       onChange={(value) =>
