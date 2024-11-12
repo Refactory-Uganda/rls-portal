@@ -365,3 +365,5 @@ function AddQuiz({ isQuizModalOpen, toggleQuizModal, lessonTitle, lessonId }) {
 }
 
 export default AddQuiz;
+
+
