@@ -2,24 +2,28 @@ import React from "react";
 
 function CourseCard({ course, onClick }) {
   return (
-    <div className="card mb-3" style={{ maxWidth: "540px" }}>
-      <div className="row g-0">
-        <div className="col-md-4">
+    <div className="card mb-4" style={{ width: "100%", maxWidth: "100%" }}>
+      <div className="row g-0 align-items-center">
+        <div className="col-md-2">
           <img
-            src="path-to-image.jpg" // Replace with actual image path or variable
-            className="img-fluid rounded-start"
+            src="../../src/assets/Images/SideImage.png" // Replace with actual image path or variable
+            className="img-fluid rounded-start w-100"
             alt="Course image"
           />
         </div>
-        <div className="col-md-8">
-          <div className="card-body">
-            <h5 className="card-title">{course.Title}</h5>
-            <p className="card-text">{course.Description}</p>
-            <p className="card-text">Topics: 5</p>
-            <p className="card-text">Facilitator: Steven</p>
-            <button onClick={onClick} className="btn btn-primary action-btn">
-              View course
-            </button>
+        <div className="col-md-10">
+          <div className="card-body d-flex flex-column">
+            <div className="flex-grow-1">
+              <h5 className="card-title">{course.Title}</h5>
+              <p className="card-text">{course.Description}</p>
+              <p className="card-text">Topics: 5</p>
+              <p className="card-text">Facilitator: Steven</p>
+            </div>
+            <div className="d-flex justify-content-end">
+              <button onClick={onClick} className="btn btn-primary action-btn">
+                View course
+              </button>
+            </div>
           </div>
         </div>
       </div>

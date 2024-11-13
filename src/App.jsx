@@ -111,7 +111,7 @@ const App = () => {
                   setSelectedMenu={setSelectedMenu}
                   menuItems={[
                     { name: "Dashboard", key: "dashboard", to: "/facilitator", iconClass: "fas fa-tachometer-alt" },
-                    { name: "Courses", key: "courses", to: "/facilitator/courses", iconClass: "fas fa-book" },
+                    { name: "Course", key: "course", to: "/facilitator/course", iconClass: "fas fa-book" },
                     { name: "Learners", key: "learners", to: "/facilitator/learners", iconClass: "fas fa-user-graduate" },
                     { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-chalkboard-teacher" },
                     { name: "Assignments", key: "assignments", to: "/facilitator/assignments", iconClass: "fas fa-book" },
@@ -137,7 +137,7 @@ const App = () => {
                   setSelectedMenu={setSelectedMenu}
                   menuItems={[
                     { name: "Dashboard", key: "dashboard", to: "/facilitator", iconClass: "fas fa-tachometer-alt" },
-                    { name: "Courses", key: "courses", to: "/facilitator/courses", iconClass: "fas fa-book" },
+                    { name: "Course", key: "course", to: "/facilitator/course", iconClass: "fas fa-book" },
                     { name: "Learners", key: "learners", to: "/facilitator/learners", iconClass: "fas fa-user-graduate" },
                     { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-chalkboard-teacher" },
                     { name: "Assignments", key: "assignments", to: "/facilitator/assignments", iconClass: "fas fa-book" },
@@ -162,7 +162,7 @@ const App = () => {
                   setSelectedMenu={setSelectedMenu}
                   menuItems={[
                     { name: "Dashboard", key: "dashboard", to: "/facilitator", iconClass: "fas fa-tachometer-alt" },
-                    { name: "Course", key: "courses", to: "/facilitator/course", iconClass: "fas fa-book" },
+                    { name: "Course", key: "course", to: "/facilitator/course", iconClass: "fas fa-book" },
                     { name: "Learners", key: "learners", to: "/facilitator/learners", iconClass: "fas fa-user-graduate" },
                     { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-chalkboard-teacher" },
                     { name: "Assignments", key: "assignments", to: "/facilitator/assignments", iconClass: "fas fa-book" },

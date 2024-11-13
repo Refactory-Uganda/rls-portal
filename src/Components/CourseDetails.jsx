@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import api from "../services/api";
 import "../../src/assets/css/courseDetails.css";
-import TopicsList from "../Components/TopicsList";
+import TopicsList from "./TopicsList";
 import { Modal, Toast } from "react-bootstrap";
 
 const CourseDetails = ({
