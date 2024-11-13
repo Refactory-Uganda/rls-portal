@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import '../../src/assets/css/navbar.css';
 
-const Navbar = ({ email }) => {
+const Navbar = ({ email, role }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   // Toggle dropdown state
@@ -28,7 +28,7 @@ const Navbar = ({ email }) => {
       </a>
 
       <div className="ms-8" style={{ fontSize: '25px', marginRight: '600px', marginTop: '15px' }}>
-        <p>Hi, Admin</p>
+        <p>Hi, {role}</p>
       </div>
 
       <div className="d-flex align-items-center">

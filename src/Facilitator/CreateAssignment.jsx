@@ -17,7 +17,7 @@ function CreateAssignment() {
     formData.append('dueDate', dueDate);
 
     try {
-      const response = await fetch('/api/assignments', {
+      const response = await fetch('/assignments', {
         method: 'POST',
         body: formData,
       });

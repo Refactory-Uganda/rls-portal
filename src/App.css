@@ -61,6 +61,7 @@ a {
 .action-btn {
   background-color: #663367;
   color: white;
+  height: 40px;
 }
 .action-btn:hover {
   background-color: #542b55;
@@ -77,6 +78,7 @@ a {
   background-color: white;
   color: #663367;
   border: 0.1rem solid #663367;
+  height: 40px;
 }
 .secondary-action-btn:hover {
   background-color: #542b55;

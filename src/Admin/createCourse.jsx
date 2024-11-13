@@ -11,8 +11,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { Button } from "react-bootstrap";
-import AddQuiz from "./AddQuiz";
-import RichTextEditor from "./RichTextEditor";
+import AddQuiz from "../Components/AddQuiz";
+import RichTextEditor from "../Components/RichTextEditor";
 const CreateCourse = () => {
   const [courseData, setCourseData] = useState({
     Title: "",
