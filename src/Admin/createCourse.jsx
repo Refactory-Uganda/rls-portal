@@ -10,8 +10,8 @@ import {
   faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "react-bootstrap";
-import AddQuiz from "./AddQuiz";
-import RichTextEditor from "./RichTextEditor";
+import AddQuiz from "../Components/AddQuiz";
+import RichTextEditor from "../Components/RichTextEditor";
 import api from "../services/api";
 
 const CreateCourse = () => {

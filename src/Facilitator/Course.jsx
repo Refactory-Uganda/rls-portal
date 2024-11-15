@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import CourseDetails from "../Components/CourseDetails";
 import CourseList from "./CourseList";
 import api from "../services/api";
-import EditCourse from "./EditCourse";
-import CreateCourse from "./createCourse"; // Ensure the path is correct
+// import EditCourse from "./EditCourse";
+// import CreateCourse from "./createCourse"; 
 import CourseContentView from "../Components/CourseContentView";
 
-const Courses = () => {
+const Course = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [courses, setCourses] = useState([]);
   const [view, setView] = useState("list"); 
@@ -16,7 +16,7 @@ const Courses = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await api.get("/courses");
+        const response = await api.get("/courses"); 
         setCourses(response.data.courses);
       } catch (error) {
         console.error("Error fetching courses:", error);
@@ -27,29 +27,6 @@ const Courses = () => {
     fetchCourses();
   }, []);
 
-  // Handle deletion of a course
-  const handleDeleteCourse = (deletedCourseId) => {
-    setCourses(courses.filter((course) => course.id !== deletedCourseId));
-    setSelectedCourse(null); // Optionally deselect after deletion
-    setView("list");
-  };
-
-  // Handle successful editing
-  const handleEditSuccess = (updatedCourse) => {
-    // Update the courses list with the updated course
-    setCourses((prevCourses) =>
-      prevCourses.map((course) =>
-        course.id === updatedCourse.id ? updatedCourse : course
-      )
-    );
-    setView("details");
-  };
-
-  // Handle successful course creation
-  const handleCreateSuccess = (newCourse) => {
-    setCourses([...courses, newCourse]); // Add new course to the list
-    setView("list");
-  };
 
   return (
     <div className="container mx-auto p-4">
@@ -67,38 +44,21 @@ const Courses = () => {
         <CourseDetails
           selectedCourse={selectedCourse}
           setSelectedCourse={setSelectedCourse}
-          onDelete={handleDeleteCourse}
           setView={setView}
           error={error}
           setError={setError}
         />
       )}
 
-      {view === "edit" && selectedCourse && (
-        <EditCourse
-          selectedCourse={selectedCourse}
-          onUpdateSuccess={handleEditSuccess}
-          onCancel={() => setView("details")}
-        />
-      )}
-
-      {view === "createCourse" && (
-        <CreateCourse
-          onCreateSuccess={handleCreateSuccess} // Handle successful course creation
-          onCancel={() => setView("list")}
-        />
-      )}
       {view === "contentView" && (
         <CourseContentView
           setView={setView}
           selectedCourse={selectedCourse}
           setSelectedCourse={setSelectedCourse}
-          onCreateSuccess={handleCreateSuccess} // Handle successful course creation
-          // onCancel={() => setView("list")}
         />
       )}
     </div>
   );
 };
 
-export default Courses;
+export default Course;

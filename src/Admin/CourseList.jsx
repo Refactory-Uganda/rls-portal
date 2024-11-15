@@ -13,14 +13,14 @@ const CourseList = ({ courses, setSelectedCourse, view, setView }) => {
       <div className="container courseList-btn-container">
         <a
           href="#"
-          className="btn btn-primary action-btn"
+          className="btn action-btn"
           onClick={() => setView("createCourse")}
         >
           Create new course
         </a>
         <a
           href="#"
-          className="btn btn-primary secondary-action-btn"
+          className="btn secondary-action-btn"
           // onClick={() => setView("createCourse")}
         >
           Open drafts
