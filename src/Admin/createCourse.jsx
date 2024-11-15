@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEdit,
@@ -9,16 +9,29 @@ import {
   faList,
   faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 import { Button } from "react-bootstrap";
 import AddQuiz from "../Components/AddQuiz";
 import RichTextEditor from "../Components/RichTextEditor";
+import api from "../services/api";
+
 const CreateCourse = () => {
   const [courseData, setCourseData] = useState({
     Title: "",
     Description: "",
     Duration: "",
+    courseOutline: [],
+    requirements: [],
+    courseObjective: [],
+    status: "DRAFT",
+    facilitatorId: "",
   });
+
+  // const [feedback, setFeedback] = useState({ error: "", success: "" });
+  const [outlineInput, setOutlineInput] = useState(""); // To handle outline field
+  const [requirement, setRequirement] = useState(""); // To handle outline field
+  const [courseObjectiveInput, setCourseObjectiveInput] = useState(""); // To handle outline field
+  const [facilitators, setFacilitators] = useState([]);
+  const [image, setImage] = useState(null);
 
   const [isQuizModalOpen, setQuizModalOpen] = useState(false);
 
@@ -53,6 +66,20 @@ const CreateCourse = () => {
     success: "",
   });
 
+useEffect(() => {
+  const fetchFacilitators = async () => {
+    try {
+      const response = await api.get("/courses/staff");
+      setFacilitators(response.data);
+    } catch (error) {
+      console.error("Error fetching facilitators:", error);
+    }
+  };
+  
+  fetchFacilitators();
+  // setFacilitators([{id:"101",name:"Steven"},{id:"102",name:"Jackson"}])
+}, []);
+
   // Event Handlers
   const handleLessonInputChange = (name, value) => {
     // Update newLesson content directly using Quill's HTML value
@@ -62,11 +89,87 @@ const CreateCourse = () => {
     }));
   };
 
+  // const handleCourseInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setCourseData((prev) => ({ ...prev, [name]: value }));
+  //   setFeedback({ error: "", success: "" });
+  // };
+
+  // =====================================
+  const handleOutlineChange = (e) => {
+    setOutlineInput(e.target.value);
+  };
+  const handleObjectiveChange = (e) => {
+    setCourseObjectiveInput(e.target.value);
+  };
+  const handleRequirementsChange = (e) => {
+    setRequirement(e.target.value);
+  };
+
+  const addOutlineItem = () => {
+    if (outlineInput.trim()) {
+      setCourseData((prev) => ({
+        ...prev,
+        courseOutline: [...prev.courseOutline, outlineInput.trim()],
+      }));
+      setOutlineInput("");
+    }
+  };
+  const addObjectiveItem = () => {
+    if (courseObjectiveInput.trim()) {
+      setCourseData((prev) => ({
+        ...prev,
+        courseObjective: [...prev.courseObjective, courseObjectiveInput.trim()],
+      }));
+      setCourseObjectiveInput("");
+    }
+  };
+  const addRequirementItem = () => {
+    if (requirement.trim()) {
+      setCourseData((prev) => ({
+        ...prev,
+        requirements: [...prev.requirements, requirement.trim()],
+      }));
+      setRequirement("");
+    }
+  };
+
+  // =====================================
+
   const handleCourseInputChange = (e) => {
     const { name, value } = e.target;
-    setCourseData((prev) => ({ ...prev, [name]: value }));
+
+    setCourseData((prev) => {
+      // Handle adding to arrays for courseOutline and additionalArrayField
+      if (name === "courseOutline") {
+        return {
+          ...prev,
+          courseOutline: [...prev.courseOutline, value],
+        };
+      } else if (name === "requirements") {
+        return {
+          ...prev,
+          requirements: [...prev.requirements, value],
+        };
+      } else {
+        // Handle other fields normally
+        return {
+          ...prev,
+          [name]: value,
+        };
+      }
+    });
+
     setFeedback({ error: "", success: "" });
   };
+
+  // Facilitator selection
+  const handleFacilitatorChange = (e) => {
+    setCourseData({ ...courseData, facilitatorId: e.target.value });
+  };
+
+  // Image upload
+  const handleImageChange = (e) => setImage(e.target.files[0]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -75,21 +178,40 @@ const CreateCourse = () => {
     if (!Title || !Description || !Duration) {
       setFeedback({ error: "Please fill all required fields.", success: "" });
       return;
+
     }
 
+    const formData = new FormData();
+    formData.append("Title", courseData.Title);
+    formData.append("Description", courseData.Description);
+    formData.append("Duration", courseData.Duration);
+    formData.append("status", courseData.status);
+    formData.append("facilitatorId", courseData.facilitatorId);
+    formData.append("image", image);
+
+    // Append arrays as JSON strings
+    formData.append("courseOutline", JSON.stringify(courseData.courseOutline));
+    formData.append("requirements", JSON.stringify(courseData.requirements));
+    formData.append("courseObjective", JSON.stringify(courseData.courseObjective));
+
     try {
-      const response = await axios.post(
-        "http://localhost:3000/courses",
-        courseData
+      const response = await api.post(
+        "/courses",
+        formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       const courseId = response.data.id;
 
       for (const topic of topics) {
-        const topicResponse = await axios.post(
-          `http://localhost:3000/topic/${courseId}`,
+        const topicResponse = await api.post(
+          `/topic/${courseId}`,
           {
             Title: topic.Title,
             Description: topic.Description,
+            courseId: courseId,
           }
         );
 
@@ -97,7 +219,7 @@ const CreateCourse = () => {
 
         await Promise.all(
           topic.Lessons.map((lesson) =>
-            axios.post(`http://localhost:3000/lesson/${topicId}`, {
+            api.post(`/lesson/${topicId}`, {
               title: lesson.title,
               text: lesson.text,
               topicId: topicId,
@@ -106,7 +228,7 @@ const CreateCourse = () => {
         );
       }
 
-      setCourseData({ Title: "", Description: "", Duration: "" });
+      setCourseData({ Title: "", Description: "", Duration: "", status: "" });
       setTopics([]);
       setFeedback({ error: "", success: "Course created successfully!" });
     } catch (error) {
@@ -318,6 +440,99 @@ const CreateCourse = () => {
                           <label htmlFor="courseDescription">Description</label>
                         </div>
                       </div>
+                      {/* =============== */}
+                   
+
+                      <div className="form-group">
+                        <label>Course Outline</label>
+                        <input
+                          type="text"
+                          value={outlineInput}
+                          onChange={handleOutlineChange}
+                        />
+                        <button type="button" onClick={addOutlineItem}>
+                          Add to Outline
+                        </button>
+                        <ul>
+                          {courseData.courseOutline.map((item, index) => (
+                            <li key={index}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="form-group">
+                        <label>Course Objectives</label>
+                        <input
+                          type="text"
+                          value={courseObjectiveInput}
+                          onChange={handleObjectiveChange}
+                        />
+                        <button type="button" onClick={addObjectiveItem}>
+                          Add Course Objectives
+                        </button>
+                        <ul>
+                          {courseData.courseObjective.map((item, index) => (
+                            <li key={index}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="form-group">
+                        <label>Requirements</label>
+                        <input
+                          type="text"
+                          value={requirement}
+                          onChange={handleRequirementsChange}
+                        />
+                        <button type="button" onClick={addRequirementItem}>
+                          Add Requirement
+                        </button>
+                        <ul>
+                          {courseData.requirements.map((item, index) => (
+                            <li key={index}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* =============================== */}
+                      <div className="col-12">
+                        <div className="form-floating">
+                          <select
+                            name="status"
+                            className="form-control custom-focus"
+                            id="status"
+                            value={courseData.status}
+                            // onChange={handleCourseInputChange}
+                            style={{ height: "50px" }}
+                            placeholder="Enter course outline"
+                          >
+                            <option value="DRAFT">DRAFT</option>
+                            <option value="PUBLISHED">PUBLISHED</option>
+                          </select>
+
+                          <label htmlFor="courseOutline">status</label>
+                        </div>
+                      </div>
+                      {/* ======================= */}
+                      {/* Facilitator Selection */}
+                      <div className="form-group">
+                        <label>Facilitator</label>
+                        <select
+                          value={courseData.facilitatorId}
+                          onChange={handleFacilitatorChange}
+                        >
+                          <option value="">Select Facilitator</option>
+                          {facilitators.map((facilitator) => (
+                            <option key={facilitator.id} value={facilitator.id}>
+                              {`${facilitator.firstName} ${facilitator.lastName}`}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      {/* Image Upload */}
+                      <div className="form-group">
+                        <label>Course Image</label>
+                        <input type="file" onChange={handleImageChange} />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -505,7 +720,14 @@ const CreateCourse = () => {
                                 </div>
                                 <div className="form-floating mb-3">
                                   <div>
-                                    <label style={{ textAlign: "left", display: "block"}}>Lesson Content</label>
+                                    <label
+                                      style={{
+                                        textAlign: "left",
+                                        display: "block",
+                                      }}
+                                    >
+                                      Lesson Content
+                                    </label>
                                     <RichTextEditor
                                       value={newLesson.text} // Use newLesson.text instead of lessonContent
                                       onChange={(value) =>

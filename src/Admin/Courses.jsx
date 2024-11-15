@@ -9,14 +9,14 @@ import CourseContentView from "../Components/CourseContentView";
 const Courses = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [courses, setCourses] = useState([]);
-  const [view, setView] = useState("list"); // 'list', 'details', 'edit', 'createCourse'
+  const [view, setView] = useState("list"); 
   const [error, setError] = useState("");
 
   // Fetch courses from the backend when the component mounts
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await api.get("/courses"); // Ensure this endpoint matches your backend
+        const response = await api.get("/courses");
         setCourses(response.data.courses);
       } catch (error) {
         console.error("Error fetching courses:", error);
