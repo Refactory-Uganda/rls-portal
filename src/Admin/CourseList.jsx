@@ -10,7 +10,7 @@ const CourseList = ({ courses, setSelectedCourse, view, setView }) => {
   console.log(courses);
   return (
     <div className="container">
-      <div className="container courseList-btn-container">
+      <div className="courseList-btn-container">
         <a
           href="#"
           className="btn action-btn"
