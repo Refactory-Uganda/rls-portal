@@ -6,13 +6,13 @@ function CourseCard({ course, onClick }) {
       <div className="row g-0 align-items-center">
         <div className="col-md-2">
           <img
-            src="../../src/assets/Images/SideImage.png" // Replace with actual image path or variable
+            src="../../src/assets/Images/SideImage.png" 
             className="img-fluid rounded-start w-100"
             alt="Course image"
           />
         </div>
         <div className="col-md-10">
-          <div className="card-body d-flex flex-column">
+          <div className="card-body d-flex flex-column text-start">
             <div className="flex-grow-1">
               <h5 className="card-title">{course.Title}</h5>
               <p className="card-text">{course.Description}</p>
