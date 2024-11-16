@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ContentList from "./ContentList";
 
+
 import DisplayRichText from "./displayrichtext";
 import RichTextEditor from "./RichTextEditor";
 
@@ -46,7 +47,7 @@ const CourseContentView = ({ selectedCourse, setView }) => {
     <div className="container mx-auto my-8">
       {!isQuizViewOpen ? (
         <>
-          <div className="container courseList-btn-container">
+          <div className="courseList-btn-container">
             <button
               className="btn btn-primary action-btn"
               onClick={handleBackClick}
