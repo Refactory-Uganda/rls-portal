@@ -1,0 +1,23 @@
+/* Styling for Calendar Page */
+.calendar-page {
+    background-color: #f7f7f7; /* Light background */
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  h1 {
+    color: rgb(56, 191, 195); /* Custom color for the title */
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Wrapper for the iframe */
+  .calendar-wrapper {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid rgb(56, 191, 195); /* Border color to match your theme */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  }
+  

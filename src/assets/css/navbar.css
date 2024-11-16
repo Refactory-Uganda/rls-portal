@@ -16,7 +16,7 @@
 }
 
 /* Adjust greeting and profile alignment */
-.navbar .ms-8 {
+.navbar .ms-10 {
   font-size: 1.5rem;
   margin-right: auto; /* Align left for spacing */
 }
@@ -28,7 +28,7 @@
 
 /* Media query for tablets and smaller devices */
 @media (max-width: 768px) {
-  .navbar .ms-8 {
+  .navbar .ms-10 {
       font-size: 1.2rem;
       margin-right: 20px; /* Reduce margin on smaller screens */
       display: none; /* Hide the greeting text on smaller screens */

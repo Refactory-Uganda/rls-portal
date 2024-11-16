@@ -9,28 +9,35 @@ import {
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Sidebar from "./Components/Sidebar";
-import DashboardContent from "./Admin/DashboardContent";
 import Navbar from "./Components/Navbar";
-import Login from "./Login/Login";
 import useAuth from "./Hooks/useAuth";
 
 
 // Logins
+import Login from "./Login/Login";
 import LoginWelcome from "./Auth/users/LoginWelcome";
 import AdminLogin from "./Auth/users/AdminLogin";
 import FacilitatorLogin from "./Auth/users/FacilitatorLogin";
 import LearnerLogin from "./Auth/users/LearnerLogin";
 
+
 //Import Admin Components
 import Courses from "./Admin/Courses";
+import DashboardContent from "./Admin/DashboardContent";
 
 // Import Facilitator Components
-// import FacilitatorNavbar from "./Facilitator/FacilitatorNavbar";
-// import FacilitatorSidebar from "./Facilitator/FacilitatorSidebar";
 import FacilitatorDashboardContent from "./Facilitator/FacilitatorDashboardContent";
 import AssignmentsContent from "./Facilitator/AssignmentsContent";
 import CourseList from "./Facilitator/CourseList";
 import Course from "./Facilitator/Course";
+import Resources from "./Facilitator/Resources";
+
+//Import Learner Components
+import LearnerDashboard from "./Learner/LearnerDashboard";
+import Calendar from "./Learner/Calendar";
+import LearnerAssignments from "./Learner/LearnerAssignments";
+// import Topics from "./Learner/Topics";
+
 
 
 const App = () => {
@@ -175,6 +182,138 @@ const App = () => {
             </div>
           }
         />
+
+        <Route
+          path="/facilitator/resources"
+          element={
+            <div className="d-flex flex-column h-100">
+              <Navbar email={"dnambafu@refactory.academy"} role={"Facilitator"} />
+              <div className="d-flex flex-grow-1 main-sidebar-content">
+                <Sidebar
+                  selectedMenu={selectedMenu}
+                  setSelectedMenu={setSelectedMenu}
+                  menuItems={[
+                    { name: "Dashboard", key: "dashboard", to: "/facilitator", iconClass: "fas fa-tachometer-alt" },
+                    { name: "Course", key: "course", to: "/facilitator/course", iconClass: "fas fa-book" },
+                    { name: "Learners", key: "learners", to: "/facilitator/learners", iconClass: "fas fa-user-graduate" },
+                    { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-chalkboard-teacher" },
+                    { name: "Assignments", key: "assignments", to: "/facilitator/assignments", iconClass: "fas fa-book" },
+                  ]}
+                />
+                <div className="flex-grow-1 bg-light dash-content">
+                  <Resources />
+                </div>
+              </div>
+            </div>
+          }
+        />
+
+        {/* Protected Learner routes */}
+        <Route
+          path="/learner"
+          element={
+            <div className="d-flex flex-column h-100">
+              <Navbar email={"ajonathan.student@refactory.academy"} role={"Learner"} />
+              <div className="d-flex flex-grow-1 main-sidebar-content">
+                <Sidebar
+                  selectedMenu={selectedMenu}
+                  setSelectedMenu={setSelectedMenu}
+                  menuItems={[
+                    { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-home" },
+                    { name: "Topics", key: "topics", to: "/learner/topics", iconClass: "fas fa-list-alt" },
+                    { name: "Assignments", key: "assignments", to: "/learner/assignments", iconClass: "fas fa-tasks" },
+                    { name: "Calendar", key: "calendar", to: "/calendar", iconClass: "fas fa-calendar-alt" }
+
+                  ]}
+
+                />
+                <div className="flex-grow-1 bg-light dash-content">
+                  <LearnerDashboard selectedMenu={selectedMenu} />
+                </div>
+              </div>
+            </div>
+          }
+        />
+
+        {/* Learner-specific route for Calendar */}
+        <Route
+          path="/learner/calendar"
+          element={
+            <div className="d-flex flex-column h-100">
+              <Navbar email={"ajonathan@refactory.academy"} role={"Learner"} />
+              <div className="d-flex flex-grow-1 main-sidebar-content">
+                <Sidebar
+                  selectedMenu={selectedMenu}
+                  setSelectedMenu={setSelectedMenu}
+                  menuItems={[
+                    { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-home" },
+                    { name: "Topics", key: "topics", to: "/learner/topics", iconClass: "fas fa-list-alt" },
+                    { name: "Assignments", key: "assignments", to: "/learner/assignments", iconClass: "fas fa-tasks" },
+                    { name: "Calendar", key: "calendar", to: "/learner/calendar", iconClass: "fas fa-calendar-alt" }
+
+                  ]}
+                />
+                <div className="flex-grow-1 bg-light dash-content">
+                  <Calendar />
+                </div>
+              </div>
+            </div>
+          }
+        />
+
+        {/* Learner-specific route for Assignments */}
+        <Route
+          path="/learner/assignments"
+          element={
+            <div className="d-flex flex-column h-100">
+              <Navbar email={"ajonathan@refactory.academy"} role={"Learner"} />
+              <div className="d-flex flex-grow-1 main-sidebar-content">
+                <Sidebar
+                  selectedMenu={selectedMenu}
+                  setSelectedMenu={setSelectedMenu}
+                  menuItems={[
+                    { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-home" },
+                    { name: "Topics", key: "topics", to: "/learner/topics", iconClass: "fas fa-list-alt" },
+                    { name: "Assignments", key: "assignments", to: "/learner/assignments", iconClass: "fas fa-tasks" },
+                    { name: "Calendar", key: "calendar", to: "/learner/calendar", iconClass: "fas fa-calendar-alt" }
+
+                  ]}
+                />
+                <div className="flex-grow-1 bg-light dash-content">
+                  <LearnerAssignments />
+                </div>
+              </div>
+            </div>
+          }
+        />
+
+        {/* Learner-specific route for Assignments */}
+        {/* <Route
+          path="/learner/topics"
+          element={
+            <div className="d-flex flex-column h-100">
+              <Navbar email={"ajonathan@refactory.academy"} role={"Learner"} />
+              <div className="d-flex flex-grow-1 main-sidebar-content">
+                <Sidebar
+                  selectedMenu={selectedMenu}
+                  setSelectedMenu={setSelectedMenu}
+                  menuItems={[
+                    { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-home" },
+                    { name: "Topics", key: "topics", to: "/learner/topics", iconClass: "fas fa-list-alt" },
+                    { name: "Assignments", key: "assignments", to: "/learner/assignments", iconClass: "fas fa-tasks" },
+                    { name: "Calendar", key: "calendar", to: "/learner/calendar", iconClass: "fas fa-calendar-alt" }
+
+                  ]}
+                />
+                <div className="flex-grow-1 bg-light dash-content">
+                  <Topics />
+                </div>
+              </div>
+            </div>
+          }
+        /> */}
+
+
 
       </Routes>
     </Router>

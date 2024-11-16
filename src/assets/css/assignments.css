@@ -1,0 +1,122 @@
+/* assignments.css */
+.assignments-page {
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 20px;
+}
+
+.assignments-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    padding: 8px 15px;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 5px;
+    background-color: rgb(56, 191, 195);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.filter-btn:hover {
+    background-color: #48a5a9;
+    transform: scale(1.05);
+}
+
+.filter-btn.active {
+    background-color: #563d7c;
+    color: white;
+}
+
+.assignments-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.assignment-card {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.assignment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.assignment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.assignment-header h4 {
+    margin-left: 10px;
+    font-size: 1.2rem;
+}
+
+.assignment-details {
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.status {
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 5px;
+    background-color: rgb(56, 191, 195);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #48a5a9;
+    transform: scale(1.05);
+}
+
+button:active {
+    background-color: #2e7f81;
+    transform: scale(0.95);
+}
