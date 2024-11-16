@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Toast } from "react-bootstrap";
+import Accordion from "react-bootstrap/Accordion";
 import "../../src/assets/css/topicsList.css";
 import api from "../services/api";
 import RichTextEditor from "./RichTextEditor";
@@ -103,7 +104,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
       alert("Failed to add the lesson. Please try again.");
     }
   };
-  
+
   const handleEditTopicSubmit = async (e) => {
     e.preventDefault();
     const updatedTopic = {
@@ -163,86 +164,191 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
 
   return (
     <div className="accordion" id="topicsAccordion">
-      {selectedCourse.topics.map((topic) => (
-        <div
-          className="card topic-cover-card"
-          key={topic.id}
-          style={{ padding: "0" }}
-        >
-          <div className="topic-card">
-            <h2 className="mb-0 topic-list-item">
-              <button
-                className="btn btn-link topic-btn"
-                type="button"
-                onClick={() => toggleTopic(topic.id)}
-                aria-expanded={activeTopic === topic.id}
-                aria-controls={`collapse${topic.id}`}
-              >
-                {topic.Title}
-              </button>
-              <span>
-                <button
-                  className="btn btn-green me-2"
-                  onClick={() => handleAddLessonClick(topic)}
-                  title="Add Lesson"
-                >
-                  <i className="bi bi-plus-square-fill"></i>
-                </button>
-                <button
-                  className="btn btn-green me-2"
-                  onClick={() => handleEditTopic(topic)}
-                  title="Edit Topic"
-                >
-                  <i className="fas fa-edit"></i>
-                </button>
-                <button
-                  className="btn btn-green me-2"
-                  onClick={() => handleDeleteTopic(topic.id)}
-                  title="Delete Topic"
-                >
-                  <i className="fas fa-trash"></i>
-                </button>
-              </span>
-            </h2>
-          </div>
+      {/* {selectedCourse.topics.map((topic) => (
+        // <div
+        //   className="card topic-cover-card"
+        //   key={topic.id}
+        //   style={{ padding: "0" }}
+        // >
+        //   <div className="topic-card">
+        //     <h2 className="mb-0 topic-list-item">
+        //       <button
+        //         className="btn btn-link topic-btn"
+        //         type="button"
+        //         onClick={() => toggleTopic(topic.id)}
+        //         aria-expanded={activeTopic === topic.id}
+        //         aria-controls={`collapse${topic.id}`}
+        //       >
+        //         {topic.Title}
+        //       </button>
+        //       <span>
+        //         <button
+        //           className="btn btn-green me-2"
+        //           onClick={() => handleAddLessonClick(topic)}
+        //           title="Add Lesson"
+        //         >
+        //           <i className="bi bi-plus-square-fill"></i>
+        //         </button>
+        //         <button
+        //           className="btn btn-green me-2"
+        //           onClick={() => handleEditTopic(topic)}
+        //           title="Edit Topic"
+        //         >
+        //           <i className="fas fa-edit"></i>
+        //         </button>
+        //         <button
+        //           className="btn btn-green me-2"
+        //           onClick={() => handleDeleteTopic(topic.id)}
+        //           title="Delete Topic"
+        //         >
+        //           <i className="fas fa-trash"></i>
+        //         </button>
+        //       </span>
+        //     </h2>
+        //   </div>
 
-          <div
-            id={`collapse${topic.id}`}
-            className={`collapse ${activeTopic === topic.id ? "show" : ""}`}
-          >
-            <div className="card-body lesson-card">
-              <ul className="list-group">
-                {topic.Lesson.map((lesson) => (
-                  <li
-                    className="list-group-item lesson-list-item"
-                    key={lesson.id}
+        //   <div
+        //     id={`collapse${topic.id}`}
+        //     className={`collapse ${activeTopic === topic.id ? "show" : ""}`}
+        //   >
+        //     <div className="card-body lesson-card">
+        //       <ul className="list-group">
+        //         {topic.Lesson.map((lesson) => (
+        //           <li
+        //             className="list-group-item lesson-list-item"
+        //             key={lesson.id}
+        //           >
+        //             {lesson.title}
+        //             <span>
+        //               <button
+        //                 className="btn btn-green me-2"
+        //                 onClick={() => handleEditLesson(lesson)}
+        //                 title="Edit Lesson"
+        //               >
+        //                 <i className="fas fa-edit"></i>
+        //               </button>
+        //               <button
+        //                 className="btn btn-green me-2"
+        //                 onClick={() =>
+        //                   handleDeleteLesson(lesson.id, lesson.topicId)
+        //                 }
+        //                 title="Delete Lesson"
+        //               >
+        //                 <i className="fas fa-trash"></i>
+        //               </button>
+        //             </span>
+        //           </li>
+        //         ))}
+        //       </ul>
+        //     </div>
+        //   </div>
+        // </div>
+        
+      ))} */}
+      {/* <Accordion defaultActiveKey="0" flush>
+        {selectedCourse.topics.map((topic) => {
+          const numLessons = topic.Lesson.length;
+          return (
+            <Accordion.Item eventKey="0" key={topic.id}>
+              <Accordion.Header>
+                {`${topic.Title} | ${
+                  numLessons === 0
+                    ? "No Lessons"
+                    : numLessons === 1
+                    ? `${numLessons} Lesson`
+                    : `${numLessons} Lessons`
+                }`}
+                <span>
+                  <button
+                    className="btn btn-green me-2"
+                    onClick={() => handleAddLessonClick(topic)}
+                    title="Add Lesson"
                   >
-                    {lesson.title}
-                    <span>
-                      <button
-                        className="btn btn-green me-2"
-                        onClick={() => handleEditLesson(lesson)}
-                        title="Edit Lesson"
-                      >
-                        <i className="fas fa-edit"></i>
-                      </button>
-                      <button
-                        className="btn btn-green me-2"
-                        onClick={() =>
-                          handleDeleteLesson(lesson.id, lesson.topicId)
-                        }
-                        title="Delete Lesson"
-                      >
-                        <i className="fas fa-trash"></i>
-                      </button>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      ))}
+                    <i className="bi bi-plus-square-fill"></i>
+                  </button>
+                  <button
+                    className="btn btn-green me-2"
+                    onClick={() => handleEditTopic(topic)}
+                    title="Edit Topic"
+                  >
+                    <i className="fas fa-edit"></i>
+                  </button>
+                  <button
+                    className="btn btn-green me-2"
+                    onClick={() => handleDeleteTopic(topic.id)}
+                    title="Delete Topic"
+                  >
+                    <i className="fas fa-trash"></i>
+                  </button>
+                </span>
+              </Accordion.Header>
+              {topic.Lesson.map((lesson) => (
+                <Accordion.Body key={lesson.id}>{lesson.title}</Accordion.Body>
+              ))}
+            </Accordion.Item>
+          );
+        })}
+      </Accordion> */}
+
+      <Accordion defaultActiveKey="0" flush>
+        {selectedCourse.topics.map((topic) => {
+          const numLessons = topic.Lesson.length;
+          return (
+            <Accordion.Item eventKey={topic.id.toString()} key={topic.id}>
+              <Accordion.Header className="d-flex justify-content-between w-100 align-items-center topic-card">
+                <div className="d-flex justify-content-between w-100 align-items-center">
+                  {/* Topic Title and Lesson Count */}
+                  <span>
+                    {`${topic.Title} | ${
+                      numLessons === 0
+                        ? "No Lessons"
+                        : numLessons === 1
+                        ? `${numLessons} Lesson`
+                        : `${numLessons} Lessons`
+                    }`}
+                  </span>
+                  {/* Action Buttons */}
+                  <span className="d-flex gap-2">
+                    <button
+                      className="btn btn-green"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent the accordion from toggling
+                        handleAddLessonClick(topic);
+                      }}
+                      title="Add Lesson"
+                    >
+                      <i className="bi bi-plus-square-fill"></i>
+                    </button>
+                    <button
+                      className="btn btn-green"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleEditTopic(topic);
+                      }}
+                      title="Edit Topic"
+                    >
+                      <i className="fas fa-edit"></i>
+                    </button>
+                    <button
+                      className="btn btn-green"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteTopic(topic.id);
+                      }}
+                      title="Delete Topic"
+                    >
+                      <i className="fas fa-trash"></i>
+                    </button>
+                  </span>
+                </div>
+              </Accordion.Header>
+              {topic.Lesson.map((lesson) => (
+                <Accordion.Body key={lesson.id}>{lesson.title}</Accordion.Body>
+              ))}
+            </Accordion.Item>
+          );
+        })}
+      </Accordion>
 
       {/* Add Lesson Modal */}
       <Modal

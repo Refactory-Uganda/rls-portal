@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import api from "../services/api";
-import "../../src/assets/css/courseDetails.css";
+import "../assets/css/courseDetails.css";
 import TopicsList from "./TopicsList";
 import { Modal, Toast } from "react-bootstrap";
+// import { height } from "@fortawesome/free-solid-svg-icons/fa0";
 
 const CourseDetails = ({
   selectedCourse,
@@ -128,15 +129,15 @@ const CourseDetails = ({
   };
 
   return (
-    <div className="container mx-auto my-8">
-      <div className="container courseList-btn-container">
+    <div className=" mx-auto my-8" >
+      {/* <div className="course-details-btn-container" style={{ height: "3rem" }}>
         <button
           className="btn btn-primary action-btn"
           onClick={handleBackClick}
         >
           <i className="bi bi-arrow-left"></i> Back to Courses
         </button>
-      </div>
+      </div> */}
 
       <div className="course-and-topics-details-container row d-flex align-items-stretch">
         {/* Course Details */}

@@ -128,7 +128,7 @@ const CourseDetails = ({
 
   return (
     <div className="container mx-auto my-8">
-      <div className="container courseList-btn-container">
+      <div className="courseList-btn-container">
         <button
           className="btn btn-primary action-btn"
           onClick={handleBackClick}
