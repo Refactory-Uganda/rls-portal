@@ -176,7 +176,7 @@ const ContentList = ({
   };
 
   return (
-    <div className="accordion" id="topicsAccordion">
+    <div className="accordion contentList-accordion" id="topicsAccordion">
       {selectedCourse.topics.map((topic) => (
         <div
           className="card topic-cover-card"
