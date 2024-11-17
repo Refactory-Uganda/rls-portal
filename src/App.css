@@ -38,6 +38,9 @@
   }
 }
 
+button {
+  text-transform: inherit;
+}
 .card {
   padding: 1em;
 }

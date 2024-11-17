@@ -1,12 +1,13 @@
 import React from "react";
+import "../assets/css/fCourseCard.css"
 
 function CourseCard({ course, onClick }) {
   return (
-    <div className="card mb-4" style={{ width: "100%", maxWidth: "100%" }}>
-      <div className="row g-0 align-items-center">
+    <div className="card mb-4 facilitator-course-card" style={{ width: "100%", maxWidth: "100%",padding: "0" }}>
+      <div className="row g-0 align-items-center" style={{ padding: "0" }}>
         <div className="col-md-2">
           <img
-            src="../../src/assets/Images/SideImage.png" 
+            src="../../src/assets/Images/SideImage.png"
             className="img-fluid rounded-start w-100"
             alt="Course image"
           />
