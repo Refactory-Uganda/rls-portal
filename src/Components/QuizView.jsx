@@ -187,7 +187,8 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
         <button onClick={onBack} className="btn action-btn mb-3">
           Back to Lesson
         </button>
-        <h3>{`${quiz.title}`}</h3>
+        <h3 style={{fontWeight:"bold"}}>{`${quiz.title}`}</h3>
+        <span>
         <Button
           onClick={() => setShowQuizEditModal(true)}
           className="btn btn-primary action-btn"
@@ -203,16 +204,21 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
         </Button>
         <Button
           onClick={addQuestion}
-          className="btn btn-success mb-3 secondary-action-btn"
+          className="btn secondary-action-btn"
           title="Add Question"
         >
           <i className="bi bi-plus-square-fill"></i>
         </Button>
+        </span>
       </div>
       <div className="quiz-content-container">
         <form onSubmit={handleQuizSubmit}>
           {quiz.questions.map((question, qIndex) => (
-            <div key={question.id} className="quiz-question-list-item">
+            <div
+              key={question.id}
+              className="quiz-question-list-item"
+              style={{ textAlign: "left" }}
+            >
               <h5>
                 {`Q${qIndex + 1}: ${question.text}`}
                 <Button
@@ -246,9 +252,11 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
               ))}
             </div>
           ))}
-          <button type="submit" className="btn btn-primary action-btn mt-3">
-            Submit Quiz
-          </button>
+          <div style={{textAlign:"right"}}>
+            <button type="submit" className="btn btn-primary action-btn mt-3">
+              Submit Quiz
+            </button>
+          </div>
         </form>
       </div>
       {score !== null && <p>Your Score: {score}</p>}

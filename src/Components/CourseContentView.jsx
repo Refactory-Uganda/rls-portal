@@ -42,150 +42,80 @@ const CourseContentView = ({ selectedCourse, setView }) => {
     setQuiz(lessonToView.quiz);
   };
 
+  if (isQuizViewOpen) {
+    return (
+      <QuizView
+        quiz={quiz}
+        setQuiz={setQuiz}
+        onBack={() => setIsQuizViewOpen(false)}
+        lessonToView={lessonToView}
+      />
+    );
+  }
+
   return (
-    // <div className="container mx-auto my-8">
-    //   {!isQuizViewOpen ? (
-    //     <>
-    //       <div className="courseList-btn-container">
-    //         <button
-    //           className="btn btn-primary action-btn"
-    //           onClick={handleBackClick}
-    //         >
-    //           <i className="bi bi-arrow-left"></i> Back to Course Details
-    //         </button>
-    //       </div>
-    //       <div className="course-and-topics-details-container row d-flex align-items-stretch">
-    //         <div className="card col-md-8 d-flex">
-    //           {lessonToView && (
-    //             <div>
-    //               <DisplayRichText htmlContent={lessonToView.text} />
-    //             </div>
-    //           )}
-    //         </div>
-    //         <div className="course-topics-container card col-md-4 d-flex">
-    //           <ContentList
-    //             selectedCourse={selectedCourse}
-    //             handleViewLessonContent={handleViewLessonContent}
-    //             lessonToView={lessonToView}
-    //             setLessonToView={setLessonToView}
-    //           />
-    //         </div>
-    //       </div>
-    //     </>
-    //   ) : (
-    //     <QuizView
-    //       quiz={quiz}
-    //       setQuiz={setQuiz}
-    //       onBack={() => setIsQuizViewOpen(false)}
-    //       lessonToView={lessonToView}
-    //     />
-    //   )}
-
-    //   <div className="container quiz-btn-container">
-    //     {lessonToView && !isQuizViewOpen && (
-    //       <>
-    //         <a
-    //           href="#"
-    //           className="btn btn-primary action-btn"
-    //           onClick={(e) => {
-    //             e.preventDefault();
-    //             handleTakeQuizClick();
-    //           }}
-    //         >
-    //          View Quiz
-    //         </a>
-    //         {/* <a
-    //           href="#"
-    //           className="btn btn-primary secondary-action-btn action-btn"
-    //           onClick={(e) => {
-    //             e.preventDefault();
-    //             toggleEditQuizModal();
-    //           }}
-    //         >
-    //           Edit Quiz
-    //         </a> */}
-    //       </>
-    //     )}
-    //   </div>
-
-    //   {isEditQuizModalOpen && (
-    //     <EditQuiz
-    //       isEditModalOpen={isEditQuizModalOpen}
-    //       toggleQuizModal={toggleEditQuizModal}
-    //       quizData={lessonToView.quiz}
-    //     />
-    //   )}
-
-    //   {loadingQuiz && <p>Loading quiz...</p>}
-    //   {error && <p>Error fetching quiz: {error}</p>}
-    // </div>
-    <div>
-      <div className="content-view-container">
-        <div className="main-content">
-          {/* Video View Window */}
-          <div className="video-view">
+  
+  <div>
+    <div className="content-view-container">
+      {/* Main Content Section */}
+      <div className="main-content">
+        <div className="video-view">
+          {lessonToView ? (
+            <div className="lesson-content-window">
+              <DisplayRichText htmlContent={lessonToView.text} />
+            </div>
+          ) : (
             <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              src="https://www.youtube.com/embed/FOD408a0EzU"
               frameBorder="0"
               allowFullScreen
               title="Video View"
             ></iframe>
-          </div>
-
-          {/* Comments Section */}
-          <div className="comments-section">
-            {/* <h3>Comments</h3>
-            <div className="comment">
-              <p>
-                <strong>User1:</strong> Great video!
-              </p>
-            </div>
-            <div className="comment">
-              <p>
-                <strong>User2:</strong> Very informative, thanks!
-              </p>
-            </div> */}
-            <textarea
-              placeholder="Add a comment..."
-              className="content-view-text-area"
-            />
-            {/* <button>Post</button> */}
-          </div>
+          )}
         </div>
 
-        {/* Scrollable Video Rows */}
-        <div className="content-list-container">
-          {/* <h3>Up Next</h3>
-        {[1, 2, 3].map((video) => (
-          <div className="video-item" key={video}>
-            <img
-              src={`https://via.placeholder.com/120x90`}
-              alt={`Video Thumbnail ${video}`}
-            />
-            <div className="video-info">
-              <p className="title">{`Video Title ${video}`}</p>
-              <p className="channel">Channel Name</p>
-            </div>
-          </div>
-        ))} */}
-          <div className="courseList-btn-container">
+        {/* Action Buttons */}
+        {lessonToView && (
+          <div className="quiz-btn-container">
             <button
               className="btn btn-primary action-btn"
-              onClick={handleBackClick}
+              onClick={handleTakeQuizClick}
             >
-              <i className="bi bi-arrow-left"></i> Back to Details
+              View Quiz
             </button>
           </div>
-          <ContentList
-            selectedCourse={selectedCourse}
-            handleViewLessonContent={handleViewLessonContent}
-            lessonToView={lessonToView}
-            setLessonToView={setLessonToView}
+        )}
+
+        {/* Comments Section */}
+        <div className="comments-section">
+          <textarea
+            placeholder="Add a comment..."
+            className="content-view-text-area"
           />
         </div>
       </div>
+
+      {/* Scrollable Video Rows */}
+      <div className="content-list-container">
+        <div className="courseList-btn-container">
+          <button
+            className="btn btn-primary action-btn"
+            onClick={handleBackClick}
+          >
+            <i className="bi bi-arrow-left"></i> Back to Details
+          </button>
+        </div>
+        <ContentList
+          selectedCourse={selectedCourse}
+          handleViewLessonContent={handleViewLessonContent}
+          lessonToView={lessonToView}
+          setLessonToView={setLessonToView}
+        />
+      </div>
     </div>
-  );
+  </div>
+);
 };
+
 
 export default CourseContentView;

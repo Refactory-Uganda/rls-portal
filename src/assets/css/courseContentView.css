@@ -22,10 +22,19 @@
   margin-top: 0;
 }
 
+.lesson-content-window {
+  width: 100%;
+  height: 28rem; /* 60vh equivalent when root font size is 16px */
+  border-radius: 0.5rem;
+  background-color: white;
+  margin-bottom: 0.3rem;
+}
+
 .video-view iframe {
   width: 100%;
   height: 28rem; /* 60vh equivalent when root font size is 16px */
   border-radius: 0.5rem;
+  margin-bottom: 0.3rem;
 }
 
 /* Comments Section */
