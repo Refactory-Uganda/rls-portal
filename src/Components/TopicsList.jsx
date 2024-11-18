@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Toast } from "react-bootstrap";
-import Accordion from "react-bootstrap/Accordion";
 import "../../src/assets/css/topicsList.css";
 import api from "../services/api";
 import RichTextEditor from "./RichTextEditor";
@@ -50,7 +49,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
       showToast("Topic deleted successfully");
     } catch (error) {
       console.error("Error deleting topic:", error);
-      alert("Failed to delete the topic. Please try again.");
+      showToast("Failed to delete the topic. Please try again.");
     }
   };
 
@@ -70,7 +69,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
       showToast("Lesson deleted successfully");
     } catch (error) {
       console.error("Error deleting lesson:", error);
-      alert("Failed to delete the lesson. Please try again.");
+      showToast("Failed to delete the lesson. Please try again.");
     }
   };
 
@@ -82,7 +81,6 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
 
   const handleAddLesson = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
     const newLesson = {
       title: e.target.title.value,
       text: lessonText,
@@ -101,7 +99,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
       showToast("Lesson added successfully");
     } catch (error) {
       console.error("Error adding lesson:", error);
-      alert("Failed to add the lesson. Please try again.");
+      showToast("Failed to add the lesson. Please try again.");
     }
   };
 
@@ -121,7 +119,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
       showToast("Topic updated successfully");
     } catch (error) {
       console.error("Error updating topic:", error);
-      alert("Failed to update the topic. Please try again.");
+      showToast("Failed to update the topic. Please try again.");
     }
   };
 
@@ -149,7 +147,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
       showToast("Lesson updated successfully");
     } catch (error) {
       console.error("Error updating lesson:", error);
-      alert("Failed to update the lesson. Please try again.");
+      showToast("Failed to update the lesson. Please try again.");
     }
   };
 
@@ -158,197 +156,125 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
     setShowSuccessToast(true);
   };
 
-  const handleLessonTextChange = (event) => {
-    setLessonText(event.target.value);
+  const handleLessonTextChange = (content) => {
+    setLessonText(content);
   };
 
   return (
     <div className="accordion" id="topicsAccordion">
-      {/* {selectedCourse.topics.map((topic) => (
-        // <div
-        //   className="card topic-cover-card"
-        //   key={topic.id}
-        //   style={{ padding: "0" }}
-        // >
-        //   <div className="topic-card">
-        //     <h2 className="mb-0 topic-list-item">
-        //       <button
-        //         className="btn btn-link topic-btn"
-        //         type="button"
-        //         onClick={() => toggleTopic(topic.id)}
-        //         aria-expanded={activeTopic === topic.id}
-        //         aria-controls={`collapse${topic.id}`}
-        //       >
-        //         {topic.Title}
-        //       </button>
-        //       <span>
-        //         <button
-        //           className="btn btn-green me-2"
-        //           onClick={() => handleAddLessonClick(topic)}
-        //           title="Add Lesson"
-        //         >
-        //           <i className="bi bi-plus-square-fill"></i>
-        //         </button>
-        //         <button
-        //           className="btn btn-green me-2"
-        //           onClick={() => handleEditTopic(topic)}
-        //           title="Edit Topic"
-        //         >
-        //           <i className="fas fa-edit"></i>
-        //         </button>
-        //         <button
-        //           className="btn btn-green me-2"
-        //           onClick={() => handleDeleteTopic(topic.id)}
-        //           title="Delete Topic"
-        //         >
-        //           <i className="fas fa-trash"></i>
-        //         </button>
-        //       </span>
-        //     </h2>
-        //   </div>
+      {selectedCourse.topics.map((topic) => {
+        const numLessons = topic.Lesson.length;
+        return (
+          <div
+            className="card topic-cover-card"
+            key={topic.id}
+            style={{ padding: "0" }}
+          >
+            {/* Topic Header */}
+            <div className="topic-card">
+              <h2 className="mb-0 topic-list-item">
+                <button
+                  className="btn btn-link topic-btn"
+                  type="button"
+                  onClick={() => toggleTopic(topic.id)}
+                  aria-expanded={activeTopic === topic.id}
+                  aria-controls={`collapse${topic.id}`}
+                >
+                  {`${topic.Title} | ${
+                    numLessons === 0
+                      ? "No Lessons"
+                      : numLessons === 1
+                      ? `${numLessons} Lesson`
+                      : `${numLessons} Lessons`
+                  }`}
+                </button>
 
-        //   <div
-        //     id={`collapse${topic.id}`}
-        //     className={`collapse ${activeTopic === topic.id ? "show" : ""}`}
-        //   >
-        //     <div className="card-body lesson-card">
-        //       <ul className="list-group">
-        //         {topic.Lesson.map((lesson) => (
-        //           <li
-        //             className="list-group-item lesson-list-item"
-        //             key={lesson.id}
-        //           >
-        //             {lesson.title}
-        //             <span>
-        //               <button
-        //                 className="btn btn-green me-2"
-        //                 onClick={() => handleEditLesson(lesson)}
-        //                 title="Edit Lesson"
-        //               >
-        //                 <i className="fas fa-edit"></i>
-        //               </button>
-        //               <button
-        //                 className="btn btn-green me-2"
-        //                 onClick={() =>
-        //                   handleDeleteLesson(lesson.id, lesson.topicId)
-        //                 }
-        //                 title="Delete Lesson"
-        //               >
-        //                 <i className="fas fa-trash"></i>
-        //               </button>
-        //             </span>
-        //           </li>
-        //         ))}
-        //       </ul>
-        //     </div>
-        //   </div>
-        // </div>
-        
-      ))} */}
-      {/* <Accordion defaultActiveKey="0" flush>
-        {selectedCourse.topics.map((topic) => {
-          const numLessons = topic.Lesson.length;
-          return (
-            <Accordion.Item eventKey="0" key={topic.id}>
-              <Accordion.Header>
-                {`${topic.Title} | ${
-                  numLessons === 0
-                    ? "No Lessons"
-                    : numLessons === 1
-                    ? `${numLessons} Lesson`
-                    : `${numLessons} Lessons`
-                }`}
-                <span>
+                {/* Action Buttons */}
+                <span className="d-flex align-items-center gap-2">
                   <button
                     className="btn btn-green me-2"
-                    onClick={() => handleAddLessonClick(topic)}
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent accordion toggle
+                      handleAddLessonClick(topic);
+                    }}
                     title="Add Lesson"
                   >
                     <i className="bi bi-plus-square-fill"></i>
                   </button>
                   <button
                     className="btn btn-green me-2"
-                    onClick={() => handleEditTopic(topic)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleEditTopic(topic);
+                    }}
                     title="Edit Topic"
                   >
                     <i className="fas fa-edit"></i>
                   </button>
                   <button
                     className="btn btn-green me-2"
-                    onClick={() => handleDeleteTopic(topic.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDeleteTopic(topic.id);
+                    }}
                     title="Delete Topic"
                   >
                     <i className="fas fa-trash"></i>
                   </button>
-                </span>
-              </Accordion.Header>
-              {topic.Lesson.map((lesson) => (
-                <Accordion.Body key={lesson.id}>{lesson.title}</Accordion.Body>
-              ))}
-            </Accordion.Item>
-          );
-        })}
-      </Accordion> */}
 
-      <Accordion defaultActiveKey="0" flush>
-        {selectedCourse.topics.map((topic) => {
-          const numLessons = topic.Lesson.length;
-          return (
-            <Accordion.Item eventKey={topic.id.toString()} key={topic.id}>
-              <Accordion.Header className="d-flex justify-content-between w-100 align-items-center topic-card">
-                <div className="d-flex justify-content-between w-100 align-items-center">
-                  {/* Topic Title and Lesson Count */}
-                  <span>
-                    {`${topic.Title} | ${
-                      numLessons === 0
-                        ? "No Lessons"
-                        : numLessons === 1
-                        ? `${numLessons} Lesson`
-                        : `${numLessons} Lessons`
+                  {/* Arrow Icon */}
+                  <i
+                    className={`arrow-indicator ${
+                      activeTopic === topic.id ? "arrow-up" : "arrow-down"
                     }`}
-                  </span>
-                  {/* Action Buttons */}
-                  <span className="d-flex gap-2">
-                    <button
-                      className="btn btn-green"
-                      onClick={(e) => {
-                        e.stopPropagation(); // Prevent the accordion from toggling
-                        handleAddLessonClick(topic);
-                      }}
-                      title="Add Lesson"
+                  ></i>
+                </span>
+              </h2>
+            </div>
+
+            {/* Topic Content */}
+            <div
+              id={`collapse${topic.id}`}
+              className={`collapse ${activeTopic === topic.id ? "show" : ""}`}
+            >
+              <div className="card-body lesson-card">
+                <ul className="list-group">
+                  {topic.Lesson.map((lesson) => (
+                    <li
+                      className="list-group-item lesson-list-item"
+                      key={lesson.id}
                     >
-                      <i className="bi bi-plus-square-fill"></i>
-                    </button>
-                    <button
-                      className="btn btn-green"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleEditTopic(topic);
-                      }}
-                      title="Edit Topic"
-                    >
-                      <i className="fas fa-edit"></i>
-                    </button>
-                    <button
-                      className="btn btn-green"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDeleteTopic(topic.id);
-                      }}
-                      title="Delete Topic"
-                    >
-                      <i className="fas fa-trash"></i>
-                    </button>
-                  </span>
-                </div>
-              </Accordion.Header>
-              {topic.Lesson.map((lesson) => (
-                <Accordion.Body key={lesson.id}>{lesson.title}</Accordion.Body>
-              ))}
-            </Accordion.Item>
-          );
-        })}
-      </Accordion>
+                      {lesson.title}
+                      <span>
+                        <button
+                          className="btn btn-green me-2"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleEditLesson(lesson);
+                          }}
+                          title="Edit Lesson"
+                        >
+                          <i className="fas fa-edit"></i>
+                        </button>
+                        <button
+                          className="btn btn-green me-2"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteLesson(lesson.id, lesson.topicId);
+                          }}
+                          title="Delete Lesson"
+                        >
+                          <i className="fas fa-trash"></i>
+                        </button>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        );
+      })}
 
       {/* Add Lesson Modal */}
       <Modal
@@ -361,16 +287,21 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
         <Modal.Body>
           <form onSubmit={handleAddLesson}>
             <div className="mb-3">
-              <label>Title</label>
+              <label htmlFor="title" className="form-label">
+                Lesson Title
+              </label>
               <input
                 type="text"
                 className="form-control"
+                id="title"
                 name="title"
                 required
               />
             </div>
             <div className="mb-3">
-              <label>Text</label>
+              <label htmlFor="lessonText" className="form-label">
+                Lesson Content
+              </label>
               <RichTextEditor
                 value={lessonText}
                 onChange={handleLessonTextChange}
@@ -378,80 +309,8 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
                 required
               />
             </div>
-            <button type="submit" className="btn action-btn">
-              Add Lesson
-            </button>
-          </form>
-        </Modal.Body>
-      </Modal>
-
-      {/* Edit Topic Modal */}
-      <Modal
-        show={showEditTopicModal}
-        onHide={() => setShowEditTopicModal(false)}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Topic</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form onSubmit={handleEditTopicSubmit}>
-            <div className="mb-3">
-              <label>Title</label>
-              <input
-                type="text"
-                className="form-control"
-                name="title"
-                defaultValue={currentTopic?.Title}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label>Description</label>
-              <textarea
-                className="form-control"
-                name="description"
-                defaultValue={currentTopic?.Description}
-                required
-              />
-            </div>
-            <button type="submit" className="btn action-btn">
-              Save Changes
-            </button>
-          </form>
-        </Modal.Body>
-      </Modal>
-
-      {/* Edit Lesson Modal */}
-      <Modal
-        show={showEditLessonModal}
-        onHide={() => setShowEditLessonModal(false)}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Lesson</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form onSubmit={handleEditLessonSubmit}>
-            <div className="mb-3">
-              <label>Title</label>
-              <input
-                type="text"
-                className="form-control"
-                name="title"
-                defaultValue={currentLesson?.title}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label>Text</label>
-              <RichTextEditor
-                value={lessonText}
-                onChange={handleLessonTextChange}
-                name="lessonText"
-                required
-              />
-            </div>
-            <button type="submit" className="btn action-btn">
-              Save Changes
+            <button type="submit" className="btn btn-primary">
+              Save Lesson
             </button>
           </form>
         </Modal.Body>
@@ -461,8 +320,9 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
       <Toast
         onClose={() => setShowSuccessToast(false)}
         show={showSuccessToast}
-        delay={1000}
+        delay={3000}
         autohide
+        className="position-fixed bottom-0 end-0 m-3"
       >
         <Toast.Body>{successMessage}</Toast.Body>
       </Toast>
