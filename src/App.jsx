@@ -36,7 +36,7 @@ import Resources from "./Facilitator/Resources";
 import LearnerDashboard from "./Learner/LearnerDashboard";
 import Calendar from "./Learner/Calendar";
 import LearnerAssignments from "./Learner/LearnerAssignments";
-// import Topics from "./Learner/Topics";
+import LCourse from "./Learner/Course";
 
 
 
@@ -220,7 +220,7 @@ const App = () => {
                   setSelectedMenu={setSelectedMenu}
                   menuItems={[
                     { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-home" },
-                    { name: "Topics", key: "topics", to: "/learner/topics", iconClass: "fas fa-list-alt" },
+                    { name: "course", key: "course", to: "/learner/course", iconClass: "fas fa-list-alt" },
                     { name: "Assignments", key: "assignments", to: "/learner/assignments", iconClass: "fas fa-tasks" },
                     { name: "Calendar", key: "calendar", to: "/calendar", iconClass: "fas fa-calendar-alt" }
 
@@ -247,7 +247,7 @@ const App = () => {
                   setSelectedMenu={setSelectedMenu}
                   menuItems={[
                     { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-home" },
-                    { name: "Topics", key: "topics", to: "/learner/topics", iconClass: "fas fa-list-alt" },
+                    { name: "course", key: "course", to: "/learner/course", iconClass: "fas fa-list-alt" },
                     { name: "Assignments", key: "assignments", to: "/learner/assignments", iconClass: "fas fa-tasks" },
                     { name: "Calendar", key: "calendar", to: "/learner/calendar", iconClass: "fas fa-calendar-alt" }
 
@@ -273,7 +273,7 @@ const App = () => {
                   setSelectedMenu={setSelectedMenu}
                   menuItems={[
                     { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-home" },
-                    { name: "Topics", key: "topics", to: "/learner/topics", iconClass: "fas fa-list-alt" },
+                    { name: "course", key: "course", to: "/learner/course", iconClass: "fas fa-list-alt" },
                     { name: "Assignments", key: "assignments", to: "/learner/assignments", iconClass: "fas fa-tasks" },
                     { name: "Calendar", key: "calendar", to: "/learner/calendar", iconClass: "fas fa-calendar-alt" }
 
@@ -288,8 +288,8 @@ const App = () => {
         />
 
         {/* Learner-specific route for Assignments */}
-        {/* <Route
-          path="/learner/topics"
+        <Route
+          path="/learner/course"
           element={
             <div className="d-flex flex-column h-100">
               <Navbar email={"ajonathan@refactory.academy"} role={"Learner"} />
@@ -299,19 +299,20 @@ const App = () => {
                   setSelectedMenu={setSelectedMenu}
                   menuItems={[
                     { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-home" },
-                    { name: "Topics", key: "topics", to: "/learner/topics", iconClass: "fas fa-list-alt" },
+                    { name: "course", key: "course", to: "/learner/course", iconClass: "fas fa-list-alt" },
                     { name: "Assignments", key: "assignments", to: "/learner/assignments", iconClass: "fas fa-tasks" },
                     { name: "Calendar", key: "calendar", to: "/learner/calendar", iconClass: "fas fa-calendar-alt" }
 
                   ]}
                 />
                 <div className="flex-grow-1 bg-light dash-content">
-                  <Topics />
+                  <LCourse />
                 </div>
               </div>
             </div>
           }
-        /> */}
+        />
+        
 
 
 
