@@ -1,5 +1,6 @@
 import React from "react";
 import "../assets/css/courseCard.css";
+import api from "../services/api";
 
 // function CourseCard({ course, onClick }) {
 //   // const imageUrl = `${import.meta.env.VITE_API_URL || "http://localhost:3000"}${course.image}`;
@@ -56,7 +57,7 @@ const CourseCard = ({ course, onClick }) => {
     <div className="col" onClick={onClick}>
       <div
         className="card text-start course-card"
-        style={{ width: "18rem", padding: "0" }}
+        style={{ width: "14rem", padding: "0" }}
       >
         <img
           src={imageUrl}
@@ -68,7 +69,7 @@ const CourseCard = ({ course, onClick }) => {
           alt={course.Title || "Course Image"}
         />
         <div className="card-body">
-          <h5 className="card-title">{course.Title}</h5>
+          <h5 className="card-title" style={{fontWeight:"bold"}}>{course.Title}</h5>
           <p className="card-text">{course.Description}</p>
           <p className="card-text">{`${
             numTopics === 0

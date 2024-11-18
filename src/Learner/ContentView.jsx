@@ -54,67 +54,67 @@ const ContentView = ({ selectedCourse, setView }) => {
   }
 
   return (
-  
-  <div>
-    <div className="content-view-container">
-      {/* Main Content Section */}
-      <div className="main-content">
-        <div className="video-view">
-          {lessonToView ? (
-            <div className="lesson-content-window">
-              <DisplayRichText htmlContent={lessonToView.text} />
+    <div>
+      <div className="content-view-container">
+        {/* Main Content Section */}
+        <div className="main-content scrollable-container">
+          <div className="video-view">
+            {lessonToView ? (
+              <div className="lesson-content-window">
+                <DisplayRichText htmlContent={lessonToView.text} />
+              </div>
+            ) : (
+              <iframe
+                src="https://www.youtube.com/embed/FOD408a0EzU"
+                frameBorder="0"
+                allowFullScreen
+                title="Video View"
+              ></iframe>
+            )}
+          </div>
+
+          {/* Action Buttons */}
+          {lessonToView && (
+            <div className="quiz-btn-container">
+              <button
+                className="btn btn-primary action-btn"
+                onClick={handleTakeQuizClick}
+              >
+                View Quiz
+              </button>
             </div>
-          ) : (
-            <iframe
-              src="https://www.youtube.com/embed/FOD408a0EzU"
-              frameBorder="0"
-              allowFullScreen
-              title="Video View"
-            ></iframe>
           )}
+
+          {/* Comments Section */}
+          <div className="comments-section">
+            <textarea
+              placeholder="Add a comment..."
+              className="content-view-text-area"
+            />
+          </div>
         </div>
 
-        {/* Action Buttons */}
-        {lessonToView && (
-          <div className="quiz-btn-container">
+        {/* Scrollable Video Rows */}
+        <div className="content-list-container scrollable-container">
+          <div className="courseList-btn-container" style={{ paddingLeft: "0" }}>
             <button
               className="btn btn-primary action-btn"
-              onClick={handleTakeQuizClick}
+              onClick={handleBackClick}
+              
             >
-              View Quiz
+              <i className="bi bi-arrow-left"></i> Back to Details
             </button>
           </div>
-        )}
-
-        {/* Comments Section */}
-        <div className="comments-section">
-          <textarea
-            placeholder="Add a comment..."
-            className="content-view-text-area"
+          <ContentList
+            selectedCourse={selectedCourse}
+            handleViewLessonContent={handleViewLessonContent}
+            lessonToView={lessonToView}
+            setLessonToView={setLessonToView}
           />
         </div>
       </div>
-
-      {/* Scrollable Video Rows */}
-      <div className="content-list-container">
-        <div className="courseList-btn-container">
-          <button
-            className="btn btn-primary action-btn"
-            onClick={handleBackClick}
-          >
-            <i className="bi bi-arrow-left"></i> Back to Details
-          </button>
-        </div>
-        <ContentList
-          selectedCourse={selectedCourse}
-          handleViewLessonContent={handleViewLessonContent}
-          lessonToView={lessonToView}
-          setLessonToView={setLessonToView}
-        />
-      </div>
     </div>
-  </div>
-);
+  );
 };
 
 

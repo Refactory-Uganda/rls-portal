@@ -40,6 +40,10 @@
 
 button {
   text-transform: inherit;
+  font-size: 0.9rem;
+}
+.btn {
+  font-size: 0.9rem;
 }
 .card {
   padding: 1em;
@@ -112,12 +116,13 @@ a {
 }
 
 .main-sidebar-content {
-  margin-top: 5.5rem;
+  margin-top: 4.5rem;
 }
 
 .dash-content {
   margin-left: 16rem;
   margin-right: 1rem;
+  font-size: 0.9rem;
 }
 
 .custom-radio .form-check-input:checked {

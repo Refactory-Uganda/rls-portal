@@ -4,6 +4,10 @@
   gap: 1.5rem;
   height: 3rem !important;
 }
+.course-details-main-container{
+  font-size: 0.9rem;
+}
+
 .course-and-topics-details-container {
   text-align: left;
 }
