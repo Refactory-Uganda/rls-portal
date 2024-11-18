@@ -181,8 +181,8 @@ const CourseDetails = ({
                 }
               >
                 <i className="fas fa-trash"></i>
-              </button> */}
-              {/* <button
+              </button>
+              <button
                 className="btn btn-primary secondary-action-btn"
                 onClick={() => setShowAddTopicModal(true)}
               >
@@ -257,6 +257,59 @@ const CourseDetails = ({
         </Modal.Body>
       </Modal>
 
+      {/* Add Topic Modal */}
+      <Modal show={showAddTopicModal} onHide={handleCloseAddTopicModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Topic</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleAddTopic();
+            }}
+          >
+            <div className="mb-3">
+              <label>Title</label>
+              <input
+                type="text"
+                className="form-control"
+                value={topicTitle}
+                onChange={(e) => setTopicTitle(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <label>Description</label>
+              <textarea
+                className="form-control"
+                value={topicDescription}
+                onChange={(e) => setTopicDescription(e.target.value)}
+              ></textarea>
+            </div>
+            <button type="submit" className="btn action-btn">
+              Add Topic
+            </button>
+          </form>
+        </Modal.Body>
+      </Modal>
+
+      {/* Success Toasts */}
+      <Toast
+        onClose={() => setShowSuccess(false)}
+        show={showSuccess}
+        delay={3000}
+        autohide
+      >
+        <Toast.Body>Course updated successfully!</Toast.Body>
+      </Toast>
+      <Toast
+        onClose={() => setShowTopicSuccess(false)}
+        show={showTopicSuccess}
+        delay={3000}
+        autohide
+      >
+        <Toast.Body>Topic added successfully!</Toast.Body>
+      </Toast>
     </div>
   );
 };

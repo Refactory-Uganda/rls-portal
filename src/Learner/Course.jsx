@@ -52,7 +52,7 @@ const LCourse = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-2">
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       {view === "list" && (

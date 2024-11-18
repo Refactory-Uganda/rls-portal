@@ -30,7 +30,7 @@ const CourseView = ({ courses, setSelectedCourse, view, setView }) => {
       {courses.length === 0 ? (
         <p>Loading courses...</p>
       ) : (
-        <div className="row row-cols-3 row-cols-lg-3 g-2 g-lg-3">
+        <div className="row row-cols-3 row-cols-lg-3 g-1 g-lg-3">
           {courses.map((course) => (
             <CourseCard
               key={course.id}

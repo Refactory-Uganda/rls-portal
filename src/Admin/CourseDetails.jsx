@@ -129,7 +129,7 @@ const CourseDetails = ({
   };
 
   return (
-    <div className=" mx-auto my-8" >
+    <div className=" mx-auto my-8 course-details-main-container"  >
       {/* <div className="course-details-btn-container" style={{ height: "3rem" }}>
         <button
           className="btn btn-primary action-btn"
