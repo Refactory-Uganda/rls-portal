@@ -1,5 +1,5 @@
 import React from "react";
-import CourseCard from "./LCourseCard";
+import CourseCard from "../Components/LCourseCard";
 
 const CourseView = ({ courses, setSelectedCourse, view, setView }) => {
   // Handle course card click to display course details
