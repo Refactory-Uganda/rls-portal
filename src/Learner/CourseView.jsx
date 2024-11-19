@@ -1,35 +1,24 @@
 import React from "react";
 import CourseCard from "../Components/LCourseCard";
+import LongLoadingCourseCard from "../Facilitator/LongLoadingCard";
 
-const CourseView = ({ courses, setSelectedCourse, view, setView }) => {
+
+const CourseView = ({ courses, setSelectedCourse, view, setView, isLoading }) => {
   // Handle course card click to display course details
   const handleCourseClick = (course) => {
     setSelectedCourse(course);
     setView("details");
   };
   console.log(courses);
+  const placeholders = Array.from({ length: 8 }, (_, index) => index + 1);
   return (
     <div className="container">
-      {/* <div className="courseList-btn-container">
-        <a
-          href="#"
-          className="btn action-btn"
-          onClick={() => setView("createCourse")}
-        >
-          Create new course
-        </a>
-        <a
-          href="#"
-          className="btn secondary-action-btn"
-          // onClick={() => setView("createCourse")}
-        >
-          Open drafts
-        </a>
-      </div> */}
-      {/* Optional: Add a "Create Course" button here */}
-      {courses.length === 0 ? (
-        <p>Loading courses...</p>
-      ) : (
+     
+      {isLoading ? (<div className="row row-cols-4 row-cols-lg-4 g-2 g-lg-3">
+          {placeholders.map((item, index) => (
+            <LongLoadingCourseCard key={index} />
+          ))}
+        </div> ) : (
         <div className="row row-cols-3 row-cols-lg-3 g-1 g-lg-3">
           {courses.map((course) => (
             <CourseCard
