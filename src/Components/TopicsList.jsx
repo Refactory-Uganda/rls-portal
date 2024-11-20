@@ -29,8 +29,11 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
   };
 
   const handleEditTopic = (topic) => {
+    
+    console.log(topic);
     setCurrentTopic(topic);
     setShowEditTopicModal(true);
+    console.log("function reached");
   };
 
   const handleEditLesson = (lesson) => {
@@ -156,8 +159,8 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
     setShowSuccessToast(true);
   };
 
-  const handleLessonTextChange = (content) => {
-    setLessonText(content);
+  const handleLessonTextChange = (event) => {
+    setLessonText(event.target.value);
   };
 
   return (
@@ -206,6 +209,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                       handleEditTopic(topic);
+                      console.log("clicked");
                     }}
                     title="Edit Topic"
                   >
@@ -280,7 +284,45 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
       <Modal
         show={showAddLessonModal}
         onHide={() => setShowAddLessonModal(false)}
+        dialogClassName="custom-medium-modal-width"
       >
+        {/* Edit Topic Modal */}
+        <Modal
+          show={showEditTopicModal}
+          onHide={() => setShowEditTopicModal(false)}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Topic</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form onSubmit={handleEditTopicSubmit}>
+              <div className="mb-3">
+                <label>Title</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="title"
+                  defaultValue={currentTopic?.Title || ""}
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label>Description</label>
+                <textarea
+                  className="form-control"
+                  name="description"
+                  defaultValue={currentTopic?.Description || ""}
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" className="btn action-btn">
+                Save Changes
+              </button>
+            </form>
+          </Modal.Body>
+        </Modal>
+
+        {/* Add Lesson Modal */}
         <Modal.Header closeButton>
           <Modal.Title>Add Lesson</Modal.Title>
         </Modal.Header>
@@ -306,10 +348,9 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
                 value={lessonText}
                 onChange={handleLessonTextChange}
                 name="lessonText"
-                required
               />
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary action-btn">
               Save Lesson
             </button>
           </form>
@@ -320,9 +361,9 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
       <Toast
         onClose={() => setShowSuccessToast(false)}
         show={showSuccessToast}
-        delay={3000}
+        delay={1500}
         autohide
-        className="position-fixed bottom-0 end-0 m-3"
+        className="position-fixed bottom-0 end-0 m-3 success-toast"
       >
         <Toast.Body>{successMessage}</Toast.Body>
       </Toast>
