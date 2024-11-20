@@ -302,20 +302,14 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
               <label htmlFor="lessonText" className="form-label">
                 Lesson Content
               </label>
-              {/* <RichTextEditor
+              <RichTextEditor
                 value={lessonText}
                 onChange={handleLessonTextChange}
                 name="lessonText"
                 required
-              /> */}
-              <RichTextEditor
-  value={lessonText} // Pass the state as the value
-  onChange={handleLessonTextChange} // Pass the handler for state updates
-  name="lessonText"
-/>
-
+              />
             </div>
-            <button type="submit" className="btn btn-primary action-btn">
+            <button type="submit" className="btn btn-primary">
               Save Lesson
             </button>
           </form>
