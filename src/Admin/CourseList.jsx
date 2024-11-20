@@ -48,9 +48,9 @@ const CourseList = ({ courses, setSelectedCourse, view, setView }) => {
         >
           Create new course
         </a>
-        <a href="#" className="btn secondary-action-btn">
+        {/* <a href="#" className="btn secondary-action-btn">
           Open drafts
-        </a>
+        </a> */}
       </div>
       {courses.length === 0 ? (
         <p>Loading courses...</p>

@@ -68,7 +68,7 @@ const App = () => {
                   menuItems={[
                     { name: "Dashboard", key: "dashboard", to: "/admin", iconClass: "fas fa-tachometer-alt" },
                     { name: "Courses", key: "courses", to: "/admin/courses", iconClass: "fas fa-book" },
-                    { name: "Learners", key: "learners", to: "/admin/learners", iconClass: "fas fa-user-graduate" },
+                    { name: "Learners", key: "learners", to: "/admin/learners", iconClass: "fas fa-users" },
                     { name: "Facilitators", key: "facilitators", to: "/admin/facilitators", iconClass: "fas fa-chalkboard-teacher" },
                   ]}
                 />
@@ -93,7 +93,7 @@ const App = () => {
                   menuItems={[
                     { name: "Dashboard", key: "dashboard", to: "/admin", iconClass: "fas fa-tachometer-alt" },
                     { name: "Courses", key: "courses", to: "/admin/courses", iconClass: "fas fa-book" },
-                    { name: "Learners", key: "learners", to: "/admin/learners", iconClass: "fas fa-user-graduate" },
+                    { name: "Learners", key: "learners", to: "/admin/learners", iconClass: "fas fa-users" },
                     { name: "Facilitators", key: "facilitators", to: "/admin/facilitators", iconClass: "fas fa-chalkboard-teacher" },
                   ]}
                 />
@@ -119,9 +119,9 @@ const App = () => {
                   menuItems={[
                     { name: "Dashboard", key: "dashboard", to: "/facilitator", iconClass: "fas fa-tachometer-alt" },
                     { name: "Course", key: "course", to: "/facilitator/course", iconClass: "fas fa-book" },
-                    { name: "Learners", key: "learners", to: "/facilitator/learners", iconClass: "fas fa-user-graduate" },
-                    { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-chalkboard-teacher" },
-                    { name: "Assignments", key: "assignments", to: "/facilitator/assignments", iconClass: "fas fa-book" },
+                    { name: "Learners", key: "learners", to: "/facilitator/learners", iconClass: "fas fa-users" },
+                    { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-folder-open" },
+                    { name: "Assignments", key: "assignments", to: "/facilitator/assignments", iconClass: "fas fa-tasks" },
                   ]}
                 />
                 <div className="flex-grow-1 bg-light dash-content">
@@ -145,9 +145,9 @@ const App = () => {
                   menuItems={[
                     { name: "Dashboard", key: "dashboard", to: "/facilitator", iconClass: "fas fa-tachometer-alt" },
                     { name: "Course", key: "course", to: "/facilitator/course", iconClass: "fas fa-book" },
-                    { name: "Learners", key: "learners", to: "/facilitator/learners", iconClass: "fas fa-user-graduate" },
-                    { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-chalkboard-teacher" },
-                    { name: "Assignments", key: "assignments", to: "/facilitator/assignments", iconClass: "fas fa-book" },
+                    { name: "Learners", key: "learners", to: "/facilitator/learners", iconClass: "fas fa-users" },
+                    { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-folder-open" },
+                    { name: "Assignments", key: "assignments", to: "/facilitator/assignments", iconClass: "fas fa-tasks" },
                   ]}
                 />
                 <div className="flex-grow-1 bg-light dash-content">
@@ -170,9 +170,9 @@ const App = () => {
                   menuItems={[
                     { name: "Dashboard", key: "dashboard", to: "/facilitator", iconClass: "fas fa-tachometer-alt" },
                     { name: "Course", key: "course", to: "/facilitator/course", iconClass: "fas fa-book" },
-                    { name: "Learners", key: "learners", to: "/facilitator/learners", iconClass: "fas fa-user-graduate" },
-                    { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-chalkboard-teacher" },
-                    { name: "Assignments", key: "assignments", to: "/facilitator/assignments", iconClass: "fas fa-book" },
+                    { name: "Learners", key: "learners", to: "/facilitator/learners", iconClass: "fas fa-users" },
+                    { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-folder-open" },
+                    { name: "Assignments", key: "assignments", to: "/facilitator/assignments", iconClass: "fas fa-tasks" },
                   ]}
                 />
                 <div className="flex-grow-1 bg-light dash-content">
@@ -195,9 +195,9 @@ const App = () => {
                   menuItems={[
                     { name: "Dashboard", key: "dashboard", to: "/facilitator", iconClass: "fas fa-tachometer-alt" },
                     { name: "Course", key: "course", to: "/facilitator/course", iconClass: "fas fa-book" },
-                    { name: "Learners", key: "learners", to: "/facilitator/learners", iconClass: "fas fa-user-graduate" },
-                    { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-chalkboard-teacher" },
-                    { name: "Assignments", key: "assignments", to: "/facilitator/assignments", iconClass: "fas fa-book" },
+                    { name: "Learners", key: "learners", to: "/facilitator/learners", iconClass: "fas fa-users" },
+                    { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-folder-open" },
+                    { name: "Assignments", key: "assignments", to: "/facilitator/assignments", iconClass: "fas fa-tasks" },
                   ]}
                 />
                 <div className="flex-grow-1 bg-light dash-content">
@@ -219,10 +219,10 @@ const App = () => {
                   selectedMenu={selectedMenu}
                   setSelectedMenu={setSelectedMenu}
                   menuItems={[
-                    { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-home" },
-                    { name: "course", key: "course", to: "/learner/course", iconClass: "fas fa-list-alt" },
+                    { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-tachometer-alt" },
+                    { name: "Course", key: "course", to: "/learner/course", iconClass: "fas fa-book" },
                     { name: "Assignments", key: "assignments", to: "/learner/assignments", iconClass: "fas fa-tasks" },
-                    { name: "Calendar", key: "calendar", to: "/calendar", iconClass: "fas fa-calendar-alt" }
+                    { name: "Calendar", key: "calendar", to: "/calendar", iconClass: "fas fa-calendar-alt" },
 
                   ]}
 
@@ -246,11 +246,10 @@ const App = () => {
                   selectedMenu={selectedMenu}
                   setSelectedMenu={setSelectedMenu}
                   menuItems={[
-                    { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-home" },
-                    { name: "course", key: "course", to: "/learner/course", iconClass: "fas fa-list-alt" },
+                    { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-tachometer-alt" },
+                    { name: "Course", key: "course", to: "/learner/course", iconClass: "fas fa-book" },
                     { name: "Assignments", key: "assignments", to: "/learner/assignments", iconClass: "fas fa-tasks" },
-                    { name: "Calendar", key: "calendar", to: "/learner/calendar", iconClass: "fas fa-calendar-alt" }
-
+                    { name: "Calendar", key: "calendar", to: "/calendar", iconClass: "fas fa-calendar-alt" },
                   ]}
                 />
                 <div className="flex-grow-1 bg-light dash-content">
@@ -272,11 +271,10 @@ const App = () => {
                   selectedMenu={selectedMenu}
                   setSelectedMenu={setSelectedMenu}
                   menuItems={[
-                    { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-home" },
-                    { name: "course", key: "course", to: "/learner/course", iconClass: "fas fa-list-alt" },
+                    { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-tachometer-alt" },
+                    { name: "Course", key: "course", to: "/learner/course", iconClass: "fas fa-book" },
                     { name: "Assignments", key: "assignments", to: "/learner/assignments", iconClass: "fas fa-tasks" },
-                    { name: "Calendar", key: "calendar", to: "/learner/calendar", iconClass: "fas fa-calendar-alt" }
-
+                    { name: "Calendar", key: "calendar", to: "/calendar", iconClass: "fas fa-calendar-alt" },
                   ]}
                 />
                 <div className="flex-grow-1 bg-light dash-content">
@@ -298,10 +296,10 @@ const App = () => {
                   selectedMenu={selectedMenu}
                   setSelectedMenu={setSelectedMenu}
                   menuItems={[
-                    { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-home" },
-                    { name: "course", key: "course", to: "/learner/course", iconClass: "fas fa-list-alt" },
+                    { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-tachometer-alt" },
+                    { name: "Course", key: "course", to: "/learner/course", iconClass: "fas fa-book" },
                     { name: "Assignments", key: "assignments", to: "/learner/assignments", iconClass: "fas fa-tasks" },
-                    { name: "Calendar", key: "calendar", to: "/learner/calendar", iconClass: "fas fa-calendar-alt" }
+                    { name: "Calendar", key: "calendar", to: "/calendar", iconClass: "fas fa-calendar-alt" },
 
                   ]}
                 />
@@ -312,7 +310,7 @@ const App = () => {
             </div>
           }
         />
-        
+
 
 
 
