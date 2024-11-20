@@ -98,7 +98,7 @@ const CourseContentView = ({ selectedCourse, setView }) => {
         <div className="content-list-container scrollable-container">
           <div className="courseList-btn-container" style={{ paddingLeft: "0" }}>
             <button
-              className="btn btn-primary action-btn"
+              className="btn btn-primary action-btn floating-btn"
               onClick={handleBackClick}
               
             >

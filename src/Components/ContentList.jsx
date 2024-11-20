@@ -374,29 +374,9 @@ const ContentList = ({
                 }
                 required
 
-                // className="form-control"
-                // name="text"
-                // value={currentLesson?.text || ""}
-                // onChange={(e) =>
-                //   setCurrentLesson({ ...currentLesson, text: e.target.value })
-                // } // Update lesson text on change
-                // required
+               
               />
-              {/* <RichTextEditor
-                className="form-control"
-                name="text"
-                value={currentLesson?.text || ""}
-                onChange={(e) =>
-                  setCurrentLesson({ ...currentLesson, text: e.target.value })
-                } // Update lesson text on change
-                required
-              /> */}
-              {/* <textarea
-                className="form-control"
-                name="text"
-                defaultValue={currentLesson?.text || ""}
-                required
-              ></textarea> */}
+             
             </div>
             <button type="submit" className="btn action-btn">
               Save Changes
