@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import api from "../services/api";
-import "../../src/assets/css/courseDetails.css";
-import TopicsList from "./TopicsList";
+import "../assets/css/courseDetails.css";
+import TopicsList from "../Components/TopicsList";
 import { Modal, Toast } from "react-bootstrap";
+// import { height } from "@fortawesome/free-solid-svg-icons/fa0";
 
 const CourseDetails = ({
   selectedCourse,
@@ -98,6 +99,7 @@ const CourseDetails = ({
     const newTopic = {
       Title: topicTitle,
       Description: topicDescription,
+      courseId: selectedCourse.id,
     };
 
     try {
@@ -127,13 +129,13 @@ const CourseDetails = ({
   };
 
   return (
-    <div className="container mx-auto my-8">
-      <div className="courseList-btn-container">
+    <div className=" mx-auto my-8 course-details-main-container"  >
+      <div className="course-details-btn-container" style={{ height: "3rem" }}>
         <button
           className="btn btn-primary action-btn"
           onClick={handleBackClick}
         >
-          <i className="bi bi-arrow-left"></i> Back to Courses
+          <i className="bi bi-arrow-left"></i> Back to Course
         </button>
       </div>
 
@@ -162,7 +164,7 @@ const CourseDetails = ({
             ))}
 
             <div className="course-details-btn-container">
-              <button
+              {/* <button
                 className="btn btn-purple me-2"
                 onClick={handleEditCourse}
                 title="Edit Course"
@@ -181,7 +183,7 @@ const CourseDetails = ({
                 }
               >
                 <i className="fas fa-trash"></i>
-              </button>
+              </button> */}
               <button
                 className="btn btn-primary secondary-action-btn"
                 onClick={() => setShowAddTopicModal(true)}

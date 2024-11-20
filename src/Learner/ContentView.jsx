@@ -80,7 +80,7 @@ const ContentView = ({ selectedCourse, setView }) => {
                 className="btn btn-primary action-btn"
                 onClick={handleTakeQuizClick}
               >
-                View Quiz
+                Take Quiz
               </button>
             </div>
           )}

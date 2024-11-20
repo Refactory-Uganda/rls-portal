@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CourseDetails from "../Components/CourseDetails";
+import CourseDetails from "./FCourseDetails";
 import CourseList from "./CourseList";
 import api from "../services/api";
 // import EditCourse from "./EditCourse";

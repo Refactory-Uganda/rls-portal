@@ -845,8 +845,8 @@ const CreateCourse = () => {
                     disabled={
                       !courseData.Title ||
                       !courseData.Description ||
-                      !courseData.Duration ||
-                      topics.length === 0
+                      !courseData.Duration 
+                      // topics.length === 0
                     }
                   >
                     <FontAwesomeIcon icon={faGraduationCap} className="me-2" />

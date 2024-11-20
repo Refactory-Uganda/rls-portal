@@ -56,9 +56,9 @@ const CourseList = ({
         >
           Create new course
         </a>
-        <a href="#" className="btn secondary-action-btn">
+        {/* <a href="#" className="btn secondary-action-btn">
           Open drafts
-        </a>
+        </a> */}
       </div>
       {isLoading ? (
       
