@@ -35,6 +35,7 @@
 .lesson-content-window div {
   max-width: 100%; /* Ensure child elements do not exceed parent width */
   word-wrap: break-word; /* Handle long words gracefully */
+  text-align: left;
 }
 
 .video-view iframe {
@@ -121,7 +122,18 @@
   background-color: #555;
 }
 
-.scrollable-container{
+.scrollable-container {
   overflow-y: auto; /* Allows vertical scrolling */
-    overflow-x: hidden; /* Prevents horizontal scrolling */
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+.floating-btn {
+  position: fixed;
+  bottom: 4rem;
+  right: 1.4rem;
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+  z-index: 1000;
+  cursor: pointer;
 }
