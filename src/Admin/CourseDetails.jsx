@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import api from "../services/api";
-import "../../src/assets/css/courseDetails.css";
+import "../assets/css/courseDetails.css";
 import TopicsList from "../Components/TopicsList";
 import { Modal, Toast } from "react-bootstrap";
+// import { height } from "@fortawesome/free-solid-svg-icons/fa0";
 
 const CourseDetails = ({
   selectedCourse,
@@ -98,6 +99,7 @@ const CourseDetails = ({
     const newTopic = {
       Title: topicTitle,
       Description: topicDescription,
+      courseId: selectedCourse.id,
     };
 
     try {
@@ -127,13 +129,13 @@ const CourseDetails = ({
   };
 
   return (
-    <div className="container mx-auto my-8">
-      <div className="courseList-btn-container">
+    <div className=" mx-auto my-8 course-details-main-container"  >
+      <div className="course-details-btn-container" style={{ height: "3rem" }}>
         <button
           className="btn btn-primary action-btn"
           onClick={handleBackClick}
         >
-          <i className="bi bi-arrow-left"></i> Back to Courses
+          <i className="bi bi-arrow-left"></i> Back to Course
         </button>
       </div>
 
@@ -145,7 +147,7 @@ const CourseDetails = ({
               <strong>{selectedCourse.Title}</strong>
             </h2>
             <h6 className="card-subtitle mb-2 text-body-secondary">
-              Duration: {selectedCourse.Duration}
+              Duration: {selectedCourse.Duration} weeks
             </h6>
             <h6 className="card-subtitle mb-2 text-body-secondary">
               Facilitator: Steven Kawooya
@@ -153,14 +155,14 @@ const CourseDetails = ({
             <h6 className="card-subtitle mb-2 text-body-secondary">
               Award: Certificate
             </h6>
-            <h6 className="card-subtitle mb-2 text-body-secondary">
+            {/* <h6 className="card-subtitle mb-2 text-body-secondary">
               Course objective:
-            </h6>
-            <p className="card-text">
-              This course equips learners with essential knowledge and practical
-              skills in {selectedCourse.Title}, enabling them to apply key
-              concepts in real-world situations.
-            </p>
+            </h6> */}
+            <p className="card-text">{selectedCourse.Description}</p>
+            {selectedCourse.courseOutline.map((item, index) => (
+              <p key={index}>{item}</p>
+            ))}
+
             <div className="course-details-btn-container">
               <button
                 className="btn btn-purple me-2"
@@ -297,18 +299,16 @@ const CourseDetails = ({
       <Toast
         onClose={() => setShowSuccess(false)}
         show={showSuccess}
-        delay={1500}
+        delay={3000}
         autohide
-        className="position-fixed bottom-0 end-0 m-3 success-toast"
       >
         <Toast.Body>Course updated successfully!</Toast.Body>
       </Toast>
       <Toast
         onClose={() => setShowTopicSuccess(false)}
         show={showTopicSuccess}
-        delay={1500}
+        delay={3000}
         autohide
-        className="position-fixed bottom-0 end-0 m-3 success-toast"
       >
         <Toast.Body>Topic added successfully!</Toast.Body>
       </Toast>
