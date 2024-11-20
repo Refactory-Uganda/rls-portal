@@ -66,19 +66,19 @@ const CreateCourse = () => {
     success: "",
   });
 
-useEffect(() => {
-  const fetchFacilitators = async () => {
-    try {
-      const response = await api.get("/courses/staff");
-      setFacilitators(response.data);
-    } catch (error) {
-      console.error("Error fetching facilitators:", error);
-    }
-  };
-  
-  fetchFacilitators();
-  // setFacilitators([{id:"101",name:"Steven"},{id:"102",name:"Jackson"}])
-}, []);
+  useEffect(() => {
+    const fetchFacilitators = async () => {
+      try {
+        const response = await api.get("/courses/staff");
+        setFacilitators(response.data);
+      } catch (error) {
+        console.error("Error fetching facilitators:", error);
+      }
+    };
+
+    fetchFacilitators();
+    // setFacilitators([{id:"101",name:"Steven"},{id:"102",name:"Jackson"}])
+  }, []);
 
   // Event Handlers
   const handleLessonInputChange = (name, value) => {
@@ -178,7 +178,6 @@ useEffect(() => {
     if (!Title || !Description || !Duration) {
       setFeedback({ error: "Please fill all required fields.", success: "" });
       return;
-
     }
 
     const formData = new FormData();
@@ -192,28 +191,25 @@ useEffect(() => {
     // Append arrays as JSON strings
     formData.append("courseOutline", JSON.stringify(courseData.courseOutline));
     formData.append("requirements", JSON.stringify(courseData.requirements));
-    formData.append("courseObjective", JSON.stringify(courseData.courseObjective));
+    formData.append(
+      "courseObjective",
+      JSON.stringify(courseData.courseObjective)
+    );
 
     try {
-      const response = await api.post(
-        "/courses",
-        formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await api.post("/courses", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       const courseId = response.data.id;
 
       for (const topic of topics) {
-        const topicResponse = await api.post(
-          `/topic/${courseId}`,
-          {
-            Title: topic.Title,
-            Description: topic.Description,
-            courseId: courseId,
-          }
-        );
+        const topicResponse = await api.post(`/topic/${courseId}`, {
+          Title: topic.Title,
+          Description: topic.Description,
+          courseId: courseId,
+        });
 
         const topicId = topicResponse.data.id;
 
@@ -441,9 +437,8 @@ useEffect(() => {
                         </div>
                       </div>
                       {/* =============== */}
-                   
 
-                      <div className="form-group">
+                      <div className="form-group col-12">
                         <label>Course Outline</label>
                         <input
                           type="text"
@@ -467,7 +462,7 @@ useEffect(() => {
                           onChange={handleObjectiveChange}
                         />
                         <button type="button" onClick={addObjectiveItem}>
-                          Add Course Objectives
+                          Add Course Objective
                         </button>
                         <ul>
                           {courseData.courseObjective.map((item, index) => (
@@ -735,23 +730,6 @@ useEffect(() => {
                                       } // Ensure you're using the correct handler
                                     />
                                   </div>
-
-                                  {/* <textarea
-                                    className="form-control custom-focus"
-                                    id="lessontext"
-                                    value={newLesson.text || ""}
-                                    onChange={(e) =>
-                                      setNewLesson({
-                                        ...newLesson,
-                                        text: e.target.value,
-                                      })
-                                    }
-                                    placeholder="Lesson Content"
-                                    style={{ height: "100px" }}
-                                  />
-                                  <label htmlFor="lessontext">
-                                    Lesson Content
-                                  </label> */}
                                 </div>
                                 <button
                                   type="button"

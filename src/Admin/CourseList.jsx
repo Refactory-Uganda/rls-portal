@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import CourseCard from "./CourseCard";
+import LoadingCard from "./LoadingCard";
 
-const CourseList = ({ courses, setSelectedCourse, view, setView }) => {
+const CourseList = ({
+  courses,
+  setSelectedCourse,
+  view,
+  setView,
+  isLoading,
+}) => {
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
-  const coursesPerPage = 8; 
+  const coursesPerPage = 8;
 
   // Calculate total number of pages
   const totalPages = Math.ceil(courses.length / coursesPerPage);
@@ -14,7 +21,6 @@ const CourseList = ({ courses, setSelectedCourse, view, setView }) => {
   const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
   const currentCourses = courses.slice(indexOfFirstCourse, indexOfLastCourse);
 
-  
   const handleCourseClick = (course) => {
     setSelectedCourse(course);
     setView("details");
@@ -38,6 +44,8 @@ const CourseList = ({ courses, setSelectedCourse, view, setView }) => {
     }
   };
 
+  const placeholders = Array.from({ length: 8 }, (_, index) => index + 1);
+
   return (
     <div className="container">
       <div className="courseList-btn-container">
@@ -52,8 +60,13 @@ const CourseList = ({ courses, setSelectedCourse, view, setView }) => {
           Open drafts
         </a> */}
       </div>
-      {courses.length === 0 ? (
-        <p>Loading courses...</p>
+      {isLoading ? (
+      
+        <div className="row row-cols-4 row-cols-lg-4 g-2 g-lg-3">
+          {placeholders.map((item, index) => (
+            <LoadingCard key={index} />
+          ))}
+        </div>
       ) : (
         <div className="row row-cols-4 row-cols-lg-4 g-2 g-lg-3">
           {currentCourses.map((course) => (
