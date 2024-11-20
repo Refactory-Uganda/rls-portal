@@ -299,18 +299,16 @@ const CourseDetails = ({
       <Toast
         onClose={() => setShowSuccess(false)}
         show={showSuccess}
-        delay={1500}
+        delay={3000}
         autohide
-        className="position-fixed bottom-0 end-0 m-3 success-toast"
       >
         <Toast.Body>Course updated successfully!</Toast.Body>
       </Toast>
       <Toast
         onClose={() => setShowTopicSuccess(false)}
         show={showTopicSuccess}
-        delay={1500}
+        delay={3000}
         autohide
-        className="position-fixed bottom-0 end-0 m-3 success-toast"
       >
         <Toast.Body>Topic added successfully!</Toast.Body>
       </Toast>
