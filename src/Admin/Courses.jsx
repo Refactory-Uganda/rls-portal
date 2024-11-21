@@ -29,6 +29,7 @@ const Courses = () => {
 
     fetchCourses();
   }, []);
+  console.log(courses)
   // Handle deletion of a course
   const handleDeleteCourse = (deletedCourseId) => {
     setCourses(courses.filter((course) => course.id !== deletedCourseId));
