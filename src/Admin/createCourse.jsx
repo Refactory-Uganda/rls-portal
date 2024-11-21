@@ -538,7 +538,7 @@ const CreateCourse = () => {
                             <option value="PUBLISHED">PUBLISHED</option>
                           </select> */}
 
-                          <label htmlFor="courseOutline">status</label>
+                          {/* <label htmlFor="courseOutline">status</label> */}
                         </div>
                       </div>
                       {/* ======================= */}
@@ -575,17 +575,7 @@ const CreateCourse = () => {
                       {/* Facilitator Selection */}
                       <div className="form-group">
                         <label>Facilitator</label>
-                        {/* <select
-                          value={courseData.facilitatorId}
-                          onChange={handleFacilitatorChange}
-                        >
-                          <option value="">Select Facilitator</option>
-                          {facilitators.map((facilitator) => (
-                            <option key={facilitator.id} value={facilitator.id}>
-                              {`${facilitator.firstName} ${facilitator.lastName}`}
-                            </option>
-                          ))}
-                        </select> */}
+                       
                         <select
                           value={courseData.facilitatorId}
                           onChange={handleFacilitatorChange}
