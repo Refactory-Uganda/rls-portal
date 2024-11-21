@@ -129,7 +129,7 @@ const CourseDetails = ({
   };
 
   return (
-    <div className=" mx-auto my-8 course-details-main-container"  >
+    <div className=" mx-auto my-8 course-details-main-container">
       <div className="course-details-btn-container" style={{ height: "3rem" }}>
         <button
           className="btn btn-primary action-btn"
@@ -159,10 +159,32 @@ const CourseDetails = ({
               Course objective:
             </h6> */}
             <p className="card-text">{selectedCourse.Description}</p>
-            {selectedCourse.courseOutline.map((item, index) => (
+            {/* {selectedCourse.courseOutline.map((item, index) => (
               <p key={index}>{item}</p>
-            ))}
+            ))} */}
 
+            {selectedCourse.courseOutline
+              .flatMap((item) => {
+                try {
+                  // Attempt to parse if the string is valid JSON
+                  if (item.startsWith("[") || item.startsWith("{")) {
+                    return JSON.parse(item);
+                  } else {
+                    // Return as-is if it's a plain string
+                    return item;
+                  }
+                } catch (error) {
+                  console.error(
+                    "Error parsing course outline item:",
+                    item,
+                    error
+                  );
+                  return []; // Return an empty array if parsing fails
+                }
+              })
+              .map((parsedItem, index) => (
+                <p key={index}>{parsedItem}</p>
+              ))}
             <div className="course-details-btn-container">
               {/* <button
                 className="btn btn-purple me-2"

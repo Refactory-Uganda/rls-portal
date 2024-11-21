@@ -24,6 +24,9 @@ const CreateCourse = () => {
     courseObjective: [],
     status: "DRAFT",
     facilitatorId: "",
+    facilitator: "",
+    award: "",
+    assessmentMode: "",
   });
 
   // const [feedback, setFeedback] = useState({ error: "", success: "" });
@@ -140,7 +143,21 @@ const CreateCourse = () => {
     const { name, value } = e.target;
 
     setCourseData((prev) => {
-      // Handle adding to arrays for courseOutline and additionalArrayField
+      // Handle updating facilitatorId and facilitatorName
+      if (name === "facilitatorId") {
+        const selectedFacilitator = facilitators.find(
+          (facilitator) => facilitator.id === value
+        );
+        return {
+          ...prev,
+          facilitatorId: value,
+          facilitator: selectedFacilitator
+            ? `${selectedFacilitator.firstName} ${selectedFacilitator.lastName}`
+            : "",
+        };
+      }
+
+      // Handle adding to arrays for courseOutline and requirements
       if (name === "courseOutline") {
         return {
           ...prev,
@@ -151,21 +168,29 @@ const CreateCourse = () => {
           ...prev,
           requirements: [...prev.requirements, value],
         };
-      } else {
-        // Handle other fields normally
-        return {
-          ...prev,
-          [name]: value,
-        };
       }
+
+      // Handle other fields normally
+      return {
+        ...prev,
+        [name]: value,
+      };
     });
 
+    // Reset feedback state
     setFeedback({ error: "", success: "" });
   };
 
   // Facilitator selection
+  // const handleFacilitatorChange = (e) => {
+  //   setCourseData({ ...courseData, facilitatorId: e.target.value });
+  // };
+
   const handleFacilitatorChange = (e) => {
-    setCourseData({ ...courseData, facilitatorId: e.target.value });
+    setCourseData((prevData) => ({
+      ...prevData,
+      facilitatorId: e.target.value, // Update the facilitatorId
+    }));
   };
 
   // Image upload
@@ -186,6 +211,9 @@ const CreateCourse = () => {
     formData.append("Duration", courseData.Duration);
     formData.append("status", courseData.status);
     formData.append("facilitatorId", courseData.facilitatorId);
+    formData.append("facilitator", courseData.facilitator);
+    formData.append("award", courseData.award);
+    formData.append("assessmentMode", courseData.assessmentMode);
     formData.append("image", image);
 
     // Append arrays as JSON strings
@@ -448,10 +476,17 @@ const CreateCourse = () => {
                         <button type="button" onClick={addOutlineItem}>
                           Add to Outline
                         </button>
-                        <ul>
+                        {/* <ul>
                           {courseData.courseOutline.map((item, index) => (
                             <li key={index}>{item}</li>
                           ))}
+                        </ul> */}
+                        <ul>
+                          {(courseData.courseOutline || []).map(
+                            (item, index) => (
+                              <li key={index}>{item}</li>
+                            )
+                          )}
                         </ul>
                       </div>
                       <div className="form-group">
@@ -490,7 +525,7 @@ const CreateCourse = () => {
                       {/* =============================== */}
                       <div className="col-12">
                         <div className="form-floating">
-                          <select
+                          {/* <select
                             name="status"
                             className="form-control custom-focus"
                             id="status"
@@ -501,16 +536,46 @@ const CreateCourse = () => {
                           >
                             <option value="DRAFT">DRAFT</option>
                             <option value="PUBLISHED">PUBLISHED</option>
-                          </select>
+                          </select> */}
 
                           <label htmlFor="courseOutline">status</label>
                         </div>
                       </div>
                       {/* ======================= */}
+                      {/* Assessment Mode Select Field */}
+                      <div className="mb-3">
+                        <label>Assessment Mode</label>
+                        <select
+                          name="assessmentMode"
+                          value={courseData.assessmentMode}
+                          onChange={handleCourseInputChange}
+                          required
+                        >
+                          <option value="">Select Assessment Mode</option>
+                          <option value="QUIZ">Quiz</option>
+                          <option value="ASSIGNMENT">Assignment</option>
+                        </select>
+                      </div>
+
+                      {/* Award Select Field */}
+                      <div className="mb-3">
+                        <label>Award</label>
+                        <select
+                          name="award"
+                          value={courseData.award}
+                          onChange={handleCourseInputChange}
+                          required
+                        >
+                          <option value="">Select Award</option>
+                          <option value="certificate">Certificate</option>
+                          <option value="diploma">Diploma</option>
+                        </select>
+                      </div>
+
                       {/* Facilitator Selection */}
                       <div className="form-group">
                         <label>Facilitator</label>
-                        <select
+                        {/* <select
                           value={courseData.facilitatorId}
                           onChange={handleFacilitatorChange}
                         >
@@ -520,8 +585,33 @@ const CreateCourse = () => {
                               {`${facilitator.firstName} ${facilitator.lastName}`}
                             </option>
                           ))}
+                        </select> */}
+                        <select
+                          value={courseData.facilitatorId}
+                          onChange={handleFacilitatorChange}
+                          required
+                        >
+                          <option value="" readOnly>
+                            Select Facilitator
+                          </option>
+                          {facilitators.map((facilitator) => (
+                            <option key={facilitator.id} value={facilitator.id}>
+                              {`${facilitator.firstName} ${facilitator.lastName}`}
+                            </option>
+                          ))}
                         </select>
+                        <p>
+                          Selected Facilitator ID: {courseData.facilitatorId}
+                        </p>
                       </div>
+
+                      {/* Hidden Input for Facilitator Name */}
+                      <input
+                        type="hidden"
+                        name="facilitator"
+                        value={courseData.facilitator}
+                        readOnly
+                      />
 
                       {/* Image Upload */}
                       <div className="form-group">
@@ -845,7 +935,7 @@ const CreateCourse = () => {
                     disabled={
                       !courseData.Title ||
                       !courseData.Description ||
-                      !courseData.Duration 
+                      !courseData.Duration
                       // topics.length === 0
                     }
                   >
