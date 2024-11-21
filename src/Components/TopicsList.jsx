@@ -29,9 +29,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
   };
 
   const handleEditTopic = (topic) => {
-    
-    console.log(topic);
-    setCurrentTopic(topic);
+       setCurrentTopic(topic);
     setShowEditTopicModal(true);
     console.log("function reached");
   };
@@ -209,7 +207,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                       handleEditTopic(topic);
-                      console.log("clicked");
+                      
                     }}
                     title="Edit Topic"
                   >
@@ -287,7 +285,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
         dialogClassName="custom-medium-modal-width"
       >
         {/* Edit Topic Modal */}
-        <Modal
+        {/* <Modal
           show={showEditTopicModal}
           onHide={() => setShowEditTopicModal(false)}
         >
@@ -320,7 +318,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
               </button>
             </form>
           </Modal.Body>
-        </Modal>
+        </Modal> */}
 
         {/* Add Lesson Modal */}
         <Modal.Header closeButton>

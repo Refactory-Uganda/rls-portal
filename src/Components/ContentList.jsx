@@ -33,6 +33,9 @@ const ContentList = ({
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
+  // RichTextEditor State for Add/Edit Lesson
+  const [lessonText, setLessonText] = useState("");
+
   const toggleTopic = (id) => {
     setActiveTopic(activeTopic === id ? null : id);
   };
@@ -42,7 +45,6 @@ const ContentList = ({
     setShowEditTopicModal(true);
   };
 
- 
   const handleEditLesson = (lesson) => {
     setCurrentLesson(lesson || { title: "", text: "" }); // Set fallback
     setShowEditLessonModal(true);
@@ -87,15 +89,21 @@ const ContentList = ({
     setShowAddLessonModal(true);
   };
 
+  // Add lesson logic
+  const handleLessonTextChange = (event) => {
+    setLessonText(event.target.value);
+  };
+
   const handleAddLesson = async (e) => {
     e.preventDefault();
     const newLesson = {
       title: e.target.title.value,
-      text: e.target.text.value,
+      text: lessonText,
+      topicId: currentTopic.id,
     };
     try {
       const response = await api.post(`/lesson/${currentTopic.id}`, newLesson);
-      const addedLesson = response.data; // Assuming response contains new lesson data
+      const addedLesson = response.data;
       const updatedTopics = selectedCourse.topics.map((topic) =>
         topic.id === currentTopic.id
           ? { ...topic, Lesson: [...topic.Lesson, addedLesson] }
@@ -106,7 +114,7 @@ const ContentList = ({
       showToast("Lesson added successfully");
     } catch (error) {
       console.error("Error adding lesson:", error);
-      alert("Failed to add the lesson. Please try again.");
+      showToast("Failed to add the lesson. Please try again.");
     }
   };
 
@@ -131,10 +139,6 @@ const ContentList = ({
   };
 
   const handleEditLessonSubmit = async (e) => {
-    // e.preventDefault();
-    // const updatedLesson = {
-    //   title: e.target.title.value,
-    //   text: e.target.text.value,
     e.preventDefault();
     if (!currentLesson) return; // Guard clause
 
@@ -142,25 +146,26 @@ const ContentList = ({
       title: e.target.title.value,
       text: currentLesson.text, // Use text from state
     };
-    console.log(currentLesson);
-    try {
-      await api.patch(`/lesson/${currentLesson.id}`, updatedLesson);
-      console.log(currentTopic);
-      const updatedTopics = selectedCourse.topics.map((topic) => {
-        console.log(topic);
 
+    try {
+      const response = await api.patch(
+        `/lesson/${currentLesson.id}`,
+        updatedLesson
+      );
+      if (!response.ok) throw new Error("Failed to update lesson");
+
+      const updatedTopics = selectedCourse.topics.map((topic) => {
         if (topic.id === currentTopic.id) {
-          const updatedLessons = topic.Lesson.map((lesson) => {
-            console.log(lesson);
-            console.log(currentLesson);
+          const updatedLessons = topic.Lesson.map((lesson) =>
             lesson.id === currentLesson.id
               ? { ...lesson, ...updatedLesson }
-              : lesson;
-          });
+              : lesson
+          );
           return { ...topic, Lesson: updatedLessons };
         }
         return topic;
       });
+
       setSelectedCourse((prev) => ({ ...prev, topics: updatedTopics }));
       setShowEditLessonModal(false);
       showToast("Lesson updated successfully");
@@ -169,7 +174,6 @@ const ContentList = ({
       alert("Failed to update the lesson. Please try again.");
     }
   };
-
   const showToast = (message) => {
     setSuccessMessage(message);
     setShowSuccessToast(true);
@@ -177,7 +181,9 @@ const ContentList = ({
 
   return (
     <div className="accordion contentList-accordion" id="topicsAccordion">
-      {selectedCourse.topics.map((topic) => (
+      {selectedCourse.topics.map((topic) => {
+         const numLessons = topic.Lesson.length;
+        return(
         <div
           className="card topic-cover-card"
           key={topic.id}
@@ -192,7 +198,13 @@ const ContentList = ({
                 aria-expanded={activeTopic === topic.id}
                 aria-controls={`collapse${topic.id}`}
               >
-                {topic.Title}
+                {`${topic.Title} | ${
+                    numLessons === 0
+                      ? "No Lessons"
+                      : numLessons === 1
+                      ? `${numLessons} Lesson`
+                      : `${numLessons} Lessons`
+                  }`}
               </button>
               <span>
                 <button
@@ -269,7 +281,7 @@ const ContentList = ({
             </div>
           </div>
         </div>
-      ))}
+      )})}
 
       {/* Add Lesson Modal */}
       <Modal
@@ -292,11 +304,15 @@ const ContentList = ({
             </div>
             <div className="mb-3">
               <label>Text</label>
-              <textarea
-                className="form-control"
+
+              <RichTextEditor
                 name="text"
+                value={currentLesson?.text || ""}
+                onChange={(value) =>
+                  setCurrentLesson((prev) => ({ ...prev, text: value }))
+                }
                 required
-              ></textarea>
+              />
             </div>
             <button type="submit" className="btn action-btn">
               Add Lesson
@@ -373,10 +389,7 @@ const ContentList = ({
                   }))
                 }
                 required
-
-               
               />
-             
             </div>
             <button type="submit" className="btn action-btn">
               Save Changes
