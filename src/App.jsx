@@ -24,6 +24,8 @@ import LearnerLogin from "./Auth/users/LearnerLogin";
 //Import Admin Components
 import Courses from "./Admin/Courses";
 import DashboardContent from "./Admin/DashboardContent";
+import Facilitators from "./Admin/Facilitators";
+import Learners from "./Admin/Learners";
 
 // Import Facilitator Components
 import FacilitatorDashboardContent from "./Facilitator/FacilitatorDashboardContent";
@@ -99,6 +101,58 @@ const App = () => {
                 />
                 <div className="flex-grow-1 bg-light dash-content">
                   <Courses
+                  />
+                </div>
+              </div>
+            </div>
+          }
+        />
+
+         {/* Admin-specific route for Facilitators page */}
+         <Route
+          path="/admin/facilitators"
+          element={
+            <div className="d-flex flex-column h-100">
+              <Navbar email={"jkanza@refactory.academy"} role={"Admin"} />
+              <div className="d-flex flex-grow-1 main-sidebar-content">
+                <Sidebar
+                  selectedMenu={selectedMenu}
+                  setSelectedMenu={setSelectedMenu}
+                  menuItems={[
+                    { name: "Dashboard", key: "dashboard", to: "/admin", iconClass: "fas fa-tachometer-alt" },
+                    { name: "Courses", key: "courses", to: "/admin/courses", iconClass: "fas fa-book" },
+                    { name: "Learners", key: "learners", to: "/admin/learners", iconClass: "fas fa-users" },
+                    { name: "Facilitators", key: "facilitators", to: "/admin/facilitators", iconClass: "fas fa-chalkboard-teacher" },
+                  ]}
+                />
+                <div className="flex-grow-1 bg-light dash-content">
+                  <Facilitators
+                  />
+                </div>
+              </div>
+            </div>
+          }
+        />
+
+         {/* Admin-specific route for Learners page */}
+         <Route
+          path="/admin/learners"
+          element={
+            <div className="d-flex flex-column h-100">
+              <Navbar email={"jkanza@refactory.academy"} role={"Admin"} />
+              <div className="d-flex flex-grow-1 main-sidebar-content">
+                <Sidebar
+                  selectedMenu={selectedMenu}
+                  setSelectedMenu={setSelectedMenu}
+                  menuItems={[
+                    { name: "Dashboard", key: "dashboard", to: "/admin", iconClass: "fas fa-tachometer-alt" },
+                    { name: "Courses", key: "courses", to: "/admin/courses", iconClass: "fas fa-book" },
+                    { name: "Learners", key: "learners", to: "/admin/learners", iconClass: "fas fa-users" },
+                    { name: "Facilitators", key: "facilitators", to: "/admin/facilitators", iconClass: "fas fa-chalkboard-teacher" },
+                  ]}
+                />
+                <div className="flex-grow-1 bg-light dash-content">
+                  <Learners
                   />
                 </div>
               </div>
