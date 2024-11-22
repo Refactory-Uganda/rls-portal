@@ -35,6 +35,11 @@ const ContentList = ({
 
   // RichTextEditor State for Add/Edit Lesson
   const [lessonText, setLessonText] = useState("");
+  // Initial state for the rich text input
+  const [lessonDetails, setLessonDetails] = useState({
+    text: "", 
+  });
+
 
   const toggleTopic = (id) => {
     setActiveTopic(activeTopic === id ? null : id);
@@ -122,51 +127,30 @@ const ContentList = ({
     }
   };
 
-  // const handleAddLessonClick = (topic) => {
-  //   setCurrentTopic(topic);
-  //   setShowAddLessonModal(true);
-  // };
-
+  
   const handleAddLessonClick = (topic) => {
     setCurrentTopic(topic);
     setLessonText(""); // Clear previous input
     setShowAddLessonModal(true);
   };
 
-  // Add lesson logic
+ 
+
   const handleLessonTextChange = (event) => {
-    setLessonText(event.target.value);
+    const { name, value } = event.target; // Destructure the event object
+    setLessonDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value, // Update the specific field in the form state
+    }));
   };
 
-  // const handleAddLesson = async (e) => {
-  //   e.preventDefault();
-  //   const newLesson = {
-  //     title: e.target.title.value,
-  //     text: lessonText,
-  //     topicId: currentTopic.id,
-  //   };
-  //   try {
-  //     const response = await api.post(`/lesson/${currentTopic.id}`, newLesson);
-  //     const addedLesson = response.data;
-  //     const updatedTopics = selectedCourse.topics.map((topic) =>
-  //       topic.id === currentTopic.id
-  //         ? { ...topic, Lesson: [...topic.Lesson, addedLesson] }
-  //         : topic
-  //     );
-  //     setSelectedCourse((prev) => ({ ...prev, topics: updatedTopics }));
-  //     setShowAddLessonModal(false);
-  //     showToast("Lesson added successfully");
-  //   } catch (error) {
-  //     console.error("Error adding lesson:", error);
-  //     showToast("Failed to add the lesson. Please try again.");
-  //   }
-  // };
+  
 
   const handleAddLesson = async (e) => {
     e.preventDefault();
     const newLesson = {
       title: e.target.title.value,
-      text: lessonText, // Use lessonText here
+      text: lessonDetails.text, // Use lessonText here
       topicId: currentTopic.id,
     };
 
@@ -357,18 +341,10 @@ const ContentList = ({
             <div className="mb-3">
               <label>Text</label>
 
-              {/* <RichTextEditor
-                name="text"
-                value={currentLesson?.text || ""}
-                onChange={(value) =>
-                  setCurrentLesson((prev) => ({ ...prev, text: value }))
-                }
-                required
-              /> */}
               <RichTextEditor
                 name="text"
-                value={lessonText} // Use lessonText for Add Lesson flow
-                onChange={setLessonText} // Update lessonText directly
+                value={lessonDetails.text} // Use lessonText for Add Lesson flow
+                onChange={handleLessonTextChange} // Update lessonText directly
                 required
               />
             </div>

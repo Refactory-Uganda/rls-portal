@@ -1,76 +1,77 @@
-// import React, { useState, useEffect } from "react";
-// import ReactQuill from "react-quill";
-// import "react-quill/dist/quill.snow.css";
-
-// function RichTextEditor({ value, onChange, name }) {
-//   const [editorContent, setEditorContent] = useState(value || "");
-
-//   useEffect(() => {
-//     // Sync editor content with the value prop when it changes
-//     if (value !== editorContent) {
-//       setEditorContent(value || "");
-//     }
-//   }, [value]);
-
-//   const handleContentChange = (content) => {
-//     setEditorContent(content);
-//     if (onChange) {
-//       onChange({ target: { name, value: content } }); // Ensure structure compatible with form handling
-//     }
-//   };
-
-//   // Quill modules configuration
-//   const modules = {
-//     toolbar: [
-//       [{ header: [1, 2, 3, false] }],
-//       ["bold", "italic", "underline", "strike"],
-//       [{ list: "ordered" }, { list: "bullet" }],
-//       ["link", "image"],
-//       [{ align: [] }],
-//       ["clean"],
-//     ],
-//   };
-
-//   // Quill formats to control what's allowed in the editor
-//   const formats = [
-//     "header",
-//     "bold",
-//     "italic",
-//     "underline",
-//     "strike",
-//     "list",
-//     "bullet",
-//     "link",
-//     "image",
-//     "align",
-//   ];
-
-//   return (
-//     <ReactQuill
-//       value={editorContent}
-//       onChange={handleContentChange}
-//       modules={modules}
-//       formats={formats}
-//       placeholder="Enter lesson content here..."
-//     />
-//   );
-// }
-
-// export default RichTextEditor;
 import React, { useState, useEffect, useRef } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import "prismjs/themes/prism-tomorrow.css";
+import Prism from "prismjs";
+import Quill from 'quill';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
+
+ // Register highlight.js with the Syntax module
+ window.hljs = hljs;
+// Languages for code snippets
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-python";
+import "prismjs/components/prism-java";
 
 function RichTextEditor({ value, onChange, name }) {
+ 
+  const quillRef = useRef(null);
   const [editorContent, setEditorContent] = useState(value || "");
-  const quillRef = useRef(null); // Reference for Quill Editor
+const [selectedLanguage, setSelectedLanguage] = useState("javascript");
+
+  // Highlight code blocks after rendering
+  useEffect(() => {
+    const quillEditor = quillRef.current?.getEditor();
+    if (quillEditor) {
+      const elements = quillEditor.root.querySelectorAll("pre code");
+      elements.forEach((block) => Prism.highlightElement(block));
+    }
+  }, [editorContent]);
+
+  // Custom video embed handler
+  const videoHandler = () => {
+    const url = prompt("Enter YouTube video URL:");
+    if (url) {
+      // Extract the YouTube video ID from the URL
+      const videoId = getYouTubeVideoId(url);
+      if (videoId) {
+        const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+        const iframe = `<iframe width="560" height="315" src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        const quill = quillRef.current.getEditor();
+        const range = quill.getSelection();
+        quill.clipboard.dangerouslyPasteHTML(range.index, iframe);
+      } else {
+        alert("Invalid YouTube URL.");
+      }
+    }
+  };
+
+  // Helper function to extract video ID from YouTube URL
+  const getYouTubeVideoId = (url) => {
+    const regExp =
+      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S+?\?v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+    const match = url.match(regExp);
+    return match ? match[1] : null;
+  };
 
   useEffect(() => {
     // Sync editor content with the value prop when it changes
-    if (value !== undefined && value !== editorContent) {
+    if (value !== editorContent) {
       setEditorContent(value || "");
     }
   }, [value]);
+
+  //  // Custom toolbar handler for inserting code blocks
+  //  const insertCodeBlock = () => {
+  //   const quill = quillRef.current.getEditor();
+  //   const range = quill.getSelection();
+
+  //   if (range) {
+  //     const codeSnippet = `<pre><code class="language-${selectedLanguage}">// Write your ${selectedLanguage} code here...</code></pre>`;
+  //     quill.clipboard.dangerouslyPasteHTML(range.index, codeSnippet);
+  //   }
+  // };
 
   const handleContentChange = (content) => {
     setEditorContent(content);
@@ -79,78 +80,49 @@ function RichTextEditor({ value, onChange, name }) {
     }
   };
 
-  const handleImageUpload = () => {
-    const input = document.createElement("input");
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
-    input.click();
-    input.onchange = async () => {
-      const file = input.files[0];
-      const formData = new FormData();
-      formData.append("file", file);
-
-      try {
-        // Replace with your upload logic (e.g., API call to upload the file)
-        const uploadedUrl = await uploadImageToServer(formData);
-        insertToEditor(uploadedUrl, "image");
-      } catch (error) {
-        console.error("Image upload failed:", error);
-      }
-    };
-  };
-
-  const handleVideoEmbed = () => {
-    const videoUrl = prompt("Enter the video URL");
-    if (videoUrl) {
-      insertToEditor(videoUrl, "video");
-    }
-  };
-
-  const insertToEditor = (url, type) => {
-    const quill = quillRef.current.getEditor(); // Access the Quill instance
-    const range = quill.getSelection();
-    if (type === "image") {
-      quill.insertEmbed(range.index, "image", url);
-    } else if (type === "video") {
-      quill.insertEmbed(range.index, "video", url);
-    }
-  };
-
-  const uploadImageToServer = async (formData) => {
-    // Replace with actual API logic
-    const response = await fetch("/api/upload", {
-      method: "POST",
-      body: formData,
-    });
-    const data = await response.json();
-    return data.url; // Return the uploaded image URL
-  };
-
   // Quill modules configuration
   const modules = {
     toolbar: {
       container: [
+        [{ font: [] }],
         [{ header: [1, 2, 3, false] }],
         ["bold", "italic", "underline", "strike"],
         [{ list: "ordered" }, { list: "bullet" }],
-        ["link", "image", "video"], // Video embedding support
-        [{ align: [] }],
         [{ script: "sub" }, { script: "super" }],
+        ["link", "image", "code-block"],
         [{ color: [] }, { background: [] }],
-        [{ code: "code-block" }],
-        ["clean"], // Remove formatting
+        [{ align: [] }],
+        // [{ code: "code-block" }],
+        ["clean"],
+        ["video"],
+        [
+          {
+            customCodeBlock: true, // Dropdown for languages
+          },
+        ],
+        [
+          {
+            "code-block": [
+              { value: "javascript", label: "JavaScript" },
+              { value: "python", label: "Python" },
+            ],
+          },
+        ],
+        ["align"],
       ],
       handlers: {
-        image: handleImageUpload,
-        video: handleVideoEmbed,
-      },
+        // "customCodeBlock": insertCodeBlock, // Add code insertion.
+      }, 
     },
-    clipboard: {
-      matchVisual: false,
-    },
+    // syntax: true, // Enable syntax highlighting
+    // clipboard: {
+    //   matchVisual: false,
+    // },
   };
 
+  // Quill formats to control what's allowed in the editor
   const formats = [
+    "font",
     "header",
     "bold",
     "italic",
@@ -158,14 +130,14 @@ function RichTextEditor({ value, onChange, name }) {
     "strike",
     "list",
     "bullet",
-    "link",
-    "image",
-    "video",
-    "align",
     "script",
     "color",
     "background",
+    "link",
+    "image",
+    "align",
     "code-block",
+    "video",
   ];
 
   return (
@@ -175,7 +147,7 @@ function RichTextEditor({ value, onChange, name }) {
       onChange={handleContentChange}
       modules={modules}
       formats={formats}
-      placeholder="Enter lesson content here, embed videos, add files, or write code snippets..."
+      placeholder="Enter lesson content here..."
     />
   );
 }
