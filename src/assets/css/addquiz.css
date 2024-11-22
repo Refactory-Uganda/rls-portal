@@ -1,0 +1,191 @@
+AddQuiz Component CSS
+.quiz-modal .modal-content {
+    border-radius: 2px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  }
+  
+  .quiz-modal .modal-header {
+    background-color: #663367; 
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  .quiz-modal .modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .quiz-modal .modal-body {
+    background-color: #f7f7f7; 
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  /* .card {
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+   */
+  .card-header {
+    background-color: #38bfc3;
+    color: white;
+    font-weight: 500;
+    padding: 0.75rem 1.25rem;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .question-card {
+    margin-top: 1rem;
+  }
+  
+  .question-card .text-muted {
+    font-size: 0.85rem;
+  }
+  
+  .question-card input[type="text"] {
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    width: 100%;
+    transition: border 0.2s ease-in-out;
+  }
+  
+  .question-card input[type="text"]:focus {
+    border-color: #38bfc3;
+    outline: none;
+  }
+  
+  .question-card textarea {
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    width: 100%;
+    transition: border 0.2s ease-in-out;
+  }
+  
+  .question-card textarea:focus {
+    border-color: #38bfc3;
+    outline: none;
+  }
+  
+  .options-container {
+    background-color: #f0f4f8;
+    padding: 1rem;
+    border-radius: 10px;
+  }
+  
+  .options-container .form-check-label {
+    font-size: 0.9rem;
+  }
+  
+  .options-container .form-control-lg {
+    border-radius: 10px;
+  }
+  
+  .btn-outline-light {
+    border-radius: 50%;
+    background-color: transparent;
+    border: 1px solid #ddd;
+  }
+  
+  .btn-outline-light:hover {
+    background-color: #ddd;
+  }
+  
+  .btn-outline-secondary-action-btn {
+    border-radius: 10px;
+    background-color: #38bfc3;
+    color: white;
+    border: 1px solid #38bfc3;
+    padding: 0.5rem 1rem;
+  }
+  
+  .btn-outline-secondary-action-btn:hover {
+    background-color: #2d8b90;
+  }
+  
+  .btn-delete {
+    background-color: transparent;
+    color: #f44336;
+    border: none;
+    align-items: right;
+    min-width: 20px;
+  }
+  
+  .btn-delete:hover {
+    color: #d32f2f;
+  }
+  
+  .btn-purple {
+    background-color: #663367;
+    color: white;
+    border: 1px solid #663367;
+    border-radius: 10px;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+  }
+  
+  .btn-purple:hover {
+    background-color: #5c2d5d;
+  }
+  
+  .form-control-lg {
+    border-radius: 10px;
+    font-size: 1.1rem;
+  }
+  
+  .form-control-lg:focus {
+    border-color: #663367;
+    outline: none;
+  }
+  
+  .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+  
+  .alert-danger .d-flex {
+    align-items: center;
+  }
+  
+  .alert-danger strong {
+    margin-right: 0.5rem;
+  }
+  
+  .modal-footer {
+    border-top: none;
+  }
+  
+  @media (max-width: 768px) {
+    .quiz-modal .modal-content {
+      width: 95%;
+    }
+  
+    .quiz-modal .modal-header {
+      padding: 1rem;
+    }
+  
+    .quiz-modal .modal-body {
+      padding: 1rem;
+    }
+  
+    .question-card .text-muted {
+      font-size: 0.75rem;
+    }
+  
+    .btn-purple {
+      font-size: 0.9rem;
+      padding: 0.75rem 1rem;
+    }
+  }
+  

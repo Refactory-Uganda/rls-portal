@@ -6,12 +6,11 @@ import {
   faSave, 
   faTimes, 
   faTrash, 
-  faQuestionCircle,
-  faInfoCircle,
-  faCheckCircle,
-  faExclamationTriangle
+  faCheckCircle, 
+  faExclamationTriangle 
 } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import "../../src/assets/css/addquiz.css";
 
 function AddQuiz({ isQuizModalOpen, toggleQuizModal, lessonTitle, lessonId }) {
   const [quizTitle, setQuizTitle] = useState('');
@@ -161,7 +160,7 @@ function AddQuiz({ isQuizModalOpen, toggleQuizModal, lessonTitle, lessonId }) {
 
   return (
     <Modal show={isQuizModalOpen} onHide={toggleQuizModal} size="lg" className="quiz-modal">
-      <Modal.Header closeButton className="text-white"  style={{ backgroundColor: '#663367' }}>
+      <Modal.Header closeButton className="text-white" style={{ backgroundColor: '#663367' }}>
         <Modal.Title>
           Add Quiz to {lessonTitle}
         </Modal.Title>
@@ -251,7 +250,7 @@ function AddQuiz({ isQuizModalOpen, toggleQuizModal, lessonTitle, lessonId }) {
                       placeholder="Enter explanation for the correct answer"
                     />
                   </Form.Group>
-                  
+
                   <div className="options-container p-3 bg-light rounded">
                     <h6 className="mb-3">Answer Options</h6>
                     {question.options.map((option, oIndex) => (
@@ -259,107 +258,68 @@ function AddQuiz({ isQuizModalOpen, toggleQuizModal, lessonTitle, lessonId }) {
                         <Col xs={1} className="text-center">
                           {String.fromCharCode(65 + oIndex)}.
                         </Col>
-                        <Col>
+                        <Col xs={9}>
                           <Form.Control
                             type="text"
                             value={option.optionText}
                             onChange={(e) => handleOptionChange(e, qIndex, oIndex)}
-                            placeholder={`Option ${oIndex + 1}`}
-                            isInvalid={!!formErrors[`question-${qIndex}-options`]}
+                            placeholder="Enter option text"
+                            className="form-control-lg"
                           />
                         </Col>
-                        <Col xs={3} className="d-flex align-items-center">
+                        <Col xs={2} className="text-center">
                           <Form.Check
                             type="radio"
-                            name={`correct-answer-${qIndex}`}
-                            className="custom-radio"
-                            label={
-                              <span className="ms-2">
-                                <FontAwesomeIcon 
-                                  icon={faCheckCircle} 
-                                  style={{ color: option.iscorrect ? "#663367" : "" }}
-                                /> Correct
-                              </span>
-                            }
                             checked={option.iscorrect}
                             onChange={() => handleCorrectAnswerChange(qIndex, oIndex)}
+                            label="Correct"
                           />
                         </Col>
-                        <Col xs={1}>
-                          {question.options.length > 1 && (
-                           
-                             <button
-                             className="btn secondary-action-btn"
-                             onClick={() => handleRemoveOption(qIndex, oIndex)}
-                             title="Delete option"
-                             onMouseEnter={(e) =>
-                               (e.currentTarget.style.backgroundColor = "red")
-                             }
-                             onMouseLeave={(e) =>
-                               (e.currentTarget.style.backgroundColor = "transparent")
-                             }
-                           >
-                             <i className="fas fa-trash"></i>
-                           </button>
-                          )}
-                        </Col>
+                        {question.options.length > 1 && (
+                          <Button
+                            variant="outline btn-delete "
+                            size="sm"
+                            onClick={() => handleRemoveOption(qIndex, oIndex)}
+                          >
+                            <FontAwesomeIcon icon={faTrash} />
+                          </Button>
+                        )}
                       </Row>
                     ))}
-                    {question.options.length < 4 && (
-                      <div className="d-flex justify-content-end mt-2">
-                      
-                      <button
-                className="btn btn-primary secondary-action-btn"
-                onClick={() => handleAddOption(qIndex)}
-              >
-                Add Option
-              </button>
-                    </div>
-                    )}
-                    {!!formErrors[`question-${qIndex}-options`] && (
-                      <div className="text-danger mt-2">
-                        <FontAwesomeIcon icon={faExclamationTriangle} className="me-2" />
-                        {formErrors[`question-${qIndex}-options`]}
-                      </div>
-                    )}
+                    <Button
+                      variant="outline secondary-action-btn"
+                      size="sm"
+                      onClick={() => handleAddOption(qIndex)}
+                    >
+                      <FontAwesomeIcon icon={faPlus} /> Add Option
+                    </Button>
                   </div>
                 </Card.Body>
               </Card>
             ))}
-            
-            {questions.length < 10 && (
-              <div className="d-flex justify-content-end mt-2">
-             
-              <button
-                className="btn btn-primary secondary-action-btn"
-                onClick={handleAddQuestion}
+
+            <Button
+              variant="outline secondary-action-btn"
+              size="sm"
+              onClick={handleAddQuestion}
+              className="mb-3"
+            >
+              <FontAwesomeIcon icon={faPlus} /> Add Question
+            </Button>
+
+            <div className="d-flex justify-content-end">
+              <Button
+                variant="primary btn-purple"
+                onClick={saveQuiz}
+                disabled={isSubmitting}
               >
-                Add New Question
-              </button>
-              </div>
-              
-            )}
+                {isSubmitting ? 'Saving...' : 'Save Quiz'}
+                <FontAwesomeIcon icon={faSave} className="ms-2" />
+              </Button>
+            </div>
           </Form>
         </Container>
       </Modal.Body>
-      <Modal.Footer className="border-top">
-        
-        <button
-                className="btn btn-primary secondary-action-btn"
-                onClick={toggleQuizModal}
-              >
-                cancel
-              </button>
-
-        
-        <button
-                className="btn btn-primary action-btn"
-                onClick={saveQuiz}
-              >
-            
-                {isSubmitting ? 'Saving...' : 'Save Quiz'}
-              </button>
-      </Modal.Footer>
     </Modal>
   );
 }
