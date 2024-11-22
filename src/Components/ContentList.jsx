@@ -35,6 +35,11 @@ const ContentList = ({
 
   // RichTextEditor State for Add/Edit Lesson
   const [lessonText, setLessonText] = useState("");
+  // Initial state for the rich text input
+  const [lessonDetails, setLessonDetails] = useState({
+    text: "", 
+  });
+
 
   const toggleTopic = (id) => {
     setActiveTopic(activeTopic === id ? null : id);
@@ -51,6 +56,15 @@ const ContentList = ({
   };
 
   const handleDeleteTopic = async (topicId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this topic? This action cannot be undone."
+    );
+  
+    if (!confirmDelete) {
+      
+      return;
+    }
+  
     try {
       await api.delete(`/topic/${topicId}`);
       const updatedTopics = selectedCourse.topics.filter(
@@ -61,60 +75,6 @@ const ContentList = ({
     } catch (error) {
       console.error("Error deleting topic:", error);
       alert("Failed to delete the topic. Please try again.");
-    }
-  };
-
-  const handleDeleteLesson = async (lessonId, topicId) => {
-    try {
-      await api.delete(`/lesson/${lessonId}`);
-      const updatedTopics = selectedCourse.topics.map((topic) => {
-        if (topic.id === topicId) {
-          const updatedLessons = topic.Lesson.filter(
-            (lesson) => lesson.id !== lessonId
-          );
-          return { ...topic, Lesson: updatedLessons };
-        }
-        return topic;
-      });
-      setSelectedCourse((prev) => ({ ...prev, topics: updatedTopics }));
-      showToast("Lesson deleted successfully");
-    } catch (error) {
-      console.error("Error deleting lesson:", error);
-      alert("Failed to delete the lesson. Please try again.");
-    }
-  };
-
-  const handleAddLessonClick = (topic) => {
-    setCurrentTopic(topic);
-    setShowAddLessonModal(true);
-  };
-
-  // Add lesson logic
-  const handleLessonTextChange = (event) => {
-    setLessonText(event.target.value);
-  };
-
-  const handleAddLesson = async (e) => {
-    e.preventDefault();
-    const newLesson = {
-      title: e.target.title.value,
-      text: lessonText,
-      topicId: currentTopic.id,
-    };
-    try {
-      const response = await api.post(`/lesson/${currentTopic.id}`, newLesson);
-      const addedLesson = response.data;
-      const updatedTopics = selectedCourse.topics.map((topic) =>
-        topic.id === currentTopic.id
-          ? { ...topic, Lesson: [...topic.Lesson, addedLesson] }
-          : topic
-      );
-      setSelectedCourse((prev) => ({ ...prev, topics: updatedTopics }));
-      setShowAddLessonModal(false);
-      showToast("Lesson added successfully");
-    } catch (error) {
-      console.error("Error adding lesson:", error);
-      showToast("Failed to add the lesson. Please try again.");
     }
   };
 
@@ -135,6 +95,79 @@ const ContentList = ({
     } catch (error) {
       console.error("Error updating topic:", error);
       alert("Failed to update the topic. Please try again.");
+    }
+  };
+
+  const handleDeleteLesson = async (lessonId, topicId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this lesson? This action cannot be undone."
+    );
+  
+    if (!confirmDelete) {
+      // User canceled the deletion
+      return;
+    }
+  
+    try {
+      await api.delete(`/lesson/${lessonId}`);
+      const updatedTopics = selectedCourse.topics.map((topic) => {
+        if (topic.id === topicId) {
+          const updatedLessons = topic.Lesson.filter(
+            (lesson) => lesson.id !== lessonId
+          );
+          return { ...topic, Lesson: updatedLessons };
+        }
+        return topic;
+      });
+      setSelectedCourse((prev) => ({ ...prev, topics: updatedTopics }));
+      showToast("Lesson deleted successfully");
+    } catch (error) {
+      console.error("Error deleting lesson:", error);
+      alert("Failed to delete the lesson. Please check your network connection or try again later.");
+    }
+  };
+
+  
+  const handleAddLessonClick = (topic) => {
+    setCurrentTopic(topic);
+    setLessonText(""); // Clear previous input
+    setShowAddLessonModal(true);
+  };
+
+ 
+
+  const handleLessonTextChange = (event) => {
+    const { name, value } = event.target; // Destructure the event object
+    setLessonDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value, // Update the specific field in the form state
+    }));
+  };
+
+  
+
+  const handleAddLesson = async (e) => {
+    e.preventDefault();
+    const newLesson = {
+      title: e.target.title.value,
+      text: lessonDetails.text, // Use lessonText here
+      topicId: currentTopic.id,
+    };
+
+    try {
+      const response = await api.post(`/lesson/${currentTopic.id}`, newLesson);
+      const addedLesson = response.data;
+      const updatedTopics = selectedCourse.topics.map((topic) =>
+        topic.id === currentTopic.id
+          ? { ...topic, Lesson: [...topic.Lesson, addedLesson] }
+          : topic
+      );
+      setSelectedCourse((prev) => ({ ...prev, topics: updatedTopics }));
+      setShowAddLessonModal(false);
+      showToast("Lesson added successfully");
+    } catch (error) {
+      console.error("Error adding lesson:", error);
+      showToast("Failed to add the lesson. Please try again.");
     }
   };
 
@@ -182,106 +215,109 @@ const ContentList = ({
   return (
     <div className="accordion contentList-accordion" id="topicsAccordion">
       {selectedCourse.topics.map((topic) => {
-         const numLessons = topic.Lesson.length;
-        return(
-        <div
-          className="card topic-cover-card"
-          key={topic.id}
-          style={{ padding: "0" }}
-        >
-          <div className="topic-card">
-            <h2 className="mb-0 topic-list-tem">
-              <button
-                className="btn btn-link topic-btn"
-                type="button"
-                onClick={() => toggleTopic(topic.id)}
-                aria-expanded={activeTopic === topic.id}
-                aria-controls={`collapse${topic.id}`}
-              >
-                {`${topic.Title} | ${
+        const numLessons = topic.Lesson.length;
+        return (
+          <div
+            className="card topic-cover-card"
+            key={topic.id}
+            style={{ padding: "0" }}
+          >
+            <div className="topic-card">
+              <h2 className="mb-0 topic-list-tem">
+                <button
+                  className="btn btn-link topic-btn"
+                  type="button"
+                  onClick={() => toggleTopic(topic.id)}
+                  aria-expanded={activeTopic === topic.id}
+                  aria-controls={`collapse${topic.id}`}
+                >
+                  {`${topic.Title} | ${
                     numLessons === 0
                       ? "No Lessons"
                       : numLessons === 1
                       ? `${numLessons} Lesson`
                       : `${numLessons} Lessons`
                   }`}
-              </button>
-              <span>
-                <button
-                  className="btn btn-green me-2"
-                  onClick={() => handleAddLessonClick(topic)}
-                  title="Add Lesson"
-                >
-                  <i className="bi bi-plus-square-fill"></i>
                 </button>
-                <button
-                  className="btn btn-green me-2"
-                  onClick={() => handleEditTopic(topic)}
-                  title="Edit Topic"
-                >
-                  <i className="fas fa-edit"></i>
-                </button>
-                <button
-                  className="btn btn-green me-2"
-                  onClick={() => handleDeleteTopic(topic.id)}
-                  title="Delete Topic"
-                >
-                  <i className="fas fa-trash"></i>
-                </button>
-              </span>
-            </h2>
-          </div>
-
-          <div
-            id={`collapse${topic.id}`}
-            className={`collapse ${activeTopic === topic.id ? "show" : ""}`}
-          >
-            <div className="card-body lesson-card">
-              <ul className="list-group">
-                {topic.Lesson.map((lesson) => (
-                  <li
-                    className="list-group-item lesson-list-item"
-                    key={lesson.id}
-                    onClick={() => handleViewLessonContent(lesson)}
+                <span>
+                  <button
+                    className="btn btn-green me-2"
+                    onClick={() => handleAddLessonClick(topic)}
+                    title="Add Lesson"
                   >
-                    {lesson.title}
-                    <span>
-                      <button
-                        className="btn me-2"
-                        // onClick={() => handleAddLessonClick(topic)}
-                        onClick={toggleQuizModal}
-                        title="Add Quiz"
-                      >
-                        <i className="bi bi-plus-square-fill"></i>
-                      </button>
-                      <AddQuiz
-                        isQuizModalOpen={isQuizModalOpen}
-                        toggleQuizModal={toggleQuizModal}
-                        lessonTitle={lesson.title}
-                        lessonId={lesson.id}
-                      />
-                      <button
-                        className="btn btn-green me-2"
-                        onClick={() => handleEditLesson(lesson)}
-                        title="Edit Lesson"
-                      >
-                        <i className="fas fa-edit"></i>
-                      </button>
-                      <button
-                        className="btn btn-green me-2"
-                        onClick={() => handleDeleteLesson(lesson.id, topic.id)}
-                        title="Delete Lesson"
-                      >
-                        <i className="fas fa-trash"></i>
-                      </button>
-                    </span>
-                  </li>
-                ))}
-              </ul>
+                    <i className="bi bi-plus-square-fill"></i>
+                  </button>
+                  <button
+                    className="btn btn-green me-2"
+                    onClick={() => handleEditTopic(topic)}
+                    title="Edit Topic"
+                  >
+                    <i className="fas fa-edit"></i>
+                  </button>
+                  <button
+                    className="btn btn-green me-2"
+                    onClick={() => handleDeleteTopic(topic.id)}
+                    title="Delete Topic"
+                  >
+                    <i className="fas fa-trash"></i>
+                  </button>
+                </span>
+              </h2>
+            </div>
+
+            <div
+              id={`collapse${topic.id}`}
+              className={`collapse ${activeTopic === topic.id ? "show" : ""}`}
+            >
+              <div className="card-body lesson-card">
+                <ul className="list-group">
+                  {topic.Lesson.map((lesson) => (
+                    <li
+                      className="list-group-item lesson-list-item"
+                      key={lesson.id}
+                      onClick={() => handleViewLessonContent(lesson)}
+                    >
+                      {lesson.title}
+                      <span>
+                        <button
+                          className="btn me-2"
+                          // onClick={() => handleAddLessonClick(topic)}
+                          onClick={toggleQuizModal}
+                          title="Add Quiz"
+                        >
+                          <i className="bi bi-plus-square-fill"></i>
+                        </button>
+                        <AddQuiz
+                          isQuizModalOpen={isQuizModalOpen}
+                          toggleQuizModal={toggleQuizModal}
+                          lessonTitle={lesson.title}
+                          lessonId={lesson.id}
+                        />
+                        <button
+                          className="btn btn-green me-2"
+                          onClick={() => handleEditLesson(lesson)}
+                          title="Edit Lesson"
+                        >
+                          <i className="fas fa-edit"></i>
+                        </button>
+                        <button
+                          className="btn btn-green me-2"
+                          onClick={() =>
+                            handleDeleteLesson(lesson.id, topic.id)
+                          }
+                          title="Delete Lesson"
+                        >
+                          <i className="fas fa-trash"></i>
+                        </button>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      )})}
+        );
+      })}
 
       {/* Add Lesson Modal */}
       <Modal
@@ -307,10 +343,8 @@ const ContentList = ({
 
               <RichTextEditor
                 name="text"
-                value={currentLesson?.text || ""}
-                onChange={(value) =>
-                  setCurrentLesson((prev) => ({ ...prev, text: value }))
-                }
+                value={lessonDetails.text} // Use lessonText for Add Lesson flow
+                onChange={handleLessonTextChange} // Update lessonText directly
                 required
               />
             </div>
