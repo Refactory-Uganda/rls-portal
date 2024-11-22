@@ -187,7 +187,7 @@ const CourseDetails = ({
                 <p key={index}>{parsedItem}</p>
               ))}
             <div className="course-details-btn-container">
-              {/* <button
+              <button
                 className="btn btn-purple me-2"
                 onClick={handleEditCourse}
                 title="Edit Course"
@@ -206,7 +206,7 @@ const CourseDetails = ({
                 }
               >
                 <i className="fas fa-trash"></i>
-              </button> */}
+              </button>
               <button
                 className="btn btn-primary secondary-action-btn"
                 onClick={() => setShowAddTopicModal(true)}
