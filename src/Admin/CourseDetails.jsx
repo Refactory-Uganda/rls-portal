@@ -36,7 +36,7 @@ const CourseDetails = ({
   const [topicDescription, setTopicDescription] = useState("");
 
   // Set courseId from selectedCourse
-  const courseId = selectedCourse.id; // Assuming selectedCourse has an 'id' field
+  const courseId = selectedCourse.id;
 
   useEffect(() => {
     // Reset topic fields when modal closes

@@ -51,6 +51,15 @@ const ContentList = ({
   };
 
   const handleDeleteTopic = async (topicId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this topic? This action cannot be undone."
+    );
+  
+    if (!confirmDelete) {
+      
+      return;
+    }
+  
     try {
       await api.delete(`/topic/${topicId}`);
       const updatedTopics = selectedCourse.topics.filter(
@@ -85,6 +94,15 @@ const ContentList = ({
   };
 
   const handleDeleteLesson = async (lessonId, topicId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this lesson? This action cannot be undone."
+    );
+  
+    if (!confirmDelete) {
+      // User canceled the deletion
+      return;
+    }
+  
     try {
       await api.delete(`/lesson/${lessonId}`);
       const updatedTopics = selectedCourse.topics.map((topic) => {
@@ -100,7 +118,7 @@ const ContentList = ({
       showToast("Lesson deleted successfully");
     } catch (error) {
       console.error("Error deleting lesson:", error);
-      alert("Failed to delete the lesson. Please try again.");
+      alert("Failed to delete the lesson. Please check your network connection or try again later.");
     }
   };
 
