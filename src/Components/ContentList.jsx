@@ -15,14 +15,39 @@ const ContentList = ({
 }) => {
   const [activeTopic, setActiveTopic] = useState(null);
 
+  // Modified Quiz Modal State
+  const [quizModalState, setQuizModalState] = useState({
+    isOpen: false,
+    lessonId: null,
+    lessonTitle: ""
+  });
+
   // Modal States
   const [showEditTopicModal, setShowEditTopicModal] = useState(false);
   const [showEditLessonModal, setShowEditLessonModal] = useState(false);
   const [showAddLessonModal, setShowAddLessonModal] = useState(false);
   const [isQuizModalOpen, setQuizModalOpen] = useState(false);
 
-  const toggleQuizModal = () => {
-    setQuizModalOpen(!isQuizModalOpen);
+  // const toggleQuizModal = () => {
+  //   setQuizModalOpen(!isQuizModalOpen);
+  // };
+  
+// Function to handle opening quiz modal for specific lesson
+const handleQuizModalOpen = (lesson, e) => {
+  e.stopPropagation(); // Prevent lesson click event from triggering
+  setQuizModalState({
+    isOpen: true,
+    lessonId: lesson.id,
+    lessonTitle: lesson.title
+  });
+};
+   // Function to handle closing quiz modal
+   const handleQuizModalClose = () => {
+    setQuizModalState({
+      isOpen: false,
+      lessonId: null,
+      lessonTitle: ""
+    });
   };
 
   // Selected Topic and Lesson for Editing
@@ -279,19 +304,18 @@ const ContentList = ({
                     >
                       {lesson.title}
                       <span>
-                        <button
+                      <button
                           className="btn me-2"
-                          // onClick={() => handleAddLessonClick(topic)}
-                          onClick={toggleQuizModal}
+                          onClick={(e) => handleQuizModalOpen(lesson, e)}
                           title="Add Quiz"
                         >
                           <i className="bi bi-plus-square-fill"></i>
                         </button>
                         <AddQuiz
-                          isQuizModalOpen={isQuizModalOpen}
-                          toggleQuizModal={toggleQuizModal}
-                          lessonTitle={lesson.title}
-                          lessonId={lesson.id}
+                           isQuizModalOpen={quizModalState.isOpen}
+                           toggleQuizModal={handleQuizModalClose}
+                           lessonTitle={quizModalState.lessonTitle}
+                           lessonId={quizModalState.lessonId}
                         />
                         <button
                           className="btn btn-green me-2"
