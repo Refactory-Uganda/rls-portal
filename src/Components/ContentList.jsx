@@ -37,9 +37,8 @@ const ContentList = ({
   const [lessonText, setLessonText] = useState("");
   // Initial state for the rich text input
   const [lessonDetails, setLessonDetails] = useState({
-    text: "", 
+    text: "",
   });
-
 
   const toggleTopic = (id) => {
     setActiveTopic(activeTopic === id ? null : id);
@@ -59,12 +58,11 @@ const ContentList = ({
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this topic? This action cannot be undone."
     );
-  
+
     if (!confirmDelete) {
-      
       return;
     }
-  
+
     try {
       await api.delete(`/topic/${topicId}`);
       const updatedTopics = selectedCourse.topics.filter(
@@ -102,12 +100,12 @@ const ContentList = ({
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this lesson? This action cannot be undone."
     );
-  
+
     if (!confirmDelete) {
       // User canceled the deletion
       return;
     }
-  
+
     try {
       await api.delete(`/lesson/${lessonId}`);
       const updatedTopics = selectedCourse.topics.map((topic) => {
@@ -123,18 +121,17 @@ const ContentList = ({
       showToast("Lesson deleted successfully");
     } catch (error) {
       console.error("Error deleting lesson:", error);
-      alert("Failed to delete the lesson. Please check your network connection or try again later.");
+      alert(
+        "Failed to delete the lesson. Please check your network connection or try again later."
+      );
     }
   };
 
-  
   const handleAddLessonClick = (topic) => {
     setCurrentTopic(topic);
     setLessonText(""); // Clear previous input
     setShowAddLessonModal(true);
   };
-
- 
 
   const handleLessonTextChange = (event) => {
     const { name, value } = event.target; // Destructure the event object
@@ -143,8 +140,6 @@ const ContentList = ({
       [name]: value, // Update the specific field in the form state
     }));
   };
-
-  
 
   const handleAddLesson = async (e) => {
     e.preventDefault();
@@ -271,17 +266,21 @@ const ContentList = ({
             >
               <div className="card-body lesson-card">
                 <ul className="list-group">
-                  {topic.Lesson.map((lesson) => (
+                  {topic.Lesson.map((lesson) => {
+                    console.log(lesson.quiz)
+                    return(
                     <li
                       className="list-group-item lesson-list-item"
                       key={lesson.id}
                       onClick={() => handleViewLessonContent(lesson)}
                     >
-                      {lesson.title}
+                      {/* {lesson.title} */}
+                      {lesson.quiz
+                        ? `${lesson.title} | Includes Quiz`
+                        : lesson.title}
                       <span>
                         <button
                           className="btn me-2"
-                          // onClick={() => handleAddLessonClick(topic)}
                           onClick={toggleQuizModal}
                           title="Add Quiz"
                         >
@@ -311,7 +310,7 @@ const ContentList = ({
                         </button>
                       </span>
                     </li>
-                  ))}
+                  )})}
                 </ul>
               </div>
             </div>
