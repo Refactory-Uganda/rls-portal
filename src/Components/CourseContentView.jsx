@@ -74,7 +74,7 @@ const CourseContentView = ({ selectedCourse, setView }) => {
           </div>
 
           {/* Action Buttons */}
-          {lessonToView && (
+          {lessonToView && lessonToView.quiz && (
             <div className="quiz-btn-container">
               <button
                 className="btn btn-primary action-btn"
@@ -96,11 +96,13 @@ const CourseContentView = ({ selectedCourse, setView }) => {
 
         {/* Scrollable Video Rows */}
         <div className="content-list-container scrollable-container">
-          <div className="courseList-btn-container" style={{ paddingLeft: "0" }}>
+          <div
+            className="courseList-btn-container"
+            style={{ paddingLeft: "0" }}
+          >
             <button
               className="btn btn-primary action-btn floating-btn"
               onClick={handleBackClick}
-              
             >
               <i className="bi bi-arrow-left"></i> Back to Details
             </button>

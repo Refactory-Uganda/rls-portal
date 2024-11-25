@@ -597,9 +597,9 @@ const CreateCourse = () => {
 
                       {/* Hidden Input for Facilitator Name */}
                       <input
-                        type="hidden"
+                        // type="hidden"
                         name="facilitator"
-                        value={courseData.facilitator}
+                        value={courseData.facilitator.id}
                         readOnly
                       />
 
