@@ -159,55 +159,12 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
     }
   };
 
-  // Posting question/question
-  // const handleSubmitQuestion = async () => {
-  //   setIsSubmitting(true);
-  //   setError(null);
-
-  //   try {
-  //     // Iterate through each question and submit it
-  //     const quizId = quiz.id;
-  //     for (const question of newQuestions) {
-  //       const correctOption = question.options.find((opt) => opt.iscorrect);
-  //       const questionData = {
-  //         text: question.text,
-  //         order: newQuestions.indexOf(question),
-  //         answer: correctOption?.optionText || "",
-  //         explanation: question.explanation || "",
-  //         quizId,
-  //       };
-
-  //       // Post question
-  //       const questionResponse = await api.post("/questions", questionData);
-  //       const questionId = questionResponse.data.Question.id;
-  //       console.log(questionId);
-  //       // Post options
-  //       for (const [index, option] of question.options.entries()) {
-  //         const optionData = {
-  //           optionText: option.optionText,
-  //           iscorrect: option.iscorrect,
-  //           order: index,
-  //           questionId,
-  //         };
-
-  //         await api.post("/options", optionData);
-  //       }
-  //     }
-
-  //     // Call parent to update quiz view
-  //     // onUpdateQuiz();
-  //     setShowAddQuestionModal(false);
-  //   } catch (error) {
-  //     setError(
-  //       error.response?.data?.message ||
-  //         error.response?.data?.error ||
-  //         error.message ||
-  //         "An error occurred while submitting the question."
-  //     );
-  //   } finally {
-  //     setIsSubmitting(false);
-  //   }
-  // };
+  const handleAnswerOptionChange = (questionId, optionId) => {
+    setUserAnswers({
+      ...userAnswers,
+      [questionId]: optionId,
+    });
+  };
 
   const handleSubmitQuestion = async () => {
     setIsSubmitting(true);
@@ -261,7 +218,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
   
       setShowAddQuestionModal(false);
     } catch (error) {
-      setError(
+      alert(
         error.response?.data?.message ||
           error.response?.data?.error ||
           error.message ||
@@ -457,7 +414,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
                   <input
                     type="radio"
                     name={`question-${qIndex}`}
-                    onChange={() => handleOptionChange(question.id, option.id)}
+                    onChange={() => handleAnswerOptionChange(question.id, option.id)}
                     checked={userAnswers[question.id] === option.id}
                   />
                   <label>{` ${option.optionText}`}</label>
@@ -508,13 +465,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          {/* <Button
-            className="secondary-action-btn"
-            variant="secondary"
-            onClick={() => setShowQuizEditModal(false)}
-          >
-            Close
-          </Button> */}
+    
           <Button
             className="action-btn"
             variant="primary"
