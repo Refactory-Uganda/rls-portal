@@ -2,14 +2,27 @@ import React, { useEffect, useState } from "react";
 import "../assets/css/quizView.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { Modal, Button, Form } from "react-bootstrap";
+import {
+  faPlus,
+  faEdit,
+  faSave,
+  faTimes,
+  faTrash,
+  faCheckCircle,
+  faExclamationTriangle,
+} from "@fortawesome/free-solid-svg-icons";
+import { Modal, Button, Form, Row, Col, Card } from "react-bootstrap";
+
 import api from "../services/api";
 
 const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
   // const [quiz, setQuiz] = useState(null);
+
+  console.log(quiz);
+  console.log(lessonToView);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [editing, setEditing] = useState(false);
   const [editedQuiz, setEditedQuiz] = useState({ ...quiz });
@@ -17,9 +30,20 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
   const [score, setScore] = useState(null);
 
   const [showQuizEditModal, setShowQuizEditModal] = useState(false);
+  const [showAddQuestionModal, setShowAddQuestionModal] = useState(false);
   const [showQuestionEditModal, setShowQuestionEditModal] = useState(false);
   const [showDeleteQuizModal, setShowDeleteQuizModal] = useState(false);
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(null);
+
+  const [newQuestions, setNewQuestions] = useState([
+    {
+      text: "",
+      order: 0,
+      answer: "",
+      explanation: "",
+      options: [{ optionText: "", iscorrect: false, order: 0 }],
+    },
+  ]);
 
   useEffect(() => {
     const fetchQuiz = async () => {
@@ -33,7 +57,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
       }
     };
     fetchQuiz();
-  }, [lessonId]);
+  }, [lessonToView.quiz.id]);
 
   const handleEditQuizSubmit = async () => {
     try {
@@ -48,10 +72,12 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
     }
   };
 
+  console.log(editedQuiz);
+  console.log(quiz);
   const handleEditQuestionSubmit = async () => {
     const question = editedQuiz.questions[selectedQuestionIndex];
     try {
-      await api.patch(`/quizzes/${question.id}`, question);
+      await api.patch(`/questions/${question.id}`, question);
       setQuiz(editedQuiz);
       setShowQuestionEditModal(false);
     } catch (error) {
@@ -68,13 +94,185 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
       console.error("Failed to delete quiz:", error);
     }
   };
+  // ===============================================================================
 
-  const handleOptionChange = (questionId, optionId) => {
-    setUserAnswers({
-      ...userAnswers,
-      [questionId]: optionId,
-    });
+  const handleAddQuestion = () => {
+    setNewQuestions([
+      ...newQuestions,
+      { text: "", options: [{ optionText: "", iscorrect: false, order: 0 }] },
+    ]);
   };
+
+  const handleAddOption = (questionIndex) => {
+    const updatedQuestions = [...newQuestions];
+    const currentOptions = updatedQuestions[questionIndex].options;
+    updatedQuestions[questionIndex].options.push({
+      optionText: "",
+      iscorrect: false,
+      order: currentOptions.length,
+    });
+    setNewQuestions(updatedQuestions);
+  };
+
+  const handleQuestionChange = (e, index) => {
+    const updatedQuestions = [...newQuestions];
+    updatedQuestions[index].text = e.target.value;
+    setNewQuestions(updatedQuestions);
+  };
+
+  const handleAnswerExplanationChange = (e, index) => {
+    const updatedQuestions = [...newQuestions];
+    updatedQuestions[index].explanation = e.target.value;
+    setNewQuestions(updatedQuestions);
+  };
+
+  const handleOptionChange = (e, questionIndex, optionIndex) => {
+    const updatedQuestions = [...newQuestions];
+    updatedQuestions[questionIndex].options[optionIndex].optionText =
+      e.target.value;
+    setNewQuestions(updatedQuestions);
+  };
+
+  const handleCorrectAnswerChange = (questionIndex, optionIndex) => {
+    const updatedQuestions = [...newQuestions];
+    updatedQuestions[questionIndex].options.forEach((opt, idx) => {
+      opt.iscorrect = idx === optionIndex;
+    });
+    setNewQuestions(updatedQuestions);
+  };
+
+  const handleRemoveQuestion = (indexToRemove) => {
+    if (newQuestions.length > 1) {
+      setNewQuestions(
+        newQuestions.filter((_, index) => index !== indexToRemove)
+      );
+    }
+  };
+
+  const handleRemoveOption = (questionIndex, optionIndex) => {
+    if (newQuestions[questionIndex].options.length > 1) {
+      const updatedQuestions = [...newQuestions];
+      updatedQuestions[questionIndex].options = updatedQuestions[
+        questionIndex
+      ].options.filter((_, index) => index !== optionIndex);
+      setNewQuestions(updatedQuestions);
+    }
+  };
+
+  // Posting question/question
+  // const handleSubmitQuestion = async () => {
+  //   setIsSubmitting(true);
+  //   setError(null);
+
+  //   try {
+  //     // Iterate through each question and submit it
+  //     const quizId = quiz.id;
+  //     for (const question of newQuestions) {
+  //       const correctOption = question.options.find((opt) => opt.iscorrect);
+  //       const questionData = {
+  //         text: question.text,
+  //         order: newQuestions.indexOf(question),
+  //         answer: correctOption?.optionText || "",
+  //         explanation: question.explanation || "",
+  //         quizId,
+  //       };
+
+  //       // Post question
+  //       const questionResponse = await api.post("/questions", questionData);
+  //       const questionId = questionResponse.data.Question.id;
+  //       console.log(questionId);
+  //       // Post options
+  //       for (const [index, option] of question.options.entries()) {
+  //         const optionData = {
+  //           optionText: option.optionText,
+  //           iscorrect: option.iscorrect,
+  //           order: index,
+  //           questionId,
+  //         };
+
+  //         await api.post("/options", optionData);
+  //       }
+  //     }
+
+  //     // Call parent to update quiz view
+  //     // onUpdateQuiz();
+  //     setShowAddQuestionModal(false);
+  //   } catch (error) {
+  //     setError(
+  //       error.response?.data?.message ||
+  //         error.response?.data?.error ||
+  //         error.message ||
+  //         "An error occurred while submitting the question."
+  //     );
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
+
+  const handleSubmitQuestion = async () => {
+    setIsSubmitting(true);
+    setError(null);
+  
+    try {
+      // Validate all questions and options
+      for (const question of newQuestions) {
+        if (!question.text.trim()) {
+          throw new Error("Each question must have text.");
+        }
+  
+        if (!question.options.every((option) => option.optionText.trim())) {
+          throw new Error("All options must contain text.");
+        }
+  
+        if (!question.options.some((option) => option.iscorrect)) {
+          throw new Error("Each question must have at least one correct option.");
+        }
+      }
+  
+      // Proceed with submission if validation passes
+      const quizId = quiz.id;
+  
+      for (const question of newQuestions) {
+        const correctOption = question.options.find((opt) => opt.iscorrect);
+        const questionData = {
+          text: question.text,
+          order: newQuestions.indexOf(question),
+          answer: correctOption?.optionText || "",
+          explanation: question.explanation || "",
+          quizId,
+        };
+  
+        // Post question
+        const questionResponse = await api.post("/questions", questionData);
+        const questionId = questionResponse.data.Question.id;
+  
+        // Post options
+        for (const [index, option] of question.options.entries()) {
+          const optionData = {
+            optionText: option.optionText,
+            iscorrect: option.iscorrect,
+            order: index,
+            questionId,
+          };
+  
+          await api.post("/options", optionData);
+        }
+      }
+  
+      setShowAddQuestionModal(false);
+    } catch (error) {
+      setError(
+        error.response?.data?.message ||
+          error.response?.data?.error ||
+          error.message ||
+          "An error occurred while submitting the question."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // ===========================================================================
 
   const handleQuizSubmit = async (e) => {
     e.preventDefault();
@@ -151,22 +349,37 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
     setEditedQuiz(updatedQuiz);
   };
 
+  // Handle deleting question
   const deleteQuestion = async (questionId) => {
-    try {
-      await api.delete(`/questions/${questionId}`);
-      const updatedQuiz = { ...editedQuiz };
-      updatedQuiz.questions = updatedQuiz.questions.filter(
-        (q) => q.id !== questionId
-      );
-      setEditedQuiz(updatedQuiz);
-      setQuiz(updatedQuiz);
-    } catch (error) {
-      console.error("Failed to delete question:", error);
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this question?"
+    );
+
+    if (isConfirmed) {
+      try {
+        await api.delete(`/questions/${questionId}`);
+        const updatedQuiz = { ...editedQuiz };
+        updatedQuiz.questions = updatedQuiz.questions.filter(
+          (q) => q.id !== questionId
+        );
+        setEditedQuiz(updatedQuiz);
+        setQuiz(updatedQuiz);
+      } catch (error) {
+        console.error("Failed to delete question:", error);
+      }
     }
   };
 
   if (loading) return <p>Loading quiz...</p>;
-  if (error) return <p>Error fetching quiz: {error}</p>;
+  if (error)
+    return (
+      <div>
+        <button onClick={onBack} className="btn btn-secondary mb-3">
+          Back to Lesson
+        </button>
+        <p>Error fetching quiz: {error}</p>
+      </div>
+    );
 
   if (!quiz || !quiz.questions) {
     return (
@@ -187,28 +400,28 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
         <button onClick={onBack} className="btn action-btn mb-3">
           Back to Lesson
         </button>
-        <h3 style={{fontWeight:"bold"}}>{`${quiz.title}`}</h3>
+        <h3 style={{ fontWeight: "bold" }}>{`${quiz.title}`}</h3>
         <span>
-        <Button
-          onClick={() => setShowQuizEditModal(true)}
-          className="btn btn-primary action-btn"
-        >
-          <FontAwesomeIcon icon={faEdit} />
-        </Button>
-        <Button
-          title="Delete Quiz"
-          onClick={() => setShowDeleteQuizModal(true)}
-          className="ms-2 secondary-action-btn"
-        >
-          <FontAwesomeIcon icon={faTrash} />
-        </Button>
-        <Button
-          onClick={addQuestion}
-          className="btn secondary-action-btn"
-          title="Add Question"
-        >
-          <i className="bi bi-plus-square-fill"></i>
-        </Button>
+          <Button
+            onClick={() => setShowQuizEditModal(true)}
+            className="btn btn-primary action-btn"
+          >
+            <FontAwesomeIcon icon={faEdit} />
+          </Button>
+          <Button
+            title="Delete Quiz"
+            onClick={() => setShowDeleteQuizModal(true)}
+            className="ms-2 secondary-action-btn"
+          >
+            <FontAwesomeIcon icon={faTrash} />
+          </Button>
+          <Button
+            onClick={() => setShowAddQuestionModal(true)}
+            className="btn secondary-action-btn"
+            title="Add Question"
+          >
+            <i className="bi bi-plus-square-fill"></i>
+          </Button>
         </span>
       </div>
       <div className="quiz-content-container">
@@ -252,7 +465,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
               ))}
             </div>
           ))}
-          <div style={{textAlign:"right"}}>
+          <div style={{ textAlign: "right" }}>
             <button type="submit" className="btn btn-primary action-btn mt-3">
               Submit Quiz
             </button>
@@ -295,13 +508,13 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button
+          {/* <Button
             className="secondary-action-btn"
             variant="secondary"
             onClick={() => setShowQuizEditModal(false)}
           >
             Close
-          </Button>
+          </Button> */}
           <Button
             className="action-btn"
             variant="primary"
@@ -336,6 +549,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
                   }}
                 />
               </Form.Group>
+              <Form.Label>Options</Form.Label>
               {editedQuiz.questions[selectedQuestionIndex].option.map(
                 (option, oIndex) => (
                   <div
@@ -379,13 +593,13 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button
+          {/* <Button
             className="secondary-action-btn"
             variant="secondary"
             onClick={() => setShowQuestionEditModal(false)}
           >
             Close
-          </Button>
+          </Button> */}
           <Button
             variant="primary"
             onClick={handleEditQuestionSubmit}
@@ -424,6 +638,117 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
             Delete Quiz
           </Button>
         </Modal.Footer>
+      </Modal>
+
+      {/* Add question Modal */}
+      <Modal
+        show={showAddQuestionModal}
+        onHide={() => setShowAddQuestionModal(false)}
+        size="lg"
+        className="add-question-modal"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Add Questions</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {newQuestions.map((question, qIndex) => (
+            <Card key={qIndex} className="mb-4">
+              <Card.Body>
+                <Form.Group className="mb-3">
+                  <Form.Label>Question text</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={question.text}
+                    onChange={(e) => handleQuestionChange(e, qIndex)}
+                    placeholder={`Enter text for Question ${qIndex + 1}`}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Answer Explanation (Optional)</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={2}
+                    value={question.explanation}
+                    onChange={(e) => handleAnswerExplanationChange(e, qIndex)}
+                    placeholder="Explain the correct answer"
+                  />
+                </Form.Group>
+                <div className="options-container p-3 bg-light rounded">
+                  {question.options.map((option, oIndex) => (
+                    <Row key={oIndex} className="mb-3 align-items-center">
+                      <Col xs={1} className="text-center">
+                        {String.fromCharCode(65 + oIndex)}.
+                      </Col>
+                      <Col xs={9}>
+                        <Form.Control
+                          type="text"
+                          value={option.optionText}
+                          onChange={(e) =>
+                            handleOptionChange(e, qIndex, oIndex)
+                          }
+                          placeholder={`Option ${String.fromCharCode(
+                            65 + oIndex
+                          )}`}
+                        />
+                      </Col>
+                      <Col xs={2} className="text-center">
+                        <Form.Check
+                          type="radio"
+                          checked={option.iscorrect}
+                          onChange={() =>
+                            handleCorrectAnswerChange(qIndex, oIndex)
+                          }
+                          label="Correct"
+                        />
+                      </Col>
+                      {question.options.length > 1 && (
+                        <Button
+                          variant="outline-danger"
+                          size="sm"
+                          onClick={() => handleRemoveOption(qIndex, oIndex)}
+                        >
+                          <FontAwesomeIcon icon={faTrash} />
+                        </Button>
+                      )}
+                    </Row>
+                  ))}
+                  <Button
+                    variant="outline-secondary"
+                    size="sm"
+                    onClick={() => handleAddOption(qIndex)}
+                  >
+                    <FontAwesomeIcon icon={faPlus} /> Add Option
+                  </Button>
+                </div>
+              </Card.Body>
+              {newQuestions.length > 1 && (
+                <Card.Footer className="text-center">
+                  <Button
+                    variant="outline-danger"
+                    size="sm"
+                    onClick={() => handleRemoveQuestion(qIndex)}
+                  >
+                    Remove Question
+                  </Button>
+                </Card.Footer>
+              )}
+            </Card>
+          ))}
+          <Button
+            size="sm"
+            onClick={handleAddQuestion}
+            className="mb-3 secondary-action-btn"
+          >
+            <FontAwesomeIcon icon={faPlus} /> Add Question
+          </Button>
+          <Button
+            size="sm"
+            onClick={handleSubmitQuestion}
+            className="mb-3 action-btn"
+          >
+            Submit
+          </Button>
+        </Modal.Body>
       </Modal>
     </div>
   );
