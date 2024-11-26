@@ -95,7 +95,7 @@ function AddQuiz({ isQuizModalOpen, toggleQuizModal, lessonTitle, lessonId }) {
         for (const [optIndex, option] of question.options.entries()) {
           const optionData = {
             optionText: option.optionText,
-            iscorrect: option.isCorrect,
+            isCorrect: option.isCorrect,
             order: optIndex,
             questionId,
           };
