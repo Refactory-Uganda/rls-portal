@@ -41,7 +41,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
       order: 0,
       answer: "",
       explanation: "",
-      options: [{ optionText: "", iscorrect: false, order: 0 }],
+      options: [{ optionText: "", isCorrect: false, order: 0 }],
     },
   ]);
 
@@ -99,7 +99,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
   const handleAddQuestion = () => {
     setNewQuestions([
       ...newQuestions,
-      { text: "", options: [{ optionText: "", iscorrect: false, order: 0 }] },
+      { text: "", options: [{ optionText: "", isCorrect: false, order: 0 }] },
     ]);
   };
 
@@ -108,7 +108,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
     const currentOptions = updatedQuestions[questionIndex].options;
     updatedQuestions[questionIndex].options.push({
       optionText: "",
-      iscorrect: false,
+      isCorrect: false,
       order: currentOptions.length,
     });
     setNewQuestions(updatedQuestions);
@@ -136,7 +136,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
   const handleCorrectAnswerChange = (questionIndex, optionIndex) => {
     const updatedQuestions = [...newQuestions];
     updatedQuestions[questionIndex].options.forEach((opt, idx) => {
-      opt.iscorrect = idx === optionIndex;
+      opt.isCorrect = idx === optionIndex;
     });
     setNewQuestions(updatedQuestions);
   };
@@ -169,28 +169,30 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
   const handleSubmitQuestion = async () => {
     setIsSubmitting(true);
     setError(null);
-  
+
     try {
       // Validate all questions and options
       for (const question of newQuestions) {
         if (!question.text.trim()) {
           throw new Error("Each question must have text.");
         }
-  
+
         if (!question.options.every((option) => option.optionText.trim())) {
           throw new Error("All options must contain text.");
         }
-  
-        if (!question.options.some((option) => option.iscorrect)) {
-          throw new Error("Each question must have at least one correct option.");
+
+        if (!question.options.some((option) => option.isCorrect)) {
+          throw new Error(
+            "Each question must have at least one correct option."
+          );
         }
       }
-  
+
       // Proceed with submission if validation passes
       const quizId = quiz.id;
-  
+
       for (const question of newQuestions) {
-        const correctOption = question.options.find((opt) => opt.iscorrect);
+        const correctOption = question.options.find((opt) => opt.isCorrect);
         const questionData = {
           text: question.text,
           order: newQuestions.indexOf(question),
@@ -198,24 +200,43 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
           explanation: question.explanation || "",
           quizId,
         };
-  
+
         // Post question
         const questionResponse = await api.post("/questions", questionData);
         const questionId = questionResponse.data.Question.id;
-  
+
         // Post options
         for (const [index, option] of question.options.entries()) {
           const optionData = {
             optionText: option.optionText,
-            iscorrect: option.iscorrect,
+            isCorrect: option.isCorrect,
             order: index,
             questionId,
           };
-  
+
           await api.post("/options", optionData);
         }
       }
-  
+      // const fetchUpdatedQuiz = async () => {
+      //   try {
+      //     const response = await api.get(`/quizzes/${lessonToView.quiz.id}`);
+      //     setQuiz(response.data);
+      //   } catch (err) {
+      //     setError(err.message);
+      //   } finally {
+      //     setLoading(false);
+      //   }
+      // };
+      // fetchUpdatedQuiz();
+      setNewQuestions([
+        {
+          text: "",
+          order: 0,
+          answer: "",
+          explanation: "",
+          options: [{ optionText: "", isCorrect: false, order: 0 }],
+        },
+      ]);
       setShowAddQuestionModal(false);
     } catch (error) {
       alert(
@@ -284,7 +305,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
       updatedQuiz.questions[questionIndex].option.push({
         id: Date.now(),
         optionText: "",
-        iscorrect: false,
+        isCorrect: false,
       });
       setEditedQuiz(updatedQuiz);
     }
@@ -301,7 +322,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
     updatedQuiz.questions.push({
       id: Date.now(),
       text: "",
-      option: [{ id: Date.now() + 1, optionText: "", iscorrect: false }],
+      option: [{ id: Date.now() + 1, optionText: "", isCorrect: false }],
     });
     setEditedQuiz(updatedQuiz);
   };
@@ -414,7 +435,9 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
                   <input
                     type="radio"
                     name={`question-${qIndex}`}
-                    onChange={() => handleAnswerOptionChange(question.id, option.id)}
+                    onChange={() =>
+                      handleAnswerOptionChange(question.id, option.id)
+                    }
                     checked={userAnswers[question.id] === option.id}
                   />
                   <label>{` ${option.optionText}`}</label>
@@ -465,7 +488,6 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-    
           <Button
             className="action-btn"
             variant="primary"
@@ -645,7 +667,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
                       <Col xs={2} className="text-center">
                         <Form.Check
                           type="radio"
-                          checked={option.iscorrect}
+                          checked={option.isCorrect}
                           onChange={() =>
                             handleCorrectAnswerChange(qIndex, oIndex)
                           }
