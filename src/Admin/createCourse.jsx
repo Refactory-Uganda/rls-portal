@@ -1,952 +1,659 @@
 import React, { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEdit,
-  faTrash,
-  faPlus,
-  faMinus,
-  faBook,
-  faList,
-  faGraduationCap,
-} from "@fortawesome/free-solid-svg-icons";
-import { Button } from "react-bootstrap";
-import AddQuiz from "../Components/AddQuiz";
-import RichTextEditor from "../Components/RichTextEditor";
 import api from "../services/api";
-
-const CreateCourse = () => {
+// import { useNavigate } from "react-router-dom";
+const CreateCourse = ({ setView }) => {
   const [courseData, setCourseData] = useState({
     Title: "",
     Description: "",
     Duration: "",
-    courseOutline: [],
-    requirements: [],
-    courseObjective: [],
     status: "DRAFT",
-    facilitatorId: "",
+    courseOutline: [],
     facilitator: "",
-    award: "",
+    requirements: [],
     assessmentMode: "",
+    award: "",
+    courseObjective: [],
+    image: null,
   });
 
-  // const [feedback, setFeedback] = useState({ error: "", success: "" });
-  const [outlineInput, setOutlineInput] = useState(""); // To handle outline field
-  const [requirement, setRequirement] = useState(""); // To handle outline field
-  const [courseObjectiveInput, setCourseObjectiveInput] = useState(""); // To handle outline field
   const [facilitators, setFacilitators] = useState([]);
-  const [image, setImage] = useState(null);
+  const [courseOutlineInput, setCourseOutlineInput] = useState("");
+  const [requirementsInput, setRequirementsInput] = useState("");
+  const [courseObjectiveInput, setCourseObjectiveInput] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [previewImage, setPreviewImage] = useState(null);
+  const [toast, setToast] = useState({ show: false, message: "", type: "" });
+  const [isLoadingFacilitators, setIsLoadingFacilitators] = useState(true);
 
-  const [isQuizModalOpen, setQuizModalOpen] = useState(false);
-
-  const toggleQuizModal = () => {
-    setQuizModalOpen(!isQuizModalOpen);
+  const handleBackClick = () => {
+    // setSelectedCourse(null);
+    setView("list");
   };
 
-  const [topics, setTopics] = useState([]);
-  const [newTopic, setNewTopic] = useState({
-    Title: "",
-    Description: "",
-    Lessons: [],
-  });
+  // Custom styles
+  const styles = {
+    primaryBg: "#663367",
+    primaryHover: "#7a407c",
+    secondaryBg: "#38BFC3",
+    secondaryHover: "#2fa8ac",
+  };
 
-  const [newLesson, setNewLesson] = useState({
-    title: "",
-    text: "", // This will store the lesson content in HTML format
-  });
+  // Duration options
+  const durationOptions = [
+    "4 weeks",
+    "6 weeks",
+    "8 weeks",
+    "10 weeks",
+    "16 weeks",
+    "20 weeks",
+    "24 weeks",
+  ];
 
-  const [showAddTopic, setShowAddTopic] = useState(false);
-  const [showAddLessonIndex, setShowAddLessonIndex] = useState(null);
+  // Status options
+  const statusOptions = ["draft", "published", "in_progress", "completed"];
 
-  const [editingStates, setEditingStates] = useState({
-    topicIndex: null,
-    lessonIndex: null,
-    isEditingTopic: false,
-    isEditingLesson: false,
-  });
+  // Assessment mode options
+  const assessmentModeOptions = [
+    "online",
+    "offline",
+    "hybrid",
+    "project-based",
+  ];
 
-  const [feedback, setFeedback] = useState({
-    error: "",
-    success: "",
-  });
+  // Award options
+  const awardOptions = [
+    "certificate",
+    "digital badge",
+    "professional certification",
+    "none",
+  ];
 
   useEffect(() => {
     const fetchFacilitators = async () => {
+      setIsLoadingFacilitators(true);
       try {
         const response = await api.get("/courses/staff");
         setFacilitators(response.data);
       } catch (error) {
         console.error("Error fetching facilitators:", error);
+      } finally {
+        setIsLoadingFacilitators(false);
       }
     };
 
     fetchFacilitators();
-    // setFacilitators([{id:"101",name:"Steven"},{id:"102",name:"Jackson"}])
   }, []);
 
-  // Event Handlers
-  const handleLessonInputChange = (name, value) => {
-    // Update newLesson content directly using Quill's HTML value
-    setNewLesson((prev) => ({
-      ...prev,
-      [name]: value,
+  const showToast = (message, type = "success") => {
+    setToast({ show: true, message, type });
+    setTimeout(() => setToast({ show: false, message: "", type: "" }), 5000);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setCourseData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFacilitatorInputChange = (e) => {
+    setCourseData((prevData) => ({
+      ...prevData,
+      facilitator: e.target.value,
     }));
   };
 
-  // const handleCourseInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setCourseData((prev) => ({ ...prev, [name]: value }));
-  //   setFeedback({ error: "", success: "" });
-  // };
-
-  // =====================================
-  const handleOutlineChange = (e) => {
-    setOutlineInput(e.target.value);
-  };
-  const handleObjectiveChange = (e) => {
-    setCourseObjectiveInput(e.target.value);
-  };
-  const handleRequirementsChange = (e) => {
-    setRequirement(e.target.value);
+  const handleAssesmentInputChange = (e) => {
+    setCourseData((prevData) => ({
+      ...prevData,
+      assessmentMode: e.target.value,
+    }));
   };
 
-  const addOutlineItem = () => {
-    if (outlineInput.trim()) {
-      setCourseData((prev) => ({
-        ...prev,
-        courseOutline: [...prev.courseOutline, outlineInput.trim()],
-      }));
-      setOutlineInput("");
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        showToast("File size should be less than 5MB", "error");
+        return;
+      }
+      setCourseData((prev) => ({ ...prev, image: file }));
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
-  const addObjectiveItem = () => {
+
+  const handleAddCourseOutline = () => {
+    if (courseOutlineInput.trim()) {
+      setCourseData((prev) => ({
+        ...prev,
+        courseOutline: [...prev.courseOutline, courseOutlineInput.trim()],
+      }));
+      setCourseOutlineInput("");
+      showToast("Course Outline added successfully", "success");
+    }
+  };
+
+  const handleRemoveCourseOutline = (index) => {
+    setCourseData((prev) => ({
+      ...prev,
+      courseOutline: prev.courseOutline.filter((_, i) => i !== index),
+    }));
+    showToast("Course Outline removed", "info");
+  };
+
+  const handleAddRequirements = () => {
+    if (requirementsInput.trim()) {
+      setCourseData((prev) => ({
+        ...prev,
+        requirements: [...prev.requirements, requirementsInput.trim()],
+      }));
+      setRequirementsInput("");
+      showToast("Requirement added successfully", "success");
+    }
+  };
+
+  const handleRemoveRequirements = (index) => {
+    setCourseData((prev) => ({
+      ...prev,
+      requirements: prev.requirements.filter((_, i) => i !== index),
+    }));
+    showToast("Requirement removed", "info");
+  };
+
+  const handleAddCourseObjective = () => {
     if (courseObjectiveInput.trim()) {
       setCourseData((prev) => ({
         ...prev,
         courseObjective: [...prev.courseObjective, courseObjectiveInput.trim()],
       }));
       setCourseObjectiveInput("");
-    }
-  };
-  const addRequirementItem = () => {
-    if (requirement.trim()) {
-      setCourseData((prev) => ({
-        ...prev,
-        requirements: [...prev.requirements, requirement.trim()],
-      }));
-      setRequirement("");
+      showToast("Course Objective added successfully", "success");
     }
   };
 
-  // =====================================
-
-  const handleCourseInputChange = (e) => {
-    const { name, value } = e.target;
-
-    setCourseData((prev) => {
-      // Handle updating facilitatorId and facilitatorName
-      if (name === "facilitatorId") {
-        const selectedFacilitator = facilitators.find(
-          (facilitator) => facilitator.id === value
-        );
-        return {
-          ...prev,
-          facilitatorId: value,
-          facilitator: selectedFacilitator
-            ? `${selectedFacilitator.firstName} ${selectedFacilitator.lastName}`
-            : "",
-        };
-      }
-
-      // Handle adding to arrays for courseOutline and requirements
-      if (name === "courseOutline") {
-        return {
-          ...prev,
-          courseOutline: [...prev.courseOutline, value],
-        };
-      } else if (name === "requirements") {
-        return {
-          ...prev,
-          requirements: [...prev.requirements, value],
-        };
-      }
-
-      // Handle other fields normally
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-
-    // Reset feedback state
-    setFeedback({ error: "", success: "" });
-  };
-
-  // Facilitator selection
-  // const handleFacilitatorChange = (e) => {
-  //   setCourseData({ ...courseData, facilitatorId: e.target.value });
-  // };
-
-  const handleFacilitatorChange = (e) => {
-    setCourseData((prevData) => ({
-      ...prevData,
-      facilitatorId: e.target.value, // Update the facilitatorId
+  const handleRemoveCourseObjective = (index) => {
+    setCourseData((prev) => ({
+      ...prev,
+      courseObjective: prev.courseObjective.filter((_, i) => i !== index),
     }));
+    showToast("Course Objective removed", "info");
   };
-
-  // Image upload
-  const handleImageChange = (e) => setImage(e.target.files[0]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { Title, Description, Duration } = courseData;
-
-    if (!Title || !Description || !Duration) {
-      setFeedback({ error: "Please fill all required fields.", success: "" });
-      return;
-    }
+    setIsSubmitting(true);
+    showToast("Creating course... Please wait", "info");
 
     const formData = new FormData();
-    formData.append("Title", courseData.Title);
-    formData.append("Description", courseData.Description);
-    formData.append("Duration", courseData.Duration);
-    formData.append("status", courseData.status);
-    formData.append("facilitatorId", courseData.facilitatorId);
-    formData.append("facilitator", courseData.facilitator);
-    formData.append("award", courseData.award);
-    formData.append("assessmentMode", courseData.assessmentMode);
-    formData.append("image", image);
-
-    // Append arrays as JSON strings
-    formData.append("courseOutline", JSON.stringify(courseData.courseOutline));
-    formData.append("requirements", JSON.stringify(courseData.requirements));
-    formData.append(
-      "courseObjective",
-      JSON.stringify(courseData.courseObjective)
-    );
+    Object.keys(courseData).forEach((key) => {
+      if (["courseOutline", "requirements", "courseObjective"].includes(key)) {
+        formData.append(key, JSON.stringify(courseData[key]));
+      } else {
+        formData.append(key, courseData[key]);
+      }
+    });
+    console.log(courseData); // Loggin  courseData to verify its structure(remove after)
 
     try {
       const response = await api.post("/courses", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: { "Content-Type": "multipart/form-data" },
       });
-      const courseId = response.data.id;
-
-      for (const topic of topics) {
-        const topicResponse = await api.post(`/topic/${courseId}`, {
-          Title: topic.Title,
-          Description: topic.Description,
-          courseId: courseId,
+      showToast("Course created successfully! Redirecting...", "success");
+      setTimeout(() => {
+        // Reset form after successful submission
+        setCourseData({
+          Title: "",
+          Description: "",
+          Duration: "",
+          status: "",
+          courseOutline: [],
+          facilitator: "",
+          requirements: [],
+          assessmentMode: "",
+          award: "",
+          courseObjective: [],
+          image: null,
         });
-
-        const topicId = topicResponse.data.id;
-
-        await Promise.all(
-          topic.Lessons.map((lesson) =>
-            api.post(`/lesson/${topicId}`, {
-              title: lesson.title,
-              text: lesson.text,
-              topicId: topicId,
-            })
-          )
-        );
-      }
-
-      setCourseData({ Title: "", Description: "", Duration: "", status: "" });
-      setTopics([]);
-      setFeedback({ error: "", success: "Course created successfully!" });
+        setPreviewImage(null);
+      }, 2000);
     } catch (error) {
-      setFeedback({
-        error: "Failed to create course. Please try again.",
-        success: "",
-      });
+      showToast("Error creating course. Please try again.", "error");
       console.error("Error creating course:", error);
+    } finally {
+      setIsSubmitting(false);
     }
-  };
-
-  const handleTopicAction = (action, topicIndex = null) => {
-    switch (action) {
-      case "add":
-        if (!newTopic.Title) {
-          setFeedback({ error: "Topic title is required", success: "" });
-          return;
-        }
-        setTopics((prev) => [...prev, { ...newTopic, Lessons: [] }]);
-        setNewTopic({ Title: "", Description: "", Lessons: [] });
-        setShowAddTopic(false);
-        break;
-
-      case "update":
-        if (!newTopic.Title) {
-          setFeedback({ error: "Topic title is required", success: "" });
-          return;
-        }
-        setTopics((prev) =>
-          prev.map((topic, idx) =>
-            idx === editingStates.topicIndex ? newTopic : topic
-          )
-        );
-        setEditingStates((prev) => ({
-          ...prev,
-          isEditingTopic: false,
-          topicIndex: null,
-        }));
-        setNewTopic({ Title: "", Description: "", Lessons: [] });
-        setShowAddTopic(false);
-        break;
-
-      case "edit":
-        setNewTopic(topics[topicIndex]);
-        setEditingStates((prev) => ({
-          ...prev,
-          isEditingTopic: true,
-          topicIndex,
-        }));
-        setShowAddTopic(true);
-        break;
-
-      case "delete":
-        setTopics((prev) => prev.filter((_, idx) => idx !== topicIndex));
-        break;
-    }
-    setFeedback({ error: "", success: "" });
-  };
-
-  const handleLessonAction = (action, topicIndex, lessonIndex = null) => {
-    const updatedTopics = [...topics];
-
-    switch (action) {
-      case "add":
-        if (!newLesson.title) {
-          setFeedback({ error: "Lesson title is required", success: "" });
-          return;
-        }
-        updatedTopics[topicIndex].Lessons.push(newLesson);
-        setNewLesson({ title: "", text: "" });
-        break;
-
-      case "update":
-        if (!newLesson.title) {
-          setFeedback({ error: "Lesson title is required", success: "" });
-          return;
-        }
-        updatedTopics[topicIndex].Lessons[editingStates.lessonIndex] =
-          newLesson;
-        setEditingStates((prev) => ({
-          ...prev,
-          isEditingLesson: false,
-          lessonIndex: null,
-        }));
-        setNewLesson({ title: "", text: "" });
-        setShowAddLessonIndex(null);
-        break;
-
-      case "edit":
-        const lessonToEdit = topics[topicIndex].Lessons[lessonIndex];
-        setNewLesson({
-          title: lessonToEdit.title,
-          text: lessonToEdit.text,
-        });
-        setEditingStates((prev) => ({
-          ...prev,
-          isEditingLesson: true,
-          lessonIndex,
-        }));
-        setShowAddLessonIndex(topicIndex);
-        break;
-
-      case "delete":
-        updatedTopics[topicIndex].Lessons = updatedTopics[
-          topicIndex
-        ].Lessons.filter((_, idx) => idx !== lessonIndex);
-        break;
-    }
-
-    setTopics(updatedTopics);
-    setFeedback({ error: "", success: "" });
-  };
-
-  const renderProgressBar = () => {
-    const totalSteps = 3;
-    const completedSteps = [
-      !!courseData.Title && !!courseData.Description && !!courseData.Duration,
-      topics.length > 0,
-      topics.every((topic) => topic.Lessons.length > 0),
-    ].filter(Boolean).length;
   };
 
   return (
-    <div className="container py-1 pe-7">
-      <div className="row justify-content-center">
-        <div className="col-lg-10">
-          <div className="card shadow border-0">
-            <div
-              className="card-header  text-white py-3"
-              style={{ backgroundColor: "#663367", color: "white" }}
-            >
-              <div className="d-flex align-items-center">
-                <FontAwesomeIcon
-                  icon={faGraduationCap}
-                  className="me-3"
-                  size="2x"
-                  style={{ color: "#38BFC3" }}
-                />
+    <div className="container py-4">
+      {/* Toast Notification */}
+      {toast.show && (
+        <div
+          className="position-fixed top-0 end-0 p-3"
+          style={{ zIndex: 1050 }}
+        >
+          <div
+            className={`toast show align-items-center text-white border-0 ${toast.type === "success"
+                ? "bg-success"
+                : toast.type === "error"
+                  ? "bg-danger"
+                  : "bg-info"
+              }`}
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
+            <div className="d-flex">
+              <div className="toast-body">
+                <i
+                  className={`fas ${toast.type === "success"
+                      ? "fa-check-circle"
+                      : toast.type === "error"
+                        ? "fa-exclamation-circle"
+                        : "fa-info-circle"
+                    } me-2`}
+                ></i>
+                {toast.message}
+              </div>
+              <button
+                type="button"
+                className="btn-close btn-close-white me-2 m-auto"
+                onClick={() => setToast({ show: false, message: "", type: "" })}
+              ></button>
+            </div>
+          </div>
+        </div>
+      )}
 
-                <div>
-                  <h3 className="mb-0">Create New Course</h3>
-                  <small>Fill in the details below to create your course</small>
+      {/* Progress Indicator */}
+      {isSubmitting && (
+        <div
+          className="position-fixed top-0 start-0 w-100"
+          style={{ zIndex: 1040 }}
+        >
+          <div
+            className="progress"
+            style={{ height: "4px", backgroundColor: "rgba(255,255,255,0.2)" }}
+          >
+            <div
+              className="progress-bar progress-bar-striped progress-bar-animated"
+              role="progressbar"
+              style={{ width: "100%", backgroundColor: styles.secondaryBg }}
+            ></div>
+          </div>
+        </div>
+      )}
+      <div className="course-details-btn-container" style={{ height: "3rem" }}>
+        <button
+          className="btn btn-primary action-btn"
+          onClick={handleBackClick}
+        >
+          <i className="bi bi-arrow-left"></i> Back to Course
+        </button>
+      </div>
+
+      <div className="card shadow-sm">
+        <div
+          className="card-header text-white"
+          style={{ backgroundColor: styles.primaryBg }}
+        >
+          <h3 className="mb-0" style={{ color: "#ffffff", fontWeight: "bold" }}>
+            New Course
+          </h3>
+        </div>
+        <div className="card-body">
+          <form onSubmit={handleSubmit} className="row g-3">
+            {/* Left Column */}
+            <div className="col-md-8">
+              {/* Course Title */}
+              <div className="mb-3">
+                <label className="form-label fw-bold">Course Title</label>
+                <input
+                  type="text"
+                  name="Title"
+                  className="form-control"
+                  value={courseData.Title}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Enter course title"
+                />
+              </div>
+
+              {/* Course Description */}
+              <div className="mb-3">
+                <label className="form-label fw-bold">Course Description</label>
+                <textarea
+                  name="Description"
+                  className="form-control"
+                  value={courseData.Description}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Enter course description"
+                  rows="4"
+                />
+              </div>
+              {/* Course Outline Card */}
+              <div className="card mb-3">
+                <div
+                  className="card-header"
+                  style={{
+                    backgroundColor: styles.secondaryBg,
+                    color: "white",
+                  }}
+                >
+                  <i className="fas fa-list-ul me-2"></i>Course Outline
+                </div>
+                <div className="card-body">
+                  <div className="input-group mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Add course outline item"
+                      value={courseOutlineInput}
+                      onChange={(e) => setCourseOutlineInput(e.target.value)}
+                    />
+                    <button
+                      type="button"
+                      className="btn text-white"
+                      style={{ backgroundColor: styles.primaryBg }}
+                      onClick={handleAddCourseOutline}
+                    >
+                      <i className="fas fa-plus me-1"></i>Add
+                    </button>
+                  </div>
+                  <div className="outline-list">
+                    {courseData.courseOutline.map((outline, index) => (
+                      <div
+                        key={index}
+                        className="alert"
+                        style={{
+                          backgroundColor: `${styles.secondaryBg}20`,
+                          color: styles.primaryBg,
+                        }}
+                      >
+                        <div className="d-flex justify-content-between align-items-center">
+                          <span>
+                            <i className="fas fa-check-circle me-2"></i>
+                            {outline}
+                          </span>
+                          <button
+                            type="button"
+                            className="btn btn-sm"
+                            style={{ color: styles.primaryBg }}
+                            onClick={() => handleRemoveCourseOutline(index)}
+                          >
+                            <i className="fas fa-trash-alt"></i>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Requirements Card */}
+              <div className="card mb-3">
+                <div
+                  className="card-header"
+                  style={{
+                    backgroundColor: styles.secondaryBg,
+                    color: "white",
+                  }}
+                >
+                  <i className="fas fa-clipboard-list me-2"></i>Course
+                  Requirements
+                </div>
+                <div className="card-body">
+                  <div className="input-group mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Add course requirement"
+                      value={requirementsInput}
+                      onChange={(e) => setRequirementsInput(e.target.value)}
+                    />
+                    <button
+                      type="button"
+                      className="btn text-white"
+                      style={{ backgroundColor: styles.primaryBg }}
+                      onClick={handleAddRequirements}
+                    >
+                      <i className="fas fa-plus me-1"></i>Add
+                    </button>
+                  </div>
+                  <div className="requirements-list">
+                    {courseData.requirements.map((requirement, index) => (
+                      <div
+                        key={index}
+                        className="alert"
+                        style={{
+                          backgroundColor: `${styles.secondaryBg}20`,
+                          color: styles.primaryBg,
+                        }}
+                      >
+                        <div className="d-flex justify-content-between align-items-center">
+                          <span>
+                            <i className="fas fa-check-circle me-2"></i>
+                            {requirement}
+                          </span>
+                          <button
+                            type="button"
+                            className="btn btn-sm"
+                            style={{ color: styles.primaryBg }}
+                            onClick={() => handleRemoveRequirements(index)}
+                          >
+                            <i className="fas fa-trash-alt"></i>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Course Objectives Card */}
+              <div className="card mb-3">
+                <div
+                  className="card-header"
+                  style={{
+                    backgroundColor: styles.secondaryBg,
+                    color: "white",
+                  }}
+                >
+                  <i className="fas fa-bullseye me-2"></i>Course Objectives
+                </div>
+                <div className="card-body">
+                  <div className="input-group mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Add course objective"
+                      value={courseObjectiveInput}
+                      onChange={(e) => setCourseObjectiveInput(e.target.value)}
+                    />
+                    <button
+                      type="button"
+                      className="btn text-white"
+                      style={{ backgroundColor: styles.primaryBg }}
+                      onClick={handleAddCourseObjective}
+                    >
+                      <i className="fas fa-plus me-1"></i>Add
+                    </button>
+                  </div>
+                  <div className="objectives-list">
+                    {courseData.courseObjective.map((objective, index) => (
+                      <div
+                        key={index}
+                        className="alert"
+                        style={{
+                          backgroundColor: `${styles.secondaryBg}20`,
+                          color: styles.primaryBg,
+                        }}
+                      >
+                        <div className="d-flex justify-content-between align-items-center">
+                          <span>
+                            <i className="fas fa-check-circle me-2"></i>
+                            {objective}
+                          </span>
+                          <button
+                            type="button"
+                            className="btn btn-sm"
+                            style={{ color: styles.primaryBg }}
+                            onClick={() => handleRemoveCourseObjective(index)}
+                          >
+                            <i className="fas fa-trash-alt"></i>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="card-body p-4">
-              {renderProgressBar()}
-
-              <form onSubmit={handleSubmit}>
-                <div className=" mb-4">
-                  <div className="card-body">
-                    <h5 className="card-title mb-4 d-flex align-items-center">
-                      <FontAwesomeIcon
-                        icon={faBook}
-                        className="me-2"
-                        style={{ color: "#38BFC3" }}
-                      />
-                      Course Details
-                    </h5>
-
-                    <div className="row g-3">
-                      <div className="col-md-8">
-                        <div className="form-floating">
-                          <input
-                            type="text"
-                            name="Title"
-                            className="form-control custom-focus"
-                            id="courseTitle"
-                            value={courseData.Title}
-                            onChange={handleCourseInputChange}
-                            placeholder="Enter course title"
-                          />
-                          <label htmlFor="courseTitle">Course Title</label>
-                        </div>
-                      </div>
-
-                      <div className="col-md-4">
-                        <div className="form-floating">
-                          <select
-                            name="Duration"
-                            className="form-select custom-focus"
-                            id="courseDuration"
-                            value={courseData.Duration}
-                            onChange={handleCourseInputChange}
-                          >
-                            <option value="">Select duration</option>
-                            {[...Array(52)].map((_, i) => (
-                              <option key={i + 1} value={i + 1}>
-                                {i + 1} week{i !== 0 ? "s" : ""}
-                              </option>
-                            ))}
-                          </select>
-                          <label htmlFor="courseDuration">Duration</label>
-                        </div>
-                      </div>
-
-                      <div className="col-12">
-                        <div className="form-floating">
-                          <textarea
-                            name="Description"
-                            className="form-control custom-focus"
-                            id="courseDescription"
-                            value={courseData.Description}
-                            onChange={handleCourseInputChange}
-                            style={{ height: "100px" }}
-                            placeholder="Enter course description"
-                          />
-                          <label htmlFor="courseDescription">Description</label>
-                        </div>
-                      </div>
-                      {/* =============== */}
-
-                      <div className="form-group col-12">
-                        <label>Course Outline</label>
-                        <input
-                          type="text"
-                          value={outlineInput}
-                          onChange={handleOutlineChange}
-                        />
-                        <button type="button" onClick={addOutlineItem}>
-                          Add to Outline
-                        </button>
-                        {/* <ul>
-                          {courseData.courseOutline.map((item, index) => (
-                            <li key={index}>{item}</li>
-                          ))}
-                        </ul> */}
-                        <ul>
-                          {(courseData.courseOutline || []).map(
-                            (item, index) => (
-                              <li key={index}>{item}</li>
-                            )
-                          )}
-                        </ul>
-                      </div>
-                      <div className="form-group">
-                        <label>Course Objectives</label>
-                        <input
-                          type="text"
-                          value={courseObjectiveInput}
-                          onChange={handleObjectiveChange}
-                        />
-                        <button type="button" onClick={addObjectiveItem}>
-                          Add Course Objective
-                        </button>
-                        <ul>
-                          {courseData.courseObjective.map((item, index) => (
-                            <li key={index}>{item}</li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="form-group">
-                        <label>Requirements</label>
-                        <input
-                          type="text"
-                          value={requirement}
-                          onChange={handleRequirementsChange}
-                        />
-                        <button type="button" onClick={addRequirementItem}>
-                          Add Requirement
-                        </button>
-                        <ul>
-                          {courseData.requirements.map((item, index) => (
-                            <li key={index}>{item}</li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* =============================== */}
-                      <div className="col-12">
-                        <div className="form-floating">
-                          {/* <select
-                            name="status"
-                            className="form-control custom-focus"
-                            id="status"
-                            value={courseData.status}
-                            // onChange={handleCourseInputChange}
-                            style={{ height: "50px" }}
-                            placeholder="Enter course outline"
-                          >
-                            <option value="DRAFT">DRAFT</option>
-                            <option value="PUBLISHED">PUBLISHED</option>
-                          </select> */}
-
-                          {/* <label htmlFor="courseOutline">status</label> */}
-                        </div>
-                      </div>
-                      {/* ======================= */}
-                      {/* Assessment Mode Select Field */}
-                      <div className="mb-3">
-                        <label>Assessment Mode</label>
-                        <select
-                          name="assessmentMode"
-                          value={courseData.assessmentMode}
-                          onChange={handleCourseInputChange}
-                          required
-                        >
-                          <option value="">Select Assessment Mode</option>
-                          <option value="QUIZ">Quiz</option>
-                          <option value="ASSIGNMENT">Assignment</option>
-                        </select>
-                      </div>
-
-                      {/* Award Select Field */}
-                      <div className="mb-3">
-                        <label>Award</label>
-                        <select
-                          name="award"
-                          value={courseData.award}
-                          onChange={handleCourseInputChange}
-                          required
-                        >
-                          <option value="">Select Award</option>
-                          <option value="certificate">Certificate</option>
-                          <option value="diploma">Diploma</option>
-                        </select>
-                      </div>
-
-                      {/* Facilitator Selection */}
-                      <div className="form-group">
-                        <label>Facilitator</label>
-                       
-                        <select
-                          value={courseData.facilitatorId}
-                          onChange={handleFacilitatorChange}
-                          required
-                        >
-                          <option value="" readOnly>
-                            Select Facilitator
-                          </option>
-                          {facilitators.map((facilitator) => (
-                            <option key={facilitator.id} value={facilitator.id}>
-                              {`${facilitator.firstName} ${facilitator.lastName}`}
-                            </option>
-                          ))}
-                        </select>
-                        <p>
-                          Selected Facilitator ID: {courseData.facilitatorId}
-                        </p>
-                      </div>
-
-                      {/* Hidden Input for Facilitator Name */}
-                      <input
-                        // type="hidden"
-                        name="facilitator"
-                        value={courseData.facilitator.id}
-                        readOnly
-                      />
-
-                      {/* Image Upload */}
-                      <div className="form-group">
-                        <label>Course Image</label>
-                        <input type="file" onChange={handleImageChange} />
-                      </div>
-                    </div>
-                  </div>
+            {/* Right Column */}
+            <div className="col-md-4">
+              {/* Image Upload */}
+              <div className="card mb-3">
+                <div
+                  className="card-header"
+                  style={{
+                    backgroundColor: styles.secondaryBg,
+                    color: "white",
+                  }}
+                >
+                  <i className="fas fa-image me-2"></i>Course Image
                 </div>
-
-                <div className="topics-section mb-4">
-                  <div className="d-flex justify-content-between align-items-center mb-3">
-                    <h5 className="mb-0 d-flex align-items-center">
-                      <FontAwesomeIcon
-                        icon={faList}
-                        className="me-2"
-                        style={{ color: "#38BFC3" }}
-                      />
-                      Course Topics
-                    </h5>
-                    <button
-                      type="button"
-                      className="btn btn-primary secondary-action-btn"
-                      onClick={() => setShowAddTopic(!showAddTopic)}
+                <div className="card-body text-center">
+                  {previewImage ? (
+                    <img
+                      src={previewImage}
+                      alt="Course Preview"
+                      className="img-fluid rounded mb-3"
+                      style={{ maxHeight: "200px", objectFit: "cover" }}
+                    />
+                  ) : (
+                    <div
+                      className="d-flex justify-content-center align-items-center mb-3"
+                      style={{
+                        height: "200px",
+                        border: `2px dashed ${styles.primaryBg}`,
+                        color: styles.primaryBg,
+                      }}
                     >
-                      <FontAwesomeIcon
-                        icon={showAddTopic ? faMinus : faPlus}
-                        className="me-2"
-                      />
-                      {showAddTopic ? "Cancel" : "Add Topic"}
-                    </button>
-                  </div>
-
-                  {showAddTopic && (
-                    <div className="card mb-3 border-primary border-opacity-25">
-                      <div className="card-body">
-                        <div className="form-floating mb-3">
-                          <input
-                            type="text"
-                            className="form-control custom-focus"
-                            id="topicTitle"
-                            value={newTopic.Title}
-                            onChange={(e) =>
-                              setNewTopic({
-                                ...newTopic,
-                                Title: e.target.value,
-                              })
-                            }
-                            placeholder="Topic Title"
-                          />
-                          <label htmlFor="topicTitle">Topic Title</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                          <textarea
-                            className="form-control custom-focus"
-                            id="topicDescription"
-                            value={newTopic.Description}
-                            onChange={(e) =>
-                              setNewTopic({
-                                ...newTopic,
-                                Description: e.target.value,
-                              })
-                            }
-                            placeholder="Topic Description"
-                            style={{ height: "100px" }}
-                          />
-                          <label htmlFor="topicDescription">
-                            Topic Description
-                          </label>
-                        </div>
-                        <button
-                          type="button"
-                          className="btn btn-primary secondary-action-btn"
-                          onClick={() =>
-                            handleTopicAction(
-                              editingStates.isEditingTopic ? "update" : "add"
-                            )
-                          }
-                        >
-                          <FontAwesomeIcon
-                            icon={
-                              editingStates.isEditingTopic ? faEdit : faPlus
-                            }
-                            className="me-2"
-                          />
-                          {editingStates.isEditingTopic
-                            ? "Update Topic"
-                            : "Add Topic"}
-                        </button>
-                      </div>
+                      <i className="fas fa-cloud-upload-alt fa-3x"></i>
                     </div>
                   )}
-
-                  {topics.map((topic, topicIndex) => (
-                    <div
-                      key={topicIndex}
-                      className="card mb-3 border-0 shadow-sm"
-                    >
-                      <div className="card-header bg-light py-3">
-                        <div className="d-flex justify-content-between align-items-center">
-                          <h5 className="mb-0">{topic.Title}</h5>
-                          <div className="btn-group">
-                            <button
-                              type="button"
-                              className="btn btn-primary secondary-action-btn"
-                              onClick={() => {
-                                if (showAddLessonIndex === topicIndex) {
-                                  setShowAddLessonIndex(null);
-                                  setNewLesson({ title: "", text: "" });
-                                  setEditingStates((prev) => ({
-                                    ...prev,
-                                    isEditingLesson: false,
-                                    lessonIndex: null,
-                                  }));
-                                } else {
-                                  setShowAddLessonIndex(topicIndex);
-                                }
-                              }}
-                            >
-                              <FontAwesomeIcon
-                                icon={
-                                  showAddLessonIndex === topicIndex
-                                    ? faMinus
-                                    : faPlus
-                                }
-                                className="me-1"
-                              />
-                              {showAddLessonIndex === topicIndex
-                                ? editingStates.isEditingLesson
-                                  ? "Cancel Editing"
-                                  : "Cancel"
-                                : "Add Lesson"}
-                            </button>
-                            <button
-                              type="button"
-                              className="btn btn-outline-primary btn-sm"
-                              onClick={() =>
-                                handleTopicAction("edit", topicIndex)
-                              }
-                            >
-                              <FontAwesomeIcon icon={faEdit} className="me-1" />
-                              Edit
-                            </button>
-                            <button
-                              type="button"
-                              className="btn btn-outline-danger btn-sm"
-                              onClick={() =>
-                                handleTopicAction("delete", topicIndex)
-                              }
-                            >
-                              <FontAwesomeIcon
-                                icon={faTrash}
-                                className="me-1"
-                              />
-                              Delete
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="card-body">
-                        {/* <p className="text-muted mb-4">{topic.Description}</p> */}
-
-                        <div className="lessons-section">
-                          <div className="d-flex justify-content-between align-items-center mb-3">
-                            <h6 className="mb-0">
-                              Lessons
-                              {/* ({topic.Lessons.length}) */}
-                            </h6>
-                          </div>
-
-                          {showAddLessonIndex === topicIndex && (
-                            <div className="card mb-3 border-primary border-opacity-25">
-                              <div className="card-body">
-                                <div className="form-floating mb-3">
-                                  <input
-                                    type="text"
-                                    className="form-control custom-focus"
-                                    id="lessonTitle"
-                                    value={newLesson.title || ""}
-                                    onChange={(e) =>
-                                      setNewLesson({
-                                        ...newLesson,
-                                        title: e.target.value,
-                                      })
-                                    }
-                                    placeholder="Lesson Title"
-                                  />
-                                  <label htmlFor="lessontitle">
-                                    Lesson Title
-                                  </label>
-                                </div>
-                                <div className="form-floating mb-3">
-                                  <div>
-                                    <label
-                                      style={{
-                                        textAlign: "left",
-                                        display: "block",
-                                      }}
-                                    >
-                                      Lesson Content
-                                    </label>
-                                    <RichTextEditor
-                                      value={newLesson.text} // Use newLesson.text instead of lessonContent
-                                      onChange={(value) =>
-                                        handleLessonInputChange("text", value)
-                                      } // Ensure you're using the correct handler
-                                    />
-                                  </div>
-                                </div>
-                                <button
-                                  type="button"
-                                  className="btn btn-primary secondary-action-btn"
-                                  onClick={() =>
-                                    handleLessonAction(
-                                      editingStates.isEditingLesson
-                                        ? "update"
-                                        : "add",
-                                      topicIndex
-                                    )
-                                  }
-                                >
-                                  <FontAwesomeIcon
-                                    icon={
-                                      editingStates.isEditingLesson
-                                        ? faEdit
-                                        : faPlus
-                                    }
-                                    className="me-2"
-                                  />
-                                  {editingStates.isEditingLesson
-                                    ? "Update Lesson"
-                                    : "Add Lesson"}
-                                </button>
-                              </div>
-                            </div>
-                          )}
-
-                          <div className="lesson-list">
-                            {topic.Lessons.map((lesson, lessonIndex) => (
-                              <div
-                                key={lessonIndex}
-                                className="card mb-2 border-0 bg-light"
-                              >
-                                <div className="card-body">
-                                  <div className="d-flex justify-content-between align-items-center mb-2">
-                                    <h6 className="mb-0">
-                                      {/* <span className="text-muted me-2">
-                                        #{lessonIndex + 1}
-                                      </span> */}
-                                      {lesson.title}
-                                    </h6>
-                                    <div className="btn-group">
-                                      <Button
-                                        style={{ backgroundColor: "#663367" }}
-                                        onClick={toggleQuizModal}
-                                      >
-                                        Add Quiz
-                                      </Button>
-
-                                      <AddQuiz
-                                        isQuizModalOpen={isQuizModalOpen}
-                                        toggleQuizModal={toggleQuizModal}
-                                        lessonTitle={lesson.title}
-                                      />
-                                      <button
-                                        className="btn btn-purple me-2"
-                                        onClick={() =>
-                                          handleLessonAction(
-                                            "edit",
-                                            topicIndex,
-                                            lessonIndex
-                                          )
-                                        }
-                                      >
-                                        <FontAwesomeIcon
-                                          icon={faEdit}
-                                          className="btn btn-purple me-2"
-                                        />
-                                      </button>
-                                      <button
-                                        type="button"
-                                        className="btn btn-outline-danger btn-sm"
-                                        onClick={() =>
-                                          handleLessonAction(
-                                            "delete",
-                                            topicIndex,
-                                            lessonIndex
-                                          )
-                                        }
-                                      >
-                                        <FontAwesomeIcon
-                                          icon={faTrash}
-                                          className="me-1"
-                                        />
-                                        Delete
-                                      </button>
-                                    </div>
-                                  </div>
-                                  {/* <p className="text-muted mb-0 small">
-                                    {lesson.text}
-                                  </p> */}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="d-grid gap-2">
-                  <button
-                    type="submit"
-                    className="btn btn-success btn-lg"
-                    style={{
-                      backgroundColor: "#663367",
-                      color: "#fff",
-                      borderColor: "#663367",
-                    }}
-                    disabled={
-                      !courseData.Title ||
-                      !courseData.Description ||
-                      !courseData.Duration
-                      // topics.length === 0
-                    }
+                  <input
+                    type="file"
+                    className="form-control d-none"
+                    id="courseImage"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                  />
+                  <label
+                    htmlFor="courseImage"
+                    className="btn w-100 text-white"
+                    style={{ backgroundColor: styles.primaryBg }}
                   >
-                    <FontAwesomeIcon icon={faGraduationCap} className="me-2" />
-                    Create Course
-                  </button>
+                    <i className="fas fa-upload me-2"></i> Upload Image
+                  </label>
                 </div>
-              </form>
+              </div>
 
-              {(feedback.error || feedback.success) && (
+              {/* Course Details Dropdowns */}
+              <div className="card mb-3">
                 <div
-                  className={`alert ${
-                    feedback.error ? "alert-danger" : "alert-success"
-                  } mt-3`}
-                  role="alert"
+                  className="card-header"
+                  style={{
+                    backgroundColor: styles.secondaryBg,
+                    color: "white",
+                  }}
                 >
-                  {feedback.error || feedback.success}
+                  <i className="fas fa-cogs me-2"></i>Course Details
                 </div>
-              )}
+                <div className="card-body">
+                  {/* Duration Dropdown */}
+                  <div className="mb-3">
+                    <label className="form-label fw-bold">
+                      Course Duration
+                    </label>
+                    <select
+                      name="Duration"
+                      className="form-select"
+                      value={courseData.Duration}
+                      onChange={handleInputChange}
+                      // required
+                      placeholder="Duration"
+                    >
+                      {/* <option value="">Select Duration</option> */}
+                      {durationOptions.map((duration) => (
+                        <option key={duration} value={duration}>
+                          {duration}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Facilitator Dropdown */}
+                  <div className="mb-3">
+                    <label className="form-label fw-bold">Facilitator</label>
+                    <select
+                      name="facilitator"
+                      className="form-select"
+                      value={courseData.facilitator}
+                      onChange={handleFacilitatorInputChange}
+                      disabled={isLoadingFacilitators}
+                    >
+                      <option value="">
+                        {isLoadingFacilitators
+                          ? "Loading facilitators..."
+                          : "Select Facilitator"}
+                      </option>
+                      {facilitators.map((facilitator) => (
+                        <option key={facilitator.id} value={facilitator.id}>
+                          {`${facilitator.firstName} ${facilitator.lastName}`}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Assessment mode */}
+                  <div className="mb-3">
+                    <label className="form-label fw-bold">
+                      Assessment mode
+                    </label>
+                    <select
+                      name="assessmentMode"
+                      className="form-select"
+                      value={courseData.assessmentMode}
+                      onChange={handleAssesmentInputChange}
+                    >
+                      <option value="">Select Assessment</option>
+
+                      <option value={"QUIZ"}>Quiz</option>
+                      <option value={"ASSIGNMENT"}>Assignment</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+
+            <div className="col-12 text-end">
+              <button
+                type="submit"
+                className="btn text-white"
+                style={{
+                  backgroundColor: styles.primaryBg,
+                  width: "200px",
+                }}
+              >
+                Save Course
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
