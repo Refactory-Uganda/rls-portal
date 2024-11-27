@@ -70,7 +70,7 @@ const FacilitatorsPage = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Course Assigned</th>
-              <th>Actions</th>
+              {/* <th>Actions</th> */}
             </tr>
           </thead>
           <tbody>
@@ -79,7 +79,7 @@ const FacilitatorsPage = () => {
                 <td>{`${facilitator.firstName} ${facilitator.lastName}`}</td>
                 <td>{facilitator.email}</td>
                 <td>{facilitator.courseAssigned || `No course assigned`}</td>
-                <td>
+                {/* <td>
                   <button
                     className="btn btn-purple me-2"
                     onClick={() => handleEdit(facilitator)}
@@ -94,7 +94,7 @@ const FacilitatorsPage = () => {
                   >
                     <i className="fas fa-trash-alt"></i>
                   </button>
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>
@@ -111,7 +111,7 @@ const FacilitatorsPage = () => {
                 <b>Course:</b>{" "}
                 {facilitator.courseAssigned || `No course assigned`}
               </p>
-              <div className="actions">
+              {/* <div className="actions">
                 <button
                   className="btn btn-purple me-2"
                   onClick={() => handleEdit(facilitator)}
@@ -126,7 +126,7 @@ const FacilitatorsPage = () => {
                 >
                   <i className="fas fa-trash-alt"></i>
                 </button>
-              </div>
+              </div> */}
             </div>
           ))}
         </div>
