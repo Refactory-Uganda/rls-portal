@@ -151,20 +151,23 @@ const CourseDetails = ({
               Duration: {selectedCourse.Duration} weeks
             </h6>
             <h6 className="card-subtitle mb-2 text-body-secondary">
-              Facilitator: Steven Kawooya
+              Facilitator: {`${selectedCourse.facilitator.firstName} ${selectedCourse.facilitator.lastName}`}
             </h6>
             <h6 className="card-subtitle mb-2 text-body-secondary">
-              Award: Certificate
+              Award: {selectedCourse.award}
+            </h6>
+            <h6 className="card-subtitle mb-2 text-body-secondary">
+              Assessment Mode: {selectedCourse.assessmentMode}
             </h6>
             {/* <h6 className="card-subtitle mb-2 text-body-secondary">
               Course objective:
             </h6> */}
             <p className="card-text">{selectedCourse.Description}</p>
-            {/* {selectedCourse.courseOutline.map((item, index) => (
+            {selectedCourse.courseOutline.map((item, index) => (
               <p key={index}>{item}</p>
-            ))} */}
+            ))}
 
-            {selectedCourse.courseOutline
+            {/* {selectedCourse.courseOutline
               .flatMap((item) => {
                 try {
                   // Attempt to parse if the string is valid JSON
@@ -185,7 +188,7 @@ const CourseDetails = ({
               })
               .map((parsedItem, index) => (
                 <p key={index}>{parsedItem}</p>
-              ))}
+              ))} */}
             <div className="course-details-btn-container">
               <button
                 className="btn btn-purple me-2"

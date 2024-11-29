@@ -39,15 +39,16 @@ const CreateCourse = ({ setView }) => {
   };
 
   // Duration options
-  const durationOptions = [
-    "4 weeks",
-    "6 weeks",
-    "8 weeks",
-    "10 weeks",
-    "16 weeks",
-    "20 weeks",
-    "24 weeks",
-  ];
+  function generateDurationOptions(maxWeeks = 36) {
+    const durationOptions = [];
+    for (let i = 1; i <= maxWeeks; i++) {
+      durationOptions.push(`${i} ${i === 1 ? 'week' : 'weeks'}`);
+    }
+    return durationOptions;
+  }
+  
+  const durationOptions = generateDurationOptions();
+
 
   // Status options
   const statusOptions = ["draft", "published", "in_progress", "completed"];
@@ -105,6 +106,12 @@ const CreateCourse = ({ setView }) => {
     setCourseData((prevData) => ({
       ...prevData,
       assessmentMode: e.target.value,
+    }));
+  };
+  const handleAwardInputChange = (e) => {
+    setCourseData((prevData) => ({
+      ...prevData,
+      award: e.target.value,
     }));
   };
 
@@ -588,7 +595,7 @@ const CreateCourse = ({ setView }) => {
                       // required
                       placeholder="Duration"
                     >
-                      {/* <option value="">Select Duration</option> */}
+                      <option value="">Select Duration</option>
                       {durationOptions.map((duration) => (
                         <option key={duration} value={duration}>
                           {duration}
@@ -635,6 +642,23 @@ const CreateCourse = ({ setView }) => {
 
                       <option value={"QUIZ"}>Quiz</option>
                       <option value={"ASSIGNMENT"}>Assignment</option>
+                    </select>
+                  </div>
+                  {/* Award */}
+                  <div className="mb-3">
+                    <label className="form-label fw-bold">
+                      Award
+                    </label>
+                    <select
+                      name="assessmentMode"
+                      className="form-select"
+                      value={courseData.award}
+                      onChange={handleAwardInputChange}
+                    >
+                      <option value="">Select Award</option>
+
+                      <option value={"Certificate"}>Certificate</option>
+                      <option value={"Diploma"}>Diploma</option>
                     </select>
                   </div>
                 </div>

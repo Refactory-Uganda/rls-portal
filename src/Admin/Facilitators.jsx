@@ -1,42 +1,45 @@
 import React, { useState, useEffect } from "react";
-// import UserModal from "../Components/UserModal";
-import "../../src/assets/css/userpage.css";
 import api from "../services/api";
+import "../../src/assets/css/userpage.css";
 
 const FacilitatorsPage = () => {
   const [facilitators, setFacilitators] = useState([]);
+  const [facilitatorCourses, setFacilitatorCourses] = useState({});
+  const [viewMode, setViewMode] = useState("table");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // Fetch Facilitators
   useEffect(() => {
     const fetchFacilitators = async () => {
       try {
+        setIsLoading(true);
         const response = await api.get("/courses/staff");
-        const data = await response.data;
-        setFacilitators(data);
+        setFacilitators(response.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching facilitators:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchFacilitators();
   }, []);
 
-  console.log(facilitators);
-
-  const [viewMode, setViewMode] = useState("table"); // 'table' or 'grid'
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedFacilitator, setSelectedFacilitator] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleEdit = (facilitator) => {
-    setSelectedFacilitator(facilitator);
-    setIsModalOpen(true);
-  };
-
-  const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete this facilitator?")) {
-      setFacilitators(
-        facilitators.filter((facilitator) => facilitator.id !== id)
-      );
+  // Fetch courses for a specific facilitator only once
+  const fetchFacilitatorCourses = async (facilitatorId) => {
+    if (!facilitatorCourses[facilitatorId]) {
+      try {
+        const response = await api.get(`/courses/staff/${facilitatorId}`);
+        setFacilitatorCourses((prevCourses) => ({
+          ...prevCourses,
+          [facilitatorId]: response.data.Course, // Storing the courses array
+        }));
+      } catch (error) {
+        console.error(
+          `Error fetching courses for facilitator ${facilitatorId}:`,
+          error
+        );
+      }
     }
   };
 
@@ -63,40 +66,40 @@ const FacilitatorsPage = () => {
           Switch to {viewMode === "table" ? "Grid" : "Table"} View
         </button>
       </div>
-      {viewMode === "table" ? (
+
+      {isLoading ? (
+        <p>Loading facilitators...</p>
+      ) : viewMode === "table" ? (
         <table className="user-table">
           <thead>
             <tr>
               <th>Name</th>
               <th>Email</th>
-              <th>Course Assigned</th>
-              {/* <th>Actions</th> */}
+              <th>Courses Assigned</th>
             </tr>
           </thead>
           <tbody>
-            {filteredFacilitators.map((facilitator) => (
-              <tr key={facilitator.id}>
-                <td>{`${facilitator.firstName} ${facilitator.lastName}`}</td>
-                <td>{facilitator.email}</td>
-                <td>{facilitator.courseAssigned || `No course assigned`}</td>
-                {/* <td>
-                  <button
-                    className="btn btn-purple me-2"
-                    onClick={() => handleEdit(facilitator)}
-                    title="Edit Facilitator"
-                  >
-                    <i className="fas fa-edit"></i>
-                  </button>
-                  <button
-                    className="btn btn-delete"
-                    onClick={() => handleDelete(facilitator.id)}
-                    title="Delete Facilitator"
-                  >
-                    <i className="fas fa-trash-alt"></i>
-                  </button>
-                </td> */}
-              </tr>
-            ))}
+            {filteredFacilitators.map((facilitator) => {
+              fetchFacilitatorCourses(facilitator.id); // Fetch courses once per facilitator
+
+              return (
+                <tr key={facilitator.id}>
+                  <td className="user-table-item">{`${facilitator.firstName} ${facilitator.lastName}`}</td>
+                  <td className="user-table-item">{facilitator.email}</td>
+                  <td className="user-table-item">
+                    {facilitatorCourses[facilitator.id] ? (
+                      <ol>
+                        {facilitatorCourses[facilitator.id].map((course) => (
+                          <li key={course.Title}>{course.Title}</li>
+                        ))}
+                      </ol>
+                    ) : (
+                      "Loading courses..."
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       ) : (
@@ -108,44 +111,14 @@ const FacilitatorsPage = () => {
                 <b>Email:</b> {facilitator.email}
               </p>
               <p>
-                <b>Course:</b>{" "}
-                {facilitator.courseAssigned || `No course assigned`}
+                <b>Courses:</b>{" "}
+                {facilitatorCourses[facilitator.id]?.map((course) => (
+                  <p key={course.Title}>{course.Title}</p>
+                )) || "No courses assigned"}
               </p>
-              {/* <div className="actions">
-                <button
-                  className="btn btn-purple me-2"
-                  onClick={() => handleEdit(facilitator)}
-                  title="Edit Facilitator"
-                >
-                  <i className="fas fa-edit"></i>
-                </button>
-                <button
-                  className="btn btn-delete"
-                  onClick={() => handleDelete(facilitator.id)}
-                  title="Delete Facilitator"
-                >
-                  <i className="fas fa-trash-alt"></i>
-                </button>
-              </div> */}
             </div>
           ))}
         </div>
-      )}
-      {isModalOpen && (
-        <UserModal
-          user={selectedFacilitator}
-          onClose={() => setIsModalOpen(false)}
-          onSave={(updatedFacilitator) => {
-            setFacilitators(
-              facilitators.map((facilitator) =>
-                facilitator.id === updatedFacilitator.id
-                  ? updatedFacilitator
-                  : facilitator
-              )
-            );
-            setIsModalOpen(false);
-          }}
-        />
       )}
     </div>
   );

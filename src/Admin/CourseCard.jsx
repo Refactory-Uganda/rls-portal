@@ -44,7 +44,7 @@ const CourseCard = ({ course, onClick }) => {
               : `${numTopics} Topics`
           }`}</p>
           <p className="card-text">
-            Facilitator: {course.facilitator || "Unknown"}
+            Facilitator: {course.facilitator?`${course.facilitator.firstName} ${course.facilitator.lastName}`:"Unknown"}
           </p>
         </div>
       </div>
