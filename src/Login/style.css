@@ -1,0 +1,148 @@
+/* Desktop Styles (Unchanged) */
+body {
+  background-color: white;
+}
+
+.bg-content {
+  width: 100%;
+  height: 100vh;
+  background-color: #e0e0e0;
+  background-image: url("../assets/Images/login-bg.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.container, .content-container {
+  width: 100%;
+  height: 100%;
+}
+
+.appBar {
+  background-color: #542a52;
+  height: 70px;
+}
+
+.contents {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.column1 {
+  width: 25%;
+  background-color: #542a52;
+  text-align: center;
+}
+
+.column1 h1, .column1 p {
+  color: #72c1c6;
+  padding: 10px 50px;
+  text-align: center;
+}
+
+.column2 {
+  width: 75%;
+}
+
+/* Main Content Styling */
+.main-content {
+  margin: 2% auto;
+  width: 80%;
+}
+
+.column-grid {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.remember {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Student Login Page */
+.student-main-content {
+  display: flex;
+  height: 100vh;
+}
+
+.left-column {
+  width: 40%;
+}
+
+.right-column-parent {
+  width: 60%;
+}
+
+/* Responsive Styles for Screens Below 760px */
+@media screen and (max-width: 760px) {
+  .container, .content-container {
+    height: 100vh;
+  }
+  
+  .main-content {
+    width: 100%;
+    padding: 120px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .column-grid {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .column1, .column2 {
+    width: 100%;
+  }
+
+  .column1 .logo, .col-1 img {
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  .appBar {
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 999;
+  }
+
+  /* Centering input fields on smaller screens */
+  .student-main-content {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px; /* Adjust this value to control the vertical spacing */
+  }
+
+  .left-column, .right-column-parent {
+    width: 100%;
+  }
+
+  .right-column-child {
+    margin: 20px 10px;
+    padding-top: 40px; /* Additional top padding for inputs */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .right-column-child input {
+    margin-top: 20px; /* Spacing between input fields */
+  }
+
+  .remember {
+    flex-direction: column;
+    text-align: left;
+    margin-right: 150px;
+  }
+}

@@ -1,0 +1,69 @@
+.navbar {
+  position: fixed;
+  width: 100%;
+  background-color: #333;
+  color: black;
+  padding: 10px;
+  text-align: center;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  height: 40px;
+}
+
+/* Adjust greeting and profile alignment */
+.navbar .ms-10 {
+  font-size: 1.5rem;
+  margin-right: auto; /* Align left for spacing */
+}
+
+.navbar .d-flex.align-items-center {
+  display: flex;
+  align-items: center;
+}
+
+/* Media query for tablets and smaller devices */
+@media (max-width: 768px) {
+  .navbar .ms-10 {
+      font-size: 1.2rem;
+      margin-right: 20px; /* Reduce margin on smaller screens */
+      display: none; /* Hide the greeting text on smaller screens */
+  }
+
+  /* Adjust button margins for icons */
+  .navbar .btn-link {
+      margin-right: 10px;
+  }
+
+  /* Profile initials size adjustment */
+  .navbar .rounded-circle {
+      width: 28px;
+      height: 28px;
+      font-size: 14px;
+  }
+}
+
+/* Media query for very small screens, like mobile phones */
+@media (max-width: 576px) {
+  .navbar .navbar-brand img {
+      height: 30px; /* Resize logo */
+  }
+
+  /* Center-align notification bell and profile */
+  .navbar .d-flex.align-items-center {
+      margin-right: 5px;
+  }
+
+  /* Reduce navbar padding for compact look */
+  .navbar {
+      padding: 5px;
+  }
+
+  .navbar .material-icons {
+      font-size: 20px; /* Adjust icon size for notifications and dropdown */
+  }
+}

@@ -1,0 +1,129 @@
+/* General Styling */
+.learner-dashboard {
+    font-family: "Arial", sans-serif;
+    color: #333;
+    padding: 20px;
+    background-color: white;
+  }
+  
+  .welcome-banner {
+    background: linear-gradient(135deg, #d1d1d1, #f5f5f5);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .welcome-banner h2 {
+    font-size: 24px;
+    color: #444;
+  }
+  
+  .welcome-banner p {
+    font-size: 16px;
+    color: #666;
+    font-style: italic;
+  }
+  
+  /* Dashboard Content */
+  .dashboard-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  /* Progress Overview */
+  .progress-overview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .progress-card {
+    flex: 1;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .progress-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .progress-card h3 {
+    margin-top: 10px;
+    font-size: 24px;
+    color: rgb(56, 191, 195);
+  }
+  
+  .progress-card span {
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #666;
+  }
+  
+  /* Today's Plan */
+  .todays-plan {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .todays-plan h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
+  
+  .todays-plan ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .todays-plan li {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  .todays-plan li strong {
+    color: rgb(56, 191, 195);
+  }
+  
+  /* Calendar Section */
+  .calendar-section {
+    grid-column: span 2;
+  }
+  
+  .calendar-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .expand-btn {
+    background: none;
+    border: none;
+    color: rgb(56, 191, 195);
+    font-size: 18px;
+  }
+  
+  .expand-btn:hover {
+    color: rgb(56, 191, 195);
+  }
+  
+  /* Modal */
+  .modal-content {
+    border-radius: 10px;
+  }
+  
+  .modal-header,
+  .modal-footer {
+    background-color: #f5f5f5;
+  }
+  

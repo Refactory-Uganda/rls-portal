@@ -1,0 +1,164 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0rem;
+  text-align: center;
+  background-color: white !important;
+}
+
+* {
+  font-family: "Century Gothic", Helvetica, Arial, sans-serif;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+button {
+  text-transform: inherit;
+  font-size: 0.9rem;
+}
+.btn {
+  font-size: 0.9rem;
+}
+.card {
+  padding: 1em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+a {
+  cursor: pointer;
+}
+
+.sidebar-collapse-icon {
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.course-card {
+  height: 100%;
+}
+
+.action-btn {
+  background-color: #663367;
+  color: white;
+  height: 40px;
+}
+.action-btn:hover {
+  background-color: #542b55;
+  color: white;
+}
+.courseList-btn-container {
+  padding: 0.5rem;
+  text-align: left;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.secondary-action-btn {
+  background-color: white;
+  color: #663367;
+  border: 0.1rem solid #663367;
+  height: 40px;
+}
+.secondary-action-btn:hover {
+  background-color: #542b55;
+  color: white;
+}
+.btn-purple {
+  color: #663367;
+}
+
+.btn-purple {
+  background-color: #663367;
+  color: white;
+}
+
+.btn-purple:hover {
+  background-color: #663367;
+}
+
+.btn-delete {
+  background-color: #663367;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.btn-delete:hover {
+  background-color: red;
+  color: white;
+}
+
+.main-sidebar-content {
+  margin-top: 4.5rem;
+}
+
+.dash-content {
+  margin-left: 16rem;
+  margin-right: 1rem;
+  font-size: 0.9rem;
+}
+
+.custom-radio .form-check-input:checked {
+  background-color: #38bfc3;
+  border-color: #38bfc3;
+}
+
+.course-card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.pagination-btn {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.pagination-btn.active {
+  background-color: #663367; /* Use your primary color */
+  color: white;
+  border-color: #663367;
+}
+
+.success-toast{
+  background-color: #38BFC3;
+}

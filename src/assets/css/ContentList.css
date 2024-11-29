@@ -1,0 +1,46 @@
+.contentList-accordion {
+  width: 100%;
+  padding: 0;
+  text-align: left;
+}
+.accordion {
+  text-align: left;
+}
+.topic-card {
+  padding: 0;
+  background-color: rgb(204, 203, 203);
+
+  text-decoration: none;
+}
+.topic-cover-card {
+  padding: 0;
+}
+.topic-btn {
+  text-decoration: none;
+  color: black;
+  text-align: left;
+}
+.topic-btn:hover {
+  color: #fff;
+}
+.lesson-card {
+  padding: 0;
+}
+.lesson-list-item {
+  background-color: white;
+  border-radius: 0;
+  display: flex;
+  justify-content: space-between;
+  color: black;
+}
+.lesson-list-item:hover {
+  cursor: pointer;
+  color: grey;
+}
+.card {
+  padding: 0;
+}
+.topic-list-tem {
+  display: flex;
+  justify-content: space-between;
+}
