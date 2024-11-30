@@ -1,0 +1,80 @@
+.facilitator-dashboard-content {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.overview-cards {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.dashboard-card {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-card h4 {
+  font-size: 1.2rem;
+  color: #663367;
+  margin-bottom: 10px;
+}
+
+.dashboard-card p {
+  font-size: 1rem;
+  color: #555555;
+}
+
+.dashboard-content-wrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.line-graph-section,
+.calendar-section {
+  flex: 1;
+  
+}
+
+.progress-card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 370px;
+}
+
+
+.card h3 {
+  margin-bottom: 20px;
+  color: #663367;
+}
+
+.calendar-frame {
+  border: none;
+  width: 100%;
+  height: 280px;
+}
+
+.expand-btn {
+  background: none;
+  border: none;
+  color: #663367;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.expand-btn:hover {
+  transform: scale(1.2);
+  background-color: none;
+}

@@ -1,0 +1,81 @@
+.dash-cards {
+    height: 8rem;
+}
+
+h3 {
+    font-size: 25px;
+    font-weight: 100px;
+}
+
+.card-numbers {
+    color: #663367;
+    font-size: 1.8rem;
+    text-align: right;
+    font-weight: bold;
+}
+
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .dash-cards {
+        height: auto; 
+        margin-bottom: 1rem;
+    }
+
+    .card-title {
+        font-size: 1.2rem; 
+    }
+
+    .card-numbers {
+        font-size: 1.5rem; 
+    }
+
+    /* Stacking columns vertically */
+    .row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Adjusting Pie Chart Card */
+    .col-md-6 {
+        width: 100%; 
+        margin-bottom: 1rem; 
+    }
+
+    /* Google Calendar */
+    iframe {
+        height: 300px; 
+    }
+
+    /* Center align the contents */
+    .card-body {
+        text-align: center;
+    }
+
+    /* Pie chart responsiveness */
+    .pie-chart-container {
+        width: 90%;
+        margin: auto;
+    }
+}
+
+/* Extra Small Screens (Phones) */
+@media screen and (max-width: 576px) {
+    .card-title {
+        font-size: 1rem; 
+    }
+
+    .card-numbers {
+        font-size: 1.2rem; 
+        text-align: center; 
+    }
+
+    .container.mt-4 {
+        padding: 0 10px; 
+    }
+
+    .dash-cards {
+        padding: 1rem; 
+    }
+}
