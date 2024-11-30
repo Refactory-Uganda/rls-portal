@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import "../assets/css/Resources.css";
+import "../assets/css/resources.css";
 
 // Sample resources data
 const resources = [
