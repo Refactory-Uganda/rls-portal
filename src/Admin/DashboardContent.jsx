@@ -1,6 +1,6 @@
 import React from "react";
 import Courses from "./Courses";
-import CreateCourse from "./CreateCourse"; // Ensure case matches
+import CreateCourse from "./createCourse"; // Ensure case matches
 import InitialDashboard from "./InitialDashboard";
 
 const DashboardContent = ({ selectedMenu }) => {

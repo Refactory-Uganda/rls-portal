@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../Login/style.css";
-import SignUpLogo from "../assets/images/staff-logo.png";
-import Dashboard from "../assets/images/refactory-IMS-dashboard.png";
+import SignUpLogo from "../assets/Images/staff-logo.png";
+import Dashboard from "../assets/Images/refactory-IMS-dashboard.png";
 import { Button } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import Cookies from "js-cookie";
