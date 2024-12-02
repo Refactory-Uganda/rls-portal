@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Toast } from "react-bootstrap";
 import "../../src/assets/css/ContentList.css";
@@ -19,34 +19,35 @@ const ContentList = ({
   const [quizModalState, setQuizModalState] = useState({
     isOpen: false,
     lessonId: null,
-    lessonTitle: ""
+    lessonTitle: "",
   });
 
   // Modal States
   const [showEditTopicModal, setShowEditTopicModal] = useState(false);
   const [showEditLessonModal, setShowEditLessonModal] = useState(false);
   const [showAddLessonModal, setShowAddLessonModal] = useState(false);
-  const [isQuizModalOpen, setQuizModalOpen] = useState(false);
+  const [showAddAssignmentModal, setShowAddAssignmentModal] = useState(false);
+  // const [isQuizModalOpen, setQuizModalOpen] = useState(false);
 
   // const toggleQuizModal = () => {
   //   setQuizModalOpen(!isQuizModalOpen);
   // };
-  
-// Function to handle opening quiz modal for specific lesson
-const handleQuizModalOpen = (lesson, e) => {
-  e.stopPropagation(); // Prevent lesson click event from triggering
-  setQuizModalState({
-    isOpen: true,
-    lessonId: lesson.id,
-    lessonTitle: lesson.title
-  });
-};
-   // Function to handle closing quiz modal
-   const handleQuizModalClose = () => {
+
+  // Function to handle opening quiz modal for specific lesson
+  const handleQuizModalOpen = (lesson, e) => {
+    e.stopPropagation(); // Prevent lesson click event from triggering
+    setQuizModalState({
+      isOpen: true,
+      lessonId: lesson.id,
+      lessonTitle: lesson.title,
+    });
+  };
+  // Function to handle closing quiz modal
+  const handleQuizModalClose = () => {
     setQuizModalState({
       isOpen: false,
       lessonId: null,
-      lessonTitle: ""
+      lessonTitle: "",
     });
   };
 
@@ -62,9 +63,8 @@ const handleQuizModalOpen = (lesson, e) => {
   const [lessonText, setLessonText] = useState("");
   // Initial state for the rich text input
   const [lessonDetails, setLessonDetails] = useState({
-    text: "", 
+    text: "",
   });
-
 
   const toggleTopic = (id) => {
     setActiveTopic(activeTopic === id ? null : id);
@@ -84,12 +84,11 @@ const handleQuizModalOpen = (lesson, e) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this topic? This action cannot be undone."
     );
-  
+
     if (!confirmDelete) {
-      
       return;
     }
-  
+
     try {
       await api.delete(`/topic/${topicId}`);
       const updatedTopics = selectedCourse.topics.filter(
@@ -127,12 +126,12 @@ const handleQuizModalOpen = (lesson, e) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this lesson? This action cannot be undone."
     );
-  
+
     if (!confirmDelete) {
       // User canceled the deletion
       return;
     }
-  
+
     try {
       await api.delete(`/lesson/${lessonId}`);
       const updatedTopics = selectedCourse.topics.map((topic) => {
@@ -148,18 +147,17 @@ const handleQuizModalOpen = (lesson, e) => {
       showToast("Lesson deleted successfully");
     } catch (error) {
       console.error("Error deleting lesson:", error);
-      alert("Failed to delete the lesson. Please check your network connection or try again later.");
+      alert(
+        "Failed to delete the lesson. Please check your network connection or try again later."
+      );
     }
   };
 
-  
   const handleAddLessonClick = (topic) => {
     setCurrentTopic(topic);
     setLessonText(""); // Clear previous input
     setShowAddLessonModal(true);
   };
-
- 
 
   const handleLessonTextChange = (event) => {
     const { name, value } = event.target; // Destructure the event object
@@ -168,8 +166,6 @@ const handleQuizModalOpen = (lesson, e) => {
       [name]: value, // Update the specific field in the form state
     }));
   };
-
-  
 
   const handleAddLesson = async (e) => {
     e.preventDefault();
@@ -267,6 +263,13 @@ const handleQuizModalOpen = (lesson, e) => {
                 <span>
                   <button
                     className="btn btn-green me-2"
+                    // onClick={() => handleAddLessonClick(topic)}
+                    title="Add Assignment"
+                  >
+                    <i className="fa-solid fa-list-check"></i>
+                  </button>
+                  <button
+                    className="btn btn-green me-2"
                     onClick={() => handleAddLessonClick(topic)}
                     title="Add Lesson"
                   >
@@ -303,10 +306,17 @@ const handleQuizModalOpen = (lesson, e) => {
                       onClick={() => handleViewLessonContent(lesson)}
                     >
                       {lesson.quiz
-                          ? `${lesson.title} | Includes Quiz`
-                          : lesson.title}
+                        ? `${lesson.title} | Includes Quiz`
+                        : lesson.title}
                       <span>
-                      <button
+                        <button
+                          className="btn btn-green me-2"
+                          // onClick={() => handleAddLessonClick(topic)}
+                          title="Add Assignment"
+                        >
+                          <i className="fa-solid fa-list-check"></i>
+                        </button>
+                        <button
                           className="btn me-2"
                           onClick={(e) => handleQuizModalOpen(lesson, e)}
                           title="Add Quiz"
@@ -314,10 +324,10 @@ const handleQuizModalOpen = (lesson, e) => {
                           <i className="bi bi-plus-square-fill"></i>
                         </button>
                         <AddQuiz
-                           isQuizModalOpen={quizModalState.isOpen}
-                           toggleQuizModal={handleQuizModalClose}
-                           lessonTitle={quizModalState.lessonTitle}
-                           lessonId={quizModalState.lessonId}
+                          isQuizModalOpen={quizModalState.isOpen}
+                          toggleQuizModal={handleQuizModalClose}
+                          lessonTitle={quizModalState.lessonTitle}
+                          lessonId={quizModalState.lessonId}
                         />
                         <button
                           className="btn btn-green me-2"
@@ -344,6 +354,59 @@ const handleQuizModalOpen = (lesson, e) => {
           </div>
         );
       })}
+
+      {/* Add Assignment Modal */}
+      <Modal size="lg"
+        // show={showAddLessonModal}
+        // onHide={() => setShowAddLessonModal(false)}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Add Assignment</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form 
+          // onSubmit={}
+          >
+            <div className="mb-3">
+              <label>Title</label>
+              <input
+                type="text"
+                className="form-control"
+                name="title"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label>Instructions</label>
+
+              <RichTextEditor
+                name="text"
+                // value={lessonDetails.text} // Use lessonText for Add Lesson flow
+                // onChange={handleLessonTextChange} // Update lessonText directly
+                required
+              />
+            </div>
+
+            <div className="mb-3">
+              <label>Due date</label>
+              <input
+                type="date"
+                className="form-control"
+                name="dueDate"
+                required
+              />
+            </div>
+            <div>
+            <button type="submit" className="btn secondary-action-btn">
+              Attach file
+            </button>
+            <button type="submit" className="btn action-btn">
+              Assign
+            </button>
+            </div>
+          </form>
+        </Modal.Body>
+      </Modal>
 
       {/* Add Lesson Modal */}
       <Modal
