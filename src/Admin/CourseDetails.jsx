@@ -151,7 +151,7 @@ const CourseDetails = ({
               Duration: {selectedCourse.Duration} weeks
             </h6>
             <h6 className="card-subtitle mb-2 text-body-secondary">
-              Facilitator: {`${selectedCourse.facilitator.firstName} ${selectedCourse.facilitator.lastName}`}
+              Facilitator: {selectedCourse.facilitator?(`${selectedCourse.facilitator.firstName} ${selectedCourse.facilitator.lastName}`):"No assigned facilitator"}
             </h6>
             <h6 className="card-subtitle mb-2 text-body-secondary">
               Award: {selectedCourse.award}
