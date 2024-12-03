@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Toast } from "react-bootstrap";
 import "../../src/assets/css/ContentList.css";
@@ -19,36 +19,15 @@ const ContentList = ({
   const [quizModalState, setQuizModalState] = useState({
     isOpen: false,
     lessonId: null,
-    lessonTitle: ""
+    lessonTitle: "",
   });
 
   // Modal States
   const [showEditTopicModal, setShowEditTopicModal] = useState(false);
   const [showEditLessonModal, setShowEditLessonModal] = useState(false);
   const [showAddLessonModal, setShowAddLessonModal] = useState(false);
-  const [isQuizModalOpen, setQuizModalOpen] = useState(false);
-
-  // const toggleQuizModal = () => {
-  //   setQuizModalOpen(!isQuizModalOpen);
-  // };
-  
-// Function to handle opening quiz modal for specific lesson
-const handleQuizModalOpen = (lesson, e) => {
-  e.stopPropagation(); // Prevent lesson click event from triggering
-  setQuizModalState({
-    isOpen: true,
-    lessonId: lesson.id,
-    lessonTitle: lesson.title
-  });
-};
-   // Function to handle closing quiz modal
-   const handleQuizModalClose = () => {
-    setQuizModalState({
-      isOpen: false,
-      lessonId: null,
-      lessonTitle: ""
-    });
-  };
+  const [showAddAssignmentModal, setShowAddAssignmentModal] = useState(false);
+  // const [isQuizModalOpen, setQuizModalOpen] = useState(false);
 
   // Selected Topic and Lesson for Editing
   const [currentTopic, setCurrentTopic] = useState(null);
@@ -62,9 +41,102 @@ const handleQuizModalOpen = (lesson, e) => {
   const [lessonText, setLessonText] = useState("");
   // Initial state for the rich text input
   const [lessonDetails, setLessonDetails] = useState({
-    text: "", 
+    text: "",
+  });
+  const [assignmentDetails, setAssignmentDetails] = useState({
+    instructions: "",
   });
 
+  // For adding assignment
+  const [assignmentData, setAssignmentData] = useState({
+    title: "",
+    instructions: "",
+    dueDateTime: "",
+    file: null,
+  });
+
+  // Function to handle opening quiz modal for specific lesson
+  const handleQuizModalOpen = (lesson, e) => {
+    e.stopPropagation(); // Prevent lesson click event from triggering
+    setQuizModalState({
+      isOpen: true,
+      lessonId: lesson.id,
+      lessonTitle: lesson.title,
+    });
+  };
+  // Function to handle closing quiz modal
+  const handleQuizModalClose = () => {
+    setQuizModalState({
+      isOpen: false,
+      lessonId: null,
+      lessonTitle: "",
+    });
+  };
+
+  // ADD ASSIGNMENT
+  const handleAssignmentClick = () => {
+    // setCurrentTopic(topic);
+    setAssignmentData({
+      title: "",
+      instructions: "",
+      dueDateTime: "",
+      file: null,
+    });
+    setShowAddAssignmentModal(true);
+  };
+
+  const handleAssignmentInputChange = (e) => {
+    const { name, value } = e.target;
+    setAssignmentData({ ...assignmentData, [name]: value });
+  };
+
+  const handleAssignmentInstructionChange = (event) => {
+    const { name, value } = event.target; // Destructure the event object
+    setAssignmentData((prevDetails) => ({
+      ...prevDetails,
+      [name]: value, // Update the specific field in the form state
+    }));
+  };
+
+  const handleAssignmentFileChange = (e) => {
+    setAssignmentData({ ...assignmentData, file: e.target.files[0] });
+  };
+
+  const handleAssignmentSubmit = async (e) => {
+    e.preventDefault();
+    if (
+      !assignmentData.title ||
+      !assignmentData.instructions ||
+      !assignmentData.dueDateTime
+    ) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+    console.log(assignmentData);
+
+    const submissionData = new FormData();
+    submissionData.append("title", assignmentData.title);
+    submissionData.append("instructions", assignmentData.instructions);
+    submissionData.append("dueDateTime", assignmentData.dueDateTime);
+    if (assignmentData.file) {
+      submissionData.append("file", assignmentData.file);
+    }
+    try {
+      const response = await api.post(`/assignments`, submissionData);
+      const addedAssignment = response.data;
+      // const updatedTopics = selectedCourse.topics.map((topic) =>
+      //   topic.id === currentTopic.id
+      //     ? { ...topic, Lesson: [...topic.Lesson, addedLesson] }
+      //     : topic
+      // );
+      // setSelectedCourse((prev) => ({ ...prev, topics: updatedTopics }));
+      // setShowAddLessonModal(false);
+      // showToast("Lesson added successfully");
+    } catch (error) {
+      console.error("Error adding assignment:", error);
+      alert("Failed to add the assignment. Please try again.");
+    }
+  };
 
   const toggleTopic = (id) => {
     setActiveTopic(activeTopic === id ? null : id);
@@ -84,12 +156,11 @@ const handleQuizModalOpen = (lesson, e) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this topic? This action cannot be undone."
     );
-  
+
     if (!confirmDelete) {
-      
       return;
     }
-  
+
     try {
       await api.delete(`/topic/${topicId}`);
       const updatedTopics = selectedCourse.topics.filter(
@@ -127,12 +198,12 @@ const handleQuizModalOpen = (lesson, e) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this lesson? This action cannot be undone."
     );
-  
+
     if (!confirmDelete) {
       // User canceled the deletion
       return;
     }
-  
+
     try {
       await api.delete(`/lesson/${lessonId}`);
       const updatedTopics = selectedCourse.topics.map((topic) => {
@@ -148,18 +219,17 @@ const handleQuizModalOpen = (lesson, e) => {
       showToast("Lesson deleted successfully");
     } catch (error) {
       console.error("Error deleting lesson:", error);
-      alert("Failed to delete the lesson. Please check your network connection or try again later.");
+      alert(
+        "Failed to delete the lesson. Please check your network connection or try again later."
+      );
     }
   };
 
-  
   const handleAddLessonClick = (topic) => {
     setCurrentTopic(topic);
     setLessonText(""); // Clear previous input
     setShowAddLessonModal(true);
   };
-
- 
 
   const handleLessonTextChange = (event) => {
     const { name, value } = event.target; // Destructure the event object
@@ -168,8 +238,6 @@ const handleQuizModalOpen = (lesson, e) => {
       [name]: value, // Update the specific field in the form state
     }));
   };
-
-  
 
   const handleAddLesson = async (e) => {
     e.preventDefault();
@@ -206,14 +274,30 @@ const handleQuizModalOpen = (lesson, e) => {
     };
 
     try {
-      const response = await api.patch(
-        `/lesson/${currentLesson.id}`,
-        updatedLesson
-      );
-      if (!response.ok) throw new Error("Failed to update lesson");
+      await api.patch(`/lesson/${currentLesson.id}`, updatedLesson);
+      console.log("passed 1");
+      // const updatedTopics = selectedCourse.topics.map((topic) => {
+      //   if (topic.id === currentTopic.id) {
+      //     const updatedLessons = topic.Lesson.map((lesson) =>
+      //       lesson.id === currentLesson.id
+      //         ? { ...lesson, ...updatedLesson }
+      //         : lesson
+      //     );
+      //     return { ...topic, Lesson: updatedLessons };
+      //   }
+      //   return topic;
+      // });
 
+      // setSelectedCourse((prev) => ({ ...prev, topics: updatedTopics }));
+      // setShowEditLessonModal(false);
+      // showToast("Lesson updated successfully");
+      console.log(selectedCourse);
       const updatedTopics = selectedCourse.topics.map((topic) => {
+        console.log("passed 2");
+        console.log(currentTopic);
         if (topic.id === currentTopic.id) {
+          console.log(currentLesson);
+
           const updatedLessons = topic.Lesson.map((lesson) =>
             lesson.id === currentLesson.id
               ? { ...lesson, ...updatedLesson }
@@ -267,6 +351,13 @@ const handleQuizModalOpen = (lesson, e) => {
                 <span>
                   <button
                     className="btn btn-green me-2"
+                    onClick={() => handleAssignmentClick()}
+                    title="Add Assignment"
+                  >
+                    <i className="fa-solid fa-list-check"></i>
+                  </button>
+                  <button
+                    className="btn btn-green me-2"
                     onClick={() => handleAddLessonClick(topic)}
                     title="Add Lesson"
                   >
@@ -303,10 +394,17 @@ const handleQuizModalOpen = (lesson, e) => {
                       onClick={() => handleViewLessonContent(lesson)}
                     >
                       {lesson.quiz
-                          ? `${lesson.title} | Includes Quiz`
-                          : lesson.title}
+                        ? `${lesson.title} | Includes Quiz`
+                        : lesson.title}
                       <span>
-                      <button
+                        <button
+                          className="btn btn-green me-2"
+                          // onClick={() => handleAddLessonClick(topic)}
+                          title="Add Assignment"
+                        >
+                          <i className="fa-solid fa-list-check"></i>
+                        </button>
+                        <button
                           className="btn me-2"
                           onClick={(e) => handleQuizModalOpen(lesson, e)}
                           title="Add Quiz"
@@ -314,14 +412,17 @@ const handleQuizModalOpen = (lesson, e) => {
                           <i className="bi bi-plus-square-fill"></i>
                         </button>
                         <AddQuiz
-                           isQuizModalOpen={quizModalState.isOpen}
-                           toggleQuizModal={handleQuizModalClose}
-                           lessonTitle={quizModalState.lessonTitle}
-                           lessonId={quizModalState.lessonId}
+                          isQuizModalOpen={quizModalState.isOpen}
+                          toggleQuizModal={handleQuizModalClose}
+                          lessonTitle={quizModalState.lessonTitle}
+                          lessonId={quizModalState.lessonId}
                         />
                         <button
                           className="btn btn-green me-2"
-                          onClick={() => handleEditLesson(lesson)}
+                          onClick={() => {
+                            handleEditLesson(lesson);
+                            console.log(lesson);
+                          }}
                           title="Edit Lesson"
                         >
                           <i className="fas fa-edit"></i>
@@ -345,8 +446,84 @@ const handleQuizModalOpen = (lesson, e) => {
         );
       })}
 
+      {/* Add Assignment Modal */}
+
+      <Modal
+        size="lg"
+        show={showAddAssignmentModal}
+        onHide={() => setShowAddAssignmentModal(false)}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Add Assignment</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form onSubmit={handleAssignmentSubmit}>
+            <div className="mb-3">
+              <label htmlFor="title">Title</label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                className="form-control"
+                value={assignmentData.title}
+                onChange={handleAssignmentInputChange}
+                required
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="instructions">Instructions</label>
+              <RichTextEditor
+                name="instructions"
+                value={assignmentDetails.instructions}
+                onChange={handleAssignmentInstructionChange}
+                required
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="dueDateTime">Due Date</label>
+              <input
+                type="datetime-local"
+                id="dueDateTime"
+                name="dueDateTime"
+                className="form-control"
+                value={assignmentData.dueDateTime}
+                onChange={handleAssignmentInputChange}
+                required
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="file">Attach File</label>
+              <input
+                type="file"
+                id="file"
+                name="file"
+                className="form-control"
+                onChange={handleAssignmentFileChange}
+              />
+            </div>
+
+            <div className="d-flex justify-content-end">
+              {/* <Button
+                variant="secondary"
+                // onClick={handleClose}
+                className="me-2"
+              >
+                Cancel
+              </Button> */}
+              <button type="submit" className="btn action-btn">
+                Assign
+              </button>
+            </div>
+          </form>
+        </Modal.Body>
+      </Modal>
+
       {/* Add Lesson Modal */}
       <Modal
+        size="lg"
         show={showAddLessonModal}
         onHide={() => setShowAddLessonModal(false)}
       >
@@ -419,6 +596,7 @@ const handleQuizModalOpen = (lesson, e) => {
 
       {/* Edit Lesson Modal */}
       <Modal
+        size="lg"
         show={showEditLessonModal}
         onHide={() => setShowEditLessonModal(false)}
       >

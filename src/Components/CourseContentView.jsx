@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import  { useState } from "react";
 
 import ContentList from "./ContentList";
 import api from "../services/api";
 import "../assets/css/courseContentView.css";
 
 import DisplayRichText from "./Displayrichtext";
-import RichTextEditor from "./RichTextEditor";
+// import RichTextEditor from "./RichTextEditor";
 
-import EditQuiz from "./EditQuiz";
+
+
 import QuizView from "./QuizView"; // New component to display the quiz
 
 const CourseContentView = ({ selectedCourse, setView }) => {
@@ -15,8 +16,8 @@ const CourseContentView = ({ selectedCourse, setView }) => {
   const [isEditQuizModalOpen, setIsEditQuizModalOpen] = useState(false);
   const [isQuizViewOpen, setIsQuizViewOpen] = useState(false); // New state for quiz view
   const [quiz, setQuiz] = useState(null);
-  const [loadingQuiz, setLoadingQuiz] = useState(false);
-  const [error, setError] = useState(null);
+  // const [loadingQuiz, setLoadingQuiz] = useState(false);
+  // const [error, setError] = useState(null);
 
   const handleBackClick = () => {
     setView("details");

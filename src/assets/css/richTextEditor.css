@@ -1,0 +1,9 @@
+/* .ql-container {
+    height: 300px;
+  } */
+
+.ql-editor {
+  min-height: 10rem;
+
+  overflow-y: auto;
+}
