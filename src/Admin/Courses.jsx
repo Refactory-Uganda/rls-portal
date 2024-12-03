@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import CourseDetails from "./CourseDetails";
 import CourseList from "./CourseList";
 import api from "../services/api";
 import EditCourse from "./EditCourse";
-import CreateCourse from "./CreateCourse"; // Ensure the path is correct
+import CreateCourse from "./createCourse"; // Ensure the path is correct
 import CourseContentView from "../Components/CourseContentView";
 
 const Courses = () => {

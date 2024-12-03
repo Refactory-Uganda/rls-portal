@@ -4,7 +4,7 @@ import ContentList from "./LContentList";
 import api from "../services/api";
 import "../assets/css/courseContentView.css";
 
-import DisplayRichText from "../Components/displayrichtext";
+import DisplayRichText from "../Components/Displayrichtext";
 // import RichTextEditor from "./RichTextEditor";
 
 // import EditQuiz from "./EditQuiz";
