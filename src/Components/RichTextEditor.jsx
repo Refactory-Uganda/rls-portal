@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "prismjs/themes/prism-tomorrow.css";
 import Prism from "prismjs";
-import Quill from 'quill';
+// import Quill from 'quill';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
+import "../assets/css/richTextEditor.css"
 
  // Register highlight.js with the Syntax module
  window.hljs = hljs;
@@ -62,17 +63,7 @@ const [selectedLanguage, setSelectedLanguage] = useState("javascript");
     }
   }, [value]);
 
-  //  // Custom toolbar handler for inserting code blocks
-  //  const insertCodeBlock = () => {
-  //   const quill = quillRef.current.getEditor();
-  //   const range = quill.getSelection();
-
-  //   if (range) {
-  //     const codeSnippet = `<pre><code class="language-${selectedLanguage}">// Write your ${selectedLanguage} code here...</code></pre>`;
-  //     quill.clipboard.dangerouslyPasteHTML(range.index, codeSnippet);
-  //   }
-  // };
-
+ 
   const handleContentChange = (content) => {
     setEditorContent(content);
     if (onChange) {
@@ -84,9 +75,9 @@ const [selectedLanguage, setSelectedLanguage] = useState("javascript");
   const modules = {
     toolbar: {
       container: [
-        [{ font: [] }],
+        [{ font: [] },{ title: 'Font' }],
         [{ header: [1, 2, 3, false] }],
-        ["bold", "italic", "underline", "strike"],
+        ["bold", "italic", "underline", "strike",],
         [{ list: "ordered" }, { list: "bullet" }],
         [{ script: "sub" }, { script: "super" }],
         ["link", "image", "code-block"],
