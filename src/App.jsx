@@ -339,14 +339,14 @@ const App = () => {
           }
         />
 
-        {/* Learner-specific route for Assignments */}
+        {/* Learner-specific route for course */}
         <Route
           path="/learner/course"
           element={
             <div className="d-flex flex-column h-100">
               <Navbar email={"ajonathan@refactory.academy"} role={"Learner"} />
-              <div className="d-flex flex-grow-1 main-sidebar-content">
-                <Sidebar
+              {/* <div className="d-flex flex-grow-1 main-sidebar-content"> */}
+                {/* <Sidebar
                   selectedMenu={selectedMenu}
                   setSelectedMenu={setSelectedMenu}
                   menuItems={[
@@ -356,11 +356,11 @@ const App = () => {
                     { name: "Calendar", key: "calendar", to: "/calendar", iconClass: "fas fa-calendar-alt" },
 
                   ]}
-                />
-                <div className="flex-grow-1 bg-light dash-content">
+                /> */}
+                <div className="flex-grow-1 bg-light" style={{paddingTop: "5rem"}}>
                   <LCourse />
                 </div>
-              </div>
+              {/* </div> */}
             </div>
           }
         />
