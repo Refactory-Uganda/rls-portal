@@ -1,5 +1,5 @@
 .dash-cards {
-    height: 8rem;
+    height: 5rem;
 }
 
 h3 {
@@ -78,4 +78,7 @@ h3 {
     .dash-cards {
         padding: 1rem; 
     }
+}
+.admin-dash-card{
+    justify-content:space-between ;
 }

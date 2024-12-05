@@ -13,11 +13,13 @@ const truncateText = (text, wordLimit) => {
 
 const CourseCard = ({ course, onClick }) => {
   const imageUrl = course.image
-    ? `${import.meta.env.VITE_API_URL || "http://localhost:3000"}${course.image}`
+    ? `${import.meta.env.VITE_API_URL || "http://localhost:3000"}${
+        course.image
+      }`
     : defaultImage;
 
   const numTopics = course.topics?.length || 0;
-  const truncatedDescription = truncateText(course.Description, 20); // Limiting to 20 words
+  const truncatedDescription = truncateText(course.Description, 10); // Limiting to 20 words
 
   return (
     <div className="col" onClick={onClick}>
@@ -25,26 +27,61 @@ const CourseCard = ({ course, onClick }) => {
         className="card text-start course-card"
         style={{ width: "14rem", padding: "0" }}
       >
-        <img
-          src={imageUrl}
-          onError={(e) => (e.target.src = defaultImage)} // Fallback for invalid URLs
-          className="card-img-top"
-          alt={course.Title || "Course Image"}
-        />
-        <div className="card-body">
-          <h5 className="card-title" style={{ fontWeight: "bold" }}>
+        <div style={{ width: "100%", height: "7rem", padding: "0" }}>
+          <img
+            src={imageUrl}
+            onError={(e) => (e.target.src = defaultImage)} // Fallback for invalid URLs
+            className="card-img-top"
+            alt={course.Title || "Course Image"}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover", // Ensures image covers the container
+              objectPosition: "center", // Centers the image style={{
+            }}
+          />
+        </div>
+        <div
+          className="card-body"
+          style={{ display: "flex", flexDirection: "column", flex: "1" }}
+        >
+          <h5
+            className="card-title"
+            style={{
+              fontWeight: "bold",
+              fontSize: "1rem",
+              height: "3rem", // Fixed height for title
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "wrap",
+            }}
+          >
             {course.Title}
           </h5>
-          <p className="card-text">{truncatedDescription}</p> {/* Display truncated description */}
-          <p className="card-text">{`${
+          {/* <p className="card-text">{truncatedDescription}</p> */}
+          <p
+            className="card-text"
+            style={{ height: "1.5rem", overflow: "hidden" }}
+          >{`${
             numTopics === 0
               ? "No Topics"
               : numTopics === 1
               ? `${numTopics} Topic`
               : `${numTopics} Topics`
           }`}</p>
-          <p className="card-text">
-            Facilitator: {course.facilitator?`${course.facilitator.firstName} ${course.facilitator.lastName}`:"Unknown"}
+          <p
+            className="card-text"
+            style={{
+              height: "1.5rem", // Fixed height for facilitator
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}
+          >
+            Facilitator:{" "}
+            {course.facilitator
+              ? `${course.facilitator.firstName} ${course.facilitator.lastName}`
+              : "Unknown"}
           </p>
         </div>
       </div>
