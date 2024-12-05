@@ -440,7 +440,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
                     }
                     checked={userAnswers[question.id] === option.id}
                   />
-                  <label>{` ${option.optionText}`}</label>
+                  <label>{`${" " + option.optionText}`}</label>
                 </div>
               ))}
             </div>

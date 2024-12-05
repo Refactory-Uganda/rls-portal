@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExpand } from '@fortawesome/free-solid-svg-icons';
-import '../../src/assets/css/initialdashboard.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExpand } from "@fortawesome/free-solid-svg-icons";
+import "../../src/assets/css/initialdashboard.css";
+import api from "../services/api";
 
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -16,7 +17,42 @@ const InitialDashboard = () => {
   const [coursesCount, setCoursesCount] = useState(0);
   const [coursesData, setCoursesData] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [courses, setCourses] = useState([]);
+  const [error, setError] = useState("");
 
+  useEffect(() => {
+    const fetchCourses = async () => {
+      setIsLoading(true); // Set isLoading to true at the start
+      try {
+        const response = await api.get("/courses");
+        setCoursesCount(response.data.courses.length);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+        setError("Failed to fetch courses. Please try again later.");
+      } finally {
+        setIsLoading(false); // Set isLoading to false once the operation completes
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+  // Fetch Facilitators
+  useEffect(() => {
+    const fetchFacilitators = async () => {
+      try {
+        setIsLoading(true);
+        const response = await api.get("/courses/staff");
+        setFacilitatorsCount(response.data.length);
+      } catch (error) {
+        console.error("Error fetching facilitators:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchFacilitators();
+  }, []);
   // Simulate fetching data from an API
   useEffect(() => {
     const fetchData = async () => {
@@ -32,9 +68,9 @@ const InitialDashboard = () => {
         ],
       };
 
-      setFacilitatorsCount(data.facilitators);
+      // setFacilitatorsCount(data.facilitators);
       setStudentsCount(data.students);
-      setCoursesCount(data.courses.length);
+      // setCoursesCount(data.courses.length);
       setCoursesData(data.courses);
     };
 
@@ -65,76 +101,76 @@ const InitialDashboard = () => {
     <div className="container mt-4">
       <div className="row mb-3">
         {/* Facilitators Card */}
-        <div className="col-md-4 mb-3 dash-cards">
+        <div className="col-md-4 dash-cards">
           <div className="card h-100 border border-secondary shadow-sm">
             <div className="card-body">
-              <div className="d-flex align-items-start mb-3">
-                <span
-                  className="material-icons me-2"
-                  style={{ color: "rgb(56, 191, 195)" }}
-                >
-                  people
-                </span>
+              <div className="d-flex align-items-start mb-3 admin-dash-card">
                 <h3 className="card-title" style={{ color: "black" }}>
+                  <span
+                    className="material-icons me-2"
+                    style={{ color: "rgb(56, 191, 195)" }}
+                  >
+                    people
+                  </span>
                   Facilitators
                 </h3>
+                <p
+                  className="display-3 card-numbers"
+                  style={{ color: "rgb(56, 191, 195)" }}
+                >
+                  {facilitatorsCount}
+                </p>
               </div>
-              <p
-                className="display-3 card-numbers"
-                style={{ color: "rgb(56, 191, 195)" }}
-              >
-                {facilitatorsCount}
-              </p>
             </div>
           </div>
         </div>
 
         {/* Students Card */}
-        <div className="col-md-4 mb-3 dash-cards">
+        <div className="col-md-4 dash-cards">
           <div className="card h-100 border border-secondary shadow-sm">
             <div className="card-body">
-              <div className="d-flex align-items-start mb-3">
-                <span
-                  className="material-icons me-2"
-                  style={{ color: "rgb(56, 191, 195)" }}
-                >
-                  school
-                </span>
+              <div className="d-flex align-items-start mb-3 admin-dash-card">
                 <h3 className="card-title" style={{ color: "black" }}>
+                  <span
+                    className="material-icons me-2"
+                    style={{ color: "rgb(56, 191, 195)" }}
+                  >
+                    school
+                  </span>{" "}
                   Learners
                 </h3>
+                <p
+                  className="display-3 card-numbers"
+                  style={{ color: "rgb(56, 191, 195)" }}
+                >
+                  {studentsCount}
+                </p>
               </div>
-              <p
-                className="display-3 card-numbers"
-                style={{ color: "rgb(56, 191, 195)" }}
-              >
-                {studentsCount}
-              </p>
             </div>
           </div>
         </div>
 
         {/* Courses Card */}
-        <div className="col-md-4 mb-3 dash-cards">
+        <div className="col-md-4 dash-cards">
           <div className="card h-100 border border-secondary shadow-sm">
             <div className="card-body">
-              <div className="d-flex align-items-start mb-3">
-                <span
-                  className="material-icons me-2"
-                  style={{ color: "rgb(56, 191, 195)" }}
-                >
-                  book
-                </span>
+              <div className="d-flex align-items-start mb-3 admin-dash-card">
                 <h3 className="card-title" style={{ color: "black" }}>
+                  <span
+                    className="material-icons me-2"
+                    style={{ color: "rgb(56, 191, 195)" }}
+                  >
+                    book
+                  </span>
                   Courses
                 </h3>
+                <p
+                  className="display-3 card-numbers"
+                  style={{ color: "rgb(56, 191, 195)" }}
+                >
+                  {coursesCount}
+                </p>
               </div>
-              <p
-                className="display-3 card-numbers"
-                style={{ color: "rgb(56, 191, 195)" }}
-              >
-                {coursesCount}
-              </p>
             </div>
           </div>
         </div>
@@ -161,7 +197,9 @@ const InitialDashboard = () => {
           <div className="card h-100" style={{ borderRadius: "10px" }}>
             <div className="card-body">
               <div className="d-flex justify-content-between align-items-center">
-                <h3 className="card-title text-black">Events and Class Schedules</h3>
+                <h3 className="card-title text-black">
+                  Events and Class Schedules
+                </h3>
                 <button className="btn btn-link" onClick={handleShowModal}>
                   <FontAwesomeIcon icon={faExpand} />
                 </button>
@@ -180,8 +218,8 @@ const InitialDashboard = () => {
 
       {/* Modal for Expanded Google Calendar */}
       <div
-        className={`modal fade ${showModal ? 'show' : ''}`}
-        style={{ display: showModal ? 'block' : 'none' }}
+        className={`modal fade ${showModal ? "show" : ""}`}
+        style={{ display: showModal ? "block" : "none" }}
         tabIndex="-1"
         role="dialog"
         aria-labelledby="calendarModalLabel"
@@ -190,13 +228,19 @@ const InitialDashboard = () => {
         <div className="modal-dialog modal-lg" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="calendarModalLabel">Expanded Calendar</h5>
+              <h5 className="modal-title" id="calendarModalLabel">
+                Expanded Calendar
+              </h5>
               <button
                 type="button"
                 className="close ms-auto"
                 onClick={handleCloseModal}
                 aria-label="Close"
-                style={{ border: "none", background: "transparent", fontSize: "1.5rem" }}
+                style={{
+                  border: "none",
+                  background: "transparent",
+                  fontSize: "1.5rem",
+                }}
               >
                 <span aria-hidden="true">&times;</span>
               </button>

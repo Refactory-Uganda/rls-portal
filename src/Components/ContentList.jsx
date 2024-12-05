@@ -348,6 +348,7 @@ const ContentList = ({
                       : `${numLessons} Lessons`
                   }`}
                 </button>
+                
                 <span>
                   <button
                     className="btn btn-green me-2"
