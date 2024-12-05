@@ -4,7 +4,7 @@ import CourseList from "./CourseView";
 import api from "../services/api";
 // import EditCourse from "./EditCourse";
 // import CreateCourse from "./createCourse";
-import CourseContentView from "./ContentView";
+import ContentView from "./ContentView";
 
 const LCourse = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
@@ -12,6 +12,10 @@ const LCourse = () => {
   const [view, setView] = useState("list");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+
+  const handleBackClick = () => {
+    setView("learnerdashboard");
+  };
 
   // Fetch courses from the backend when the component mounts
   useEffect(() => {
@@ -56,6 +60,18 @@ const LCourse = () => {
 
   return (
     <div className="container mx-auto p-2">
+
+      <div
+        className="courseList-btn-container"
+        style={{ paddingLeft: "0" }}
+      >
+        <button
+          className="btn btn-primary action-btn"
+          onClick={handleBackClick}
+        >
+          <i className="bi bi-arrow-left"></i> Back to Dashboard
+        </button>
+      </div>
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       {view === "list" && (
@@ -86,14 +102,14 @@ const LCourse = () => {
         />
       )}
 
-      
+
       {view === "contentView" && (
-        <CourseContentView
+        <ContentView
           setView={setView}
           selectedCourse={selectedCourse}
           setSelectedCourse={setSelectedCourse}
           onCreateSuccess={handleCreateSuccess} // Handle successful course creation
-          // onCancel={() => setView("list")}
+        // onCancel={() => setView("list")}
         />
       )}
     </div>

@@ -27,7 +27,7 @@ const Navbar = ({ email, role }) => {
   const initials = getInitialsFromEmail(email);
 
   return (
-    <nav className="navbar navbar-light bg-light shadow-sm">
+    <nav className="navbar navbar-light bg-light shadow-sm sticky">
       <a href="#" className="navbar-brand">
         <img
           src="../src/assets/Images/login-logo.png"

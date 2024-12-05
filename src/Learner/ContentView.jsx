@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from "react";
+import  { useState } from "react";
 
 import ContentList from "./LContentList";
 import api from "../services/api";
 import "../assets/css/courseContentView.css";
-
 import DisplayRichText from "../Components/Displayrichtext";
-// import RichTextEditor from "./RichTextEditor";
 
-// import EditQuiz from "./EditQuiz";
-// import QuizView from "./QuizView";
+
+
 
 const ContentView = ({ selectedCourse, setView }) => {
   const [lessonToView, setLessonToView] = useState(null);
   const [isEditQuizModalOpen, setIsEditQuizModalOpen] = useState(false);
   const [isQuizViewOpen, setIsQuizViewOpen] = useState(false); // New state for quiz view
   const [quiz, setQuiz] = useState(null);
-  const [loadingQuiz, setLoadingQuiz] = useState(false);
-  const [error, setError] = useState(null);
+  // const [loadingQuiz, setLoadingQuiz] = useState(false);
+  // const [error, setError] = useState(null);
 
   const handleBackClick = () => {
     setView("details");
@@ -74,7 +72,7 @@ const ContentView = ({ selectedCourse, setView }) => {
           </div>
 
           {/* Action Buttons */}
-          {lessonToView && (
+          {lessonToView && lessonToView.quiz && (
             <div className="quiz-btn-container">
               <button
                 className="btn btn-primary action-btn"
@@ -96,11 +94,13 @@ const ContentView = ({ selectedCourse, setView }) => {
 
         {/* Scrollable Video Rows */}
         <div className="content-list-container scrollable-container">
-          <div className="courseList-btn-container" style={{ paddingLeft: "0" }}>
+          <div
+            className="courseList-btn-container"
+            style={{ paddingLeft: "0" }}
+          >
             <button
-              className="btn btn-primary action-btn"
+              className="btn btn-primary action-btn floating-btn"
               onClick={handleBackClick}
-              
             >
               <i className="bi bi-arrow-left"></i> Back to Details
             </button>
@@ -116,6 +116,5 @@ const ContentView = ({ selectedCourse, setView }) => {
     </div>
   );
 };
-
 
 export default ContentView;
