@@ -1,6 +1,6 @@
 import React from "react";
-import LoginForm from "./login/LoginForm";
-import LoginHeader from "./login/LoginHeader";
+import LoginForm from "../users/Login/LoginForm";
+import LoginHeader from "../users/Login/LoginHeader";
 function StudentLogin() {
   return (
     <>
