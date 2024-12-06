@@ -1,7 +1,7 @@
 import { Button, Grid } from "@mui/material";
 import React from "react";
 // import "./style.css";
-import logo from "../../assets/images/login-logo.png";
+import logo from "../../../src/assets/Images/login-logo.png";
 import { userGroups } from "../../Auth/users/Login/userGroups";
 import { Link } from "react-router-dom";
 
