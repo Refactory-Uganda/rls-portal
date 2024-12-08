@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import "../assets/css/learnerDashboard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBook, faTasks, faChartLine, faTrophy, faExpand } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBook,
+  faTasks,
+  faChartLine,
+  faExpand,
+} from "@fortawesome/free-solid-svg-icons";
 import { Modal, Button } from "react-bootstrap";
 import {
   Chart as ChartJS,
@@ -15,7 +20,14 @@ import {
 import { Line } from "react-chartjs-2";
 
 // Register Chart.js components
-ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Tooltip,
+  Legend
+);
 
 const LearnerDashboard = () => {
   const [showCalendarModal, setShowCalendarModal] = useState(false);
@@ -39,6 +51,13 @@ const LearnerDashboard = () => {
     ],
   };
 
+  // const DashboardCard = () => {
+  const [clicked, setClicked] = useState(false);
+
+  const handleCardClick = () => {
+    setClicked((prevState) => !prevState); // Toggle the clicked state
+  };
+
   const lineOptions = {
     responsive: true,
     plugins: {
@@ -56,15 +75,19 @@ const LearnerDashboard = () => {
 
   return (
     <div className="learner-dashboard">
-      {/* Welcome Banner */}
-      {/* <div className="welcome-banner">
-        <h2>Good Morning, [Name]!</h2>
-        <p>"Stay consistent! You're just one step closer to your goal."</p>
-      </div> */}
+      
 
       {/* Dashboard Overview */}
       <div className="overview-cards">
-        <div className="dashboard-card">
+        <div
+          className="dashboard-card"
+          onClick={handleCardClick}
+          style={{
+            cursor: "pointer",
+            backgroundColor: clicked ? "#e0e0ff" : "#fff", // Change background when clicked
+            transition: "background-color 0.3s ease",
+          }}
+        >
           <FontAwesomeIcon icon={faBook} size="2x" />
           <h4>Course Progress</h4>
           <p>75%</p>
@@ -79,49 +102,48 @@ const LearnerDashboard = () => {
           <h4>Learning Streak</h4>
           <p>10 Days</p>
         </div>
-        {/* <div className="dashboard-card">
-          <FontAwesomeIcon icon={faTrophy} size="2x" />
-          <h4>Badges Earned</h4>
-          <p>5</p>
-        </div> */}
+       
       </div>
 
       {/* Dashboard Content */}
       <div className="dashboard-content-wrapper">
-  {/* Line Graph Section */}
-  <div className="line-graph-section">
-    <div className="progress-card">
-      <div className="card-body">
-        <h3>Progress Overview</h3>
-        <Line data={lineData} options={lineOptions} />
-      </div>
-    </div>
-  </div>
-
-  {/* Calendar Section */}
-  <div className="calendar-section">
-    <div className="progress-card">
-      <div className="card-body">
-        <div className="d-flex justify-content-between align-items-center">
-          <h3>Events and Schedules</h3>
-          <button className="expand-btn" onClick={handleShowCalendar}>
-            <FontAwesomeIcon icon={faExpand} />
-          </button>
+        {/* Line Graph Section */}
+        <div className="line-graph-section">
+          <div className="progress-card">
+            <div className="card-body">
+              <h3>Progress Overview</h3>
+              <Line data={lineData} options={lineOptions} />
+            </div>
+          </div>
         </div>
-        <iframe
-          title="Google Calendar"
-          src="https://calendar.google.com/calendar/embed?src=daphinenambafu%40gmail.com&ctz=Africa%2FNairobi"
-          className="calendar-frame"
-        ></iframe>
+
+        {/* Calendar Section */}
+        <div className="calendar-section">
+          <div className="progress-card">
+            <div className="card-body">
+              <div className="d-flex justify-content-between align-items-center">
+                <h3>Events and Schedules</h3>
+                <button className="expand-btn" onClick={handleShowCalendar}>
+                  <FontAwesomeIcon icon={faExpand} />
+                </button>
+              </div>
+              <iframe
+                title="Google Calendar"
+                src="https://calendar.google.com/calendar/embed?src=daphinenambafu%40gmail.com&ctz=Africa%2FNairobi"
+                className="calendar-frame"
+              ></iframe>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
-
-
 
       {/* Calendar Modal */}
-      <Modal show={showCalendarModal} onHide={handleCloseCalendar} centered size="lg">
+      <Modal
+        show={showCalendarModal}
+        onHide={handleCloseCalendar}
+        centered
+        size="lg"
+      >
         <Modal.Header closeButton>
           <Modal.Title>Events and Class Schedules</Modal.Title>
         </Modal.Header>
