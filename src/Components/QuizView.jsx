@@ -272,6 +272,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
           attemptId: attemptId,
           questionId: question.id,
           optionId: userAnswer,
+          isCorrect: true,
         });
       });
 
@@ -281,6 +282,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
         {
           quizId: quiz.id,
           answers: answers,
+          
         }
       );
 
