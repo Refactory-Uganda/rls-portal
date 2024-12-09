@@ -1,20 +1,14 @@
-import  { useState } from "react";
-
+import React, { useState } from "react";
 import ContentList from "./LContentList";
 import api from "../services/api";
 import "../assets/css/courseContentView.css";
 import DisplayRichText from "../Components/Displayrichtext";
-
-
-
+import TakeQuiz from "./TakeQuiz";
 
 const ContentView = ({ selectedCourse, setView }) => {
   const [lessonToView, setLessonToView] = useState(null);
-  const [isEditQuizModalOpen, setIsEditQuizModalOpen] = useState(false);
-  const [isQuizViewOpen, setIsQuizViewOpen] = useState(false); // New state for quiz view
+  const [isQuizViewOpen, setIsQuizViewOpen] = useState(false);
   const [quiz, setQuiz] = useState(null);
-  // const [loadingQuiz, setLoadingQuiz] = useState(false);
-  // const [error, setError] = useState(null);
 
   const handleBackClick = () => {
     setView("details");
@@ -24,7 +18,6 @@ const ContentView = ({ selectedCourse, setView }) => {
     try {
       const response = await api.get(`/lesson/${lesson.id}`);
       const lessonData = response.data;
-      console.log(lessonData);
       setLessonToView(lessonData);
       setIsQuizViewOpen(false);
     } catch (error) {
@@ -32,17 +25,17 @@ const ContentView = ({ selectedCourse, setView }) => {
     }
   };
 
-  const toggleEditQuizModal = () =>
-    setIsEditQuizModalOpen(!isEditQuizModalOpen);
-
   const handleTakeQuizClick = () => {
-    setIsQuizViewOpen(true);
-    setQuiz(lessonToView.quiz);
+    if (lessonToView && lessonToView.quiz) {
+      setIsQuizViewOpen(true);
+      setQuiz(lessonToView.quiz);
+    }
   };
 
+  // If quiz view is open, render TakeQuiz component
   if (isQuizViewOpen) {
     return (
-      <QuizView
+      <TakeQuiz
         quiz={quiz}
         setQuiz={setQuiz}
         onBack={() => setIsQuizViewOpen(false)}

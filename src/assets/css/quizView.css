@@ -37,3 +37,7 @@
 .option-edit-list-item {
   margin-top: 0.2rem;
 }
+
+.submit-btn-container {
+  justify-items: right;
+}

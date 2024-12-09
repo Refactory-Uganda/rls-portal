@@ -40,7 +40,7 @@ function EditQuiz({ isEditModalOpen, toggleQuizModal, quizData }) {
     }
     try {
       const updatedQuizData = { title: quizTitle, description: quizDescription, questions };
-      await axios.patch(`http://localhost:3000/quizzes/${quizData.id}`, updatedQuizData);
+      await api.patch(`/quizzes/${quizData.id}`, updatedQuizData);
       toggleQuizModal();
     } catch (error) {
       console.error('Error updating quiz:', error);
