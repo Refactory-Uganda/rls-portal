@@ -1,3 +1,4 @@
+
 import React from "react";
 import "../assets/css/courseCard.css";
 import defaultImage from "../assets/Images/course-image.jpeg";

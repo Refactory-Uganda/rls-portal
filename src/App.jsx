@@ -276,7 +276,7 @@ const App = () => {
                     { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-tachometer-alt" },
                     { name: "Course", key: "course", to: "/learner/course", iconClass: "fas fa-book" },
                     { name: "Assignments", key: "assignments", to: "/learner/assignments", iconClass: "fas fa-tasks" },
-                    { name: "Calendar", key: "calendar", to: "/calendar", iconClass: "fas fa-calendar-alt" },
+                    { name: "Calendar", key: "calendar", to: "/learner/calendar", iconClass: "fas fa-calendar-alt" },
 
                   ]}
 
@@ -303,7 +303,7 @@ const App = () => {
                     { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-tachometer-alt" },
                     { name: "Course", key: "course", to: "/learner/course", iconClass: "fas fa-book" },
                     { name: "Assignments", key: "assignments", to: "/learner/assignments", iconClass: "fas fa-tasks" },
-                    { name: "Calendar", key: "calendar", to: "/calendar", iconClass: "fas fa-calendar-alt" },
+                    { name: "Calendar", key: "calendar", to: "/learner/calendar", iconClass: "fas fa-calendar-alt" },
                   ]}
                 />
                 <div className="flex-grow-1 bg-light dash-content">
@@ -328,7 +328,7 @@ const App = () => {
                     { name: "Dashboard", key: "dashboard", to: "/learner", iconClass: "fas fa-tachometer-alt" },
                     { name: "Course", key: "course", to: "/learner/course", iconClass: "fas fa-book" },
                     { name: "Assignments", key: "assignments", to: "/learner/assignments", iconClass: "fas fa-tasks" },
-                    { name: "Calendar", key: "calendar", to: "/calendar", iconClass: "fas fa-calendar-alt" },
+                    { name: "Calendar", key: "calendar", to: "/learner/calendar", iconClass: "fas fa-calendar-alt" },
                   ]}
                 />
                 <div className="flex-grow-1 bg-light dash-content">
