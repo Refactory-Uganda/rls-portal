@@ -127,14 +127,16 @@ const CourseDetails = ({
   };
 
   return (
-    <div className="container mx-auto my-8">
-      <div className="courseList-btn-container">
-        <button
-          className="btn btn-primary action-btn"
-          onClick={handleBackClick}
-        >
-          <i className="bi bi-arrow-left"></i> Back to Courses
-        </button>
+    <div className="course-details-container">
+      <div className="container mx-auto my-8">
+        <div className="courseList-btn-container">
+          <button
+            className="btn btn-primary action-btn"
+            onClick={handleBackClick}
+          >
+            <i className="bi bi-arrow-left"></i> Back to Courses
+          </button>
+        </div>
       </div>
 
       <div className="course-and-topics-details-container row d-flex align-items-stretch">

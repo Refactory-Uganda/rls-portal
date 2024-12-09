@@ -4,6 +4,12 @@
   gap: 1.5rem;
   height: 3rem !important;
 }
+
+.course-details-container button:contains("Back to Dashboard") {
+  display: none;
+}
+
+
 .course-details-main-container{
   font-size: 0.9rem;
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 import CourseDetails from "./LCourseDetails";
 import CourseList from "./CourseView";
 import api from "../services/api";
@@ -13,9 +14,7 @@ const LCourse = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleBackClick = () => {
-    setView("learnerdashboard");
-  };
+  const navigate = useNavigate(); // Hook for navigation
 
   // Fetch courses from the backend when the component mounts
   useEffect(() => {
@@ -34,6 +33,7 @@ const LCourse = () => {
 
     fetchCourses();
   }, []);
+
   // Handle deletion of a course
   const handleDeleteCourse = (deletedCourseId) => {
     setCourses(courses.filter((course) => course.id !== deletedCourseId));
@@ -59,61 +59,56 @@ const LCourse = () => {
   };
 
   return (
-    <div className="container mx-auto p-2">
-
-      <div
-        className="courseList-btn-container"
-        style={{ paddingLeft: "0" }}
-      >
-        <button
-          className="btn btn-primary action-btn"
-          onClick={handleBackClick}
-        >
-          <i className="bi bi-arrow-left"></i> Back to Dashboard
-        </button>
+      <div className="container mx-auto my-8">
+        {view === "list" && (
+          <>
+            <div className="courseList-btn-container">
+              <button
+                className="btn btn-primary action-btn"
+                onClick={() => navigate("/learner")} // Redirect to the dashboard
+              >
+                <i className="bi bi-arrow-left"></i> Back to Dashboard
+              </button>
+            </div>
+            <CourseList
+              courses={courses}
+              setSelectedCourse={setSelectedCourse}
+              setView={setView}
+              isLoading={isLoading}
+            />
+          </>
+        )}
+    
+        {view === "details" && selectedCourse && (
+          <CourseDetails
+            selectedCourse={selectedCourse}
+            setSelectedCourse={setSelectedCourse}
+            onDelete={handleDeleteCourse}
+            setView={setView}
+            error={error}
+            setError={setError}
+          />
+        )}
+    
+        {view === "edit" && selectedCourse && (
+          <EditCourse
+            selectedCourse={selectedCourse}
+            onUpdateSuccess={handleEditSuccess}
+            onCancel={() => setView("details")}
+          />
+        )}
+    
+        {view === "contentView" && (
+          <ContentView
+            setView={setView}
+            selectedCourse={selectedCourse}
+            setSelectedCourse={setSelectedCourse}
+            onCreateSuccess={handleCreateSuccess} // Handle successful course creation
+          />
+        )}
       </div>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-      {view === "list" && (
-        <CourseList
-          courses={courses}
-          setSelectedCourse={setSelectedCourse}
-          setView={setView}
-          isLoading={isLoading}
-        />
-      )}
-
-      {view === "details" && selectedCourse && (
-        <CourseDetails
-          selectedCourse={selectedCourse}
-          setSelectedCourse={setSelectedCourse}
-          onDelete={handleDeleteCourse}
-          setView={setView}
-          error={error}
-          setError={setError}
-        />
-      )}
-
-      {view === "edit" && selectedCourse && (
-        <EditCourse
-          selectedCourse={selectedCourse}
-          onUpdateSuccess={handleEditSuccess}
-          onCancel={() => setView("details")}
-        />
-      )}
-
-
-      {view === "contentView" && (
-        <ContentView
-          setView={setView}
-          selectedCourse={selectedCourse}
-          setSelectedCourse={setSelectedCourse}
-          onCreateSuccess={handleCreateSuccess} // Handle successful course creation
-        // onCancel={() => setView("list")}
-        />
-      )}
-    </div>
-  );
+    );
+    
 };
 
 export default LCourse;
