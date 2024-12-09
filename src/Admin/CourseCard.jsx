@@ -13,11 +13,23 @@ const truncateText = (text, wordLimit) => {
 };
 
 const CourseCard = ({ course, onClick }) => {
-  const imageUrl = course.image
-    ? `${import.meta.env.VITE_API_URL || "http://localhost:3000"}${
-        course.image
-      }`
+  const url = course.image;
+  const regex = /^(https:\/\/drive\.google\.com\/uc\?id=[^&]+)/;
+  const cleanUrl = url.match(regex)?.[1];
+  console.log(cleanUrl);
+
+  const imageUrl = course.image && cleanUrl
+    ? `${cleanUrl.toString()}`
     : defaultImage;
+
+    console.log(imageUrl.type);  
+    console.log(imageUrl);
+
+  // const imageUrl = course.image
+  //   ? `${import.meta.env.VITE_API_URL || "http://localhost:3000"}${
+  //       course.image
+  //     }`
+  //   : defaultImage;
 
   const numTopics = course.topics?.length || 0;
   const truncatedDescription = truncateText(course.Description, 10); // Limiting to 20 words
