@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import api from "../services/api";
 // import { useNavigate } from "react-router-dom";
-const CreateCourse = ({ setView }) => {
+const CreateCourse = ({ setView, setCourses }) => {
   const [courseData, setCourseData] = useState({
     Title: "",
     Description: "",
@@ -42,13 +42,12 @@ const CreateCourse = ({ setView }) => {
   function generateDurationOptions(maxWeeks = 36) {
     const durationOptions = [];
     for (let i = 1; i <= maxWeeks; i++) {
-      durationOptions.push(`${i} ${i === 1 ? 'week' : 'weeks'}`);
+      durationOptions.push(`${i} ${i === 1 ? "week" : "weeks"}`);
     }
     return durationOptions;
   }
-  
-  const durationOptions = generateDurationOptions();
 
+  const durationOptions = generateDurationOptions();
 
   // Status options
   const statusOptions = ["draft", "published", "in_progress", "completed"];
@@ -207,6 +206,12 @@ const CreateCourse = ({ setView }) => {
       const response = await api.post("/courses", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
+
+      const newCourse = response.data.courses; // Assuming the API response contains the created course object
+      showToast("Course created successfully! Redirecting...", "success");
+
+      // Update the courses list
+      setCourses((prevCourses) => [...prevCourses, newCourse]);
       showToast("Course created successfully! Redirecting...", "success");
       setTimeout(() => {
         // Reset form after successful submission
@@ -225,6 +230,7 @@ const CreateCourse = ({ setView }) => {
         });
         setPreviewImage(null);
       }, 2000);
+      setView("list");
     } catch (error) {
       showToast("Error creating course. Please try again.", "error");
       console.error("Error creating course:", error);
@@ -242,12 +248,13 @@ const CreateCourse = ({ setView }) => {
           style={{ zIndex: 1050 }}
         >
           <div
-            className={`toast show align-items-center text-white border-0 ${toast.type === "success"
+            className={`toast show align-items-center text-white border-0 ${
+              toast.type === "success"
                 ? "bg-success"
                 : toast.type === "error"
-                  ? "bg-danger"
-                  : "bg-info"
-              }`}
+                ? "bg-danger"
+                : "bg-info"
+            }`}
             role="alert"
             aria-live="assertive"
             aria-atomic="true"
@@ -255,12 +262,13 @@ const CreateCourse = ({ setView }) => {
             <div className="d-flex">
               <div className="toast-body">
                 <i
-                  className={`fas ${toast.type === "success"
+                  className={`fas ${
+                    toast.type === "success"
                       ? "fa-check-circle"
                       : toast.type === "error"
-                        ? "fa-exclamation-circle"
-                        : "fa-info-circle"
-                    } me-2`}
+                      ? "fa-exclamation-circle"
+                      : "fa-info-circle"
+                  } me-2`}
                 ></i>
                 {toast.message}
               </div>
@@ -646,9 +654,7 @@ const CreateCourse = ({ setView }) => {
                   </div>
                   {/* Award */}
                   <div className="mb-3">
-                    <label className="form-label fw-bold">
-                      Award
-                    </label>
+                    <label className="form-label fw-bold">Award</label>
                     <select
                       name="assessmentMode"
                       className="form-select"
