@@ -638,7 +638,7 @@ const CreateCourse = ({ setView }) => {
                       value={courseData.assessmentMode}
                       onChange={handleAssesmentInputChange}
                     >
-                      <option value="">Select Assessment</option>
+                      <option value="">Select Mode</option>
 
                       <option value={"QUIZ"}>Quiz</option>
                       <option value={"ASSIGNMENT"}>Assignment</option>

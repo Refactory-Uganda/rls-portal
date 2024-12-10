@@ -8,6 +8,7 @@ import {
 } from "reactstrap";
 import "../../src/assets/css/navbar.css";
 
+
 const Navbar = ({ email, role }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -30,7 +31,7 @@ const Navbar = ({ email, role }) => {
     <nav className="navbar navbar-light bg-light shadow-sm sticky">
       <a href="#" className="navbar-brand">
         <img
-          src="../src/assets/Images/login-logo.png"
+          src="/login-logo.png"
           className="h-4 nav-logo"
           alt="Logo"
         />
