@@ -3,7 +3,7 @@ import api from "../services/api";
 import "../assets/css/courseDetails.css";
 import TopicsList from "../Components/TopicsList";
 import { Modal, Toast } from "react-bootstrap";
-import ContentList from "../Components/ContentList"
+import ContentList from "../Components/ContentList";
 // import { height } from "@fortawesome/free-solid-svg-icons/fa0";
 
 const CourseDetails = ({
@@ -151,7 +151,10 @@ const CourseDetails = ({
               Duration: {selectedCourse.Duration} weeks
             </h6>
             <h6 className="card-subtitle mb-2 text-body-secondary">
-              Facilitator: {selectedCourse.facilitator?(`${selectedCourse.facilitator.firstName} ${selectedCourse.facilitator.lastName}`):"No assigned facilitator"}
+              Facilitator:{" "}
+              {selectedCourse.facilitator
+                ? `${selectedCourse.facilitator.firstName} ${selectedCourse.facilitator.lastName}`
+                : "No assigned facilitator"}
             </h6>
             <h6 className="card-subtitle mb-2 text-body-secondary">
               Award: {selectedCourse.award}
@@ -163,32 +166,13 @@ const CourseDetails = ({
               Course objective:
             </h6> */}
             <p className="card-text">{selectedCourse.Description}</p>
+            <p style={{ fontWeight: "bold", fontSize: "1rem" }}>
+              Course outline
+            </p>
             {selectedCourse.courseOutline.map((item, index) => (
               <p key={index}>{item}</p>
             ))}
 
-            {/* {selectedCourse.courseOutline
-              .flatMap((item) => {
-                try {
-                  // Attempt to parse if the string is valid JSON
-                  if (item.startsWith("[") || item.startsWith("{")) {
-                    return JSON.parse(item);
-                  } else {
-                    // Return as-is if it's a plain string
-                    return item;
-                  }
-                } catch (error) {
-                  console.error(
-                    "Error parsing course outline item:",
-                    item,
-                    error
-                  );
-                  return []; // Return an empty array if parsing fails
-                }
-              })
-              .map((parsedItem, index) => (
-                <p key={index}>{parsedItem}</p>
-              ))} */}
             <div className="course-details-btn-container">
               <button
                 className="btn btn-purple me-2"

@@ -51,8 +51,10 @@ const ContentList = ({
   const [assignmentData, setAssignmentData] = useState({
     title: "",
     instructions: "",
-    dueDateTime: "",
-    file: null,
+    dueDate: "",
+    points: 0,
+    uploadQuestion: null,
+    lessonId: "",
   });
 
   // Function to handle opening quiz modal for specific lesson
@@ -74,13 +76,15 @@ const ContentList = ({
   };
 
   // ADD ASSIGNMENT
-  const handleAssignmentClick = () => {
-    // setCurrentTopic(topic);
+  const handleAssignmentClick = (lesson) => {
+    setCurrentLesson(lesson);
     setAssignmentData({
       title: "",
       instructions: "",
-      dueDateTime: "",
-      file: null,
+      dueDate: "",
+      points: 0,
+      uploadQuestion: null,
+      lessonId: "",
     });
     setShowAddAssignmentModal(true);
   };
@@ -107,7 +111,7 @@ const ContentList = ({
     if (
       !assignmentData.title ||
       !assignmentData.instructions ||
-      !assignmentData.dueDateTime
+      !assignmentData.dueDate
     ) {
       alert("Please fill in all required fields.");
       return;
@@ -117,9 +121,12 @@ const ContentList = ({
     const submissionData = new FormData();
     submissionData.append("title", assignmentData.title);
     submissionData.append("instructions", assignmentData.instructions);
-    submissionData.append("dueDateTime", assignmentData.dueDateTime);
-    if (assignmentData.file) {
-      submissionData.append("file", assignmentData.file);
+    submissionData.append("dueDate", assignmentData.dueDate);
+    submissionData.append("points", assignmentData.points);
+
+    submissionData.append("lessonId", currentLesson.id);
+    if (assignmentData.uploadQuestion) {
+      submissionData.append("uploadQuestion", assignmentData.uploadQuestion);
     }
     try {
       const response = await api.post(`/assignments`, submissionData);
@@ -132,6 +139,15 @@ const ContentList = ({
       // setSelectedCourse((prev) => ({ ...prev, topics: updatedTopics }));
       // setShowAddLessonModal(false);
       // showToast("Lesson added successfully");
+      setAssignmentData({
+        title: "",
+        instructions: "",
+        dueDate: "",
+        points: 0,
+        uploadQuestion: null,
+        lessonId: "",
+      });
+      setShowAddAssignmentModal(false);
     } catch (error) {
       console.error("Error adding assignment:", error);
       alert("Failed to add the assignment. Please try again.");
@@ -348,15 +364,15 @@ const ContentList = ({
                       : `${numLessons} Lessons`
                   }`}
                 </button>
-                
+
                 <span>
-                  <button
+                  {/* <button
                     className="btn btn-green me-2"
                     onClick={() => handleAssignmentClick()}
                     title="Add Assignment"
                   >
                     <i className="fa-solid fa-list-check"></i>
-                  </button>
+                  </button> */}
                   <button
                     className="btn btn-green me-2"
                     onClick={() => handleAddLessonClick(topic)}
@@ -400,7 +416,7 @@ const ContentList = ({
                       <span>
                         <button
                           className="btn btn-green me-2"
-                          // onClick={() => handleAddLessonClick(topic)}
+                          onClick={() => handleAssignmentClick(lesson)}
                           title="Add Assignment"
                         >
                           <i className="fa-solid fa-list-check"></i>
@@ -483,11 +499,11 @@ const ContentList = ({
             </div>
 
             <div className="mb-3">
-              <label htmlFor="dueDateTime">Due Date</label>
+              <label htmlFor="dueDate">Due Date</label>
               <input
                 type="datetime-local"
-                id="dueDateTime"
-                name="dueDateTime"
+                id="dueDate"
+                name="dueDate"
                 className="form-control"
                 value={assignmentData.dueDateTime}
                 onChange={handleAssignmentInputChange}
@@ -496,24 +512,30 @@ const ContentList = ({
             </div>
 
             <div className="mb-3">
-              <label htmlFor="file">Attach File</label>
+              <label htmlFor="uploadQuestion">Attach File</label>
               <input
                 type="file"
-                id="file"
-                name="file"
+                id="uploadQuestion"
+                name="uploadQuestion"
                 className="form-control"
                 onChange={handleAssignmentFileChange}
               />
             </div>
+            <div className="mb-3">
+              <label htmlFor="points">Points</label>
+              <input
+                type="number"
+                id="points"
+                name="points"
+                className="form-control"
+                value={assignmentData.points}
+                onChange={handleAssignmentInputChange}
+                required
+                min="0"
+              />
+            </div>
 
             <div className="d-flex justify-content-end">
-              {/* <Button
-                variant="secondary"
-                // onClick={handleClose}
-                className="me-2"
-              >
-                Cancel
-              </Button> */}
               <button type="submit" className="btn action-btn">
                 Assign
               </button>

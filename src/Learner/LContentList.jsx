@@ -275,7 +275,7 @@ const LContentList = ({
 
     try {
       await api.patch(`/lesson/${currentLesson.id}`, updatedLesson);
-      console.log("passed 1");
+   
       // const updatedTopics = selectedCourse.topics.map((topic) => {
       //   if (topic.id === currentTopic.id) {
       //     const updatedLessons = topic.Lesson.map((lesson) =>
