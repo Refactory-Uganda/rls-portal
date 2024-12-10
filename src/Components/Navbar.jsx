@@ -7,25 +7,39 @@ import {
   DropdownItem,
 } from "reactstrap";
 import "../../src/assets/css/navbar.css";
-
+import ProfileModal from "./ProfileModal"; // Import the new ProfileModal component
+import LogoutModal from "./LogOutModal";
 
 const Navbar = ({ email, role }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false); // State for profile modal visibility
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false); // State for logout modal visibility
+  const [user, setUser] = useState({
+    name: "John Doe", // Default name, will be updated later
+    initials: email.split("@")[0].slice(0, 2).toUpperCase(), // Default initials based on email
+    image: null, // Placeholder for profile image
+  });
 
   // Toggle dropdown state
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
-  // Function to extract initials from email
-  const getInitialsFromEmail = (email) => {
-    if (!email) return ""; // Return empty string if no email
-    const namePart = email.split("@")[0]; // Get part before '@'
-    const initials = namePart[0].toUpperCase() + namePart[1].toUpperCase(); // Get first 2 letters
-    return initials;
+  // Function to handle profile image save
+  const handleProfileSave = (updatedProfile) => {
+    setUser(updatedProfile); // Update user state with new image or name
   };
 
-  const initials = getInitialsFromEmail(email);
+  // Handle logout confirmation
+  const handleLogout = () => {
+    // Perform logout logic here, like redirecting or clearing session data
+    window.location.href = "/"; // Redirect to index page
+  };
+
+  // Handle closing the modal
+  const closeLogoutModal = () => {
+    setIsLogoutModalOpen(false);
+  };
 
   return (
     <nav className="navbar navbar-light bg-light shadow-sm sticky">
@@ -41,18 +55,18 @@ const Navbar = ({ email, role }) => {
         className="ms-8"
         style={{ fontSize: "25px", marginRight: "600px", marginTop: "5px" }}
       >
-        <p style={{ marginBottom: "2px" }}>Hi, {role}</p>
+        <p style={{ marginBottom: "2px", color: "#38BFC3", fontWeight: "5px"}}>Hi, {role}</p>
       </div>
 
       <div className="d-flex align-items-center">
         {/* Notification Bell with red dot */}
-        <button className="btn btn-link position-relative me-4">
+        {/* <button className="btn btn-link position-relative me-4">
           <span className="material-icons text-secondary">notifications</span>
           <span
             className="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"
             style={{ width: "8px", height: "8px" }} // Adjust size of dot
           />
-        </button>
+        </button> */}
 
         {/* Dropdown for user profile */}
         <Dropdown
@@ -65,7 +79,7 @@ const Navbar = ({ email, role }) => {
             className="btn d-flex align-items-center p-0"
             data-toggle="dropdown"
           >
-            {/* Displaying initials */}
+            {/* Displaying profile image or initials */}
             <div
               className="rounded-circle me-2 d-flex justify-content-center align-items-center"
               style={{
@@ -75,19 +89,49 @@ const Navbar = ({ email, role }) => {
                 color: "white",
                 fontSize: "16px",
                 fontWeight: "bold",
+                cursor: "pointer", // Makes it clear the initials/image is clickable
               }}
             >
-              {initials}
+              {user.image ? (
+                <img
+                  src={user.image}
+                  alt="Profile"
+                  style={{
+                    width: "32px", 
+                    height: "32px", 
+                    objectFit: "cover", // Crop image to fit within the circle
+                    borderRadius: "50%"
+                  }}
+                />
+              ) : (
+                user.initials
+              )}
             </div>
             <span className="material-icons text-secondary">expand_more</span>
           </DropdownToggle>
 
-          <DropdownMenu end>
-            <DropdownItem href="#">Profile</DropdownItem>
-            <DropdownItem href="#">Logout</DropdownItem>
+          <DropdownMenu end className="dropdown">
+            {/* Profile option that opens the profile modal */}
+            <DropdownItem onClick={() => setIsProfileModalOpen(true)}>Profile</DropdownItem>
+            <DropdownItem onClick={() => setIsLogoutModalOpen(true)}>Logout</DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </div>
+
+      {/* Render the Profile Modal */}
+      <ProfileModal
+        isOpen={isProfileModalOpen}
+        onClose={() => setIsProfileModalOpen(false)} // Close modal on cancel
+        user={user}
+        onSave={handleProfileSave} // Save updated profile info
+      />
+
+      {/* Render the Logout Modal */}
+      <LogoutModal
+        isOpen={isLogoutModalOpen}
+        onClose={closeLogoutModal}
+        onConfirm={handleLogout} // Logout logic here
+      />
     </nav>
   );
 };

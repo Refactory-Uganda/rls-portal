@@ -1,129 +1,111 @@
-/* General Styling */
+.body {
+  background-color: #fff !important;
+}
+
 .learner-dashboard {
-    font-family: "Arial", sans-serif;
-    color: #333;
-    padding: 20px;
-    background-color: white;
+  padding: 20px;
+  background-color: #fff  !important;
+}
+
+.welcome-section {
+  text-align: left; 
+  color: #6f3f6f;
+  margin-top: 20px;
+}
+
+.para {
+  color: black;
+}
+
+/* Cards Section */
+.dashboard-cards {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 30px;
+  flex-wrap: wrap; /* Ensures that cards wrap on smaller screens */
+}
+
+.dashboard-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex: 1 1 calc(30% - 20px); /* Flex layout for equal sizing */
+  text-align: center;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.dashboard-card h4 {
+  margin: 10px 0;
+}
+
+.dashboard-card p {
+  font-size: 1rem;
+}
+
+
+/* Learning Tip and Motivation Section */
+.motivation-tip-section-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  text-align: left;
+  margin-top: 60px;
+  flex-wrap: wrap; /* Ensures items wrap on smaller screens */
+}
+
+/* Individual Section Styling */
+.motivation-section,
+.learning-tip-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex: 1 1 calc(48% - 20px); /* Flex layout for equal sizing */
+}
+
+.learning-tip-section {
+  background:   #38BFC3; /* Lighter background for the learning tip */
+}
+
+.motivation-section {
+  background: #794f79;
+  color: #fff;
+}
+
+.motivation-section h3,
+.learning-tip-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.motivation-section p,
+.learning-tip-section p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .motivation-tip-section-container {
+    flex-direction: column; /* Stack vertically on smaller screens */
+    gap: 15px;
   }
-  
-  .welcome-banner {
-    background: linear-gradient(135deg, #d1d1d1, #f5f5f5);
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    margin-bottom: 20px;
+
+  .motivation-section,
+  .learning-tip-section {
+    flex: 1 1 100%; /* Take full width on smaller screens */
   }
-  
-  .welcome-banner h2 {
-    font-size: 24px;
-    color: #444;
+
+  .motivation-section h3,
+  .learning-tip-section h3 {
+    font-size: 1.3rem;
   }
-  
-  .welcome-banner p {
-    font-size: 16px;
-    color: #666;
-    font-style: italic;
+
+  .motivation-section p,
+  .learning-tip-section p {
+    font-size: 1rem;
   }
-  
-  /* Dashboard Content */
-  .dashboard-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  
-  /* Progress Overview */
-  .progress-overview {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .progress-card {
-    flex: 1;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .progress-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .progress-card h3 {
-    margin-top: 10px;
-    font-size: 24px;
-    color: rgb(56, 191, 195);
-  }
-  
-  .progress-card span {
-    display: block;
-    margin-top: 10px;
-    font-size: 16px;
-    color: #666;
-  }
-  
-  /* Today's Plan */
-  .todays-plan {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-  }
-  
-  .todays-plan h3 {
-    margin-bottom: 15px;
-    font-size: 20px;
-  }
-  
-  .todays-plan ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .todays-plan li {
-    margin-bottom: 10px;
-    font-size: 16px;
-  }
-  
-  .todays-plan li strong {
-    color: rgb(56, 191, 195);
-  }
-  
-  /* Calendar Section */
-  .calendar-section {
-    grid-column: span 2;
-  }
-  
-  .calendar-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-  }
-  
-  .expand-btn {
-    background: none;
-    border: none;
-    color: rgb(56, 191, 195);
-    font-size: 18px;
-  }
-  
-  .expand-btn:hover {
-    color: rgb(56, 191, 195);
-  }
-  
-  /* Modal */
-  .modal-content {
-    border-radius: 10px;
-  }
-  
-  .modal-header,
-  .modal-footer {
-    background-color: #f5f5f5;
-  }
-  
+}

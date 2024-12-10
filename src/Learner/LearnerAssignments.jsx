@@ -122,7 +122,7 @@ const LearnerAssignments = () => {
 
   return (
     <div className="assignments-page">
-      <div className="assignments-filter">
+      {/* <div className="assignments-filter">
         <input
           type="text"
           placeholder="Search assignments..."
@@ -142,7 +142,7 @@ const LearnerAssignments = () => {
             </button>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <div className="assignments-list">
         {filteredAssignments.length > 0 ? (

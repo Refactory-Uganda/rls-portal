@@ -4,7 +4,9 @@ import "../../src/assets/css/courseDetails.css";
 const Calendar = () => {
   return (
     <div className="calendar-page">
-      <h1 className="text-center my-4">Events and Class Schedules</h1>
+      <h1 className="text-center my-4" style={{
+        fontWeight: "lighter",
+      }}>Events and Class Schedules</h1>
       <iframe
         title="Google Calendar"
         src="https://calendar.google.com/calendar/embed?src=daphinenambafu%40gmail.com&ctz=Africa%2FNairobi"
