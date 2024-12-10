@@ -366,13 +366,13 @@ const ContentList = ({
                 </button>
 
                 <span>
-                  <button
+                  {/* <button
                     className="btn btn-green me-2"
                     onClick={() => handleAssignmentClick()}
                     title="Add Assignment"
                   >
                     <i className="fa-solid fa-list-check"></i>
-                  </button>
+                  </button> */}
                   <button
                     className="btn btn-green me-2"
                     onClick={() => handleAddLessonClick(topic)}
