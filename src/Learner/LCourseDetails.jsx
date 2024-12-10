@@ -143,26 +143,34 @@ const CourseDetails = ({
         {/* Course Details */}
         <div className="card col-md-12 d-flex">
           <div className="card-body">
-            <h2 className="card-title">
+          <h2 className="card-title">
               <strong>{selectedCourse.Title}</strong>
             </h2>
             <h6 className="card-subtitle mb-2 text-body-secondary">
-              Duration: {selectedCourse.Duration}
+              Duration: {selectedCourse.Duration} weeks
             </h6>
             <h6 className="card-subtitle mb-2 text-body-secondary">
-              Facilitator: Steven Kawooya
+              Facilitator:{" "}
+              {selectedCourse.facilitator
+                ? `${selectedCourse.facilitator.firstName} ${selectedCourse.facilitator.lastName}`
+                : "No assigned facilitator"}
             </h6>
             <h6 className="card-subtitle mb-2 text-body-secondary">
-              Award: Certificate
+              Award: {selectedCourse.award}
             </h6>
             <h6 className="card-subtitle mb-2 text-body-secondary">
+              Assessment Mode: {selectedCourse.assessmentMode}
+            </h6>
+            {/* <h6 className="card-subtitle mb-2 text-body-secondary">
               Course objective:
-            </h6>
-            <p className="card-text">
-              This course equips learners with essential knowledge and practical
-              skills in {selectedCourse.Title}, enabling them to apply key
-              concepts in real-world situations.
+            </h6> */}
+            <p className="card-text">{selectedCourse.Description}</p>
+            <p style={{ fontWeight: "bold", fontSize: "1rem" }}>
+              Course outline
             </p>
+            {selectedCourse.courseOutline.map((item, index) => (
+              <p key={index}>{item}</p>
+            ))}
             <div className="course-details-btn-container">
               {/* <button
                 className="btn btn-purple me-2"
