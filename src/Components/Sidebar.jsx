@@ -2,12 +2,23 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Import Link for internal navigation
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../src/assets/css/sidebar.css';
+import LogoutModal from "./LogOutModal";
 
 const Sidebar = ({ selectedMenu, setSelectedMenu, menuItems }) => {
   const [isCollapsed, setIsCollapsed] = useState(window.innerWidth < 768); // Default to collapsed on smaller screens
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal open/close state
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
+  };
+
+  const handleLogoutConfirm = () => {
+    // Logic for logging out (clear session, token, etc.)
+    window.location.href = "/"; // Redirect to index page after confirmation
+  };
+
+  const handleLogoutClose = () => {
+    setIsModalOpen(false); // Close the modal if the user clicks "No"
   };
 
   useEffect(() => {
@@ -29,13 +40,13 @@ const Sidebar = ({ selectedMenu, setSelectedMenu, menuItems }) => {
         transition: "width 0.3s"
       }}
     >
-      <div className="p-3">
+      {/* <div className="p-3">
         <div className="d-flex justify-content-between align-items-center">
           <button onClick={toggleSidebar} className="btn btn-outline-light">
             <i className="fas fa-arrows-alt-h"></i>
           </button>
         </div>
-      </div>
+      </div> */}
 
       <nav className="flex-grow-1 p-3 sidebar-nav" id="nav-items">
         {menuItems.map((item) => (
@@ -52,14 +63,21 @@ const Sidebar = ({ selectedMenu, setSelectedMenu, menuItems }) => {
       </nav>
 
       <div className="p-3">
-        <Link
-          to="/logout" // Adjust as needed for logout route
+        <button
+          onClick={() => setIsModalOpen(true)} // Open modal on click
           className="d-flex align-items-center py-2 text-decoration-none text-white"
         >
           <i className="fas fa-sign-out-alt icon-large me-2"></i>
           {!isCollapsed && <span>Logout</span>}
-        </Link>
+        </button>
       </div>
+
+      {/* Logout Modal */}
+      <LogoutModal
+        isOpen={isModalOpen}
+        onClose={handleLogoutClose} // Close modal on "No"
+        onConfirm={handleLogoutConfirm} // Perform logout on "Yes"
+      />
     </div>
   );
 };

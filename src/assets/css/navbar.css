@@ -26,6 +26,10 @@
   align-items: center;
 }
 
+.dropdown-menu:hover {
+  background-color: #38BFC3;
+}
+
 /* Media query for tablets and smaller devices */
 @media (max-width: 768px) {
   .navbar .ms-10 {

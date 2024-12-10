@@ -32,7 +32,8 @@ import FacilitatorDashboardContent from "./Facilitator/FacilitatorDashboardConte
 import AssignmentsContent from "./Facilitator/AssignmentsContent";
 import CourseList from "./Facilitator/CourseList";
 import Course from "./Facilitator/Course";
-import Resources from "./Facilitator/Resources";
+// import Resources from "./Facilitator/Resources";
+import CourseLearners from "./Facilitator/CourseLearners";
 
 //Import Learner Components
 import LearnerDashboard from "./Learner/LearnerDashboard";
@@ -174,7 +175,7 @@ const App = () => {
                     { name: "Dashboard", key: "dashboard", to: "/facilitator", iconClass: "fas fa-tachometer-alt" },
                     { name: "Course", key: "course", to: "/facilitator/course", iconClass: "fas fa-book" },
                     { name: "Learners", key: "learners", to: "/facilitator/learners", iconClass: "fas fa-users" },
-                    { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-folder-open" },
+                    // { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-folder-open" },
                     { name: "Assignments", key: "assignments", to: "/facilitator/assignments", iconClass: "fas fa-tasks" },
                   ]}
                 />
@@ -200,7 +201,7 @@ const App = () => {
                     { name: "Dashboard", key: "dashboard", to: "/facilitator", iconClass: "fas fa-tachometer-alt" },
                     { name: "Course", key: "course", to: "/facilitator/course", iconClass: "fas fa-book" },
                     { name: "Learners", key: "learners", to: "/facilitator/learners", iconClass: "fas fa-users" },
-                    { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-folder-open" },
+                    // { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-folder-open" },
                     { name: "Assignments", key: "assignments", to: "/facilitator/assignments", iconClass: "fas fa-tasks" },
                   ]}
                 />
@@ -225,7 +226,7 @@ const App = () => {
                     { name: "Dashboard", key: "dashboard", to: "/facilitator", iconClass: "fas fa-tachometer-alt" },
                     { name: "Course", key: "course", to: "/facilitator/course", iconClass: "fas fa-book" },
                     { name: "Learners", key: "learners", to: "/facilitator/learners", iconClass: "fas fa-users" },
-                    { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-folder-open" },
+                    // { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-folder-open" },
                     { name: "Assignments", key: "assignments", to: "/facilitator/assignments", iconClass: "fas fa-tasks" },
                   ]}
                 />
@@ -238,7 +239,7 @@ const App = () => {
         />
 
         <Route
-          path="/facilitator/resources"
+          path="/facilitator/learners"
           element={
             <div className="d-flex flex-column h-100">
               <Navbar email={"dnambafu@refactory.academy"} role={"Facilitator"} />
@@ -250,12 +251,12 @@ const App = () => {
                     { name: "Dashboard", key: "dashboard", to: "/facilitator", iconClass: "fas fa-tachometer-alt" },
                     { name: "Course", key: "course", to: "/facilitator/course", iconClass: "fas fa-book" },
                     { name: "Learners", key: "learners", to: "/facilitator/learners", iconClass: "fas fa-users" },
-                    { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-folder-open" },
+                    // { name: "Resources", key: "resources", to: "/facilitator/resources", iconClass: "fas fa-folder-open" },
                     { name: "Assignments", key: "assignments", to: "/facilitator/assignments", iconClass: "fas fa-tasks" },
                   ]}
                 />
                 <div className="flex-grow-1 bg-light dash-content">
-                  <Resources />
+                  <CourseLearners />
                 </div>
               </div>
             </div>

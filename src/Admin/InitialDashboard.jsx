@@ -99,165 +99,134 @@ const InitialDashboard = () => {
 
   return (
     <div className="container mt-4">
-      <div className="row mb-3">
-        {/* Facilitators Card */}
-        <div className="col-md-4 dash-cards">
-          <div className="card h-100 border border-secondary shadow-sm">
-            <div className="card-body">
-              <div className="d-flex align-items-start mb-3 admin-dash-card">
-                <h3 className="card-title" style={{ color: "black" }}>
-                  <span
-                    className="material-icons me-2"
-                    style={{ color: "rgb(56, 191, 195)" }}
-                  >
-                    people
-                  </span>
-                  Facilitators
-                </h3>
-                <p
-                  className="display-3 card-numbers"
-                  style={{ color: "rgb(56, 191, 195)" }}
-                >
-                  {facilitatorsCount}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Students Card */}
-        <div className="col-md-4 dash-cards">
-          <div className="card h-100 border border-secondary shadow-sm">
-            <div className="card-body">
-              <div className="d-flex align-items-start mb-3 admin-dash-card">
-                <h3 className="card-title" style={{ color: "black" }}>
-                  <span
-                    className="material-icons me-2"
-                    style={{ color: "rgb(56, 191, 195)" }}
-                  >
-                    school
-                  </span>{" "}
-                  Learners
-                </h3>
-                <p
-                  className="display-3 card-numbers"
-                  style={{ color: "rgb(56, 191, 195)" }}
-                >
-                  {studentsCount}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Courses Card */}
-        <div className="col-md-4 dash-cards">
-          <div className="card h-100 border border-secondary shadow-sm">
-            <div className="card-body">
-              <div className="d-flex align-items-start mb-3 admin-dash-card">
-                <h3 className="card-title" style={{ color: "black" }}>
-                  <span
-                    className="material-icons me-2"
-                    style={{ color: "rgb(56, 191, 195)" }}
-                  >
-                    book
-                  </span>
-                  Courses
-                </h3>
-                <p
-                  className="display-3 card-numbers"
-                  style={{ color: "rgb(56, 191, 195)" }}
-                >
-                  {coursesCount}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Additional content */}
-      <div className="row mb-4">
-        <div className="col-md-6 mb-3">
-          <div
-            className="card"
-            style={{ backgroundColor: "white", borderRadius: "20px" }}
-          >
-            <div className="card-body">
-              <h3 className="card-title" style={{ color: "black" }}>
-                Highly Taken Courses
-              </h3>
-              <Pie data={pieChartData} />
-            </div>
-          </div>
-        </div>
-
-        {/* Google Calendar (iframe) with modal functionality */}
-        <div className="col-md-6 mb-3">
-          <div className="card h-100" style={{ borderRadius: "10px" }}>
-            <div className="card-body">
-              <div className="d-flex justify-content-between align-items-center">
-                <h3 className="card-title text-black">
-                  Events and Class Schedules
-                </h3>
-                <button className="btn btn-link" onClick={handleShowModal}>
-                  <FontAwesomeIcon icon={faExpand} />
-                </button>
-              </div>
-              <iframe
-                title="Google Calendar"
-                src="https://calendar.google.com/calendar/embed?src=daphinenambafu%40gmail.com&ctz=Africa%2FNairobi"
-                style={{ border: "0", width: "100%", height: "400px" }}
-                frameBorder="0"
-                scrolling="no"
-              ></iframe>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Modal for Expanded Google Calendar */}
-      <div
-        className={`modal fade ${showModal ? "show" : ""}`}
-        style={{ display: showModal ? "block" : "none" }}
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="calendarModalLabel"
-        aria-hidden={!showModal}
-      >
-        <div className="modal-dialog modal-lg" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="calendarModalLabel">
-                Expanded Calendar
-              </h5>
-              <button
-                type="button"
-                className="close ms-auto"
-                onClick={handleCloseModal}
-                aria-label="Close"
-                style={{
-                  border: "none",
-                  background: "transparent",
-                  fontSize: "1.5rem",
-                }}
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <iframe
-                title="Expanded Google Calendar"
-                src="https://calendar.google.com/calendar/embed?src=daphinenambafu%40gmail.com&ctz=Africa%2FNairobi"
-                style={{ border: "0", width: "100%", height: "600px" }}
-                frameBorder="0"
-                scrolling="no"
-              ></iframe>
-            </div>
-          </div>
+  <div className="row mb-3">
+    {/* Facilitators Card */}
+    <div className="col-md-4 dash-cards">
+      <div className="card h-100" style={{ border: "none", borderRadius: "8px" }}>
+        <div className="card-body">
+          <h3 className="card-title" style={{ color: "black" }}>
+            <span className="material-icons me-2" style={{ color: "rgb(56, 191, 195)" }}>
+              people
+            </span>
+            Facilitators
+          </h3>
+          <p className="display-3 card-numbers" style={{ color: "rgb(56, 191, 195)" }}>
+            {facilitatorsCount}
+          </p>
         </div>
       </div>
     </div>
+
+    {/* Students Card */}
+    <div className="col-md-4 dash-cards">
+      <div className="card h-100" style={{ border: "none", borderRadius: "8px" }}>
+        <div className="card-body">
+          <h3 className="card-title" style={{ color: "black" }}>
+            <span className="material-icons me-2" style={{ color: "rgb(56, 191, 195)" }}>
+              school
+            </span>
+            Learners
+          </h3>
+          <p className="display-3 card-numbers" style={{ color: "rgb(56, 191, 195)" }}>
+            {studentsCount}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Courses Card */}
+    <div className="col-md-4 dash-cards">
+      <div className="card h-100" style={{ border: "none", borderRadius: "8px" }}>
+        <div className="card-body">
+          <h3 className="card-title" style={{ color: "black" }}>
+            <span className="material-icons me-2" style={{ color: "rgb(56, 191, 195)" }}>
+              book
+            </span>
+            Courses
+          </h3>
+          <p className="display-3 card-numbers" style={{ color: "rgb(56, 191, 195)" }}>
+            {coursesCount}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Additional content */}
+  <div className="row mb-4">
+    <div className="col-md-6 mb-3">
+      <div className="card" style={{ backgroundColor: "white", borderRadius: "20px", border: "none",  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}>
+        <div className="card-body">
+          <h3 className="card-title" style={{ color: "black" }}>
+            Highly Taken Courses
+          </h3>
+          <Pie data={pieChartData} />
+        </div>
+      </div>
+    </div>
+
+    {/* Google Calendar (iframe) with modal functionality */}
+    <div className="col-md-6 mb-3">
+      <div className="card h-100" style={{ borderRadius: "10px", border: "none", boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}>
+        <div className="card-body">
+          <div className="d-flex justify-content-between align-items-center">
+            <h3 className="card-title text-black">
+              Events and Class Schedules
+            </h3>
+            <button className="btn btn-link" onClick={handleShowModal}>
+              <FontAwesomeIcon icon={faExpand} />
+            </button>
+          </div>
+          <iframe
+            title="Google Calendar"
+            src="https://calendar.google.com/calendar/embed?src=daphinenambafu%40gmail.com&ctz=Africa%2FNairobi"
+            style={{ border: "0", width: "100%", height: "400px" }}
+            frameBorder="0"
+            scrolling="no"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Modal for Expanded Google Calendar */}
+  <div
+    className={`modal fade ${showModal ? "show" : ""}`}
+    style={{ display: showModal ? "block" : "none" }}
+    tabIndex="-1"
+    role="dialog"
+    aria-labelledby="calendarModalLabel"
+    aria-hidden={!showModal}
+  >
+    <div className="modal-dialog modal-lg" role="document">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title" id="calendarModalLabel">Expanded Calendar</h5>
+          <button
+            type="button"
+            className="close ms-auto"
+            onClick={handleCloseModal}
+            aria-label="Close"
+            style={{ border: "none", background: "#38bfc3", fontSize: "1.5rem" }}
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div className="modal-body">
+          <iframe
+            title="Expanded Google Calendar"
+            src="https://calendar.google.com/calendar/embed?src=daphinenambafu%40gmail.com&ctz=Africa%2FNairobi"
+            style={{ border: "0", width: "100%", height: "600px" }}
+            frameBorder="0"
+            scrolling="no"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
   );
 };
 
