@@ -1,9 +1,7 @@
 import  { useState } from "react";
-
 import ContentList from "./ContentList";
 import api from "../services/api";
 import "../assets/css/courseContentView.css";
-
 import DisplayRichText from "./Displayrichtext";
 // import RichTextEditor from "./RichTextEditor";
 
