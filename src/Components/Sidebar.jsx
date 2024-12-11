@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Import Link for internal navigation
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../src/assets/css/sidebar.css';
-import LogoutModal from "./LogOutModal";
+import LogoutModal from "./LogoutModal";
 
 const Sidebar = ({ selectedMenu, setSelectedMenu, menuItems }) => {
   const [isCollapsed, setIsCollapsed] = useState(window.innerWidth < 768); // Default to collapsed on smaller screens

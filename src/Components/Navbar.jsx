@@ -8,7 +8,7 @@ import {
 } from "reactstrap";
 import "../../src/assets/css/navbar.css";
 import ProfileModal from "./ProfileModal"; // Import the new ProfileModal component
-import LogoutModal from "./LogOutModal";
+import LogoutModal from "./LogoutModal"
 
 const Navbar = ({ email, role }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
