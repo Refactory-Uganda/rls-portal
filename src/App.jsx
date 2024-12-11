@@ -63,7 +63,7 @@ const App = () => {
           path="/admin"
           element={
             <div className="d-flex flex-column h-100">
-              <Navbar email={"jkanza@refactory.academy"} role={"Admin"} />
+              <Navbar email={"Jalia@refactory.academy"} role={"Admin"} />
               <div className="d-flex flex-grow-1 main-sidebar-content">
                 <Sidebar
                   selectedMenu={selectedMenu}
@@ -88,7 +88,7 @@ const App = () => {
           path="/admin/courses"
           element={
             <div className="d-flex flex-column h-100">
-              <Navbar email={"jkanza@refactory.academy"} role={"Admin"} />
+              <Navbar email={"Jalia@refactory.academy"} role={"Admin"} />
               <div className="d-flex flex-grow-1 main-sidebar-content">
                 <Sidebar
                   selectedMenu={selectedMenu}
@@ -114,7 +114,7 @@ const App = () => {
           path="/admin/facilitators"
           element={
             <div className="d-flex flex-column h-100">
-              <Navbar email={"jkanza@refactory.academy"} role={"Admin"} />
+              <Navbar email={"Jalia@refactory.academy"} role={"Admin"} />
               <div className="d-flex flex-grow-1 main-sidebar-content">
                 <Sidebar
                   selectedMenu={selectedMenu}
@@ -140,7 +140,7 @@ const App = () => {
           path="/admin/learners"
           element={
             <div className="d-flex flex-column h-100">
-              <Navbar email={"jkanza@refactory.academy"} role={"Admin"} />
+              <Navbar email={"Jalia@refactory.academy"} role={"Admin"} />
               <div className="d-flex flex-grow-1 main-sidebar-content">
                 <Sidebar
                   selectedMenu={selectedMenu}
@@ -166,7 +166,7 @@ const App = () => {
           path="/facilitator"
           element={
             <div className="d-flex flex-column h-100">
-              <Navbar email={"dnambafu@refactory.academy"} role={"Facilitator"} />
+              <Navbar email={"ikalumba@refactory.academy"} role={"Facilitator"} />
               <div className="d-flex flex-grow-1 main-sidebar-content">
                 <Sidebar
                   selectedMenu={selectedMenu}
@@ -192,7 +192,7 @@ const App = () => {
           path="/facilitator/assignments"
           element={
             <div className="d-flex flex-column h-100">
-              <Navbar email={"dnambafu@refactory.academy"} role={"Facilitator"} />
+              <Navbar email={"ikalumba@refactory.academy"} role={"Facilitator"} />
               <div className="d-flex flex-grow-1 main-sidebar-content">
                 <Sidebar
                   selectedMenu={selectedMenu}
@@ -217,7 +217,7 @@ const App = () => {
           path="/facilitator/course"
           element={
             <div className="d-flex flex-column h-100">
-              <Navbar email={"dnambafu@refactory.academy"} role={"Facilitator"} />
+              <Navbar email={"ikalumba@refactory.academy"} role={"Facilitator"} />
               <div className="d-flex flex-grow-1 main-sidebar-content">
                 <Sidebar
                   selectedMenu={selectedMenu}
@@ -242,7 +242,7 @@ const App = () => {
           path="/facilitator/learners"
           element={
             <div className="d-flex flex-column h-100">
-              <Navbar email={"dnambafu@refactory.academy"} role={"Facilitator"} />
+              <Navbar email={"ikalumba@refactory.academy"} role={"Facilitator"} />
               <div className="d-flex flex-grow-1 main-sidebar-content">
                 <Sidebar
                   selectedMenu={selectedMenu}
@@ -268,7 +268,7 @@ const App = () => {
           path="/learner"
           element={
             <div className="d-flex flex-column h-100">
-              <Navbar email={"ajonathan.student@refactory.academy"} role={"Learner"} />
+              <Navbar email={"dnambafu.student@refactory.academy"} role={"Learner"} />
               <div className="d-flex flex-grow-1 main-sidebar-content">
                 <Sidebar
                   selectedMenu={selectedMenu}
@@ -295,7 +295,7 @@ const App = () => {
           path="/learner/calendar"
           element={
             <div className="d-flex flex-column h-100">
-              <Navbar email={"ajonathan@refactory.academy"} role={"Learner"} />
+              <Navbar email={"dnambafu.student@refactory.academy"} role={"Learner"} />
               <div className="d-flex flex-grow-1 main-sidebar-content">
                 <Sidebar
                   selectedMenu={selectedMenu}
@@ -320,7 +320,7 @@ const App = () => {
           path="/learner/assignments"
           element={
             <div className="d-flex flex-column h-100">
-              <Navbar email={"ajonathan@refactory.academy"} role={"Learner"} />
+              <Navbar email={"dnambafu.student@refactory.academy"} role={"Learner"} />
               <div className="d-flex flex-grow-1 main-sidebar-content">
                 <Sidebar
                   selectedMenu={selectedMenu}
@@ -345,7 +345,7 @@ const App = () => {
           path="/learner/course"
           element={
             <div className="d-flex flex-column h-100">
-              <Navbar email={"ajonathan@refactory.academy"} role={"Learner"} />
+              <Navbar email={"dnambafu.student@refactory.academy"} role={"Learner"} />
               {/* <div className="d-flex flex-grow-1 main-sidebar-content"> */}
                 {/* <Sidebar
                   selectedMenu={selectedMenu}
