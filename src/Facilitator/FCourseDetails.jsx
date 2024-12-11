@@ -3,6 +3,7 @@ import api from "../services/api";
 import "../assets/css/courseDetails.css";
 import TopicsList from "../Components/TopicsList";
 import { Modal, Toast } from "react-bootstrap";
+import ContentList from "../Components/ContentList";
 // import { height } from "@fortawesome/free-solid-svg-icons/fa0";
 
 const CourseDetails = ({
@@ -211,7 +212,7 @@ const CourseDetails = ({
 
         {/* Topics Container */}
         <div className="course-topics-container card col-md-12 d-flex">
-          <TopicsList
+        <ContentList
             selectedCourse={selectedCourse}
             setSelectedCourse={setSelectedCourse}
           />
