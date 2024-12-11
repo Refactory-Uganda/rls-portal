@@ -41,7 +41,7 @@ const learningTips = [
   "Stay positive and motivated! Your effort will pay off."
 ];
 
-const LearnerDashboard = ({ user = { firstName: "Jonathan" }, courseName = "Course Name", topicsCount = 5, lessonsCount = 20 }) => {
+const LearnerDashboard = ({ user = { firstName: "Daphine" }, courseName = "Course Name", topicsCount = 5, lessonsCount = 20 }) => {
   const navigate = useNavigate();
 
   const handleNavigateToCourse = () => {
