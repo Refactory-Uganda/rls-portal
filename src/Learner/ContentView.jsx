@@ -4,6 +4,7 @@ import ContentList from "./LContentList";
 import api from "../services/api";
 import "../assets/css/courseContentView.css";
 import DisplayRichText from "../Components/Displayrichtext";
+import TakeQuiz from "./TakeQuiz";
 
 
 
@@ -42,7 +43,7 @@ const ContentView = ({ selectedCourse, setView }) => {
 
   if (isQuizViewOpen) {
     return (
-      <QuizView
+      <TakeQuiz
         quiz={quiz}
         setQuiz={setQuiz}
         onBack={() => setIsQuizViewOpen(false)}

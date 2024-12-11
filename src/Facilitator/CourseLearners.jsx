@@ -4,11 +4,11 @@ import "../../src/assets/css/userpage.css";
 
 const CourseLearners = () => {
   const [learners, setLearners] = useState([
-    { id: 1, name: "Daphine Nambafu", email: "dnambafu@student.refactory.academy", courseAssigned: "Project Management" },
-    { id: 2, name: "Isaac Kalumba", email: "ikalumba@student.refactory.academy", courseAssigned: "CSE with JavaScript" },
+    { id: 1, name: "Daphine Nambafu", email: "dnambafu@student.refactory.academy", courseAssigned: "Foundations in Software Engineering" },
+    { id: 2, name: "Isaac Kalumba", email: "ikalumba@student.refactory.academy", courseAssigned: "Foundations in Software Engineering" },
     { id: 3, name: "Jovita Kanza", email: "jkanza@student.refactory.academy", courseAssigned: "Foundations in Software Engineering" },
-    { id: 4, name: "Alia Jonathan", email: "ajonathan@student.refactory.academy", courseAssigned: "CSE with Python" },
-    { id: 5, name: "Immaculate Nayiga", email: "inayiga@student.refactory.academy", courseAssigned: "Data Science and Machine Learning" },
+    { id: 4, name: "Alia Jonathan", email: "ajonathan@student.refactory.academy", courseAssigned: "Foundations in Software Engineering" },
+    { id: 5, name: "Immaculate Nayiga", email: "inayiga@student.refactory.academy", courseAssigned: "Foundations in Software Engineering" },
   ]);
 
   const [viewMode, setViewMode] = useState("table"); // 'table' or 'grid'

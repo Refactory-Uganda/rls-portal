@@ -59,15 +59,15 @@ const FacilitatorDashboardContent = () => {
       <div className="overview-cards">
         <div className="dashboard-card">
           <h4>Courses</h4>
-          <p>10 Active Courses</p>
+          <p>3 Active Courses</p>
         </div>
         <div className="dashboard-card">
           <h4>Learners</h4>
-          <p>250 Enrolled</p>
+          <p>5 Enrolled</p>
         </div>
         <div className="dashboard-card">
-          <h4>Resources</h4>
-          <p>30 Available</p>
+          <h4>Assigments</h4>
+          <p>4 Available</p>
         </div>
       </div>
 
@@ -75,8 +75,8 @@ const FacilitatorDashboardContent = () => {
         <div className="line-graph-section">
           <div className="progress-card">
             <div className="card-body">
-              <h3>Progress Overview</h3>
-              <Line data={lineData} options={lineOptions} />
+              <h3 className="Heading">Progress Overview</h3>
+              <Line className="data" data={lineData} options={lineOptions} />
             </div>
           </div>
         </div>
