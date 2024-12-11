@@ -54,7 +54,7 @@ function LoginForm(props) {
     false: (
       <Button
         component={Link}
-        to="/facilitator"
+        to="/learner"
         fullWidth
         type="submit"
         sx={{
