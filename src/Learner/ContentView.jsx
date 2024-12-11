@@ -1,5 +1,4 @@
 import  { useState } from "react";
-
 import ContentList from "./LContentList";
 import api from "../services/api";
 import "../assets/css/courseContentView.css";
@@ -33,10 +32,7 @@ const ContentView = ({ selectedCourse, setView }) => {
     }
   };
 
-  const toggleEditQuizModal = () =>
-    setIsEditQuizModalOpen(!isEditQuizModalOpen);
-
-  const handleTakeQuizClick = () => {
+   const handleTakeQuizClick = () => {
     setIsQuizViewOpen(true);
     setQuiz(lessonToView.quiz);
   };
@@ -59,7 +55,7 @@ const ContentView = ({ selectedCourse, setView }) => {
         <div className="main-content scrollable-container">
           <div className="video-view">
             {lessonToView ? (
-              <div className="lesson-content-window">
+              <div className="learner-lesson-content-window">
                 <DisplayRichText htmlContent={lessonToView.text} />
               </div>
             ) : (
