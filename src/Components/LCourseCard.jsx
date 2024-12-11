@@ -149,7 +149,9 @@ function CourseCard({ course, onClick }) {
                   ? `${numTopics} Topic`
                   : `${numTopics} Topics`}
               </p>
-              <p className="card-text">Facilitator: Steven</p>
+              <p className="card-text">Facilitator: {course.facilitator
+              ? `${course.facilitator.firstName} ${course.facilitator.lastName}`
+              : "Unknown"}</p>
             </div>
           </div>
         </div>
