@@ -5,7 +5,7 @@ function StaffLogin() {
   return (
     <>
       <LoginHeader />
-      <LoginForm userGroup="facilitator" />
+      <LoginForm userGroup="Staff" />
     </>
   );
 }
