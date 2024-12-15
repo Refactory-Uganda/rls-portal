@@ -5,7 +5,7 @@ function AdminLogin() {
   return (
     <>
       <LoginHeader />
-      <LoginForm userGroup="admin" />
+      <LoginForm userGroup="Administrator" />
     </>
   );
 }
