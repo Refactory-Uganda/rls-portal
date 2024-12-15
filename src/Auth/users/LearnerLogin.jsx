@@ -5,7 +5,7 @@ function StudentLogin() {
   return (
     <>
       <LoginHeader />
-      <LoginForm userGroup="learner" />
+      <LoginForm userGroup="Student" />
     </>
   );
 }

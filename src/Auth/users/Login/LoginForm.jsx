@@ -1,22 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, replace, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { Button, Snackbar, Alert, Checkbox } from "@mui/material";
 import { Save } from "@mui/icons-material";
-import { TextField1 } from "../../../microComponents/TextField1"; // Adjust based on your import path
-import AccessInputs from "../../../microComponents/AccessInputs"; // Adjust based on your import path
+import { TextField1 } from "../../../microComponents/TextField1"; // Adjust import path
+import AccessInputs from "../../../microComponents/AccessInputs"; // Adjust import path
 import Dashboard from "../../../../src/assets/Images/refactory-IMS-dashboard.png";
-import useLogin from "./hooks/useLogin";
 import { LoadingButton } from "@mui/lab";
 import "./assets/form-styles.css";
+import api from "../../../services/api";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-function LoginForm(props) {
-  const { error, loading, errorMessage, handleLogin, setError } = useLogin();
+function LoginForm({ userGroup }) {
+  const navigate = useNavigate();
+  const [error, setError] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
-  // Updated validation schema
+  // Validation schema
   const validationSchema = yup.object({
     email: yup
       .string()
@@ -24,6 +27,38 @@ function LoginForm(props) {
       .required("Enter your email"),
     password: yup.string().required("Enter your password"),
   });
+
+  const handleLogin = async (values) => {
+    setLoading(true);
+    try {
+      // Include userGroup in the login payload
+      const payload = {
+        ...values,
+        userGroup,
+      };
+
+      const response = await api.post("/authentication/login", payload);
+      const { user, tokens } = response.data;
+
+      // Save tokens and user details in local storage
+      localStorage.setItem("accessToken", tokens.access_token);
+      localStorage.setItem("refreshToken", tokens.refresh_token);
+      localStorage.setItem("user", JSON.stringify(user));
+
+      // Navigate based on user group
+      const roleToRoute = {
+        Administrator: "/admin",
+        Staff: "/facilitator",
+        Student: "/learner",
+      };
+      window.location.replace(roleToRoute[user.userGroup] || "/");
+    } catch (err) {
+      setError(true);
+      setErrorMessage("Invalid credentials or server error.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const buttonState = {
     true: (
@@ -53,8 +88,6 @@ function LoginForm(props) {
     ),
     false: (
       <Button
-        component={Link}
-        to="/learner"
         fullWidth
         type="submit"
         sx={{
@@ -88,131 +121,63 @@ function LoginForm(props) {
         password: "",
       }}
       validationSchema={validationSchema}
-      onSubmit={(values) => {
-        handleLogin(values, props.userGroup);
-      }}
+      onSubmit={(values) => handleLogin(values)}
     >
-      {({ handleSubmit, errors, touched }) => {
-        return (
-          <form className="form-wrap" onSubmit={handleSubmit} method="POST">
-            <div className="main-content">
-              <div className="column-grid">
-                <div className="column-content image-area">
-                  <h1 style={{ fontSize: "36px" }}>
-                    Welcome back{" "}
-                    {props.userGroup.charAt(0).toUpperCase() +
-                      props.userGroup.slice(1)}
-                  </h1>
-                  <img src={Dashboard} alt="signupDashboard" />
+      {({ handleSubmit, errors, touched }) => (
+        <form className="form-wrap" onSubmit={handleSubmit}>
+          <div className="main-content">
+            <div className="column-grid">
+              <div className="column-content image-area">
+                <h1 style={{ fontSize: "36px" }}>
+                  Welcome back{" "}
+                  {userGroup.charAt(0).toUpperCase() + userGroup.slice(1)}
+                </h1>
+                <img src={Dashboard} alt="signupDashboard" />
+              </div>
+              <div className="column-content login-area">
+                {error && (
+                  <Alert
+                    severity="error"
+                    onClose={() => setError(false)}
+                    className="error-message"
+                  >
+                    {errorMessage}
+                  </Alert>
+                )}
+                <div className="email">
+                  <TextField1
+                    name="email"
+                    placeholder="Email Address"
+                    size="small"
+                    fullWidth
+                    error={touched.email && Boolean(errors.email)}
+                    helperText={touched.email && errors.email}
+                  />
                 </div>
-
-                <div className="column-content login-area">
-                  {error && (
-                    <Alert
-                      severity="error"
-                      onClose={() => setError(false)}
-                      className="error-message"
-                    >
-                      {errorMessage}
-                    </Alert>
-                  )}
-
-                  <div className="email">
-                    <TextField1
-                      name="email"
-                      placeholder="Email Address" // Placeholder text
-                      size="small"
-                      fullWidth
-                      error={touched.email && Boolean(errors.email)} // Check for errors
-                      helperText={touched.email && errors.email} // Display error message
-                      sx={{
-                        marginTop: "5px",
-                        height: "50px",
-                        position: "relative",
-                        "& input": {
-                          padding: "12px 0", // Adjust padding to align with the design
-                        },
-                        "&::before": {
-                          content: '"Email Address"', // Floating label
-                          position: "absolute",
-                          left: "10px",
-                          top: "15px",
-                          color: "#aaa", // Placeholder color
-                          fontSize: "14px",
-                          pointerEvents: "none",
-                          transition: "0.2s ease all",
-                        },
-                        "&:focus-within::before": {
-                          top: "-10px", // Adjust position when focused
-                          fontSize: "12px",
-                          color: "blue", // Change color when focused
-                        },
-                        "&:has(input:valid)::before": {
-                          top: "-10px", // Adjust position if input is valid
-                          fontSize: "12px",
-                          color: "blue", // Change color if input is valid
-                        },
-                      }}
-                    />
-                  </div>
-
-                  <div className="password">
-                    <AccessInputs
-                      name="password"
-                      placeholder="Password" // Placeholder text
-                      size="small"
-                      fullWidth
-                      error={touched.password && Boolean(errors.password)} // Check for errors
-                      helperText={touched.password && errors.password} // Display error message
-                      sx={{
-                        marginTop: "5px",
-                        height: "50px",
-                        position: "relative",
-                        "& input": {
-                          padding: "12px 0", // Adjust padding to align with the design
-                        },
-                        "&::before": {
-                          content: '"Password"', // Floating label
-                          position: "absolute",
-                          left: "10px",
-                          top: "15px",
-                          color: "#aaa", // Placeholder color
-                          fontSize: "14px",
-                          pointerEvents: "none",
-                          transition: "0.2s ease all",
-                        },
-                        "&:focus-within::before": {
-                          top: "-10px", // Adjust position when focused
-                          fontSize: "12px",
-                          color: "blue", // Change color when focused
-                        },
-                        "&:has(input:valid)::before": {
-                          top: "-10px", // Adjust position if input is valid
-                          fontSize: "12px",
-                          color: "blue", // Change color if input is valid
-                        },
-                      }}
-                    />
-                  </div>
-
-                  <div className="remember">
-                    <p>
-                      <span>
-                        <Checkbox {...label} />
-                      </span>
-                      Remember me
-                    </p>
-                    <p>
-                      <Link to="/user/password/forgot">Forgot Password?</Link>{" "}
-                    </p>
-                  </div>
-                  {buttonState}
+                <div className="password">
+                  <AccessInputs
+                    name="password"
+                    placeholder="Password"
+                    size="small"
+                    fullWidth
+                    error={touched.password && Boolean(errors.password)}
+                    helperText={touched.password && errors.password}
+                  />
                 </div>
+                <div className="remember">
+                  <p>
+                    <Checkbox {...label} /> Remember me
+                  </p>
+                  <p>
+                    <Link to="/user/password/forgot">Forgot Password?</Link>
+                  </p>
+                </div>
+                {buttonState}
               </div>
             </div>
-          </form>
-        );
-      }}
+          </div>
+        </form>
+      )}
     </Formik>
   );
 }
