@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // Import Link for internal navigation
+import { Link, useNavigate } from "react-router-dom"; // Import Link for internal navigation
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../src/assets/css/sidebar.css';
 import LogoutModal from "./LogoutModal";
+import api from "../services/api";
+api
 
 const Sidebar = ({ selectedMenu, setSelectedMenu, menuItems }) => {
   const [isCollapsed, setIsCollapsed] = useState(window.innerWidth < 768); // Default to collapsed on smaller screens
@@ -12,9 +14,27 @@ const Sidebar = ({ selectedMenu, setSelectedMenu, menuItems }) => {
     setIsCollapsed(!isCollapsed);
   };
 
+  const navigate = useNavigate();
   const handleLogoutConfirm = () => {
-    // Logic for logging out (clear session, token, etc.)
-    window.location.href = "/"; // Redirect to index page after confirmation
+
+    // try {
+      // Optional: Inform the server to invalidate tokens
+    //   const refreshToken = localStorage.getItem("refreshToken");
+    //   if (refreshToken) {
+    //     await api.post("/authentication/logout", { refreshToken });
+    //   }
+    // } catch (err) {
+    //   console.error("Error during server logout:", err);
+    // } finally {
+      // Clear localStorage/sessionStorage
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("user");
+      localStorage.removeItem("lastEmail"); // Optional: If you saved email for autofill
+  
+      // Navigate to login page
+      navigate("/", { replace: true }); // Redirect to login page with history replacement
+    // }
   };
 
   const handleLogoutClose = () => {
