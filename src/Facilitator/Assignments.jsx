@@ -120,13 +120,13 @@ const AssignmentsPage = () => {
             </Toast>
 
             {/* Create Assignment Button */}
-            <button
+            {/* <button
                 className="icon-button"
                 onClick={() => setShowCreateModal(true)}
                 title="Create Assignment"
             >
                 <FaPlus /> Add Assignment
-            </button>
+            </button> */}
 
             {/* Assignment List */}
             <div className="assignment-list">

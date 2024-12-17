@@ -1,29 +1,33 @@
 import React, { useEffect, useState } from "react";
-import "../assets/css/quizView.css";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import "../assets/css/takequiz.css";
 import { Modal, Button, Form } from "react-bootstrap";
 import api from "../services/api";
 
 const TakeQuiz = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
-  // const [quiz, setQuiz] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  const [editing, setEditing] = useState(false);
-  const [editedQuiz, setEditedQuiz] = useState({ ...quiz });
   const [userAnswers, setUserAnswers] = useState({});
-  const [score, setScore] = useState(null);
-
-  const [showQuizEditModal, setShowQuizEditModal] = useState(false);
-  const [showQuestionEditModal, setShowQuestionEditModal] = useState(false);
-  const [showDeleteQuizModal, setShowDeleteQuizModal] = useState(false);
-  const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(null);
+  const [quizResult, setQuizResult] = useState(null);
+  const [isQuizSubmitted, setIsQuizSubmitted] = useState(false);
 
   useEffect(() => {
-    const fetchQuiz = async () => {
+    const fetchQuizResult = async () => {
       try {
+        // Check if quiz result already exists
+        const resultResponse = await api.get(`/quizzes/${lessonToView.quiz.id}/result`);
+        if (resultResponse.data) {
+          setQuizResult(resultResponse.data);
+          setIsQuizSubmitted(true);
+          setLoading(false);
+          return;
+        }
+      } catch (err) {
+        // No existing result is fine, continue to fetch quiz
+        console.log("No existing result found");
+      }
+
+      try {
+        // Fetch quiz details
         const response = await api.get(`/quizzes/${lessonToView.quiz.id}`);
         setQuiz(response.data);
       } catch (err) {
@@ -32,137 +36,61 @@ const TakeQuiz = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
         setLoading(false);
       }
     };
-    fetchQuiz();
-  }, [lessonId]);
 
-  const handleEditQuizSubmit = async () => {
-    try {
-      await api.patch(`/quizzes/${quiz.id}`, {
-        title: editedQuiz.title,
-        description: editedQuiz.description,
-      });
-      setQuiz(editedQuiz);
-      setShowQuizEditModal(false);
-    } catch (error) {
-      console.error("Failed to update quiz:", error);
-    }
-  };
-
-  const handleEditQuestionSubmit = async () => {
-    const question = editedQuiz.questions[selectedQuestionIndex];
-    try {
-      await api.patch(`/quizzes/${question.id}`, question);
-      setQuiz(editedQuiz);
-      setShowQuestionEditModal(false);
-    } catch (error) {
-      console.error("Failed to update question:", error);
-    }
-  };
-
-  const handleDeleteQuiz = async () => {
-    try {
-      await api.delete(`/quizzes/${quiz.id}`);
-      setShowDeleteQuizModal(false);
-      onBack(); // Go back to the previous screen after deleting
-    } catch (error) {
-      console.error("Failed to delete quiz:", error);
-    }
-  };
+    fetchQuizResult();
+  }, [lessonId, setQuiz, lessonToView.quiz.id]);
 
   const handleOptionChange = (questionId, optionId) => {
-    setUserAnswers({
-      ...userAnswers,
-      [questionId]: optionId,
-    });
+    // Only allow option change if quiz is not submitted
+    if (!isQuizSubmitted) {
+      setUserAnswers({
+        ...userAnswers,
+        [questionId]: optionId,
+      });
+    }
   };
 
   const handleQuizSubmit = async (e) => {
     e.preventDefault();
+    
+    // Check if all questions are answered
+    const unansweredQuestions = quiz.questions.filter(
+      question => !userAnswers[question.id]
+    );
+    
+    if (unansweredQuestions.length > 0) {
+      alert("Please answer all questions before submitting.");
+      return;
+    }
 
     try {
-      //Create a new assessment entry and get the attemptId
+      // Start quiz attempt
       const assessmentResponse = await api.post("/quizzes/start", {
-        quizId: quiz.id, // Assuming `quiz.id` uniquely identifies the quiz
+        quizId: quiz.id,
       });
       const attemptId = assessmentResponse.data.id;
 
-      const answers = [];
+      // Prepare answers
+      const answers = quiz.questions.map((question) => ({
+        attemptId,
+        questionId: question.id,
+        optionId: userAnswers[question.id],
+        isCorrect: true, // Server-side validation
+      }));
 
-      // Build the answers array without calculating the score
-      quiz.questions.forEach((question) => {
-        const userAnswer = userAnswers[question.id];
-
-        answers.push({
-          attemptId: attemptId,
-          questionId: question.id,
-          optionId: userAnswer,
-          isCorrect: true,
-        });
-      });
-
-      //Submit the quiz with answers to the backend
+      // Submit quiz
       const submissionResponse = await api.post(
         `/quizzes/${attemptId}/submitQuiz`,
-        {
-          quizId: quiz.id,
-          answers: answers,
-        }
+        { quizId: quiz.id, answers }
       );
 
-      // Display the score returned by the backend
-      console.log(submissionResponse);
-      const score = submissionResponse.data.data.score;
-      const maxScore = submissionResponse.data.data.maxScore;
-      setScore(score);
-
-      alert(
-        `Quiz submitted successfully! Your score: ${score} out of ${maxScore}`
-      );
+      // Set quiz result
+      const result = submissionResponse.data.data;
+      setQuizResult(result);
+      setIsQuizSubmitted(true);
     } catch (error) {
       console.error("Error submitting quiz:", error);
       alert("There was an error submitting your quiz. Please try again.");
-    }
-  };
-
-  const addOption = (questionIndex) => {
-    const updatedQuiz = { ...editedQuiz };
-    if (updatedQuiz.questions[questionIndex].option.length < 4) {
-      updatedQuiz.questions[questionIndex].option.push({
-        id: Date.now(),
-        optionText: "",
-        iscorrect: false,
-      });
-      setEditedQuiz(updatedQuiz);
-    }
-  };
-
-  const deleteOption = (questionIndex, optionIndex) => {
-    const updatedQuiz = { ...editedQuiz };
-    updatedQuiz.questions[questionIndex].option.splice(optionIndex, 1);
-    setEditedQuiz(updatedQuiz);
-  };
-
-  const addQuestion = () => {
-    const updatedQuiz = { ...editedQuiz };
-    updatedQuiz.questions.push({
-      id: Date.now(),
-      text: "",
-      option: [{ id: Date.now() + 1, optionText: "", iscorrect: false }],
-    });
-    setEditedQuiz(updatedQuiz);
-  };
-
-  const deleteQuestion = async (questionId) => {
-    try {
-      await api.delete(`/questions/${questionId}`);
-      const updatedQuiz = { ...editedQuiz };
-      updatedQuiz.questions = updatedQuiz.questions.filter(
-        (q) => q.id !== questionId
-      );
-      setEditedQuiz(updatedQuiz);
-      setQuiz(updatedQuiz);
-    } catch (error) {
-      console.error("Failed to delete question:", error);
     }
   };
 
@@ -180,25 +108,79 @@ const TakeQuiz = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
     );
   }
 
-  console.log(quiz);
+  // Quiz result view
+  if (isQuizSubmitted && quizResult) {
+    return (
+      <div className="quiz-result-container">
+        <div className="btn-container">
+          <button onClick={onBack} className="btn action-btn mb-3">
+          <i className="bi bi-arrow-left"></i>
+          </button>
+          <h3>{quiz.title} - Results</h3>
+        </div>
+        <div className="result-details">
+          <div className="score-summary">
+            <h4>Your Score</h4>
+            <p className="score">
+              {quizResult.score} / {quizResult.maxScore}
+            </p>
+            <p className="percentage">
+              {((quizResult.score / quizResult.maxScore) * 100).toFixed(2)}%
+            </p>
+          </div>
+          
+          <div className="detailed-results">
+            <h4>Detailed Breakdown</h4>
+            {quiz.questions.map((question, qIndex) => {
+              const userOptionId = userAnswers[question.id];
+              const selectedOption = question.option.find(opt => opt.id === userOptionId);
+              const correctOption = question.option.find(opt => opt.iscorrect);
+              
+              return (
+                <div key={question.id} className="question-result">
+                  <h5>{`Q${qIndex + 1}: ${question.text}`}</h5>
+                  <div className="options">
+                    {question.option.map((option) => (
+                      <div 
+                        key={option.id} 
+                        className={`option ${
+                          option.id === userOptionId 
+                            ? (option.iscorrect ? 'correct' : 'incorrect')
+                            : (option.iscorrect ? 'correct-answer' : '')
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          checked={userOptionId === option.id}
+                          readOnly
+                        />
+                        <label>{option.optionText}</label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-
-
+  // Quiz taking view
   return (
     <div>
       <div className="btn-container">
         <button onClick={onBack} className="btn action-btn mb-3">
           Back to Lesson
         </button>
-        <h3>{`${quiz.title}`}</h3>
+        <h3>{quiz.title}</h3>
       </div>
       <div className="quiz-content-container">
         <form onSubmit={handleQuizSubmit}>
           {quiz.questions.map((question, qIndex) => (
             <div key={question.id} className="quiz-question-list-item">
-              <h5>
-                {`Q${qIndex + 1}: ${question.text}`}
-              </h5>
+              <h5>{`Q${qIndex + 1}: ${question.text}`}</h5>
               {question.option.map((option) => (
                 <div key={option.id} className="option-container">
                   <input
@@ -207,20 +189,18 @@ const TakeQuiz = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
                     onChange={() => handleOptionChange(question.id, option.id)}
                     checked={userAnswers[question.id] === option.id}
                   />
-                  <label>{` ${option.optionText}`}</label>
+                  <label>{option.optionText}</label>
                 </div>
               ))}
             </div>
           ))}
           <div className="submit-btn-container">
-          <button type="submit" className="btn btn-primary action-btn mt-3">
-            Submit Quiz
-          </button>
+            <button type="submit" className="btn btn-primary action-btn mt-3">
+              Submit Quiz
+            </button>
           </div>
         </form>
       </div>
-      {score !== null && <p>Your Score: {score}</p>}
-       
     </div>
   );
 };
