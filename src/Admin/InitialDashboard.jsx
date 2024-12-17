@@ -53,6 +53,23 @@ const InitialDashboard = () => {
     };
     fetchFacilitators();
   }, []);
+
+ // Fetch Students
+ useEffect(() => {
+  const fetchStudents = async () => {
+    try {
+      setIsLoading(true);
+      const response = await api.get("/learner");
+      setStudentsCount(response.data.length);
+    } catch (error) {
+      console.error("Error fetching students:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  fetchStudents();
+}, []);
+
   // Simulate fetching data from an API
   useEffect(() => {
     const fetchData = async () => {
@@ -69,7 +86,7 @@ const InitialDashboard = () => {
       };
 
       // setFacilitatorsCount(data.facilitators);
-      setStudentsCount(data.students);
+      // setStudentsCount(data.students);
       // setCoursesCount(data.courses.length);
       setCoursesData(data.courses);
     };
