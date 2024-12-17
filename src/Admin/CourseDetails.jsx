@@ -30,6 +30,17 @@ const CourseDetails = ({
     selectedCourse.Description
   );
 
+  const [facilitators, setFacilitators] = useState([]); // To hold the fetched facilitators
+  const [selectedFacilitator, setSelectedFacilitator] = useState(
+    selectedCourse.facilitator
+      ? `${selectedCourse.facilitator.firstName} ${selectedCourse.facilitator.lastName}`
+      : "No assigned facilitator"
+  );
+  const [award, setAward] = useState(selectedCourse.award);
+  const [assessmentMode, setAssessmentMode] = useState(
+    selectedCourse.assessmentMode
+  );
+
   // State for adding topics
   const [showAddTopicModal, setShowAddTopicModal] = useState(false);
   const [topicTitle, setTopicTitle] = useState("");
@@ -45,6 +56,22 @@ const CourseDetails = ({
       setTopicDescription("");
     }
   }, [showAddTopicModal]);
+
+  useEffect(() => {
+    if (showCourseModal) {
+      const fetchFacilitators = async () => {
+        try {
+          const response = await api.get("/courses/staff");
+          setFacilitators(response.data);
+        } catch (error) {
+          console.error("Error fetching facilitators:", error);
+        }
+        // finally {
+        // }
+      };
+      fetchFacilitators();
+    }
+  }, [showCourseModal]);
 
   const handleBackClick = () => {
     setSelectedCourse(null);
@@ -78,6 +105,9 @@ const CourseDetails = ({
       Title: courseTitle,
       Duration: duration,
       Description: courseDescription,
+      award: award,
+      assessmentMode: assessmentMode,
+      facilitator: selectedFacilitator,
     };
 
     try {
@@ -216,15 +246,11 @@ const CourseDetails = ({
             selectedCourse={selectedCourse}
             setSelectedCourse={setSelectedCourse}
           />
-          {/* <TopicsList
-            selectedCourse={selectedCourse}
-            setSelectedCourse={setSelectedCourse}
-          /> */}
         </div>
       </div>
 
       {/* Course Edit Modal */}
-      <Modal show={showCourseModal} onHide={handleCloseCourseModal}>
+      {/* <Modal show={showCourseModal} onHide={handleCloseCourseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Course</Modal.Title>
         </Modal.Header>
@@ -266,6 +292,98 @@ const CourseDetails = ({
                 onChange={(e) => setCourseDescription(e.target.value)}
               ></textarea>
             </div>
+            <button type="submit" className="btn action-btn">
+              Update Course
+            </button>
+          </form>
+        </Modal.Body>
+      </Modal> */}
+      <Modal show={showCourseModal} onHide={handleCloseCourseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Course</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleUpdateCourse();
+            }}
+          >
+            <div className="mb-3">
+              <label>Title</label>
+              <input
+                type="text"
+                className="form-control"
+                value={courseTitle}
+                onChange={(e) => setCourseTitle(e.target.value)}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label>Duration (Weeks)</label>
+              <select
+                className="form-control"
+                value={duration}
+                onChange={(e) => setDuration(e.target.value)}
+              >
+                {[...Array(52)].map((_, i) => (
+                  <option key={i + 1} value={i + 1}>
+                    {i + 1} week{i !== 0 ? "s" : ""}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="mb-3">
+              <label>Description</label>
+              <textarea
+                className="form-control"
+                value={courseDescription}
+                onChange={(e) => setCourseDescription(e.target.value)}
+              ></textarea>
+            </div>
+
+            <div className="mb-3">
+              <label>Facilitator</label>
+              <select
+                className="form-control"
+                value={selectedFacilitator}
+                onChange={(e) => setSelectedFacilitator(e.target.value)}
+              >
+                <option value="">Select Facilitator</option>
+                {facilitators.map((facilitator) => (
+                  <option key={facilitator.id} value={facilitator.id}>
+                    {`${facilitator.firstName} ${facilitator.lastName}`}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="mb-3">
+              <label>Award</label>
+              <select
+                className="form-control"
+                value={award}
+                onChange={(e) => setAward(e.target.value)}
+              >
+                <option value="">Select mode</option>
+                <option value="Certificate">Certificate</option>
+                <option value="Diploma">Diploma</option>
+              </select>
+            </div>
+
+            <div className="mb-3">
+              <label>Assessment Mode</label>
+              <select
+                className="form-control"
+                value={assessmentMode}
+                onChange={(e) => setAssessmentMode(e.target.value)}
+              >
+                <option value="QUIZ">Quiz</option>
+                <option value="ASSIGNMENT">Assignment</option>
+              </select>
+            </div>
+
             <button type="submit" className="btn action-btn">
               Update Course
             </button>

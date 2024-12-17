@@ -4,6 +4,7 @@ import api from "../services/api";
 import "../assets/css/courseContentView.css";
 import DisplayRichText from "./Displayrichtext";
 // import RichTextEditor from "./RichTextEditor";
+import ContentWaitingScreen from "./ContentWaitingScreen";
 
 
 
@@ -63,12 +64,13 @@ const CourseContentView = ({ selectedCourse, setView }) => {
                 <DisplayRichText htmlContent={lessonToView.text} />
               </div>
             ) : (
-              <iframe
-                src="https://www.youtube.com/embed/FOD408a0EzU"
-                frameBorder="0"
-                allowFullScreen
-                title="Video View"
-              ></iframe>
+              <ContentWaitingScreen/>
+              // <iframe
+              //   src="https://www.youtube.com/embed/FOD408a0EzU"
+              //   frameBorder="0"
+              //   allowFullScreen
+              //   title="Video View"
+              // ></iframe>
             )}
           </div>
 
@@ -85,12 +87,12 @@ const CourseContentView = ({ selectedCourse, setView }) => {
           )}
 
           {/* Comments Section */}
-          <div className="comments-section">
+          {/* <div className="comments-section">
             <textarea
               placeholder="Add a comment..."
               className="content-view-text-area"
             />
-          </div>
+          </div> */}
         </div>
 
         {/* Scrollable Video Rows */}
