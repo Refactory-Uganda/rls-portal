@@ -1,99 +1,91 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
+import "../../src/assets/css/profilemodal.css";
 
-const ProfileModal = ({ isOpen, onClose, user, onSave, isRegistered }) => {
-  const [newName, setNewName] = useState(user.name); // Manage name change
-  const [newImage, setNewImage] = useState(user.image); // Manage image change
-  const [imagePreview, setImagePreview] = useState(user.image); // Preview uploaded image
+const ProfileModal = ({ isOpen, onClose, user, onSave }) => {
+  const [profileImage, setProfileImage] = useState(user.image);
 
-  // Persist image in localStorage on image change
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = () => {
-        const imageData = reader.result; // base64 image
-        setNewImage(imageData); // Set the new image as base64 data URL
-        setImagePreview(imageData); // Preview the image immediately
-
-        // Save the image in localStorage to persist after refresh
-        localStorage.setItem("profileImage", imageData);
+      reader.onload = () => {
+        setProfileImage(reader.result); // Set the base64 image URL
       };
       reader.readAsDataURL(file);
     }
   };
 
-  // Load image from localStorage on component mount
-  useEffect(() => {
-    const savedImage = localStorage.getItem("profileImage");
-    if (savedImage) {
-      setImagePreview(savedImage);
-      setNewImage(savedImage);
-    }
-  }, []);
-
-  // Handle form submission (save profile changes)
   const handleSave = () => {
-    onSave({
-      name: newName,
-      image: newImage,
-      initials: newName.split(" ")[0].slice(0, 2).toUpperCase(), // Update initials based on name
-    });
+    onSave({ image: profileImage }); // Pass the updated image back to parent
     onClose();
+  };
+
+  // Generate initials or fallback
+  const getInitials = () => {
+    if (user.email && user.email.includes("@")) {
+      const localPart = user.email.split("@")[0];
+      return localPart.slice(0, 2).toUpperCase(); // Extract first two letters
+    }
+    return "NA"; // Default initials
   };
 
   return (
     <Modal isOpen={isOpen} toggle={onClose}>
-      <ModalHeader toggle={onClose}>Edit Profile</ModalHeader>
+      <ModalHeader toggle={onClose}>Your Profile</ModalHeader>
       <ModalBody>
-        <div>
-          <label>Name</label>
-          <input
-            type="text"
-            value={newName}
-            onChange={(e) => !isRegistered && setNewName(e.target.value)} // Prevent name change if registered
-            className="form-control"
-            readOnly={isRegistered} // Make name field read-only if the user is registered
-          />
-        </div>
-        <div className="mt-3">
-          <label>Profile Image</label>
-          <input
-            type="file"
-            onChange={handleImageChange}
-            className="form-control"
-          />
-          {imagePreview && (
-            <div className="mt-3" style={{
-                display: "flex",
-                justifyContent: "center",  // Centers the image horizontally
-                alignItems: "center",      // Centers the image vertically
-              }}>
-              <img
-                src={imagePreview}
-                alt="Profile Preview"
-                style={{
-                  width: "200px",  // Slightly bigger image size
-                  height: "200px", // Slightly bigger height
-                  objectFit: "cover", // Ensures image fills the space
-                  borderRadius: "50%", // Keeps the circular shape
-                  filter: "none", // No shiny effect
-                  boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)", // Adds a shadow to give it depth
-                  margin: "20px 0", // Adds space around the image
-                  display: "block", // Makes sure it behaves like a block element
-                  border: "3px solid #ccc", // Adds a border around the image
-                }}
-              />
+        <div className="text-center mb-4">
+          {profileImage ? (
+            <img
+              src={profileImage}
+              alt="Profile"
+              className="rounded-circle"
+              style={{ width: "100px", height: "100px", objectFit: "cover" }}
+            />
+          ) : (
+            <div
+              className="rounded-circle d-flex justify-content-center align-items-center"
+              style={{
+                width: "100px",
+                height: "100px",
+                backgroundColor: "#6c757d",
+                color: "white",
+                fontSize: "32px",
+                fontWeight: "bold",
+              }}
+            >
+              {getInitials()}
             </div>
           )}
         </div>
+        <div className="mb-3 text-center">
+          <label
+            htmlFor="profileImage"
+            className="btn btn-outline-primary btn-sm"
+          >
+            Change Profile Image
+          </label>
+          <input
+            type="file"
+            id="profileImage"
+            style={{ display: "none" }}
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+        </div>
+        <p className="text-left">
+          <strong>Email:</strong> {user.email || "No email available"}
+        </p>
+        <p className="text-left">
+          <strong>Role:</strong> {user.role || "Role not specified"}
+        </p>
       </ModalBody>
       <ModalFooter>
+        <Button color="primary action-btn" onClick={handleSave}>
+          Save
+        </Button>
         <Button color="secondary" onClick={onClose}>
           Cancel
-        </Button>
-        <Button color="primary btn-purple" onClick={handleSave}>
-          Save Changes
         </Button>
       </ModalFooter>
     </Modal>
