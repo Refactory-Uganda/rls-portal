@@ -27,7 +27,7 @@ import Learners from "./Admin/Learners";
 
 // Import Facilitator Components
 import FacilitatorDashboardContent from "./Facilitator/FacilitatorDashboardContent";
-import AssignmentsContent from "./Facilitator/AssignmentsContent";
+import AssignmentsPage from "./Facilitator/Assignments";
 import CourseList from "./Facilitator/CourseList";
 import Course from "./Facilitator/Course";
 // import Resources from "./Facilitator/Resources";
@@ -336,7 +336,7 @@ const App = () => {
                     ]}
                   />
                   <div className="flex-grow-1 bg-light dash-content">
-                    <AssignmentsContent />
+                    <AssignmentsPage />
                   </div>
                 </div>
               </div>
