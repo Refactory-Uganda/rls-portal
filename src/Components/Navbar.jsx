@@ -55,7 +55,7 @@ const Navbar = ({ email, role }) => {
         className="ms-8"
         style={{ fontSize: "25px", marginRight: "600px", marginTop: "5px" }}
       >
-        <p style={{ marginBottom: "2px", color: "#38BFC3", fontWeight: "5px"}}>Hi, {role}</p>
+        <p style={{ marginBottom: "2px", color: "#38BFC3", fontWeight: "5px" }}>Hi, {role}</p>
       </div>
 
       <div className="d-flex align-items-center">
@@ -97,8 +97,8 @@ const Navbar = ({ email, role }) => {
                   src={user.image}
                   alt="Profile"
                   style={{
-                    width: "32px", 
-                    height: "32px", 
+                    width: "32px",
+                    height: "32px",
                     objectFit: "cover", // Crop image to fit within the circle
                     borderRadius: "50%"
                   }}
@@ -121,9 +121,13 @@ const Navbar = ({ email, role }) => {
       {/* Render the Profile Modal */}
       <ProfileModal
         isOpen={isProfileModalOpen}
-        onClose={() => setIsProfileModalOpen(false)} // Close modal on cancel
-        user={user}
-        onSave={handleProfileSave} // Save updated profile info
+        onClose={() => setIsProfileModalOpen(false)}
+        user={{
+          ...user,
+          email: email,    // Add email explicitly
+          role: role       // Add role explicitly
+        }}
+        onSave={handleProfileSave}
       />
 
       {/* Render the Logout Modal */}
