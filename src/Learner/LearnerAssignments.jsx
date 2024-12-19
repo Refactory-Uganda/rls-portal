@@ -155,12 +155,14 @@ const LearnerAssignments = () => {
     const link = document.createElement("a");
     link.href = fileUrl;
     link.download = fileName;
+    link.target = "_blank"; // Optional: open in a new tab if needed
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
   };
 
   return (
     <div className="assignments-page">
-    
       <div className="assignments-list">
         {filteredAssignments.length > 0 ? (
           filteredAssignments.map((assignment) => (
@@ -169,7 +171,7 @@ const LearnerAssignments = () => {
               title={assignment.title}
               dueDate={assignment.dueDate.toLocaleString()} // Format due date
               status={assignment.status}
-              onClick={() => fetchAssignmentDetails(assignment.id)}
+              handleCardClick={() => fetchAssignmentDetails(assignment.id)}
             />
           ))
         ) : (
@@ -202,7 +204,7 @@ const LearnerAssignments = () => {
                   htmlContent={selectedAssignment.instructions}
                 />
               </div>
-             
+
               <p>
                 <strong>Points:</strong> {selectedAssignment.points}
               </p>
@@ -210,10 +212,13 @@ const LearnerAssignments = () => {
                 <div>
                   <h6>Download Assignment Question</h6>
                   <a
-                    href={selectedAssignment.uploadQuestion}
-                    onClick={handleDownload(selectedAssignment)}
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault(); // Prevent default link behavior
+                      handleDownload(selectedAssignment);
+                    }}
                   >
-                    {selectedAssignment.uploadQuestion ? "Download file" : ""}
+                    {selectedAssignment.uploadQuestion ? "View file" : ""}
                   </a>
                 </div>
               )}

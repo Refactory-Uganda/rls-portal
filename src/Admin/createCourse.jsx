@@ -182,7 +182,7 @@ const CreateCourse = ({ setView, setCourses }) => {
         formData.append(key, courseData[key]);
       }
     });
-    console.log(courseData); // Loggin  courseData to verify its structure(remove after)
+    // console.log(courseData); //
 
     try {
       const response = await api.post("/courses", formData, {
@@ -306,7 +306,9 @@ const CreateCourse = ({ setView, setCourses }) => {
             <div className="col-md-8">
               {/* Course Title */}
               <div className="mb-3">
-                <label className="form-label fw-bold">Course Title</label>
+                <label className="form-label fw-bold">
+                  Course Title <span className="required">*</span>
+                </label>
                 <input
                   type="text"
                   name="Title"
@@ -320,7 +322,7 @@ const CreateCourse = ({ setView, setCourses }) => {
 
               {/* Course Description */}
               <div className="mb-3">
-                <label className="form-label fw-bold">Course Description</label>
+                <label className="form-label fw-bold">Course Description <span className="required">*</span></label>
                 <textarea
                   name="Description"
                   className="form-control"
@@ -575,7 +577,7 @@ const CreateCourse = ({ setView, setCourses }) => {
                   {/* Duration Dropdown */}
                   <div className="mb-3">
                     <label className="form-label fw-bold">
-                      Course Duration
+                      Course Duration <span className="required">*</span>
                     </label>
                     <select
                       name="Duration"
@@ -620,7 +622,7 @@ const CreateCourse = ({ setView, setCourses }) => {
                   {/* Assessment mode */}
                   <div className="mb-3">
                     <label className="form-label fw-bold">
-                      Assessment mode
+                      Assessment mode (optional)
                     </label>
                     <select
                       name="assessmentMode"
@@ -636,7 +638,7 @@ const CreateCourse = ({ setView, setCourses }) => {
                   </div>
                   {/* Award */}
                   <div className="mb-3">
-                    <label className="form-label fw-bold">Award</label>
+                    <label className="form-label fw-bold">Award (optional)</label>
                     <select
                       name="assessmentMode"
                       className="form-select"

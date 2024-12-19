@@ -1,12 +1,10 @@
-import  { useState } from "react";
+import { useState } from "react";
 import ContentList from "./LContentList";
 import api from "../services/api";
 import "../assets/css/courseContentView.css";
 import DisplayRichText from "../Components/Displayrichtext";
 import TakeQuiz from "./TakeQuiz";
-
-
-
+import ContentWaitingScreen from "../Components/ContentWaitingScreen";
 
 const ContentView = ({ selectedCourse, setView }) => {
   const [lessonToView, setLessonToView] = useState(null);
@@ -32,7 +30,7 @@ const ContentView = ({ selectedCourse, setView }) => {
     }
   };
 
-   const handleTakeQuizClick = () => {
+  const handleTakeQuizClick = () => {
     setIsQuizViewOpen(true);
     setQuiz(lessonToView.quiz);
   };
@@ -59,12 +57,8 @@ const ContentView = ({ selectedCourse, setView }) => {
                 <DisplayRichText htmlContent={lessonToView.text} />
               </div>
             ) : (
-              <iframe
-                src="https://www.youtube.com/embed/FOD408a0EzU"
-                frameBorder="0"
-                allowFullScreen
-                title="Video View"
-              ></iframe>
+              <ContentWaitingScreen />
+             
             )}
           </div>
 
@@ -92,7 +86,7 @@ const ContentView = ({ selectedCourse, setView }) => {
         {/* Scrollable Video Rows */}
         <div className="content-list-container scrollable-container">
           <div
-            className="courseList-btn-container"
+            // className="courseList-btn-container"
             style={{ paddingLeft: "0" }}
           >
             <button

@@ -119,9 +119,6 @@ function EditQuiz({ isEditModalOpen, toggleQuizModal, quizData }) {
     });
   };
 
-  console.log(quizData)
-  console.log(questions)
-
   return (
     <Modal show={isEditModalOpen} onHide={toggleQuizModal} size="lg">
       <Modal.Header closeButton>

@@ -18,8 +18,6 @@ import api from "../services/api";
 const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
   // const [quiz, setQuiz] = useState(null);
 
-  console.log(quiz);
-  console.log(lessonToView);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -72,8 +70,6 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
     }
   };
 
-  console.log(editedQuiz);
-  console.log(quiz);
   const handleEditQuestionSubmit = async () => {
     const question = editedQuiz.questions[selectedQuestionIndex];
     try {
@@ -287,7 +283,6 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
       );
 
       // Display the score returned by the backend
-      console.log(submissionResponse);
       const score = submissionResponse.data.data.score;
       const maxScore = submissionResponse.data.data.maxScore;
       setScore(score);
@@ -372,7 +367,6 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
     );
   }
 
-  console.log(quiz);
 
   return (
     <div>

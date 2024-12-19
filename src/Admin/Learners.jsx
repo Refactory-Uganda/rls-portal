@@ -31,7 +31,7 @@ const LearnersPage = () => {
     fetchLearners();
   }, []);
 
-  console.log(learners);
+  // console.log(learners);
   const filteredLearners = learners.filter((learner) =>
     learner.firstName.toLowerCase().includes(searchTerm.toLowerCase())
   );

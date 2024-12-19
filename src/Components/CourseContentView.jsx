@@ -27,7 +27,7 @@ const CourseContentView = ({ selectedCourse, setView }) => {
     try {
       const response = await api.get(`/lesson/${lesson.id}`);
       const lessonData = response.data;
-      console.log(lessonData);
+      // console.log(lessonData);
       setLessonToView(lessonData);
       setIsQuizViewOpen(false);
     } catch (error) {

@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Toast } from "react-bootstrap";
@@ -10,8 +12,6 @@ const ContentList = ({
   selectedCourse,
   setSelectedCourse,
   handleViewLessonContent,
-  lessonToView,
-  setLessonToView,
 }) => {
   const [activeTopic, setActiveTopic] = useState(null);
 
@@ -59,7 +59,7 @@ const ContentList = ({
 
   // Function to handle opening quiz modal for specific lesson
   const handleQuizModalOpen = (lesson, e) => {
-    e.stopPropagation(); // Prevent lesson click event from triggering
+    e.stopPropagation();
     setQuizModalState({
       isOpen: true,
       lessonId: lesson.id,
@@ -103,7 +103,9 @@ const ContentList = ({
   };
 
   const handleAssignmentFileChange = (e) => {
-    setAssignmentData({ ...assignmentData, file: e.target.files[0] });
+    const file = e.target.files[0];
+    console.log("Selected file:", file);
+    setAssignmentData({ ...assignmentData, uploadQuestion: file });
   };
 
   const handleAssignmentSubmit = async (e) => {
@@ -116,7 +118,6 @@ const ContentList = ({
       alert("Please fill in all required fields.");
       return;
     }
-    console.log(assignmentData);
 
     const submissionData = new FormData();
     submissionData.append("title", assignmentData.title);
@@ -129,7 +130,10 @@ const ContentList = ({
       submissionData.append("uploadQuestion", assignmentData.uploadQuestion);
     }
     try {
-      const response = await api.post(`/assignments`, submissionData);
+      console.log(submissionData);
+      const response = await api.post(`/assignments`, submissionData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       const addedAssignment = response.data;
       // const updatedTopics = selectedCourse.topics.map((topic) =>
       //   topic.id === currentTopic.id
@@ -291,7 +295,7 @@ const ContentList = ({
 
     try {
       await api.patch(`/lesson/${currentLesson.id}`, updatedLesson);
-      console.log("passed 1");
+
       // const updatedTopics = selectedCourse.topics.map((topic) => {
       //   if (topic.id === currentTopic.id) {
       //     const updatedLessons = topic.Lesson.map((lesson) =>
@@ -307,13 +311,9 @@ const ContentList = ({
       // setSelectedCourse((prev) => ({ ...prev, topics: updatedTopics }));
       // setShowEditLessonModal(false);
       // showToast("Lesson updated successfully");
-      console.log(selectedCourse);
-      const updatedTopics = selectedCourse.topics.map((topic) => {
-        console.log("passed 2");
-        console.log(currentTopic);
-        if (topic.id === currentTopic.id) {
-          console.log(currentLesson);
 
+      const updatedTopics = selectedCourse.topics.map((topic) => {
+        if (topic.id === currentTopic.id) {
           const updatedLessons = topic.Lesson.map((lesson) =>
             lesson.id === currentLesson.id
               ? { ...lesson, ...updatedLesson }
@@ -402,7 +402,7 @@ const ContentList = ({
               id={`collapse${topic.id}`}
               className={`collapse ${activeTopic === topic.id ? "show" : ""}`}
             >
-              <div className="card-body lesson-card">
+              <div className="lesson-card">
                 <ul className="list-group">
                   {topic.Lesson.map((lesson) => (
                     <li
@@ -438,7 +438,6 @@ const ContentList = ({
                           className="btn btn-green me-2"
                           onClick={() => {
                             handleEditLesson(lesson);
-                            console.log(lesson);
                           }}
                           title="Edit Lesson"
                         >
@@ -518,6 +517,7 @@ const ContentList = ({
                 id="uploadQuestion"
                 name="uploadQuestion"
                 className="form-control"
+                // accept=""
                 onChange={handleAssignmentFileChange}
               />
             </div>

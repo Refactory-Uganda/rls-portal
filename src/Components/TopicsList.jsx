@@ -31,7 +31,6 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
   const handleEditTopic = (topic) => {
        setCurrentTopic(topic);
     setShowEditTopicModal(true);
-    console.log("function reached");
   };
 
   const handleEditLesson = (lesson) => {

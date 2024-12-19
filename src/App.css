@@ -293,3 +293,9 @@ a {
   border-radius: 8px;
   min-height: 300px; /* Ensure consistent height for content */
 }
+
+.required {
+  color: red;
+  font-weight: bold;
+  margin-left: 2px;
+}

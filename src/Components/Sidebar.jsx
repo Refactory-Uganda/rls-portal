@@ -17,23 +17,14 @@ const Sidebar = ({ selectedMenu, setSelectedMenu, menuItems }) => {
   const navigate = useNavigate();
   const handleLogoutConfirm = () => {
 
-    // try {
-      // Optional: Inform the server to invalidate tokens
-    //   const refreshToken = localStorage.getItem("refreshToken");
-    //   if (refreshToken) {
-    //     await api.post("/authentication/logout", { refreshToken });
-    //   }
-    // } catch (err) {
-    //   console.error("Error during server logout:", err);
-    // } finally {
-      // Clear localStorage/sessionStorage
+   
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("user");
       localStorage.removeItem("lastEmail"); // Optional: If you saved email for autofill
   
       // Navigate to login page
-      navigate("/", { replace: true }); // Redirect to login page with history replacement
+      navigate("/", { replace: true }); 
     // }
   };
 
@@ -60,14 +51,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu, menuItems }) => {
         transition: "width 0.3s"
       }}
     >
-      {/* <div className="p-3">
-        <div className="d-flex justify-content-between align-items-center">
-          <button onClick={toggleSidebar} className="btn btn-outline-light">
-            <i className="fas fa-arrows-alt-h"></i>
-          </button>
-        </div>
-      </div> */}
-
+      
       <nav className="flex-grow-1 p-3 sidebar-nav" id="nav-items">
         {menuItems.map((item) => (
           <Link
