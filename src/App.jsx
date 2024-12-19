@@ -58,7 +58,7 @@ const App = () => {
         <Route
           path="/admin"
           element={
-            // <ProtectedRoute allowedRoles={["Administrator"]}>
+            <ProtectedRoute allowedRoles={["Administrator"]}>
               <div className="d-flex flex-column h-100">
                 <Navbar email={"Jalia@refactory.academy"} role={"Admin"} />
                 <div className="d-flex flex-grow-1 main-sidebar-content">
@@ -97,7 +97,7 @@ const App = () => {
                   </div>
                 </div>
               </div>
-            // </ProtectedRoute>
+            </ProtectedRoute>
           }
         />
 
@@ -105,7 +105,7 @@ const App = () => {
         <Route
           path="/admin/courses"
           element={
-            // <ProtectedRoute allowedRoles={["Administrator"]}>
+            <ProtectedRoute allowedRoles={["Administrator"]}>
               <div className="d-flex flex-column h-100">
                 <Navbar email={"Jalia@refactory.academy"} role={"Admin"} />
                 <div className="d-flex flex-grow-1 main-sidebar-content">
@@ -144,7 +144,7 @@ const App = () => {
                   </div>
                 </div>
               </div>
-            // </ProtectedRoute>
+            </ProtectedRoute>
           }
         />
 
@@ -152,7 +152,7 @@ const App = () => {
         <Route
           path="/admin/facilitators"
           element={
-            // <ProtectedRoute allowedRoles={["Administrator"]}>
+            <ProtectedRoute allowedRoles={["Administrator"]}>
               <div className="d-flex flex-column h-100">
                 <Navbar email={"Jalia@refactory.academy"} role={"Admin"} />
                 <div className="d-flex flex-grow-1 main-sidebar-content">
@@ -191,7 +191,7 @@ const App = () => {
                   </div>
                 </div>
               </div>
-            // </ProtectedRoute>
+            </ProtectedRoute>
           }
         />
 
@@ -199,7 +199,7 @@ const App = () => {
         <Route
           path="/admin/learners"
           element={
-            // <ProtectedRoute allowedRoles={["Administrator"]}>
+            <ProtectedRoute allowedRoles={["Administrator"]}>
               <div className="d-flex flex-column h-100">
                 <Navbar email={"Jalia@refactory.academy"} role={"Admin"} />
                 <div className="d-flex flex-grow-1 main-sidebar-content">
@@ -238,7 +238,7 @@ const App = () => {
                   </div>
                 </div>
               </div>
-            // </ProtectedRoute>
+            </ProtectedRoute>
           }
         />
 
