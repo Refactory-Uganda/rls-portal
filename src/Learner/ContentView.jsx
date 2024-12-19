@@ -4,6 +4,7 @@ import api from "../services/api";
 import "../assets/css/courseContentView.css";
 import DisplayRichText from "../Components/Displayrichtext";
 import TakeQuiz from "./TakeQuiz";
+import ContentWaitingScreen from "../Components/ContentWaitingScreen";
 
 
 
@@ -59,12 +60,13 @@ const ContentView = ({ selectedCourse, setView }) => {
                 <DisplayRichText htmlContent={lessonToView.text} />
               </div>
             ) : (
-              <iframe
-                src="https://www.youtube.com/embed/FOD408a0EzU"
-                frameBorder="0"
-                allowFullScreen
-                title="Video View"
-              ></iframe>
+              <ContentWaitingScreen/>
+              // <iframe
+              //   src="https://www.youtube.com/embed/FOD408a0EzU"
+              //   frameBorder="0"
+              //   allowFullScreen
+              //   title="Video View"
+              // ></iframe>
             )}
           </div>
 
