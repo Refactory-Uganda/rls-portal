@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { FaPlus, FaEdit, FaTrash, FaEye } from 'react-icons/fa'; // FontAwesome Icons
+import { useState, useEffect } from 'react';
 import api from '../services/api';
 import "../../src/assets/css/facilitatorassignments.css";
 import { Modal, Toast } from "react-bootstrap";
@@ -134,7 +133,7 @@ const AssignmentsPage = () => {
                     <p>No assignments found.</p>
                 ) : (
                     assignments.map(assignment => (
-                        <div key={assignment.id} className="assignment-card">
+                        <div key={assignment.id} className="facilitator-assignment-card">
                             <h3>{assignment.title}</h3>
                             <p>Due: {new Date(assignment.dueDate).toLocaleDateString()}</p>
                             <div className="assignment-actions">

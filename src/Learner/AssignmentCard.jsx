@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboardList, faCheckCircle, faExclamationCircle, faClock, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import { Button } from 'react-bootstrap';
 
 const AssignmentCard = ({ title, dueDate, status, onClick }) => {
   // Convert dueDate to a JavaScript Date object
@@ -59,7 +59,7 @@ const AssignmentCard = ({ title, dueDate, status, onClick }) => {
           )}
         </div>
       </div>
-      {/* <Button onClick={onClick} variant="primary btn-purple">View Assignment</Button> */}
+      
     </div>
   );
 };

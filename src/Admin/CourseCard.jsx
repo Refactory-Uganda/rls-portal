@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
 import "../assets/css/courseCard.css";
 import defaultImage from "../assets/Images/course-image.jpeg";
 
@@ -14,7 +15,7 @@ const CourseCard = ({ course, onClick }) => {
 
   useEffect(() => {
     const processImageUrl = () => {
-      // If no image provided, use default
+      // If no image provided, use default image
       if (!course.image) {
         setImageUrl(defaultImage);
         return;

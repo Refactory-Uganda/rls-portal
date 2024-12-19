@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Modal, Toast } from "react-bootstrap";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
+import { Modal} from "react-bootstrap";
 import "../../src/assets/css/topicsList.css";
 
 const TopicsList = ({ selectedCourse, onEditTopic, onEditLesson }) => {

@@ -17,8 +17,9 @@ const InitialDashboard = () => {
   const [coursesCount, setCoursesCount] = useState(0);
   const [coursesData, setCoursesData] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsLoading] = useState(false);
-  const [courses, setCourses] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState("");
 
   useEffect(() => {

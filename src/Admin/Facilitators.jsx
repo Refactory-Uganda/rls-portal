@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import api from "../services/api";
 import "../../src/assets/css/userpage.css";
+import { Table } from "react-bootstrap";
 
 const FacilitatorsPage = () => {
   const [facilitators, setFacilitators] = useState([]);
@@ -70,12 +71,13 @@ const FacilitatorsPage = () => {
       {isLoading ? (
         <p>Loading facilitators...</p>
       ) : viewMode === "table" ? (
-        <table className="user-table">
+        <Table striped bordered hover>
           <thead>
             <tr>
               <th>Name</th>
               <th>Email</th>
               <th>Courses Assigned</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -88,20 +90,24 @@ const FacilitatorsPage = () => {
                   <td className="user-table-item">{facilitator.email}</td>
                   <td className="user-table-item">
                     {facilitatorCourses[facilitator.id] ? (
-                      <ol>
-                        {facilitatorCourses[facilitator.id].map((course) => (
-                          <li key={course.Title}>{course.Title}</li>
-                        ))}
-                      </ol>
+                      
+                      <p>
+                        {facilitatorCourses[facilitator.id].length +
+                          " " +
+                          "Courses"}
+                      </p>
                     ) : (
                       "Loading courses..."
                     )}
+                  </td>
+                  <td className="user-table-item">
+                    <i className="bi bi-eye-fill" title="View Details"></i>
                   </td>
                 </tr>
               );
             })}
           </tbody>
-        </table>
+        </Table>
       ) : (
         <div className="user-grid">
           {filteredFacilitators.map((facilitator) => (

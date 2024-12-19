@@ -1,10 +1,9 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import api from "../services/api";
 import "../assets/css/courseDetails.css";
-import TopicsList from "../Components/TopicsList";
 import { Modal, Toast } from "react-bootstrap";
 import ContentList from "../Components/ContentList";
-// import { height } from "@fortawesome/free-solid-svg-icons/fa0";
 
 const CourseDetails = ({
   selectedCourse,
@@ -13,15 +12,14 @@ const CourseDetails = ({
   setView,
 }) => {
   const [showCourseModal, setShowCourseModal] = useState(false);
-  const [showTopicModal, setShowTopicModal] = useState(false);
-  const [showLessonModal, setShowLessonModal] = useState(false);
-  const [currentTopic, setCurrentTopic] = useState(null);
-  const [currentLesson, setCurrentLesson] = useState(null);
+  // const [showTopicModal, setShowTopicModal] = useState(false);
+  // const [showLessonModal, setShowLessonModal] = useState(false);
+  // const [currentTopic, setCurrentTopic] = useState(null);
+  // const [currentLesson, setCurrentLesson] = useState(null);
 
   // State for success messages
   const [showSuccess, setShowSuccess] = useState(false);
   const [showTopicSuccess, setShowTopicSuccess] = useState(false);
-  const [showLessonSuccess, setShowLessonSuccess] = useState(false);
 
   // State for course details
   const [duration, setDuration] = useState(selectedCourse.Duration);
@@ -192,9 +190,7 @@ const CourseDetails = ({
             <h6 className="card-subtitle mb-2 text-body-secondary">
               Assessment Mode: {selectedCourse.assessmentMode}
             </h6>
-            {/* <h6 className="card-subtitle mb-2 text-body-secondary">
-              Course objective:
-            </h6> */}
+           
             <p className="card-text">{selectedCourse.Description}</p>
             <p style={{ fontWeight: "bold", fontSize: "1rem" }}>
               Course outline
@@ -249,55 +245,6 @@ const CourseDetails = ({
         </div>
       </div>
 
-      {/* Course Edit Modal */}
-      {/* <Modal show={showCourseModal} onHide={handleCloseCourseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Course</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleUpdateCourse();
-            }}
-          >
-            <div className="mb-3">
-              <label>Title</label>
-              <input
-                type="text"
-                className="form-control"
-                value={courseTitle}
-                onChange={(e) => setCourseTitle(e.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <label>Duration (Weeks)</label>
-              <select
-                className="form-control"
-                value={duration}
-                onChange={(e) => setDuration(e.target.value)}
-              >
-                {[...Array(52)].map((_, i) => (
-                  <option key={i + 1} value={i + 1}>
-                    {i + 1} week{i !== 0 ? "s" : ""}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="mb-3">
-              <label>Description</label>
-              <textarea
-                className="form-control"
-                value={courseDescription}
-                onChange={(e) => setCourseDescription(e.target.value)}
-              ></textarea>
-            </div>
-            <button type="submit" className="btn action-btn">
-              Update Course
-            </button>
-          </form>
-        </Modal.Body>
-      </Modal> */}
       <Modal show={showCourseModal} onHide={handleCloseCourseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Course</Modal.Title>

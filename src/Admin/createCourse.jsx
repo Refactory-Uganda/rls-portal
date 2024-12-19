@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import api from "../services/api";
-// import { useNavigate } from "react-router-dom";
+
 const CreateCourse = ({ setView, setCourses }) => {
   const [courseData, setCourseData] = useState({
     Title: "",
@@ -48,25 +49,6 @@ const CreateCourse = ({ setView, setCourses }) => {
   }
 
   const durationOptions = generateDurationOptions();
-
-  // Status options
-  const statusOptions = ["draft", "published", "in_progress", "completed"];
-
-  // Assessment mode options
-  const assessmentModeOptions = [
-    "online",
-    "offline",
-    "hybrid",
-    "project-based",
-  ];
-
-  // Award options
-  const awardOptions = [
-    "certificate",
-    "digital badge",
-    "professional certification",
-    "none",
-  ];
 
   useEffect(() => {
     const fetchFacilitators = async () => {

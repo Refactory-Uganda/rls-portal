@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import  { useState } from "react";
 import ContentList from "./ContentList";
 import api from "../services/api";
@@ -34,8 +35,6 @@ const CourseContentView = ({ selectedCourse, setView }) => {
     }
   };
 
-  const toggleEditQuizModal = () =>
-    setIsEditQuizModalOpen(!isEditQuizModalOpen);
 
   const handleTakeQuizClick = () => {
     setIsQuizViewOpen(true);
@@ -65,12 +64,7 @@ const CourseContentView = ({ selectedCourse, setView }) => {
               </div>
             ) : (
               <ContentWaitingScreen/>
-              // <iframe
-              //   src="https://www.youtube.com/embed/FOD408a0EzU"
-              //   frameBorder="0"
-              //   allowFullScreen
-              //   title="Video View"
-              // ></iframe>
+             
             )}
           </div>
 

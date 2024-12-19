@@ -1,28 +1,23 @@
-import React from 'react';
 import { Card, Placeholder } from 'react-bootstrap';
 
 const LoadingCard = () => {
   return (
     <div className="col">
-      <Card className="text-start course-card" style={{ width: '14rem', padding: '0' }}>
-        <Card.Img
-          variant="top"
-          style={{ height: '150px', backgroundColor: '#e9ecef' }}
-        
-        />
-        <Card.Body>
-          <Placeholder as={Card.Title} animation="glow">
-            <Placeholder xs={8} />
+      <Card className="text-start course-card" style={{ width: "14rem", padding: "0" }}>
+        <div style={{ width: "100%", height: "7rem", padding: "0" }}>
+          <Placeholder as="div" animation="wave">
+            <Placeholder style={{ width: "100%", height: "100%", borderRadius: "0" }} />
           </Placeholder>
-          <Placeholder as={Card.Text} animation="glow">
-            <Placeholder xs={12} />
-            <Placeholder xs={10} />
-          </Placeholder>
-          <Placeholder as={Card.Text} animation="glow">
+        </div>
+        <Card.Body style={{ display: "flex", flexDirection: "column", flex: "1" }}>
+          <Placeholder as={Card.Title} animation="wave" className="mb-2">
             <Placeholder xs={6} />
           </Placeholder>
-          <Placeholder as={Card.Text} animation="glow">
-            <Placeholder xs={9} />
+          <Placeholder as={Card.Text} animation="wave" className="mb-1">
+            <Placeholder xs={4} />
+          </Placeholder>
+          <Placeholder as={Card.Text} animation="wave">
+            <Placeholder xs={8} />
           </Placeholder>
         </Card.Body>
       </Card>

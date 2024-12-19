@@ -1,6 +1,6 @@
-// import React from "react";
+/* eslint-disable react/prop-types */
 import Courses from "./Courses";
-import CreateCourse from "./createCourse"; // Ensure case matches
+import CreateCourse from "./createCourse";
 import InitialDashboard from "./InitialDashboard";
 
 const DashboardContent = ({ selectedMenu }) => {
@@ -12,10 +12,10 @@ const DashboardContent = ({ selectedMenu }) => {
             return <InitialDashboard />;
           case "courses":
             return <Courses />;
-          case "createCourse": // Ensure this matches your key in menuItems
+          case "createCourse":
             return <CreateCourse />;
           default:
-            return <InitialDashboard />; // Or some default component
+            return <InitialDashboard />;
         }
       })()}
     </div>

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import DOMPurify from "dompurify";
 
 const DisplayRichText = ({ htmlContent }) => {
