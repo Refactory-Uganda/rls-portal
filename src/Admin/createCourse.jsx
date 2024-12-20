@@ -322,7 +322,9 @@ const CreateCourse = ({ setView, setCourses }) => {
 
               {/* Course Description */}
               <div className="mb-3">
-                <label className="form-label fw-bold">Course Description <span className="required">*</span></label>
+                <label className="form-label fw-bold">
+                  Course Description <span className="required">*</span>
+                </label>
                 <textarea
                   name="Description"
                   className="form-control"
@@ -558,6 +560,7 @@ const CreateCourse = ({ setView, setCourses }) => {
                     style={{ backgroundColor: styles.primaryBg }}
                   >
                     <i className="fas fa-upload me-2"></i> Upload Image
+                    <span className="required">*</span>
                   </label>
                 </div>
               </div>
@@ -638,7 +641,9 @@ const CreateCourse = ({ setView, setCourses }) => {
                   </div>
                   {/* Award */}
                   <div className="mb-3">
-                    <label className="form-label fw-bold">Award (optional)</label>
+                    <label className="form-label fw-bold">
+                      Award (optional)
+                    </label>
                     <select
                       name="assessmentMode"
                       className="form-select"
