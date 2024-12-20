@@ -239,7 +239,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
               id={`collapse${topic.id}`}
               className={`collapse ${activeTopic === topic.id ? "show" : ""}`}
             >
-              <div className="card-body lesson-card">
+              <div className="lesson-card">
                 <ul className="list-group">
                   {topic.Lesson.map((lesson) => (
                     <li
