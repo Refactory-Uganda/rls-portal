@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+/* eslint-disable react/prop-types */
+import { useState } from 'react';
 import { Modal, Button, Form, Alert, Container, Row, Col, Card } from 'react-bootstrap';
-import axios from 'axios';
+import api from '../services/api';
 
 function EditQuiz({ isEditModalOpen, toggleQuizModal, quizData }) {
   const [quizTitle, setQuizTitle] = useState(quizData?.title || '');

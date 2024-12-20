@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
 import api from "../services/api";
 import "../../src/assets/css/courseDetails.css";
 import TopicsList from "./Topics";
@@ -11,15 +13,12 @@ const CourseDetails = ({
   setView,
 }) => {
   const [showCourseModal, setShowCourseModal] = useState(false);
-  const [showTopicModal, setShowTopicModal] = useState(false);
-  const [showLessonModal, setShowLessonModal] = useState(false);
-  const [currentTopic, setCurrentTopic] = useState(null);
-  const [currentLesson, setCurrentLesson] = useState(null);
+ 
 
   // State for success messages
   const [showSuccess, setShowSuccess] = useState(false);
   const [showTopicSuccess, setShowTopicSuccess] = useState(false);
-  const [showLessonSuccess, setShowLessonSuccess] = useState(false);
+  // const [showLessonSuccess, setShowLessonSuccess] = useState(false);
 
   // State for course details
   const [duration, setDuration] = useState(selectedCourse.Duration);
@@ -172,32 +171,7 @@ const CourseDetails = ({
               <p key={index}>{item}</p>
             ))}
             <div className="course-details-btn-container">
-              {/* <button
-                className="btn btn-purple me-2"
-                onClick={handleEditCourse}
-                title="Edit Course"
-              >
-                <i className="fas fa-edit"></i>
-              </button>
-              <button
-                className="btn secondary-action-btn"
-                onClick={handleDelete}
-                title="Delete Course"
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.backgroundColor = "red")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.backgroundColor = "transparent")
-                }
-              >
-                <i className="fas fa-trash"></i>
-              </button>
-              <button
-                className="btn btn-primary secondary-action-btn"
-                onClick={() => setShowAddTopicModal(true)}
-              >
-                Add Topics
-              </button> */}
+            
               <button
                 className="btn btn-primary action-btn"
                 onClick={() => setView("contentView")}

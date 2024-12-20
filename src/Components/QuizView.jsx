@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import "../assets/css/quizView.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlus,
   faEdit,
-  faSave,
-  faTimes,
   faTrash,
-  faCheckCircle,
-  faExclamationTriangle,
+
 } from "@fortawesome/free-solid-svg-icons";
 import { Modal, Button, Form, Row, Col, Card } from "react-bootstrap";
 
 import api from "../services/api";
 
+// eslint-disable-next-line no-unused-vars
 const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
   // const [quiz, setQuiz] = useState(null);
 
@@ -213,17 +213,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
           await api.post("/options", optionData);
         }
       }
-      // const fetchUpdatedQuiz = async () => {
-      //   try {
-      //     const response = await api.get(`/quizzes/${lessonToView.quiz.id}`);
-      //     setQuiz(response.data);
-      //   } catch (err) {
-      //     setError(err.message);
-      //   } finally {
-      //     setLoading(false);
-      //   }
-      // };
-      // fetchUpdatedQuiz();
+      
       setNewQuestions([
         {
           text: "",
@@ -562,13 +552,7 @@ const QuizView = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          {/* <Button
-            className="secondary-action-btn"
-            variant="secondary"
-            onClick={() => setShowQuestionEditModal(false)}
-          >
-            Close
-          </Button> */}
+          
           <Button
             variant="primary"
             onClick={handleEditQuestionSubmit}

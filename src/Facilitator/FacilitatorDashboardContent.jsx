@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../assets/css/facilitatorDashboardContent.css";
-import { faCalendarAlt, faExpand } from "@fortawesome/free-solid-svg-icons";
+import { faExpand } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Modal, Button } from "react-bootstrap";
 import {

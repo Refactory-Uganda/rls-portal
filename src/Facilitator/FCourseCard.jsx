@@ -1,4 +1,4 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import defaultImage from "../assets/Images/course-image.jpeg"; // Make sure the path is correct
 
 const CourseCard = ({ course, onClick }) => {

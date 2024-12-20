@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable no-unused-vars */
+// import React from "react";
 import { Link } from "react-router-dom";
 import "../Login/style.css";
 import SignUpLogo from "../assets/Images/staff-logo.png";
@@ -45,8 +46,8 @@ export default function UserSignIn() {
         console.log(response);
         if (response.status === 200) {
           setLoading(false);
-          var email = values.email;
-          var password = values.password;
+          // var email = values.email;
+          // var password = values.password;
 
           //   axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.access_token}`;
           Cookies.remove("refresh_token");
@@ -116,7 +117,7 @@ export default function UserSignIn() {
                   </div>
                 </div>
                 <div className="col-2">
-                  {error && <ErrorAlert message={"Invalid credentials"} />}
+                  {/* {error && <ErrorAlert message={"Invalid credentials"} />} */}
                   <div>
                     <h1>LogIn to RLS</h1>
                     <br />

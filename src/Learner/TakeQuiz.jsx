@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import "../assets/css/takequiz.css";
-import { Modal, Button, Form } from "react-bootstrap";
 import api from "../services/api";
 
 const TakeQuiz = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
@@ -21,6 +21,7 @@ const TakeQuiz = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
           setLoading(false);
           return;
         }
+      // eslint-disable-next-line no-unused-vars
       } catch (err) {
         // No existing result is fine, continue to fetch quiz
         console.log("No existing result found");
@@ -133,8 +134,7 @@ const TakeQuiz = ({ lessonId, onBack, quiz, setQuiz, lessonToView }) => {
             <h4>Detailed Breakdown</h4>
             {quiz.questions.map((question, qIndex) => {
               const userOptionId = userAnswers[question.id];
-              const selectedOption = question.option.find(opt => opt.id === userOptionId);
-              const correctOption = question.option.find(opt => opt.iscorrect);
+             
               
               return (
                 <div key={question.id} className="question-result">

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable no-unused-vars */
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 import CourseDetails from "./LCourseDetails";
 import CourseList from "./CourseView";
@@ -89,15 +90,7 @@ const LCourse = () => {
             setError={setError}
           />
         )}
-    
-        {view === "edit" && selectedCourse && (
-          <EditCourse
-            selectedCourse={selectedCourse}
-            onUpdateSuccess={handleEditSuccess}
-            onCancel={() => setView("details")}
-          />
-        )}
-    
+        
         {view === "contentView" && (
           <ContentView
             setView={setView}

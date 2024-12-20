@@ -1,5 +1,5 @@
 // Assignments.js
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 function CreateAssignment() {
   const [title, setTitle] = useState('');

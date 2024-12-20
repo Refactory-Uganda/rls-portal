@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Import Link for internal navigation
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../src/assets/css/sidebar.css';
@@ -10,9 +11,9 @@ const Sidebar = ({ selectedMenu, setSelectedMenu, menuItems }) => {
   const [isCollapsed, setIsCollapsed] = useState(window.innerWidth < 768); // Default to collapsed on smaller screens
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal open/close state
 
-  const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+  // const toggleSidebar = () => {
+  //   setIsCollapsed(!isCollapsed);
+  // };
 
   const navigate = useNavigate();
   const handleLogoutConfirm = () => {
@@ -21,7 +22,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu, menuItems }) => {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("user");
-      localStorage.removeItem("lastEmail"); // Optional: If you saved email for autofill
+      
   
       // Navigate to login page
       navigate("/", { replace: true }); 

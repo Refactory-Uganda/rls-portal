@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Toast } from "react-bootstrap";
 import "../../src/assets/css/topicsList.css";
@@ -29,7 +31,7 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
   };
 
   const handleEditTopic = (topic) => {
-       setCurrentTopic(topic);
+    setCurrentTopic(topic);
     setShowEditTopicModal(true);
   };
 
@@ -206,7 +208,6 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                       handleEditTopic(topic);
-                      
                     }}
                     title="Edit Topic"
                   >
@@ -283,42 +284,6 @@ const TopicsList = ({ selectedCourse, setSelectedCourse }) => {
         onHide={() => setShowAddLessonModal(false)}
         dialogClassName="custom-medium-modal-width"
       >
-        {/* Edit Topic Modal */}
-        {/* <Modal
-          show={showEditTopicModal}
-          onHide={() => setShowEditTopicModal(false)}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Edit Topic</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <form onSubmit={handleEditTopicSubmit}>
-              <div className="mb-3">
-                <label>Title</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="title"
-                  defaultValue={currentTopic?.Title || ""}
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label>Description</label>
-                <textarea
-                  className="form-control"
-                  name="description"
-                  defaultValue={currentTopic?.Description || ""}
-                  required
-                ></textarea>
-              </div>
-              <button type="submit" className="btn action-btn">
-                Save Changes
-              </button>
-            </form>
-          </Modal.Body>
-        </Modal> */}
-
         {/* Add Lesson Modal */}
         <Modal.Header closeButton>
           <Modal.Title>Add Lesson</Modal.Title>

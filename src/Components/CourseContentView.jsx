@@ -13,6 +13,7 @@ import QuizView from "./QuizView"; // New component to display the quiz
 
 const CourseContentView = ({ selectedCourse, setView }) => {
   const [lessonToView, setLessonToView] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [isEditQuizModalOpen, setIsEditQuizModalOpen] = useState(false);
   const [isQuizViewOpen, setIsQuizViewOpen] = useState(false); // New state for quiz view
   const [quiz, setQuiz] = useState(null);
