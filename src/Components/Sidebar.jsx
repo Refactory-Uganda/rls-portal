@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Import Link for internal navigation
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../src/assets/css/sidebar.css';
@@ -10,30 +11,21 @@ const Sidebar = ({ selectedMenu, setSelectedMenu, menuItems }) => {
   const [isCollapsed, setIsCollapsed] = useState(window.innerWidth < 768); // Default to collapsed on smaller screens
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal open/close state
 
-  const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+  // const toggleSidebar = () => {
+  //   setIsCollapsed(!isCollapsed);
+  // };
 
   const navigate = useNavigate();
   const handleLogoutConfirm = () => {
 
-    // try {
-      // Optional: Inform the server to invalidate tokens
-    //   const refreshToken = localStorage.getItem("refreshToken");
-    //   if (refreshToken) {
-    //     await api.post("/authentication/logout", { refreshToken });
-    //   }
-    // } catch (err) {
-    //   console.error("Error during server logout:", err);
-    // } finally {
-      // Clear localStorage/sessionStorage
+   
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("user");
-      localStorage.removeItem("lastEmail"); // Optional: If you saved email for autofill
+      
   
       // Navigate to login page
-      navigate("/", { replace: true }); // Redirect to login page with history replacement
+      navigate("/", { replace: true }); 
     // }
   };
 
@@ -60,14 +52,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu, menuItems }) => {
         transition: "width 0.3s"
       }}
     >
-      {/* <div className="p-3">
-        <div className="d-flex justify-content-between align-items-center">
-          <button onClick={toggleSidebar} className="btn btn-outline-light">
-            <i className="fas fa-arrows-alt-h"></i>
-          </button>
-        </div>
-      </div> */}
-
+      
       <nav className="flex-grow-1 p-3 sidebar-nav" id="nav-items">
         {menuItems.map((item) => (
           <Link

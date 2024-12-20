@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import api from "../services/api";
-// import { useNavigate } from "react-router-dom";
+
 const CreateCourse = ({ setView, setCourses }) => {
   const [courseData, setCourseData] = useState({
     Title: "",
@@ -48,25 +49,6 @@ const CreateCourse = ({ setView, setCourses }) => {
   }
 
   const durationOptions = generateDurationOptions();
-
-  // Status options
-  const statusOptions = ["draft", "published", "in_progress", "completed"];
-
-  // Assessment mode options
-  const assessmentModeOptions = [
-    "online",
-    "offline",
-    "hybrid",
-    "project-based",
-  ];
-
-  // Award options
-  const awardOptions = [
-    "certificate",
-    "digital badge",
-    "professional certification",
-    "none",
-  ];
 
   useEffect(() => {
     const fetchFacilitators = async () => {
@@ -200,7 +182,7 @@ const CreateCourse = ({ setView, setCourses }) => {
         formData.append(key, courseData[key]);
       }
     });
-    console.log(courseData); // Loggin  courseData to verify its structure(remove after)
+    // console.log(courseData); //
 
     try {
       const response = await api.post("/courses", formData, {
@@ -324,7 +306,9 @@ const CreateCourse = ({ setView, setCourses }) => {
             <div className="col-md-8">
               {/* Course Title */}
               <div className="mb-3">
-                <label className="form-label fw-bold">Course Title</label>
+                <label className="form-label fw-bold">
+                  Course Title <span className="required">*</span>
+                </label>
                 <input
                   type="text"
                   name="Title"
@@ -338,7 +322,9 @@ const CreateCourse = ({ setView, setCourses }) => {
 
               {/* Course Description */}
               <div className="mb-3">
-                <label className="form-label fw-bold">Course Description</label>
+                <label className="form-label fw-bold">
+                  Course Description <span className="required">*</span>
+                </label>
                 <textarea
                   name="Description"
                   className="form-control"
@@ -574,6 +560,7 @@ const CreateCourse = ({ setView, setCourses }) => {
                     style={{ backgroundColor: styles.primaryBg }}
                   >
                     <i className="fas fa-upload me-2"></i> Upload Image
+                    <span className="required">*</span>
                   </label>
                 </div>
               </div>
@@ -593,7 +580,7 @@ const CreateCourse = ({ setView, setCourses }) => {
                   {/* Duration Dropdown */}
                   <div className="mb-3">
                     <label className="form-label fw-bold">
-                      Course Duration
+                      Course Duration <span className="required">*</span>
                     </label>
                     <select
                       name="Duration"
@@ -638,7 +625,7 @@ const CreateCourse = ({ setView, setCourses }) => {
                   {/* Assessment mode */}
                   <div className="mb-3">
                     <label className="form-label fw-bold">
-                      Assessment mode
+                      Assessment mode (optional)
                     </label>
                     <select
                       name="assessmentMode"
@@ -654,7 +641,9 @@ const CreateCourse = ({ setView, setCourses }) => {
                   </div>
                   {/* Award */}
                   <div className="mb-3">
-                    <label className="form-label fw-bold">Award</label>
+                    <label className="form-label fw-bold">
+                      Award (optional)
+                    </label>
                     <select
                       name="assessmentMode"
                       className="form-select"

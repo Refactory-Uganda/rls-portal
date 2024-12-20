@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react/prop-types */
+import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import "../assets/css/resources.css";
 
@@ -8,7 +9,7 @@ const resources = [
   { id: 2, title: 'Student Feedback Report', description: 'Download feedback from students', category: 'Student Feedback', link: '/feedback/1' },
   { id: 3, title: 'Assignment Guidelines', description: 'Guidelines for grading assignments', category: 'Assignments', link: '/assignments/1' },
   { id: 4, title: 'Module 2 Presentation', description: 'Presentation slides for module 2', category: 'Course Materials', link: '/material/2' },
-  // Add more resources as needed
+  
 ];
 
 const ResourceCard = ({ title, description, link }) => (

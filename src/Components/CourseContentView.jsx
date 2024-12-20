@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import  { useState } from "react";
 import ContentList from "./ContentList";
 import api from "../services/api";
@@ -12,6 +13,7 @@ import QuizView from "./QuizView"; // New component to display the quiz
 
 const CourseContentView = ({ selectedCourse, setView }) => {
   const [lessonToView, setLessonToView] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [isEditQuizModalOpen, setIsEditQuizModalOpen] = useState(false);
   const [isQuizViewOpen, setIsQuizViewOpen] = useState(false); // New state for quiz view
   const [quiz, setQuiz] = useState(null);
@@ -26,7 +28,7 @@ const CourseContentView = ({ selectedCourse, setView }) => {
     try {
       const response = await api.get(`/lesson/${lesson.id}`);
       const lessonData = response.data;
-      console.log(lessonData);
+      // console.log(lessonData);
       setLessonToView(lessonData);
       setIsQuizViewOpen(false);
     } catch (error) {
@@ -34,8 +36,6 @@ const CourseContentView = ({ selectedCourse, setView }) => {
     }
   };
 
-  const toggleEditQuizModal = () =>
-    setIsEditQuizModalOpen(!isEditQuizModalOpen);
 
   const handleTakeQuizClick = () => {
     setIsQuizViewOpen(true);
@@ -65,12 +65,7 @@ const CourseContentView = ({ selectedCourse, setView }) => {
               </div>
             ) : (
               <ContentWaitingScreen/>
-              // <iframe
-              //   src="https://www.youtube.com/embed/FOD408a0EzU"
-              //   frameBorder="0"
-              //   allowFullScreen
-              //   title="Video View"
-              // ></iframe>
+             
             )}
           </div>
 

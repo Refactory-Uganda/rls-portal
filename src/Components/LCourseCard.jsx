@@ -1,4 +1,4 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import "../assets/css/fCourseCard.css";
 import defaultImage from "../assets/Images/course-image.jpeg";
 import { useState, useEffect } from "react";

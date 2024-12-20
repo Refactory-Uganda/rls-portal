@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import { useState, useEffect } from "react";
 import api from "../services/api";
 import "../assets/css/courseDetails.css";
 import TopicsList from "../Components/TopicsList";
@@ -174,26 +176,7 @@ const CourseDetails = ({
             ))}
 
             <div className="course-details-btn-container">
-              {/* <button
-                className="btn btn-purple me-2"
-                onClick={handleEditCourse}
-                title="Edit Course"
-              >
-                <i className="fas fa-edit"></i>
-              </button>
-              <button
-                className="btn secondary-action-btn"
-                onClick={handleDelete}
-                title="Delete Course"
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.backgroundColor = "red")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.backgroundColor = "transparent")
-                }
-              >
-                <i className="fas fa-trash"></i>
-              </button> */}
+             
               <button
                 className="btn btn-primary secondary-action-btn"
                 onClick={() => setShowAddTopicModal(true)}

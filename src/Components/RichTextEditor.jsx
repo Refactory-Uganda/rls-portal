@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { useState, useEffect, useRef } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -19,6 +21,7 @@ function RichTextEditor({ value, onChange, name }) {
  
   const quillRef = useRef(null);
   const [editorContent, setEditorContent] = useState(value || "");
+// eslint-disable-next-line no-unused-vars
 const [selectedLanguage, setSelectedLanguage] = useState("javascript");
 
   // Highlight code blocks after rendering
@@ -51,6 +54,7 @@ const [selectedLanguage, setSelectedLanguage] = useState("javascript");
   // Helper function to extract video ID from YouTube URL
   const getYouTubeVideoId = (url) => {
     const regExp =
+      // eslint-disable-next-line no-useless-escape
       /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S+?\?v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
     const match = url.match(regExp);
     return match ? match[1] : null;

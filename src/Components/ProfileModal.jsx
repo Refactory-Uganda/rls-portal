@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+/* eslint-disable react/prop-types */
+import { useState, useRef } from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
 import "../../src/assets/css/profilemodal.css";
 

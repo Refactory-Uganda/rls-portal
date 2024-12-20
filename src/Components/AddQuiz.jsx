@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+/* eslint-disable react/prop-types */
+import { useState } from 'react';
 import { Modal, Button, Form, Alert, Container, Row, Col, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faPlus, 
   faSave, 
-  faTimes, 
   faTrash
 } from '@fortawesome/free-solid-svg-icons';
 import api from "../services/api";

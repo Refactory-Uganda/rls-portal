@@ -1,7 +1,5 @@
-import React from 'react'
 import '../Login/syle.css'
 import SignUpLogo from '../assets/images/staff-logo.png'
-import Dashboard from '../assets/images/refactory-IMS-dashboard.png'
 import { AppBar, Button, Grid, TextField, Toolbar } from '@mui/material'
 import Checkbox from '@mui/material/Checkbox';
 // import { AppBar } from '@mui/material'

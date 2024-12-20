@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
 import { Modal, Button } from 'react-bootstrap'; // You can use Bootstrap's modal components
 
 const LogoutModal = ({ isOpen, onClose, onConfirm }) => {

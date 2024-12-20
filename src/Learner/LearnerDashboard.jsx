@@ -1,4 +1,4 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import "../assets/css/learnerDashboard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faListAlt, faClipboardList, faQuoteLeft, faLightbulb } from "@fortawesome/free-solid-svg-icons";

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 import CourseCard from "./CourseCard";
 import LoadingCard from "./LoadingCard";
 
 const CourseList = ({
   courses,
   setSelectedCourse,
-  view,
   setView,
   isLoading,
 }) => {

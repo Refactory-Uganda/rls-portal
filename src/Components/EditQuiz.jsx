@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+/* eslint-disable react/prop-types */
+import { useState } from 'react';
 import { Modal, Button, Form, Alert, Container, Row, Col, Card } from 'react-bootstrap';
-import axios from 'axios';
+import api from '../services/api';
 
 function EditQuiz({ isEditModalOpen, toggleQuizModal, quizData }) {
   const [quizTitle, setQuizTitle] = useState(quizData?.title || '');
@@ -118,9 +119,6 @@ function EditQuiz({ isEditModalOpen, toggleQuizModal, quizData }) {
       return updatedQuestions;
     });
   };
-
-  console.log(quizData)
-  console.log(questions)
 
   return (
     <Modal show={isEditModalOpen} onHide={toggleQuizModal} size="lg">

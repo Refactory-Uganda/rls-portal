@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React from "react";
-import { Link, replace, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { Formik } from "formik";
-import { Button, Snackbar, Alert, Checkbox } from "@mui/material";
+import { Button, Alert, Checkbox } from "@mui/material";
 import { Save } from "@mui/icons-material";
 import { TextField1 } from "../../../microComponents/TextField1"; // Adjust import path
 import AccessInputs from "../../../microComponents/AccessInputs"; // Adjust import path
@@ -14,6 +16,7 @@ import api from "../../../services/api";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function LoginForm({ userGroup }) {
+  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
   const [error, setError] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
@@ -31,7 +34,7 @@ function LoginForm({ userGroup }) {
   const handleLogin = async (values) => {
     setLoading(true);
     try {
-      // Include userGroup in the login payload
+   
       const payload = {
         ...values,
         userGroup,

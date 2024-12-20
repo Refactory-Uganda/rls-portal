@@ -1,9 +1,9 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import CourseCard from "../Components/LCourseCard";
 import LongLoadingCourseCard from "../Facilitator/LongLoadingCard";
 
 
-const CourseView = ({ courses, setSelectedCourse, view, setView, isLoading }) => {
+const CourseView = ({ courses, setSelectedCourse, setView, isLoading }) => {
   // Handle course card click to display course details
   const handleCourseClick = (course) => {
     setSelectedCourse(course);

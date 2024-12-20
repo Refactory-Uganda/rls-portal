@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import "../assets/css/quizView.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
